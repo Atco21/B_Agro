@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <!-- Logo -->
@@ -33,3 +34,5 @@
         </div>
     </div>
 </nav>
+=======
+>>>>>>> f896ce377dbf9a65135c425bd458e3e8e636df29
