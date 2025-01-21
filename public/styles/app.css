@@ -1,0 +1,41 @@
+
+body{
+    font-family: "Inter", serif;
+}
+
+a{
+    color:white !important;
+    font-size: 20px !important;
+    font-weight: 600 !important;
+
+    margin: 0 1rem;
+    text-decoration: none;
+}
+
+.navbar{
+    
+    background-color: #01533E;
+    border-bottom: 1px solid #e3e7ea;
+    border-top: 1px solid #e3e7ea;
+    padding: 0.5rem 0;
+
+
+}
+
+.nav-link{
+
+    color:white !important;
+    font-size: 32px !important;
+    font-weight: 600 !important;
+
+    margin: 0 1rem;
+    text-decoration: none;
+}
+
+.navbar a.active {
+    font-weight: bold !important;
+    text-decoration: underline;
+}
+
+
+
