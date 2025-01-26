@@ -9,7 +9,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Illuminate\Support\Stringable;
 use Illuminate\Support\Traits\ReflectsClosures;
 use Illuminate\View\Component;
 use InvalidArgumentException;
@@ -836,7 +835,7 @@ class BladeCompiler extends Compiler implements CompilerInterface
     {
         $prefix ??= $directory;
 
-        $this->anonymousComponentNamespaces[$prefix] = (new Stringable($directory))
+        $this->anonymousComponentNamespaces[$prefix] = Str::of($directory)
                 ->replace('/', '.')
                 ->trim('. ')
                 ->toString();

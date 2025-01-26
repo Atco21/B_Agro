@@ -10,7 +10,6 @@ use Illuminate\Support\Js;
 use Illuminate\Support\Number;
 use Illuminate\Support\Str;
 use Illuminate\Support\Testing\Fakes\Fake;
-use Illuminate\Support\Uri;
 use Mockery;
 use Mockery\LegacyMockInterface;
 use RuntimeException;
@@ -313,7 +312,6 @@ abstract class Facade
             'Storage' => Storage::class,
             'Str' => Str::class,
             'URL' => URL::class,
-            'Uri' => Uri::class,
             'Validator' => Validator::class,
             'View' => View::class,
             'Vite' => Vite::class,

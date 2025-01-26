@@ -4,6 +4,7 @@ namespace Illuminate\Foundation\Testing;
 
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Database\ConnectionInterface;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Schema\PostgresBuilder;
 use Illuminate\Foundation\Testing\Traits\CanConfigureMigrationCommands;
 use Illuminate\Support\Collection;
@@ -98,15 +99,13 @@ trait DatabaseTruncation
                 }
             )
             ->each(function (array $table) use ($connection) {
-                $connection->withoutTablePrefix(function ($connection) use ($table) {
-                    $table = $connection->table(
-                        $table['schema'] ? $table['schema'].'.'.$table['name'] : $table['name']
-                    );
+                $table = $connection->table(
+                    new Expression($table['schema'] ? $table['schema'].'.'.$table['name'] : $table['name'])
+                );
 
-                    if ($table->exists()) {
-                        $table->truncate();
-                    }
-                });
+                if ($table->exists()) {
+                    $table->truncate();
+                }
             });
 
         $connection->setEventDispatcher($dispatcher);

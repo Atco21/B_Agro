@@ -17,11 +17,11 @@ if (! function_exists('Illuminate\Support\enum_value')) {
      */
     function enum_value($value, $default = null)
     {
-        return match (true) {
+        return transform($value, fn ($value) => match (true) {
             $value instanceof \BackedEnum => $value->value,
             $value instanceof \UnitEnum => $value->name,
 
-            default => $value ?? value($default),
-        };
+            default => $value,
+        }, $default ?? $value);
     }
 }

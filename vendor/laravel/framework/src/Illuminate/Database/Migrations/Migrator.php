@@ -169,7 +169,7 @@ class Migrator
 
         $step = $options['step'] ?? false;
 
-        $this->fireMigrationEvent(new MigrationsStarted('up', $options));
+        $this->fireMigrationEvent(new MigrationsStarted('up'));
 
         $this->write(Info::class, 'Running migrations.');
 
@@ -184,7 +184,7 @@ class Migrator
             }
         }
 
-        $this->fireMigrationEvent(new MigrationsEnded('up', $options));
+        $this->fireMigrationEvent(new MigrationsEnded('up'));
 
         $this->output?->writeln('');
     }
@@ -278,7 +278,7 @@ class Migrator
 
         $this->requireFiles($files = $this->getMigrationFiles($paths));
 
-        $this->fireMigrationEvent(new MigrationsStarted('down', $options));
+        $this->fireMigrationEvent(new MigrationsStarted('down'));
 
         $this->write(Info::class, 'Rolling back migrations.');
 
@@ -302,7 +302,7 @@ class Migrator
             );
         }
 
-        $this->fireMigrationEvent(new MigrationsEnded('down', $options));
+        $this->fireMigrationEvent(new MigrationsEnded('down'));
 
         return $rolledBack;
     }

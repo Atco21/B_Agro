@@ -123,7 +123,7 @@ class Builder implements BuilderContract
     /**
      * The where constraints for the query.
      *
-     * @var array
+     * @var array|null
      */
     public $wheres = [];
 

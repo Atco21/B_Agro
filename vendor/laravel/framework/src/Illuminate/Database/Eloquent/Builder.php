@@ -121,7 +121,6 @@ class Builder implements BuilderContract
         'insertorignoreusing',
         'max',
         'min',
-        'numericaggregate',
         'raw',
         'rawvalue',
         'sum',
@@ -947,7 +946,7 @@ class Builder implements BuilderContract
         // If the model has a mutator for the requested column, we will spin through
         // the results and mutate the values so that the mutated version of these
         // columns are returned as you would expect from these Eloquent models.
-        if (! $this->model->hasAnyGetMutator($column) &&
+        if (! $this->model->hasGetMutator($column) &&
             ! $this->model->hasCast($column) &&
             ! in_array($column, $this->model->getDates())) {
             return $results;
@@ -1729,8 +1728,12 @@ class Builder implements BuilderContract
     {
         return [explode(':', $name)[0], static function ($query) use ($name) {
             $query->select(array_map(static function ($column) use ($query) {
+                if (str_contains($column, '.')) {
+                    return $column;
+                }
+
                 return $query instanceof BelongsToMany
-                        ? $query->getRelated()->qualifyColumn($column)
+                        ? $query->getRelated()->getTable().'.'.$column
                         : $column;
             }, explode(',', explode(':', $name)[1])));
         }];

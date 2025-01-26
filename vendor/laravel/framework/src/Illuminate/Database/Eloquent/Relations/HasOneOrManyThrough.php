@@ -501,7 +501,7 @@ abstract class HasOneOrManyThrough extends Relation
     protected function shouldSelect(array $columns = ['*'])
     {
         if ($columns == ['*']) {
-            $columns = [$this->related->qualifyColumn('*')];
+            $columns = [$this->related->getTable().'.*'];
         }
 
         return array_merge($columns, [$this->getQualifiedFirstKeyName().' as laravel_through_key']);

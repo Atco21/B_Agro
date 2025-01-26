@@ -13,8 +13,8 @@
 </div>
 
 <div class="modal fade" id="crearexplotacion" tabindex="-1" aria-labelledby="crearexplotacionLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content d-flex justify-content-center">
+  <div class="modal-dialog m1">
+    <div class="modal-content d-flex justify-content-center m2">
       <div class="modal-header">
         <h2 class="modal-title" id="exampleModalLabel">Nueva explotación</h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -79,9 +79,35 @@
 
 <div class="modal fade" id="crearparcela" tabindex="-1" aria-labelledby="crearParcelaLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content d-flex justify-content-center">
       <div class="modal-header">
+        
         <h3>Crear parcela</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+      </div>
+      <div class="modal-body">
+          <form>
+            <div class="row mb-3 mx-2">
+              <label for="nombreParcela" class="form-label">Nombre:</label>
+              <input type="text" class="form-control" id="nombreParcela" placeholder="Nombre">
+            </div>
+            <div class="row mb-3 mx-2">
+              <label for="cultivoParcela" class="form-label">Cultivo:</label>
+              <select class="form-select form-control" id="cultivoParcela">
+                <option selected>Elige una opción</option>
+                <option value="patatas">Patatas</option>
+                <option value="tomates">Tomates</option>
+              </select>
+            </div>
+            <div class="row mb-3 mx-2">
+              <label for="tamanyoParcela" class="form-label">Tamaño: (ha)</label>
+              <input type="number" class="form-control" id="tamanyoParcela" placeholder="1" min="1">
+            </div>
+          </form>
+      </div>
+      <div class="modal-footer modal-dialog-centered d-flex justify-content-center">
+        <button type="button" class="btn button-secondary1">Crear parcela</button>
       </div>
     </div>
   </div>

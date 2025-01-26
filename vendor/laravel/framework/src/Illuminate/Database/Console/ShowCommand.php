@@ -8,7 +8,6 @@ use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Number;
-use Illuminate\Support\Stringable;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(name: 'db:show')]
@@ -100,7 +99,7 @@ class ShowCommand extends DatabaseInspectionCommand
     protected function views(ConnectionInterface $connection, Builder $schema)
     {
         return (new Collection($schema->getViews()))
-            ->reject(fn ($view) => (new Stringable($view['name']))->startsWith(['pg_catalog', 'information_schema', 'spt_']))
+            ->reject(fn ($view) => str($view['name'])->startsWith(['pg_catalog', 'information_schema', 'spt_']))
             ->map(fn ($view) => [
                 'view' => $view['name'],
                 'schema' => $view['schema'],

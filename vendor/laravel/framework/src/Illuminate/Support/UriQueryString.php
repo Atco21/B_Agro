@@ -5,9 +5,8 @@ namespace Illuminate\Support;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Traits\InteractsWithData;
 use League\Uri\QueryString;
-use Stringable;
 
-class UriQueryString implements Arrayable, Stringable
+class UriQueryString implements Arrayable
 {
     use InteractsWithData;
 

@@ -5,7 +5,6 @@ namespace Illuminate\Support\Traits;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Date;
-use Illuminate\Support\Str;
 use stdClass;
 
 trait InteractsWithData
@@ -241,7 +240,7 @@ trait InteractsWithData
      */
     public function string($key, $default = null)
     {
-        return Str::of($this->data($key, $default));
+        return str($this->data($key, $default));
     }
 
     /**
@@ -352,17 +351,6 @@ trait InteractsWithData
     protected function isBackedEnum($enumClass)
     {
         return enum_exists($enumClass) && method_exists($enumClass, 'tryFrom');
-    }
-
-    /**
-     * Retrieve data from the instance as an array.
-     *
-     * @param  array|string|null  $key
-     * @return array
-     */
-    public function array($key = null)
-    {
-        return (array) (is_array($key) ? $this->only($key) : $this->data($key));
     }
 
     /**

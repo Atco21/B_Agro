@@ -146,9 +146,6 @@ class EventServiceProvider extends ServiceProvider
     public function discoverEvents()
     {
         return (new Collection($this->discoverEventsWithin()))
-                    ->flatMap(function ($directory) {
-                        return glob($directory, GLOB_ONLYDIR);
-                    })
                     ->reject(function ($directory) {
                         return ! is_dir($directory);
                     })

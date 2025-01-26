@@ -341,12 +341,11 @@ class Stringable implements JsonSerializable, ArrayAccess, BaseStringable
      * Determine if a given string matches a given pattern.
      *
      * @param  string|iterable<string>  $pattern
-     * @param  bool  $ignoreCase
      * @return bool
      */
-    public function is($pattern, $ignoreCase = false)
+    public function is($pattern)
     {
-        return Str::is($pattern, $this->value, $ignoreCase);
+        return Str::is($pattern, $this->value);
     }
 
     /**
