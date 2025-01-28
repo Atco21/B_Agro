@@ -1,7 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="d-flex align-items-center justify-content-center" style="height: 75vh;">
+
+
+
+@forelse ($explotacion as $item)
+    <div>
+        {{$item}}
+    </div>
+@empty
+    <div class="d-flex align-items-center justify-content-center" style="height: 75vh;">
   <div class="text-center">
     <h2 class="mb-3">No hay explotaciones</h2>
     <div class="text-center mt-4">
@@ -11,6 +19,7 @@
     </div>
   </div>
 </div>
+
 
 <div class="modal fade" id="crearexplotacion" tabindex="-1" aria-labelledby="crearexplotacionLabel" aria-hidden="true">
   <div class="modal-dialog m1">
@@ -125,4 +134,9 @@
         });
     });
 </script>
+
+
+@endforelse
+
+
 @endsection
