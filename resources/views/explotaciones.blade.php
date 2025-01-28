@@ -3,22 +3,33 @@
 @section('content')
 
 
-
 @forelse ($explotacion as $item)
-    <div>
-        {{$item}}
+  <div class="row">
+    <!-- Columna para los <h3> -->
+    <div class="col-md-4">
+      <h3>Título 1</h3>
+      <h3>Título 2</h3>
+      <h3>Título 3</h3>
+      <!-- Más <h3> aquí -->
     </div>
-@empty
-    <div class="d-flex align-items-center justify-content-center" style="height: 75vh;">
-  <div class="text-center">
-    <h2 class="mb-3">No hay explotaciones</h2>
-    <div class="text-center mt-4">
-      <button type="button" class="btn button-primary p-3" data-bs-toggle="modal" data-bs-target="#crearexplotacion">
-        Crear Explotacion
-      </button>
+
+    <!-- Columna para el resto del contenido -->
+    <div class="col-md-8">
+      <p>Contenido del resto de la ventana...</p>
+      <!-- Más contenido aquí -->
     </div>
   </div>
-</div>
+@empty
+  <div class="d-flex align-items-center justify-content-center" style="height: 75vh;">
+    <div class="text-center">
+      <h2 class="mb-3">No hay explotaciones</h2>
+      <div class="text-center mt-4">
+        <button type="button" class="btn button-primary p-3" data-bs-toggle="modal" data-bs-target="#crearexplotacion">
+          Crear Explotacion
+        </button>
+      </div>
+    </div>
+  </div>
 
 
 <div class="modal fade" id="crearexplotacion" tabindex="-1" aria-labelledby="crearexplotacionLabel" aria-hidden="true">
