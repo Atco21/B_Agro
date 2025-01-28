@@ -1,4 +1,4 @@
-vendor/
+
 /.phpunit.cache
 .phpactor.json
 .phpunit.result.cache
@@ -15,3 +15,4 @@ yarn-error.log
 
 .env
 node_modules/
+vendor/
