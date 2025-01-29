@@ -3,7 +3,7 @@ body{
     font-family: "Inter", serif;
 }
 
-a{
+.nav-link{
     color:white !important;
     font-size: 20px !important;
     font-weight: 600 !important;
@@ -13,7 +13,7 @@ a{
 }
 
 .navbar{
-    
+
     background-color: #01533E;
     border-bottom: 1px solid #e3e7ea;
     border-top: 1px solid #e3e7ea;
@@ -139,7 +139,7 @@ a{
     height: 58px;
     margin-left: 5rem !important;
 
-    
+
 }
 
 h3{
@@ -156,14 +156,39 @@ h3{
 }
 
 
-#explotacionesSelect{
-    width: 15%;
+.expoSelect{
+    width: 292px ;
     height: 50px;
     border: 2px solid rgba(207, 207, 207, 0.80);
     font-size: 24px;
+    margin-top: 1.5em;
+
 }
 
 
-text-right{
-    text-align: right;
+
+
+
+.col-2{
+
+    border: 3px solid #01533E;
+    border-top: 0;
+    margin-left: 0;
+
 }
+
+.menu2{
+    font-size: 32px;
+    font-weight: 600;
+    color:#4F4F4F;
+    margin-bottom: 1rem;
+}
+
+.navbar{
+
+    border: none;
+
+}
+
+
+

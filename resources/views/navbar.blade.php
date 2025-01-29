@@ -24,10 +24,10 @@
             <!-- Opciones de usuario a la derecha -->
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="" href="#">Mi perfil</a>
+                    <a class="nav-link" href="#">Mi perfil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="" href="#">Cerrar sesión</a>
+                    <a class="nav-link" href="#">Cerrar sesión</a>
                 </li>
             </ul>
         </div>

@@ -16,7 +16,7 @@
 <body>
     @include('navbar')
 
-    <div class="ms-5">
+    <div >
         @yield('content')
     </div>
 
