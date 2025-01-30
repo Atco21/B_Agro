@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Parcela;
 use Illuminate\Http\Request;
+use App\Models\Parcela;
+use App\Models\Explotacion;
 
-class parcelasController extends Controller
+class ParcelasController extends Controller
 {
     public function index()
     {
@@ -55,4 +56,15 @@ class parcelasController extends Controller
         return response()->json($parcelas);
     }
 
+
+
+    public function listarParcelasPorExplotacion()
+    {
+
+        // Obtener las parcelas asociadas a la explotación
+        $parcelas = Parcela::where('explotacion_id', '1')->get();
+
+        // Retornar una vista con las parcelas
+        return view('explotaciones.parcelas', compact('parcelas'));
+    }
 }

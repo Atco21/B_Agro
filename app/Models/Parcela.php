@@ -23,4 +23,7 @@ class Parcela extends Model
     {
         return $this->belongsTo(Cultivo::class);
     }
+
+
+
 }
