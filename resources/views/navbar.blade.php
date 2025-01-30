@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <!-- Logo -->
         <a class="navbar-brand" href="{{ url('/explotaciones') }}">
-            <img src="./assets/logoAgro.png" width="80" alt="Logo">
+            <img src="{{url('assets/logoAgro.png')}}" width="80" alt="Logo">
         </a>
 
 

@@ -7,7 +7,7 @@ Route::get('/', function () {
     return view('layouts.app');
 });
 
-Route::get('/explotacion', [explotacionController::class, 'index']);
+Route::get('/explotaciones', [explotacionController::class, 'index']);
 
 
 Route::get('/trabajadores', function () {
@@ -19,4 +19,8 @@ Route::get('/informes', function () {
 });
 
 
-Route::get('/explotacion/general', [ExplotacionController::class, 'general'])->name('explotaciones.general');
+Route::get('/explotaciones/general', [ExplotacionController::class, 'general'])->name('explotaciones.general');
+Route::get('/explotaciones/parcelas', [ExplotacionController::class, 'parcelas'])->name('explotaciones.parcelas');
+Route::get('/explotaciones/tareas', [ExplotacionController::class, 'tareas'])->name('explotaciones.tareas');
+Route::get('/explotaciones/incidencias', [ExplotacionController::class, 'incidencias'])->name('explotaciones.inciendias');
+Route::get('/explotaciones/maquinas', [ExplotacionController::class, 'maquinas'])->name('explotaciones.maquinas');

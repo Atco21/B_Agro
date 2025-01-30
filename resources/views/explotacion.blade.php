@@ -4,7 +4,7 @@
 
 
 @if ($explotacion->count() > 0)
-  <div class="d-flex flex-row mt-0">
+<div class="d-flex flex-row mt-0">
     <!-- Columna para los <h3> -->
     <div class="col-2 vh-100">
         <div class="d-flex flex-column justify-content-around h-50 ps-2">
@@ -19,14 +19,12 @@
     <div class="col-10">
         <div class="d-flex justify-content-end me-2">
             <select class="d-flex form-select form-control expoSelect">
-            @foreach ($explotacion as $item)
-            <option selected disabled>Selecciona una opción</option>
-            <option value="{{ $item->id }}">{{ $item->nombre }}</option>
-            @endforeach
-          </select>
+                @foreach ($explotacion as $item)
+                    <option selected disabled>Selecciona una opción</option>
+                    <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                @endforeach
+            </select>
         </div>
-    </div>
-    <div>
         @yield('content2')
     </div>
 </div>
