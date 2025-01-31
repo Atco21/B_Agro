@@ -1,7 +1,5 @@
+
 /.phpunit.cache
-/node_modules
-.env.backup
-.env.production
 .phpactor.json
 .phpunit.result.cache
 Homestead.json
@@ -14,3 +12,7 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+.env
+node_modules/
+vendor/
