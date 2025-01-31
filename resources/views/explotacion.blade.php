@@ -12,7 +12,7 @@
     <div class="col-2 vh-100">
         <div class="d-flex flex-column justify-content-around h-50 ps-2">
             <a class="menu2 {{ Request::is('general') ? 'active' : '' }}" href="{{ url('explotaciones/general') }}">General</a>
-            <a class="menu2 {{ Request::is('parcelass') ? 'active' : '' }} " href="{{ url('explotaciones/parcelas') }}">Parcelas</a>
+            <a class="menu2 {{ Request::is('parcelas') ? 'active' : '' }} " href="{{ url('explotaciones/parcelas') }}">Parcelas</a>
             <a class="menu2 {{ Request::is('tareas') ? 'active' : '' }} " href="{{ url('explotaciones/tareas') }}">Tareas</a>
             <a class="menu2 {{ Request::is('incidencias') ? 'active' : '' }} " href="{{ url('explotaciones/incidencias') }}">Incidencias</a>
             <a class="menu2 {{ Request::is('maquinas') ? 'active' : '' }} " href="{{ url('explotaciones/maquinas') }}">Máquinas</a>
