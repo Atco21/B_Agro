@@ -69,4 +69,5 @@ class ParcelasController extends Controller
         return view('explotaciones.parcelas', ['parcelas' => $parcelas, 'explotacion' => $explotacion]);
 
     }
+
 }
