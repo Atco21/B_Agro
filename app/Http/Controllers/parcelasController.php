@@ -62,9 +62,11 @@ class ParcelasController extends Controller
     {
 
         // Obtener las parcelas asociadas a la explotación
-        $parcelas = Parcela::where('explotacion_id', '1')->get();
+        $parcelas = Parcela::with('cultivo')->where('explotacion_id', 1)->get();
+        $explotacion = Explotacion::all();
 
         // Retornar una vista con las parcelas
-        return view('explotaciones.parcelas', compact('parcelas'));
+        return view('explotaciones.parcelas', ['parcelas' => $parcelas, 'explotacion' => $explotacion]);
+
     }
 }

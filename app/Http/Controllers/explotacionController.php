@@ -20,10 +20,7 @@ class explotacionController extends Controller
         return view('explotaciones.general', ['explotacion' => $explotacion]);
     }
 
-    public function parcelas(){
-        $explotacion = Explotacion::all();
-        return view('explotaciones.parcelas', ['explotacion' => $explotacion]);
-    }
+
     public function tareas(){
         $explotacion = Explotacion::all();
         return view('explotaciones.tareas', ['explotacion' => $explotacion]);
@@ -47,6 +44,11 @@ class explotacionController extends Controller
         return $explotacion;
     }
 
+    public function parcelas()
+    {
+        $explotacion = Explotacion::all();
+        return view('explotaciones.parcelas', ['explotacion' => $explotacion]);
+    }
 
 
 }

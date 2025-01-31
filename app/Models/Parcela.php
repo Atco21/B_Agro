@@ -11,7 +11,7 @@ class Parcela extends Model
 
     protected $table = 'parcelas';
 
-    protected $fillable = ['explotacion_id', 'cultivo_id', 'nombre', 'area',
+    protected $fillable = ['explotacion_id', 'cultivo_n', 'nombre', 'area',
     ];
 
     public function explotacion()
