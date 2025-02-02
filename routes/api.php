@@ -12,3 +12,4 @@ Route::get('/', [ExplotacionController::class, 'index']);
 Route::get('/parcelas',[parcelasController::class, 'index']);
 Route::get('/parcelas/{id}',[parcelasController::class, 'show']);
 Route::get('/parcelas/explotacion/{explotacion_id}',[parcelasController::class, 'porExplotacion']);
+Route::get('/explotaciones/datos/{id}',[parcelasController::class, 'getDatosPorExplotacion']);

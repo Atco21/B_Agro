@@ -60,13 +60,29 @@ class ParcelasController extends Controller
 
     public function listarParcelasPorExplotacion()
     {
+        $parcelas = Parcela::all(); // O cualquier consulta que estés utilizando para obtener las parcelas
+        
+        return view('explotaciones.parcelas', [compact('parcelas'), compact('explotacion')]);
 
-        // Obtener las parcelas asociadas a la explotación
-        $parcelas = Parcela::with('cultivo')->where('explotacion_id', 1)->get();
-        $explotacion = Explotacion::all();
 
-        // Retornar una vista con las parcelas
-        return view('explotaciones.parcelas', ['parcelas' => $parcelas, 'explotacion' => $explotacion]);
+    }
+
+    public function getDatosPorExplotacion($id){
+
+        $explotacion = Explotacion::find($id);
+
+        if (!$explotacion) {
+            return response()->json(['error' => 'Explotación no encontrada'], 404);
+        }
+
+        return response()->json([
+            'id' => $explotacion->id,
+            'nombre' => $explotacion->nombre,
+            'direccion' => $explotacion->direccion,
+            'localidad' => $explotacion->localidad,
+            'tamaño' => $explotacion->tamanyo
+        ]);
+
 
     }
 

@@ -2,7 +2,26 @@
 
 @section('content')
 
+<script>
 
+
+document.addEventListener("DOMContentLoaded", function () {
+    const select = document.getElementById("opciones");
+
+    const opcionGuardada = localStorage.getItem("opcionSeleccionada");
+    if (opcionGuardada) {
+        select.value = opcionGuardada;
+        cargarDatos(opcionGuardada); // Llamamos a la función al cargar
+    }
+
+    select.addEventListener("change", function () {
+        const idSeleccionado = select.value;
+        localStorage.setItem("opcionSeleccionada", idSeleccionado);
+        cargarDatos(idSeleccionado);
+    });
+});
+
+</script>
 
 
 
@@ -21,12 +40,14 @@
     <!-- Columna para el resto del contenido -->
     <div class="col-10">
         <div class="d-flex justify-content-end me-2">
-            <select class="d-flex form-select form-control expoSelect">
+          <form id="formulario_explotacion">
+            <select id="opciones" class="d-flex form-select form-control expoSelect">
                 <option selected disabled>Selecciona una opción</option>
                 @foreach ($explotacion as $item)
                     <option value="{{ $item->id }}">{{ $item->nombre }}</option>
                 @endforeach
             </select>
+        </form>
         </div>
         @yield('content2')
     </div>
