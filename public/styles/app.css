@@ -190,5 +190,30 @@ h3{
 
 }
 
+.input-group-text{
+    background: none;
+    border: none;
+}
+
+#cuadroBusqueda{
+
+    border: 2px solid #01533E;
+    border-radius: 5px;
+    box-shadow: none !important;
+    background-color: none;
 
 
+}
+
+#textoBusqueda{
+
+    border: none;
+
+}
+
+#tabla{
+
+    font-size: 24px;
+    text-align: center;
+
+}
