@@ -60,9 +60,9 @@ class ParcelasController extends Controller
 
     public function listarParcelasPorExplotacion()
     {
-        $parcelas = Parcela::all(); // O cualquier consulta que estés utilizando para obtener las parcelas
-        
-        return view('explotaciones.parcelas', [compact('parcelas'), compact('explotacion')]);
+        $explotacion = Explotacion::all();
+
+        return view('explotaciones.parcelas', ['explotacion'=>$explotacion]);
 
 
     }

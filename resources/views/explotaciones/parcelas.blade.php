@@ -20,7 +20,10 @@
     function cargarDatos(id) {
         console.log(`Cargando datos para explotación ID: ${id}`);
 
-        fetch(`/api/explotaciones/datos/${id}`)
+
+
+
+        fetch(`/api/parcelas/explotacion/${id}`)
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
@@ -33,27 +36,58 @@
             .catch(error => console.error("Error en la petición:", error));
     }
 
-    function actualizarContenido(data) {
-        const contentDiv = document.getElementById("content-parcelas");
-        if (!contentDiv) return;
+    async function actualizarContenido(data) {
+        const contentDiv = document.getElementById("tabla");
 
-        let html = `<h2>Parcelas</h2>`;
-        if (data.parcelas.length > 0) {
-            data.parcelas.forEach(parcela => {
-                html += `
-                    <div>
-                        <strong>ID:</strong> ${parcela.id} <br>
-                        <strong>Nombre:</strong> ${parcela.nombre} <br>
-                        <strong>Cultivo:</strong> ${parcela.cultivo ? parcela.cultivo.nombre : "Sin Cultivo"} <br>
-                    </div><hr>
-                `;
-            });
-        } else {
-            html += `<div>No hay parcelas disponibles.</div>`;
+        const idsCultivos = data.map(parcela => parcela.cultivo_id);
+        let cultivosNombre = {};
+
+        alert(idsCultivos);
+
+        try {
+            const response = await fetch(`/api/cultivos_nombre/${idsCultivos.join(",")}`);
+            const cultivosData = await response.json();
+
+            if (cultivosData.error) {
+                alert("No hay datos disponibles");
+                return;
+            }
+            console.log(cultivosData);
+            cultivosNombre = cultivosData;
+
+        } catch (error) {
+            console.error("Error obteniendo los nombres de los cultivos:", error);
+            alert("Hubo un problema al cargar los datos.");
+            return;
         }
+
+        let html = `
+            <table class="table" border="1" id="tabla_parcelas">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Cultivo</th>
+                        <th>Tamaño</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        data.forEach(parcela => {
+            html += `
+                <tr>
+                    <td>${parcela.nombre}</td>
+                    <td>${cultivosNombre.nombre || "Desconocido"}</td>
+                    <td>${parcela.tamanyo}</td>
+                </tr>
+            `;
+        });
+
+        html += `</tbody></table>`;
 
         contentDiv.innerHTML = html;
     }
+
 
     function actualizarURL(id) {
         const newURL = `/explotaciones/parcelas?explotacion=${id}`;
@@ -67,18 +101,15 @@
     };
 </script>
 
-<div id="content-parcelas">
-    <h2>Parcelas</h2>
-    @forelse ($parcelas as $parcela)
-        <div>
-            <strong>ID:</strong> {{$parcela->id}} <br>
-            <strong>Nombre:</strong> {{$parcela->nombre}} <br>
-            <strong>Cultivo:</strong> {{ $parcela->cultivo->nombre ?? 'Sin Cultivo' }} <br>
-        </div>
-        <hr>
-    @empty
-        <div>No hay parcelas disponibles.</div>
-    @endforelse
+<div id="content-parcelas" class="ps-5">
+
+    <div id="tabla" class="d-flex w-25 pe-4">
+
+
+
+    </div>
+
+
 </div>
 
 @endsection
