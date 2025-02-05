@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tratamientos', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id_tratamiento'); //porque he camiado el nombre tenia que poner esto
             $table->timestamps();
             $table->string('producto_quimico', 100);
             $table->string('dosis', 100);
             $table->string('nombre_tratamiento', 100);
+            $table->string('tempmax',100);
+            $table->string('tempmin',100);
 
         });
     }
