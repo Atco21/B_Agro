@@ -11,7 +11,7 @@ class explotacionController extends Controller
     {
         $explotacion = Explotacion::all();
         // $explotacion = [];
-        return view('explotacion', ['explotacion' => $explotacion]);
+        return view('explotacion', ['explotacion' => $explotacion]/*compact('explotacion')*/);
     }
 
     public function general()
