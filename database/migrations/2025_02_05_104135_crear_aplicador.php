@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('aplicador', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id_aplicador')->primary();
+            $table->integer('id_explotacion')->nullable();
+            $table->string('nombre')->nullable();
+            $table->string('DNI')->nullable();
             $table->timestamps();
+            $table->foreignId('id_explotacion')->constrained('explotaciones')->onDelete('cascade');
+
         });
     }
 
