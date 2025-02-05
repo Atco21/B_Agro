@@ -86,4 +86,13 @@ class ParcelasController extends Controller
 
     }
 
+    public function rendimiento(){
+
+
+        return view('explotacion');
+
+
+    }
+
+
 }

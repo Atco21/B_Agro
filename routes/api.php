@@ -20,3 +20,6 @@ Route::get('/explotaciones/datos/{id}',[parcelasController::class, 'getDatosPorE
 Route::get('/cultivos_nombre/{id}',[cultivoController::class, 'getNombre']);
 Route::get('/cultivos_nombre', [CultivoController::class, 'getNombres']);
 
+
+Route::get('/parcelas/explotacion/{explotacion_id}/rendimiento',[parcelasController::class, 'porExplotacion']);
+

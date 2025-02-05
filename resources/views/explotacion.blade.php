@@ -8,7 +8,11 @@
 
 @if ($explotacion->count() > 0)
 <div class="d-flex flex-row mt-0">
+
+
     <!-- Columna para los <h3> -->
+
+
     <div class="col-2 vh-100">
         <div class="d-flex flex-column justify-content-around h-50 ps-2">
             <a class="menu2 {{ Request::is('general') ? 'active' : '' }}" href="{{ url('explotaciones/general') }}">General</a>
@@ -18,13 +22,15 @@
             <a class="menu2 {{ Request::is('maquinas') ? 'active' : '' }} " href="{{ url('explotaciones/maquinas') }}">Máquinas</a>
         </div>
     </div>
+
+
     <!-- Columna para el resto del contenido -->
     <div class="col-10">
         <div class="d-flex justify-content-end me-2">
             <select class="d-flex form-select form-control expoSelect">
                 <option selected disabled>Selecciona una opción</option>
-                @foreach ($explotacion as $item)
-                    <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                @foreach ($explotacion as $explo)
+                    <option value="{{ $explo->id }}">{{ $explo->nombre }}</option>
                 @endforeach
             </select>
         </div>
