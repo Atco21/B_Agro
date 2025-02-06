@@ -79,10 +79,7 @@ async function actualizarContenido(data) {
 
         html += `</tbody></table>`;
         contentDiv.innerHTML = html;
-        // Seleccionar todos los tr con la clase 'lineaParcela'
-        let lineas = document.querySelectorAll('.lineaParcela'); // Corregido aquí con el punto (.)
-
-        // Añadir el event listener para cada tr con la clase 'lineaParcela'
+        let lineas = document.querySelectorAll('.lineaParcela');
         lineas.forEach(linea => {
             linea.addEventListener('click', () => {
                 datosParcela(linea.id);
@@ -98,7 +95,20 @@ async function actualizarContenido(data) {
 
 function datosParcela(id) {
 
-    fetch
+    alert(id)
+
+    // Obtener la URL actual
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Obtener el ID de la explotación actual
+    const idExplotacion = urlParams.get("explotacion");
+
+    // Construir la nueva URL manteniendo el id de la explotación y agregando el id de la parcela
+    const newURL = `/explotaciones/parcelas?explotacion=${idExplotacion}&parcela=${id}/rendimiento`;
+
+    // Actualizar la URL sin recargar la página
+    history.pushState({ explotacion: idExplotacion, parcela: id }, "", newURL);
+
 
 }
 
@@ -147,6 +157,7 @@ window.onpopstate = function(event) {
                     </tr>
                 </table>
 
+                @yield('content3')
 
             </div>
         </div>

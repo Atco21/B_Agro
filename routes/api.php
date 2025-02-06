@@ -23,3 +23,4 @@ Route::get('/cultivos_nombre', [CultivoController::class, 'getNombres']);
 
 Route::get('/parcelas/explotacion/{explotacion_id}/rendimiento',[parcelasController::class, 'porExplotacion']);
 
+

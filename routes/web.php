@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\explotacionController;
 use App\Http\Controllers\parcelasController;
+use App\Http\Controllers\rendController;
 
 
 Route::get('/', function () {
@@ -11,7 +12,7 @@ Route::get('/', function () {
 
 Route::get('/explotaciones', [explotacionController::class, 'index']);
 
-
+// dfiobvisfn
 Route::get('/trabajadores', function () {
     return view('trabajadores');
 });
@@ -28,3 +29,5 @@ Route::get('/explotaciones/incidencias', [ExplotacionController::class, 'inciden
 Route::get('/explotaciones/maquinas', [ExplotacionController::class, 'maquinas'])->name('explotaciones.maquinas');
 Route::get('/explotaciones/pedidos', [explotacionController::class, 'pedidos'])->name('explotaciones.pedidos');
 Route::get('/parcelas',[parcelasController::class, 'porExplotacion']);
+
+Route::get('/explotaciones/parcelas${idExplotacion}{idParcela}/rendimiento', [rendController::class, 'index');
