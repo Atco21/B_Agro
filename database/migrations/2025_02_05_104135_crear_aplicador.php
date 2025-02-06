@@ -12,14 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('aplicador', function (Blueprint $table) {
-            $table->integer('id_aplicador')->primary();
-            $table->integer('id_explotacion')->nullable();
+            $table->increments('id'); // Auto-incremental primary key
             $table->string('nombre')->nullable();
             $table->string('DNI')->nullable();
             $table->timestamps();
-            $table->foreignId('id_explotacion')->constrained('explotaciones')->onDelete('cascade');
 
+            // Definir clave foránea correctamente (sin repetirla)
+            $table->foreignId('id_explotacion')->nullable()->constrained('explotaciones')->onDelete('cascade');
         });
+
     }
 
     /**
