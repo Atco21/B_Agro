@@ -20,6 +20,8 @@
             <a class="menu2 {{ Request::is('tareas') ? 'active' : '' }} " href="{{ url('explotaciones/tareas') }}">Tareas</a>
             <a class="menu2 {{ Request::is('incidencias') ? 'active' : '' }} " href="{{ url('explotaciones/incidencias') }}">Incidencias</a>
             <a class="menu2 {{ Request::is('maquinas') ? 'active' : '' }} " href="{{ url('explotaciones/maquinas') }}">Máquinas</a>
+            <a class="menu2 {{ Request::is('pedidos') ? 'active' : '' }} " href="{{ url('explotaciones/pedidos') }}">Pedidos</a>
+
         </div>
     </div>
 

@@ -26,4 +26,5 @@ Route::get('/explotaciones/parcelas', [parcelasController::class, 'listarParcela
 Route::get('/explotaciones/tareas', [ExplotacionController::class, 'tareas'])->name('explotaciones.tareas');
 Route::get('/explotaciones/incidencias', [ExplotacionController::class, 'incidencias'])->name('explotaciones.inciendias');
 Route::get('/explotaciones/maquinas', [ExplotacionController::class, 'maquinas'])->name('explotaciones.maquinas');
+Route::get('/explotaciones/pedidos', [explotacionController::class, 'pedidos'])->name('explotaciones.pedidos');
 Route::get('/parcelas',[parcelasController::class, 'porExplotacion']);

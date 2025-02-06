@@ -3,112 +3,117 @@
 @section('content2')
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const select = document.querySelector(".expoSelect");
 
-        if (select) {
-            select.addEventListener("change", function() {
-                const id = select.value;
-                if (id) {
-                    cargarDatos(id);
-                    actualizarURL(id);
-                }
-            });
-        }
-    });
+addEventListener('DOMContentLoaded', inicio);
 
-    function cargarDatos(id) {
-        console.log(`Cargando datos para explotación ID: ${id}`);
+function inicio() {
+    const select = document.querySelector(".expoSelect");
 
-
-
-
-        fetch(`/api/parcelas/explotacion/${id}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    alert("No hay datos");
-                } else {
-
-                    document.getElementById('secciones').removeAttribute('hidden');
-
-
-
-                    console.log("Datos recibidos:", data);
-                    actualizarContenido(data);
-                }
-            })
-            .catch(error => console.error("Error en la petición:", error));
+    if (select) {
+        select.addEventListener("change", function() {
+            const id = select.value;
+            if (id) {
+                cargarDatos(id);
+                actualizarURL(id);
+            }
+        });
     }
 
-    async function actualizarContenido(data) {
-        const contentDiv = document.getElementById("tabla");
+}
 
-        // Obtener los IDs de los cultivos
-        const idsCultivos = data.map(parcela => parcela.cultivo_id);
 
-        try {
-            // Construir la URL con los parámetros de consulta
-            const url = `http://0.0.0.0/api/cultivos_nombre?ids=${idsCultivos.join(",")}`;
-            console.log("URL de la API:", url);
 
-            const response = await fetch(url);
-            const cultivosData = await response.json();
-
-            if (cultivosData.error) {
-                alert("No hay datos disponibles");
-                return;
+async function cargarDatos(id) {
+    fetch(`/api/parcelas/explotacion/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert("No hay datos");
+            } else {
+                document.getElementById('secciones').removeAttribute('hidden');
+                actualizarContenido(data);
             }
+        })
+        .catch(error => console.error("Error en la petición:", error));
+}
 
-            console.log("Datos recibidos:", cultivosData);
+async function actualizarContenido(data) {
+    const contentDiv = document.getElementById("tabla");
 
-            let html = `
-                <table class="table" border="1" id="tabla_parcelas">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Cultivo</th>
-                            <th>Tamaño</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
+    const idsCultivos = data.map(parcela => parcela.cultivo_id);
 
-            data.forEach(parcela => {
-                html +=
-                `
-                <tr onclick="window.location.href='http://0.0.0.0/explotaciones/parcelas?explotacion=1/rendimiento'"
+    try {
+        const url = `http://0.0.0.0/api/cultivos_nombre?ids=${idsCultivos.join(",")}`;
+        const response = await fetch(url);
+        const cultivosData = await response.json();
+
+        if (cultivosData.error) {
+            alert("No hay datos disponibles");
+            return;
+        }
+
+        let html = `
+            <table class="table" border="1" id="tabla_parcelas">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Cultivo</th>
+                        <th>Tamaño</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        data.forEach(parcela => {
+            html += `
+            <tr class="lineaParcela" id=${parcela.id}
                 style="cursor: pointer; background-color: #f9f9f9; transition: background 0.3s;"
                 onmouseover="this.style.backgroundColor='#ddd';"
                 onmouseout="this.style.backgroundColor='#f9f9f9';">
-                        <td>${parcela.nombre}</td>
-                        <td>${cultivosData[parcela.cultivo_id] || "Desconocido"}</td>
-                        <td>${parcela.tamanyo}</td>
-                </tr>
-                `;
+                    <td>${parcela.nombre}</td>
+                    <td>${cultivosData[parcela.cultivo_id] || "Desconocido"}</td>
+                    <td>${parcela.tamanyo}</td>
+            </tr>
+            `;
+        });
+
+        html += `</tbody></table>`;
+        contentDiv.innerHTML = html;
+        // Seleccionar todos los tr con la clase 'lineaParcela'
+        let lineas = document.querySelectorAll('.lineaParcela'); // Corregido aquí con el punto (.)
+
+        // Añadir el event listener para cada tr con la clase 'lineaParcela'
+        lineas.forEach(linea => {
+            linea.addEventListener('click', () => {
+                datosParcela(linea.id);
             });
+        });
 
-            html += `</tbody></table>`;
-
-            contentDiv.innerHTML = html;
-        } catch (error) {
-            console.error("Error obteniendo los nombres de los cultivos:", error);
-            alert("Hubo un problema al cargar los datos.");
-        }
+    } catch (error) {
+        console.error("Error obteniendo los nombres de los cultivos:", error);
+        alert("Hubo un problema al cargar los datos.");
     }
+}
+
+
+function datosParcela(id) {
+
+    fetch
+
+}
 
 
 
-    function actualizarURL(id) {
-        const newURL = `/explotaciones/parcelas?explotacion=${id}`;
-        history.pushState({ id: id }, "", newURL);
+function actualizarURL(id) {
+    const newURL = `/explotaciones/parcelas?explotacion=${id}`;
+    history.pushState({ id: id }, "", newURL);
+}
+
+window.onpopstate = function(event) {
+    if (event.state && event.state.id) {
+        cargarDatos(event.state.id);
     }
-
-    window.onpopstate = function(event) {
-        if (event.state && event.state.id) {
-            cargarDatos(event.state.id);
-        }
-    };
+};
 </script>
 <div id="secciones" hidden>
 
@@ -135,10 +140,10 @@
             <div class="w-100 h-100 card">
                 <table class="table-bordered">
                     <tr>
-                        <td>Rendimiento</td>
-                        <td>Órdenes</td>
-                        <td>Incidencias</td>
-                        <td>Tratamientos</td>
+                        <td class="opciones_menu2">Rendimiento</td>
+                        <td class="opciones_menu2">Órdenes</td>
+                        <td class="opciones_menu2">Incidencias</td>
+                        <td class="opciones_menu2">Tratamientos</td>
                     </tr>
                 </table>
 

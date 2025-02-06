@@ -11,6 +11,8 @@ class Parcela extends Model
 
     protected $table = 'parcelas';
 
+    protected $primaryKey = 'id';
+
     protected $fillable = ['explotacion_id', 'cultivo_n', 'nombre', 'area',
     ];
 
