@@ -10,14 +10,16 @@ use App\Models\Rendimiento;
 
 class rendController extends Controller
 {
-    public function index(){
+        public function mostrarParcela($id)
+        {
+            $parcela = Rendimiento::where('parcela_id',$id)->get();
 
-        $explotacion = Explotacion::all();
-        $parcelas = Parcelas::all();
-        $rendimiento = Rendimiento::all();
+            if (!$parcela) {
+                return response()->json(['error' => 'Parcela no encontrada'], 404);
+            }
 
-        return view('explotaciones.parcela.rendimiento', compact('explotacion'), compact('parcelas'), compact('rendimiento'));
-
-
-    }
+            return response()->json($parcela);
+        }
 }
+
+

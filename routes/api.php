@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\explotacionController;
 use App\Http\Controllers\parcelasController;
 use App\Http\Controllers\cultivoController;
+use App\Http\Controllers\rendController;
 
 
 Route::get('/explotaciones2', [ExplotacionController::class, 'index2']);
@@ -23,4 +24,6 @@ Route::get('/cultivos_nombre', [CultivoController::class, 'getNombres']);
 
 Route::get('/parcelas/explotacion/{explotacion_id}/rendimiento',[parcelasController::class, 'porExplotacion']);
 
+
+Route::get('/rendimiento/{id}',[rendController::class, 'mostrarParcela']);
 

@@ -3,6 +3,7 @@
 @section('content2')
 
 <script>
+let idparc = 1;
 
 addEventListener('DOMContentLoaded', inicio);
 
@@ -19,6 +20,8 @@ function inicio() {
         });
     }
 
+
+    document.getElementById('btnOrdenes').addEventListener('click', ordenes);
 }
 
 
@@ -43,7 +46,8 @@ async function actualizarContenido(data) {
     const idsCultivos = data.map(parcela => parcela.cultivo_id);
 
     try {
-        const url = `http://0.0.0.0/api/cultivos_nombre?ids=${idsCultivos.join(",")}`;
+        const domain = 'http://0.0.0.0'
+        const url = domain+`/api/cultivos_nombre?ids=${idsCultivos.join(",")}`;
         const response = await fetch(url);
         const cultivosData = await response.json();
 
@@ -82,7 +86,7 @@ async function actualizarContenido(data) {
         let lineas = document.querySelectorAll('.lineaParcela');
         lineas.forEach(linea => {
             linea.addEventListener('click', () => {
-                datosParcela(linea.id);
+                rendimiento(linea.id);
             });
         });
 
@@ -93,30 +97,71 @@ async function actualizarContenido(data) {
 }
 
 
-function datosParcela(id) {
+async function rendimiento(id) {
 
     alert(id)
 
-    // Obtener la URL actual
-    const urlParams = new URLSearchParams(window.location.search);
 
-    // Obtener el ID de la explotación actual
-    const idExplotacion = urlParams.get("explotacion");
+    try {
+        const domain = window.location.origin; // Usa el dominio actual
+        const url = `${domain}/api/rendimiento/${id}`;
+        const response = await fetch(url);
+        const data = await response.json();
 
-    // Construir la nueva URL manteniendo el id de la explotación y agregando el id de la parcela
-    const newURL = `/explotaciones/parcelas?explotacion=${idExplotacion}&parcela=${id}/rendimiento`;
+        if (data.error) {
+            alert("No hay datos disponibles");
+            return;
+        }
+        const rendimiento = data[0];
+        let html = `
 
-    // Actualizar la URL sin recargar la página
-    history.pushState({ explotacion: idExplotacion, parcela: id }, "", newURL);
+            <p>ID: ${rendimiento.id}</p>
+            <p>Parcela ID: ${rendimiento.parcela_id}</p>
+            <p>Cultivo sembrado: ${rendimiento.c_sembrada}</p>
+            <p>Cultivo recolectado: ${rendimiento.c_recolectada}</p>
+            <p>Cultivo esperado: ${rendimiento.c_esperada}</p>
+            <p>Costes de semilla: ${rendimiento.semillaCostes}</p>
+            <p>Costes de fertilizantes: ${rendimiento.fertilizantesCostes}</p>
+            <p>Otros costes: ${rendimiento.otrosCostes}</p>
+            <p>Precio por tonelada: ${rendimiento.precio_tonelada}</p>
+            <p>Total vendido: ${rendimiento.total_vendido}</p>
+            <p>Fecha de inicio: ${rendimiento.fecha_inicio}</p>
+            <p>Fecha de fin: ${rendimiento.fecha_fin}</p>
+
+
+
+
+
+
+        `
+        document.getElementById("rendimiento").innerHTML = html;
+        idparc = id;
+
+
+
+    } catch (error) {
+        console.error("Error obteniendo el rendimiento de las parcelas:", error);
+    }
+
 
 
 }
 
 
 
-function actualizarURL(id) {
-    const newURL = `/explotaciones/parcelas?explotacion=${id}`;
-    history.pushState({ id: id }, "", newURL);
+async function ordenes(id) {
+
+
+    alert("ordenes")
+    console.log("ayuda")
+
+
+
+}
+
+function actualizarURL(id_explo) {
+    const newURL = `/explotaciones/parcelas/${id_explo}`;
+    history.pushState({ id: id_explo }, "", newURL);
 }
 
 window.onpopstate = function(event) {
@@ -151,13 +196,19 @@ window.onpopstate = function(event) {
                 <table class="table-bordered">
                     <tr>
                         <td class="opciones_menu2">Rendimiento</td>
-                        <td class="opciones_menu2">Órdenes</td>
+                        <td class="opciones_menu2"><a  href="#" id="btnOpciones">Órdenes</a></td>
                         <td class="opciones_menu2">Incidencias</td>
                         <td class="opciones_menu2">Tratamientos</td>
                     </tr>
                 </table>
 
-                @yield('content3')
+                <div id="rendimiento">
+
+
+
+
+
+                </div>
 
             </div>
         </div>

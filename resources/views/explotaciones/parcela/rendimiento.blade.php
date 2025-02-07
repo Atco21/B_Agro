@@ -1,4 +1,4 @@
-@extends('parcelas.rendimineto')
+@extends('explotaciones.parcelas')
 
 @section('content3')
 
