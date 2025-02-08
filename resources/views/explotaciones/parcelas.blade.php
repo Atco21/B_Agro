@@ -21,7 +21,6 @@ function inicio() {
     }
 
 
-    document.getElementById('btnOrdenes').addEventListener('click', ordenes);
 }
 
 
@@ -85,9 +84,7 @@ async function actualizarContenido(data) {
         contentDiv.innerHTML = html;
         let lineas = document.querySelectorAll('.lineaParcela');
         lineas.forEach(linea => {
-            linea.addEventListener('click', () => {
-                rendimiento(linea.id);
-            });
+            linea.addEventListener('click', () => rendimiento(linea.id));
         });
 
     } catch (error) {
@@ -97,8 +94,30 @@ async function actualizarContenido(data) {
 }
 
 
+function seleccionar(id) {
+    const lineas = document.querySelectorAll('.lineaParcela');
+    lineas.forEach(linea => {
+        if (linea.id == id) {
+            linea.classList.add('seleccionada');
+        } else {
+            linea.classList.remove('seleccionada');
+        }
+    });
+}
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById('btnRendimiento').addEventListener('click', () => rendimiento(idparc));
+    document.getElementById('btnOrdenes').addEventListener('click', () => ordenes(idparc));
+});
+
+
 async function rendimiento(id) {
 
+    seleccionar(id);
+
+    idparc = id;
     alert(id)
 
 
@@ -135,8 +154,6 @@ async function rendimiento(id) {
 
         `
         document.getElementById("rendimiento").innerHTML = html;
-        idparc = id;
-
 
 
     } catch (error) {
@@ -149,7 +166,7 @@ async function rendimiento(id) {
 
 
 
-async function ordenes(id) {
+function ordenes(id) {
 
 
     alert("ordenes")
@@ -195,8 +212,8 @@ window.onpopstate = function(event) {
             <div class="w-100 h-100 card">
                 <table class="table-bordered">
                     <tr>
-                        <td class="opciones_menu2">Rendimiento</td>
-                        <td class="opciones_menu2"><a  href="#" id="btnOpciones">Órdenes</a></td>
+                        <td class="opciones_menu2"><a href="#" id="btnRendimiento">Rendimiento</a></td>
+                        <td class="opciones_menu2"><a  href="#" id="btnOrdenes">Órdenes</a></td>
                         <td class="opciones_menu2">Incidencias</td>
                         <td class="opciones_menu2">Tratamientos</td>
                     </tr>

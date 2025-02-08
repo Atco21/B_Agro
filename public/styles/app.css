@@ -227,3 +227,25 @@ h3{
     color: #4F4F4F;
 }
 
+
+
+.lineaParcela {
+    cursor: pointer;
+    background-color: #f9f9f9 !important;
+    transition: background 0.3s;
+}
+
+.lineaParcela:hover {
+    background-color: #ddd !important;
+}
+
+.lineaParcela.seleccionada {
+    background-color: #007bff !important; /* Azul Bootstrap */
+    color: white !important;
+}
+.table tbody tr.seleccionada {
+    --bs-table-bg: #FFFFE5 !important;
+    --bs-table-hover-bg: #007bff !important;
+    --bs-table-striped-bg: #FFFFE5 !important;
+    --bs-table-color: black !important;
+}
