@@ -64,6 +64,7 @@
         <h2 class="modal-title" id="exampleModalLabel">Nueva explotación</h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      
       <div class="modal-body p-5">
 
         <form>
