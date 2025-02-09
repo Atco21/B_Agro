@@ -13,7 +13,7 @@
     <!-- Columna para los <h3> -->
 
 
-    <div class="col-2 vh-100">
+    <div class="col-2 vh-100 d-flex flex-column justify-content-between">
         <div class="d-flex flex-column justify-content-around h-50 ps-2">
             <a class="menu2 {{ Request::is('general') ? 'active' : '' }}" href="{{ url('explotaciones/general') }}">General</a>
             <a class="menu2 {{ Request::is('parcelas') ? 'active' : '' }} " href="{{ url('explotaciones/parcelas') }}">Parcelas</a>
@@ -29,7 +29,7 @@
     <!-- Columna para el resto del contenido -->
     <div class="col-10">
         <div class="d-flex justify-content-end me-2">
-            <select class="d-flex form-select form-control expoSelect">
+            <select class="d-flex form-select form-control expoSelect mt-3">
                 <option selected disabled>Selecciona una opción</option>
                 @foreach ($explotacion as $explo)
                     <option value="{{ $explo->id }}">{{ $explo->nombre }}</option>

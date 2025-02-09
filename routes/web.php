@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\explotacionController;
 use App\Http\Controllers\parcelasController;
 use App\Http\Controllers\rendController;
+use App\Http\Controllers\TrabajadorController;
 
 
 Route::get('/', function () {
@@ -13,9 +14,7 @@ Route::get('/', function () {
 Route::get('/explotaciones', [explotacionController::class, 'index']);
 
 // dfiobvisfn
-Route::get('/trabajadores', function () {
-    return view('trabajadores');
-});
+Route::get('/trabajadores', [TrabajadorController::class, 'index']);
 
 Route::get('/informes', function () {
     return view('informes');

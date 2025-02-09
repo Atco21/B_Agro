@@ -122,7 +122,7 @@ async function rendimiento(id) {
 
 
     try {
-        const domain = window.location.origin; // Usa el dominio actual
+        const domain = window.location.origin; 
         const url = `${domain}/api/rendimiento/${id}`;
         const response = await fetch(url);
         const data = await response.json();
