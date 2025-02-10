@@ -73,7 +73,7 @@ body{
 
     font-size: 24px;
     width: 278px;
-    height: 100px;
+    height: 70px;
     background-color: #532301;
     color: #FFFFFF;
     font-weight: 700;
@@ -90,6 +90,10 @@ body{
     color: white;
 }
 
+.modal-body {
+    max-height: 90vh; /* Controla la altura máxima del modal */
+    overflow-y: auto;
+}
 
 
 .m1{
@@ -99,7 +103,7 @@ body{
 }
 
 .m2{
-    max-height: 830px;
+    max-height: 800px;
     background: white;
 
 }
@@ -109,18 +113,14 @@ body{
 .form-control{
     font-size: 24px !important;
     height: 50px !important;
-    padding: 3px 14px 3px 9px   !important;
     align-items: center !important;
     border: 2px solid rgba(207, 207, 207, 0.80) !important;
 
 }
 .form-control:focus{
-    height: 50px !important;
-    padding: 3px 14px 3px 9px  !important;
     align-items: center     !important;
     border: 4px solid rgba(207, 207, 207, 0.80) !important;
     box-shadow: none    !important;
-
 }
 
 
@@ -131,11 +131,24 @@ body{
     height: 37px !important;
     flex-direction: column !important;
     justify-content: center !important;
-    font-size: 32px !important;
+    font-size: 24px !important;
     font-style: normal !important;
     font-weight: 600    !important;
     line-height: normal !important;
+    margin: 0 !important;
 }
+
+.textarea{
+    height: 80px !important;
+}
+
+.fotoinput{
+
+    width: 697px !important;
+
+}
+
+
 
 .parcelas{
     background-color: #01533E;
@@ -154,7 +167,7 @@ h3{
 
     padding-left: 5rem !important;
     padding-right: 5rem !important;
-    margin-bottom: 3rem !important;
+    margin-bottom: 2rem !important;
 
 
 }

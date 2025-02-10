@@ -1,18 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="d-flex flex-row mt-3 ms-5">
+<div class="d-flex flex-row mt-3 ms-3 align-items-center">
+    <input type="search" class="form-control ms-3 w-25" placeholder="Buscar" aria-label="Buscar">
 
-    <input type="search" class="form-control ms-3 w-25 form-select" placeholder="Buscar" aria-label="Buscar">
-
-    <select class="form-select form-control expoSelect ms-3">
+    <select class="form-select form-control expoSelect ms-3 w-auto">
         <option selected disabled>Selecciona una opción</option>
         @foreach ($explotacion as $explo)
             <option value="{{ $explo->id }}">{{ $explo->nombre }}</option>
         @endforeach
     </select>
-    <div class="d-flex justify-content-end">
-    <button type="button" class="btn button-primary p-4 ms-3" data-bs-toggle="modal" data-bs-target="#anadirUsuario">
+    <div class="ms-auto pe-4">
+    <button type="button" class="btn button-primary p-4 ms-5" data-bs-toggle="modal" data-bs-target="#anadirUsuario">
         Añadir usuario
       </button>
     </div>
@@ -23,56 +22,94 @@
 
         <div class="modal-dialog m1">
 
-            <div class="modal-content ">
+            <div class="modal-content m2">
 
                 <div class="modal-header">
                     <h2 class="modal-title" id="exampleModalLabel">Nuevo usuario</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <div class="modal-body d-flexs m2">
-
-                    <form>
-                        <div class="campos row mb3">
-                            <div class="col">
-                                <h2>1. Datos personales</h2>
+                <div class="modal-body">
+                    <form action="{{ route('trabajadores.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="pb-5">
+                            <h2 class="mb-3">1. Datos personales</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="nombre_completo" class="form-label">Nombre completo:</label>
+                                    <input type="text" class="form-control" id="nombre_completo" placeholder="Introduce nombre completo" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="dni" class="form-label">DNI:</label>
+                                    <input type="text" class="form-control" id="dni" placeholder="Introduce DNI" required>
+                                </div>
                             </div>
-                            <div class="col">
-                                <h2>2. Tipo de empleado</h2>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <label for="telefono" class="form-label">Número de teléfono:</label>
+                                    <input type="text" class="form-control" id="telefono" placeholder="Introduce teléfono">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento:</label>
+                                    <input type="date" class="form-control" id="fecha_nacimiento">
+                                </div>
                             </div>
-                            <div class="col">
-                                <h2>3. Registro</h2>
+                            <div class="mt-3">
+                                <label for="direccion" class="form-label">Dirección:</label>
+                                <textarea class="form-control" id="direccion" rows="3" placeholder="Introduce dirección"></textarea>
+                            </div>
+                        </div>
+                        <div class="pb-5">
+                            <h2 class="mb-3">2. Tipo de empleado</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="rol" class="form-label">Rol:</label>
+                                    <select class="form-select form-control" id="rol" required>
+                                        <option selected disabled>Selecciona una opción</option>
+                                        <option value="1">Jefe de campo</option>
+                                        <option value="2">Aplicador</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="explotacion_id" class="form-label">Explotación:</label>
+                                    <select class="form-select form-control" id="explotacion_id" required>
+                                        <option selected disabled>Selecciona una opción</option>
+                                        @foreach ($explotacion as $explo)
+                                            <option value="{{ $explo->id }}">{{ $explo->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="campos row mb3">
-                            <div class="col">
-                                <label for="nombreUsuario" class="form-label">Nombre:</label>
-                                <input type="text" class="form-control" id="nombreUsuario" placeholder="Nombre">
+                        <div class="pb-5">
+                            <h2 class="mb-3">3. Registro</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="usuario" class="form-label">Usuario:</label>
+                                    <input type="text" class="form-control" id="usuario" placeholder="Introduce usuario" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="password" class="form-label">Contraseña:</label>
+                                    <input type="password" class="form-control" id="password" placeholder="Introduce contraseña" required>
+                                </div>
                             </div>
-                            <div class="col">
-                                <label for="rol" class="form-label">Rol:</label>
-                                <select class="form-select form-control" id="rol">
-                                    <option selected disabled>Selecciona una opción</option>
-                                    <option value="1">Jefe de campo</option>
-                                    <option value="2">Aplicador</option>
-                                </select>
+                            <div class="mt-3 col-md-6">
+                                <label for="imagen" class="form-label">Foto usuario:</label>
+                                <input type="file" class="form-control fotoinput" accept="image/png, image/jpeg" id="imagen">
                             </div>
-                            <div class="col">
-                                <label for="fotoUsuario" class="form-label">Foto usuario:</label>
-                                <input type="file" class="form-control" accept="image/png, image/jpeg" />
+                            <div class="col-md-6">
+
                             </div>
                         </div>
 
-                    </form>
-
-
-
                 </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn">Crear explotación</button>
+
+                <div class="modal-footer ">
+                    <button type="submit" class="btn button-secondary1">Añadir usuario</button>
                 </div>
+            </form>
 
             </div>
 
