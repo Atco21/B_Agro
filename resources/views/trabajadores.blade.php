@@ -46,18 +46,24 @@
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-6">
-                                    <label for="telefono" class="form-label">Número de teléfono:</label>
-                                    <input type="text" class="form-control" id="telefono" placeholder="Introduce teléfono">
+                                    <label for="email" class="form-label">Email:</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Introduce email">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento:</label>
-                                    <input type="date" class="form-control" id="fecha_nacimiento">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento:</label>
+                                            <input type="date" class="form-control" id="fecha_nacimiento">
+                                        </div>
+                                        <div class="col">
+                                            <label for="telefono" class="form-label">Número de teléfono:</label>
+                                            <input type="text" class="form-control" id="telefono" placeholder="Introduce teléfono">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="mt-3">
-                                <label for="direccion" class="form-label">Dirección:</label>
-                                <textarea class="form-control" id="direccion" rows="3" placeholder="Introduce dirección"></textarea>
-                            </div>
+
                         </div>
                         <div class="pb-5">
                             <h2 class="mb-3">2. Tipo de empleado</h2>
@@ -106,11 +112,12 @@
                 </div>
 
 
-                <div class="modal-footer ">
-                    <button type="submit" class="btn button-secondary1">Añadir usuario</button>
-                </div>
+
             </form>
 
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn button-secondary1">Añadir usuario</button>
             </div>
 
         </div>

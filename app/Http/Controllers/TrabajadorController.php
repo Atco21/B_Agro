@@ -25,14 +25,11 @@ class TrabajadorController extends Controller
             'telefono' => 'required|string|max:15',
             'email' => 'required|email|unique:trabajadores,email',
             'direccion' => 'nullable|string|max:255',
-            'iban' => 'nullable|string|max:34',
-            'seguridad_social' => 'nullable|string|max:15',
             'fecha_nacimiento' => 'nullable|date',
             'usuario' => 'required|string|unique:trabajadores,usuario',
             'password' => 'required|string|min:6',
             'rol' => 'required|string',
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'activo' => 'nullable|boolean',
             'explotacion_id' => 'required|integer|exists:explotaciones,id',
         ]);
         $imagenPath = null;
@@ -44,16 +41,11 @@ class TrabajadorController extends Controller
             'dni' => $request->dni,
             'telefono' => $request->telefono,
             'email' => $request->email,
-            'direccion' => $request->direccion,
-            'iban' => $request->iban,
-            'seguridad_social' => $request->seguridad_social,
             'fecha_nacimiento' => $request->fecha_nacimiento,
             'usuario' => $request->usuario,
             'password' => Hash::make($request->password), // Encriptar contraseña
             'rol' => $request->rol,
             'imagen' => $imagenPath,
-            'activo' => $request->activo ?? 0, // Si no se envía, será 0 (false)
-            'dias_trabajo' => $request->dias_trabajo ?? [], // Si no se envía, será un array vacío
             'explotacion_id' => $request->explotacion_id,
         ]);
 
