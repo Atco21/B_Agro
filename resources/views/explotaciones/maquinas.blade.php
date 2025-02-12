@@ -3,7 +3,7 @@
 @section('content2')
 
 
-<p>Seccion maquinas</p>
+<p></p>
 
 
 
