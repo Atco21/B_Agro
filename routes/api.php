@@ -8,6 +8,7 @@ use App\Http\Controllers\cultivoController;
 use App\Http\Controllers\rendController;
 
 
+
 Route::get('/explotaciones2', [ExplotacionController::class, 'index2']);
 Route::get('/', [ExplotacionController::class, 'index']);
 
@@ -26,4 +27,6 @@ Route::get('/parcelas/explotacion/{explotacion_id}/rendimiento',[parcelasControl
 
 
 Route::get('/rendimiento/{id}',[rendController::class, 'mostrarParcela']);
+
+Route::get('/tratamiento', [TratamientoController::class, 'mostrarTratamientos']);//esto te lleva al controlador de tratamientos
 
