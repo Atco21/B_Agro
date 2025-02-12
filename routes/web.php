@@ -41,7 +41,7 @@ Route::get('/explotaciones/incidencias', [ExplotacionController::class, 'inciden
 Route::get('/explotaciones/maquinas', [ExplotacionController::class, 'maquinas'])->name('explotaciones.maquinas');
 Route::get('/parcelas',[parcelasController::class, 'porExplotacion']);
 Route::get('/aplicador', [aplicadoresController::class, 'index']);
-Route::get('/pedidos', [pedidosController::class, 'index'])->name('pedidos.index');
-Route::get('/pedidos', [quimicosController::class, 'mostrarQuimicos']);
+// Route::get('/pedidos', [pedidosController::class, 'index'])->name('pedidos.index');
+// Route::get('/pedidos', [quimicosController::class, 'mostrarQuimicos']);
 // >>>>>>> 986337cc360e298b3ea64011ea364a83d9b2d772
 

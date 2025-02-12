@@ -4,7 +4,7 @@
 @section('content') --}}
 
 
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -14,7 +14,7 @@
     <!-- Bootstrap CSS desde CDN -->
 
 </head>
-<body>
+<body> --}}
     {{-- <div class="container mt-5">
         <h1 class="text-center text-success mb-4">Lista de Pedidos</h1>
 
@@ -89,9 +89,9 @@
     @endforeach --}}
 
     {{$quimicos}}
-
+{{--
 </body>
-</html>
+</html> --}}
 
 
 {{-- @endsection --}}
