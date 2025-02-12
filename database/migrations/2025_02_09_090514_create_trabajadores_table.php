@@ -19,9 +19,6 @@ return new class extends Migration
             $table->string('dni', 9)->unique();
             $table->string('telefono', 9);
             $table->string('email', 255)->unique();
-            $table->string('direccion', 255);
-            $table->string('iban', 24);
-            $table->string('seguridad_social', 12);
             $table->date('fecha_nacimiento');
 
             //datos de usuario
@@ -32,8 +29,6 @@ return new class extends Migration
 
 
             //tipo de empleado
-            $table->boolean('activo')->default(true);
-            $table->json('dias_trabajo')->nullable();
             $table->foreignId('explotacion_id')->constrained('explotaciones');
 
 

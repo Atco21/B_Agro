@@ -15,6 +15,34 @@
         Añadir usuario
       </button>
     </div>
+</div>
+
+
+    @if (($trabajadores->count())>0)
+
+
+        @foreach ($trabajadores as $trabajador)
+
+        <div class="card mt-3 ms-3" style="width: 25rem;">
+            <div class="d-flex flex-row mt-3 ms-3 align-items-center">
+                <img src="{{asset('storage/'.$trabajador->imagen)}}" alt="Foto de perfil" class="fotoPerfil">
+                <h4 class="card-title">{{$trabajador->nombre_completo}}</h4>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Explotación: <b>{{$trabajador->explotacion->nombre}}</b></h5>
+                <h5 class="card-title">Rol: <b>{{ $trabajador->rol == 1 ? 'Jefe de campo' : 'Aplicador' }}</b></h5>
+                <h5 class="card-title">Estado: <b>{{ $trabajador->rol == 1 ? 'Jefe de campo' : 'Aplicador' }}</b></h5>
+            </div>
+        </div>
+
+
+        @endforeach
+
+
+
+    @else
+
+    @endif
 
 
 
