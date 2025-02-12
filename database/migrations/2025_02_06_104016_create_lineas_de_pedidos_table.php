@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('lineas_de_pedidos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pedido_id')->nullable();
-            $table->unsignedBigInteger('quimico_id')->nullable();
+            $table->unsignedInteger('quimico_id')->nullable();
+            $table->integer('cantidad');
             $table->timestamps();
 
             // Definir claves foráneas con tipos de datos consistentes
