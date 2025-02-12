@@ -6,6 +6,8 @@ use App\Http\Controllers\explotacionController;
 use App\Http\Controllers\parcelasController;
 use App\Http\Controllers\cultivoController;
 use App\Http\Controllers\rendController;
+use App\Http\Controllers\TratamientoController;
+use App\Http\Controllers\OrdenController;
 
 
 
@@ -29,4 +31,4 @@ Route::get('/parcelas/explotacion/{explotacion_id}/rendimiento',[parcelasControl
 Route::get('/rendimiento/{id}',[rendController::class, 'mostrarParcela']);
 
 Route::get('/tratamiento', [TratamientoController::class, 'mostrarTratamientos']);//esto te lleva al controlador de tratamientos
-
+Route::apiResource('ordenes', OrdenController::class);//cointrolador de orden
