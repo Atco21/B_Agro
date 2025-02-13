@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('almacen_quimico', function (Blueprint $table) {
             $table->integer('id_almacen')->unsigned();
             $table->integer('id_quimico')->unsigned();
+            $table->integer('cantidad');
             $table->timestamps();
 
             // Definir clave primaria compuesta

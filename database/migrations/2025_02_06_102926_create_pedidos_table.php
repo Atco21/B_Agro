@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha_pedido')->nullable();
-            $table->integer('cantidad')->nullable();
+            $table->date('fecha_pedido');
+            $table->integer('cantidad');
             $table->enum('estado', ['enviado', 'pendiente', 'entregado']);
             $table->timestamps();
         });
