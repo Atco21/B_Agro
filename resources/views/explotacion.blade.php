@@ -29,7 +29,7 @@
     <!-- Columna para el resto del contenido -->
     <div class="col-10">
         <div class="d-flex justify-content-end me-2">
-            <select class="d-flex form-select form-control expoSelect mt-3">
+            <select class="d-flex form-select form-control expoSelect mt-3" id="selectExplotacion">
                 <option selected disabled>Selecciona una opción</option>
                 @foreach ($explotacion as $explo)
                     <option value="{{ $explo->id }}">{{ $explo->nombre }}</option>
@@ -64,7 +64,7 @@
         <h2 class="modal-title" id="exampleModalLabel">Nueva explotación</h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      
+
       <div class="modal-body p-5">
 
         <form>
@@ -197,3 +197,6 @@
 
 
 @endsection
+
+
+
