@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Trabajador;
 use App\Models\Explotacion;
+use Illuminate\Support\Facades\Hash;
+
 
 class TrabajadorController extends Controller
 {

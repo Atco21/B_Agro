@@ -119,7 +119,7 @@ async function rendimiento(id) {
     seleccionar(id);
 
     idparc = id;
-    alert(id)
+
 
 
     try {
@@ -158,6 +158,7 @@ async function rendimiento(id) {
 
 
     } catch (error) {
+        document.getElementById("rendimiento").innerHTML = "<p>No hay datos disponibles</p>";
         console.error("Error obteniendo el rendimiento de las parcelas:", error);
     }
 
