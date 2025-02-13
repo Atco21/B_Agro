@@ -40,6 +40,7 @@ async function cargarDatos(id) {
 }
 
 async function actualizarContenido(data) {
+    document.getElementById('previo').setAttribute('hidden', '');
     const contentDiv = document.getElementById("tabla");
 
     const idsCultivos = data.map(parcela => parcela.cultivo_id);
@@ -187,6 +188,17 @@ window.onpopstate = function(event) {
     }
 };
 </script>
+
+<div id="previo" >
+
+    <div class="d-flex justify-content-center align-items-center" style="height: 70vh;">
+
+    <h2>Selecciona una explotación</h2>
+
+    </div>
+
+</div>
+
 <div id="secciones" hidden>
 
     <div class="d-flex">

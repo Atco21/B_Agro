@@ -11,9 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cultivos', function (Blueprint $table) {
+        Schema::create('maquina', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 100);
+
+            $table->foreignId('explotacion_id')->constrained('explotaciones');
+
+            $table->string('nombre');
+            $table->double('capacidad');
+            $table->integer('estado');
+            $table->string('imagen', 255)->nullable();
+
             $table->timestamps();
         });
     }
@@ -21,8 +28,8 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void    
+    public function down(): void
     {
-        Schema::dropIfExists('cultivos');
+        Schema::dropIfExists('maquina');
     }
 };
