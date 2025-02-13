@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('almacen_quimico', function (Blueprint $table) {
             $table->integer('id_almacen')->unsigned();
             $table->integer('id_quimico')->unsigned();
-
             $table->timestamps();
 
-             //relaciones
-             $table->foreign('id_almacen')->references('id')->on('almacenes')->onDelete('cascade')->onUpdate('cascade');
-             $table->foreign('id_quimico')->references('id')->on('quimicos')->onDelete('cascade')->onUpdate('cascade');
+            // Definir clave primaria compuesta
+            $table->primary(['id_almacen', 'id_quimico']);
+
+            // Definir claves foráneas
+            $table->foreign('id_almacen')->references('id')->on('almacenes')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_quimico')->references('id')->on('quimicos')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
