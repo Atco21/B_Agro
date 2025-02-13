@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('nombre_tratamiento', 100);
             $table->double('tempmax',100);
             $table->double('tempmin',100);
-            $table->string('id_jefeCampo',9);
-            $table->foreign('id_jefeCampo')->references('id_jefeCampo')->on('trabajadores');
+            $table->foreignId('id_jefedecampo')->constrained('trabajadores');
           
 
         });
