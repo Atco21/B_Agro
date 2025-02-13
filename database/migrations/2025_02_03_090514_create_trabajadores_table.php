@@ -16,7 +16,7 @@ return new class extends Migration
 
             //datos personales
             $table->string('nombre_completo', 255);
-            $table->string('dni', 9)->unique();
+            $table->string('id_jefeCampo', 9)->unique();
             $table->string('telefono', 9);
             $table->string('email', 255)->unique();
             $table->date('fecha_nacimiento');

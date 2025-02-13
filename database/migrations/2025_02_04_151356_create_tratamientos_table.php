@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('producto_quimico', 100);
             $table->string('dosis', 100);
             $table->string('nombre_tratamiento', 100);
-            $table->string('tempmax',100);
-            $table->string('tempmin',100);
-            $table->string('dni',9);
-            $table->foreign('dni')->references('dni')->on('trabajadores');
+            $table->double('tempmax',100);
+            $table->double('tempmin',100);
+            $table->string('id_jefeCampo',9);
+            $table->foreign('id_jefeCampo')->references('id_jefeCampo')->on('trabajadores');
           
 
         });

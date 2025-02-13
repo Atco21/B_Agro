@@ -2,40 +2,53 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Orden extends Model
 {
-    protected $table = 'orden';
-    protected $primaryKey = 'id';
+    use HasFactory;
+
+    protected $table = 'ordenes';
+
     protected $fillable = [
         'estado',
         'fecha_inicio',
         'fecha_fin',
         'id_administrador',
+        'tarea',
         'id_jefecampo',
         'aplicador_id',
         'parcela_id',
+        'id_tratamiento',
+        'id_maquina',
     ];
-    /**
-     * Relaciones con otras tablas
-     */
-    
-    // Relación con el modelo Trabajador (Jefe de Campo)
+
+    protected $dates = ['fecha_inicio', 'fecha_fin'];
+
+    // Relaciones con otras tablas
     public function jefeCampo()
     {
-        return $this->belongsTo(Trabajador::class);
+        return $this->belongsTo(Trabajador::class, 'id_jefecampo');
     }
 
-    // Relación con el modelo Trabajador (Aplicador)
     public function aplicador()
     {
-        return $this->belongsTo(Trabajador::class);
+        return $this->belongsTo(Trabajador::class, 'aplicador_id');
     }
 
-    // Relación con el modelo Parcela
     public function parcela()
     {
         return $this->belongsTo(Parcela::class);
+    }
+
+    public function tratamiento()
+    {
+        return $this->belongsTo(Tratamiento::class, 'id_tratamiento');
+    }
+
+    public function maquina()
+    {
+        return $this->belongsTo(Maquina::class, 'id_maquina');
     }
 }
