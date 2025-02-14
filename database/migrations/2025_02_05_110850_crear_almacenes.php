@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('almacenes', function (Blueprint $table) {
-            $table->increments('id')->primary();
+            $table->increments('id');
+            $table->string('nombre');
+            $table->unsignedBigInteger('id_explotacion');
+            $table->foreign('id_explotacion')->references('id')->on('explotaciones')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

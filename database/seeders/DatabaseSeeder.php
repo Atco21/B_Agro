@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             AlmacenSeeder::class,
             AlmacenQuimicoSeeder::class,
             PedidosTableSeeder::class,
-            LineasDePedidosTableSeeder::class,
+            LineasDePedidosTableSeeder::class, 
         ]);
     }
 }
