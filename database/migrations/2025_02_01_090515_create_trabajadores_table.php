@@ -24,7 +24,7 @@ return new class extends Migration
             //datos de usuario
             $table->string('usuario', 255);
             $table->string('password', 255);
-            $table->enum('rol',['jefe de campo', 'aplicador']);
+            $table->enum('rol',['jefedecampo', 'aplicador']);
             $table->string('imagen', 255)->nullable();
 
 
