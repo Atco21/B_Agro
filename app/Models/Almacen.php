@@ -10,4 +10,12 @@ class Almacen extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['nombre', 'id_explotacion'];
     protected $hidden = ['created_at', 'updated_at'];
+
+    public function quimicos(){
+        return $this-belongsToMany(Quimico::class);
+    }
+
+    public function pedidos(){
+        return $this->belongsToMany(Pedido::class);
+    }
 }

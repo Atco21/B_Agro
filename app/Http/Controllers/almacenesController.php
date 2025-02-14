@@ -9,6 +9,6 @@ class almacenesController extends Controller
 {
     public function mostrarAlmacen(){
         $almacenes = Almacen::all();
-        return view('almacen', compact('almacenes'));
+        return view('explotacion.almacen', compact('almacenes'));
     }
 }

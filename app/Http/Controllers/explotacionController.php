@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Explotacion;
+use App\Models\Almacen;
+use App\Models\Quimico;
 
 class explotacionController extends Controller
 {
@@ -11,7 +13,7 @@ class explotacionController extends Controller
     {
         $explotacion = Explotacion::all();
         // $explotacion = [];
-        return view('explotacion', ['explotacion' => $explotacion]/*compact('explotacion')*/);
+        return view('explotacion', ['explotacion' => $explotacion]);
     }
 
     public function general()
@@ -21,9 +23,9 @@ class explotacionController extends Controller
     }
 
 
-    public function tareas(){
+    public function ordenes(){
         $explotacion = Explotacion::all();
-        return view('explotaciones.tareas', ['explotacion' => $explotacion]);
+        return view('explotaciones.ordenes', ['explotacion' => $explotacion]);
     }
     public function incidencias(){
         $explotacion = Explotacion::all();
@@ -33,6 +35,18 @@ class explotacionController extends Controller
         $explotacion = Explotacion::all();
         return view('explotaciones.maquinas', ['explotacion' => $explotacion]);
     }
+    public function almacen()
+{
+    $explotacion = Explotacion::all();
+    $almacenes = Almacen::all(); // Cargar todos los almacenes
+    $quimicos = Quimico::all();
+
+    return view('explotaciones.almacen', [
+        'explotacion' => $explotacion,
+        'almacenes' => $almacenes,
+        'quimnicos' => $quimicos
+    ]);
+}
 
 
 

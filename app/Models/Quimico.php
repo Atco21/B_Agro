@@ -10,4 +10,8 @@ class Quimico extends Model
     protected $primary = 'id';
     protected $fillable = ['nombre', 'tipo'];
     protected $hidden = ['created_at', 'updated_at'];
+
+    public function almacen(){
+        return $this->belongsToMany(Almacen::class);
+    }
 }

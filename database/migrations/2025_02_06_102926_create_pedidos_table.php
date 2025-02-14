@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha_pedido');
-            $table->integer('cantidad');
-            $table->enum('estado', ['enviado', 'pendiente', 'entregado']);
-            $table->timestamps();
+    $table->date('fecha_pedido');
+    $table->integer('cantidad');
+    $table->enum('estado', ['enviado', 'pendiente', 'entregado']);
+    $table->unsignedInteger('id_almacen');
+    $table->foreign('id_almacen')->references('id')->on('almacenes')->onDelete('cascade')->onUpdate('cascade');
+    $table->timestamps();
         });
     }
 
