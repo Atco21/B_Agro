@@ -6,6 +6,7 @@ use App\Http\Controllers\explotacionController;
 use App\Http\Controllers\parcelasController;
 use App\Http\Controllers\cultivoController;
 use App\Http\Controllers\rendController;
+use App\Http\Controllers\TratamientoController;
 
 
 
