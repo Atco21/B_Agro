@@ -27,28 +27,30 @@ class Orden extends Model
     protected $dates = ['fecha_inicio', 'fecha_fin'];
 
     // Relaciones con otras tablas
-    public function jefeCampo()
+    public function jefeCampo() //relaciona Orden con jefecampo (Una orden tiene un trabajador)
     {
-        return $this->belongsTo(Trabajador::class, 'id_jefecampo');
+        return $this->belongsTo(Trabajador::class);
     }
 
-    public function aplicador()
+    public function aplicadores() //relaciona Orden Aplicador
     {
-        return $this->belongsTo(Trabajador::class, 'aplicador_id');
+        return $this->belongsToMany(Trabajador::class);
     }
 
-    public function parcela()
+
+
+    public function parcela() //relaciona Oreden con parcela
     {
         return $this->belongsTo(Parcela::class);
     }
 
     public function tratamiento()
     {
-        return $this->belongsTo(Tratamiento::class, 'id_tratamiento');
+        return $this->belongsTo(Tratamiento::class);
     }
 
     public function maquina()
     {
-        return $this->belongsTo(Maquina::class, 'id_maquina');
+        return $this->belongsTo(Maquina::class);
     }
 }

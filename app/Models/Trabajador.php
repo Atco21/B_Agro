@@ -15,4 +15,8 @@ class Trabajador extends Model
     {
         return $this->belongsTo(Explotacion::class);
     }
+
+    public function oredenes(){
+        return $this->hasMany(Orden::class)
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Orden;
+use App\Models\Aplicadores
 use Illuminate\Http\Request;
 
 class OrdenController extends Controller
@@ -79,5 +80,12 @@ class OrdenController extends Controller
         $orden = Orden::findOrFail($id);
         $orden->delete();
         return response()->json(['message' => 'Orden eliminada correctamente']);
+    }
+     //INSERTAR Tabla intermedia de orden y aplicador que es muchos a muchos M/M
+
+     public function insertarTablaIntermedia(){
+        $orden=Orden::find(1);
+        $aplicador = Trabajador::find(2);//jefe de campo y aplicador es lo mismo
+        $orden->aplicadores()->attach($aplicador);
     }
 }

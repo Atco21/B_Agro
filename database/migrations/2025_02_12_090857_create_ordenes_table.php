@@ -13,16 +13,15 @@ return new class extends Migration
     {
         Schema::create('ordenes', function (Blueprint $table) {
             $table->id();
-            $table->enum('estado', 50); // en curso, pendientes, pausadas y finalizadas;
+            $table->string('estado', 50);
             $table->date('fecha_inicio');
             $table->date('fecha_fin')->nullable();
-            $table->foreignId('id_administrador')->constrained('trabajadores')->onDelete('cascade');
             $table->string('tarea', 255);
-            $table->foreignId('id_jefecampo')->constrained('trabajadores')->onDelete('cascade');
-            $table->foreignId('aplicador_id')->constrained('trabajadores')->onDelete('cascade');
-            $table->foreignId('parcela_id')->constrained('parcelas')->onDelete('cascade');
-            $table->foreignId('id_tratamiento')->constrained('tratamientos')->onDelete('cascade');
-            $table->foreignId('id_maquina')->nullable()->constrained('maquina')->onDelete('set null');
+            $table->foreignId('id_jefecampo')->constrained('trabajadores');
+            $table->foreignId('aplicador_id')->constrained('trabajadores');
+            $table->foreignId('parcela_id')->constrained('parcelas');
+            $table->foreignId('id_tratamiento')->nullable()->constrained('tratamientos');
+            $table->foreignId('id_maquina')->nullable()->constrained('maquina');
             $table->timestamps();
         });
     }
