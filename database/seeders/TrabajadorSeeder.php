@@ -17,7 +17,7 @@ class TrabajadorSeeder extends Seeder
     {
         DB::table('trabajadores')->insert([
             [
-                'nombre_completo' => 'Juan Pérez',
+                'nombre_completo' => 'Juan Perez',
                 'dni' => '12345678A',
                 'telefono' => '600123456',
                 'email' => 'juan.perez@example.com',
@@ -31,16 +31,16 @@ class TrabajadorSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'nombre_completo' => 'María López',
+                'nombre_completo' => 'Maria Lopez',
                 'dni' => '87654321B',
                 'telefono' => '600654321',
                 'email' => 'maria.lopez@example.com',
                 'fecha_nacimiento' => '1990-08-25',
                 'usuario' => 'marialopez',
                 'password' => Hash::make('password123'),
-                'rol' => 'trabajador',
+                'rol' => 'aplicador',
                 'imagen' => null,
-                'explotacion_id' => 2,
+                'explotacion_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

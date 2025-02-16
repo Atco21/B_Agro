@@ -7,6 +7,8 @@ use App\Http\Controllers\parcelasController;
 use App\Http\Controllers\cultivoController;
 use App\Http\Controllers\rendController;
 use App\Http\Controllers\TratamientoController;
+use App\Http\Controllers\TrabajadorController;
+
 
 
 
@@ -31,3 +33,4 @@ Route::get('/rendimiento/{id}',[rendController::class, 'mostrarParcela']);
 
 Route::get('/tratamiento', [TratamientoController::class, 'mostrarTratamientos']);//esto te lleva al controlador de tratamientos
 
+Route::get('/aplicadores', [TrabajadorController::class, 'mostrarAplicadores']);

@@ -19,6 +19,8 @@ class TrabajadorController extends Controller
 
     }
 
+
+
     public function store(Request $request){
 
         $validatedData = $request->validate([
@@ -54,6 +56,12 @@ class TrabajadorController extends Controller
         return redirect()->route('trabajadores')->with('success', 'Trabajador registrado correctamente.');
     }
 
+
+
+    public function mostrarAplicadores(){
+        $trabajadores = Trabajador::where('rol', 'aplicador')->get();
+        return response()->json($trabajadores);
+    }
 
 
 }

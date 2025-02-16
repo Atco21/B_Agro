@@ -18,9 +18,9 @@ return new class extends Migration
             $table->date('fecha_fin')->nullable();
             $table->string('tarea', 255);
             $table->foreignId('id_jefecampo')->constrained('trabajadores')->onDelete('cascade');
-            $table->foreignId('aplicador_id')->constrained('trabajadores')->onDelete('cascade');
+            $table->foreignId('id_aplicador')->constrained('trabajadores')->onDelete('cascade');
             $table->foreignId('parcela_id')->constrained('parcelas')->onDelete('cascade');
-            $table->foreignId('id_tratamiento')->constrained('tratamientos')->onDelete('cascade');
+            $table->foreignId('id_tratamiento')->nullable()->constrained('tratamientos')->onDelete('cascade');
             $table->foreignId('id_maquina')->nullable()->constrained('maquina')->nullable();
             $table->timestamps();
         });
