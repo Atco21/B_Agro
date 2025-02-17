@@ -3,12 +3,11 @@
 @section('content2')
 
 <script>
-let idparc = 1;
 
 addEventListener('DOMContentLoaded', inicio);
 
 function inicio() {
-    const select = document.querySelector(".expoSelect");
+    const select = document.querySelector(".exploSelect");
 
     if (select) {
         select.addEventListener("change", function() {
@@ -113,7 +112,7 @@ async function rendimiento(id) {
 
 
     try {
-        const domain = window.location.origin;
+        const domain = 'localhost:';
         const url = `${domain}/api/rendimiento/${id}`;
         const response = await fetch(url);
         const data = await response.json();
@@ -220,6 +219,7 @@ window.onpopstate = function(event) {
                         <td class="opciones_menu2">Incidencias</td>
                         <td class="opciones_menu2">Tratamientos</td>
                     </tr>
+
                 </table>
 
                 <div id="rendimiento">

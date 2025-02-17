@@ -18,7 +18,7 @@ Route::get('/', [ExplotacionController::class, 'index']);
 
 Route::get('/parcelas',[parcelasController::class, 'index']);
 Route::get('/parcelas/{id}',[parcelasController::class, 'show']);
-Route::get('/parcelas/explotacion/{explotacion_id}',[parcelasController::class, 'porExplotacion']);
+Route::get('/parcelas/explotacion/{explo_id}',[parcelasController::class, 'porExplotacion']);
 Route::get('/explotaciones/datos/{id}',[parcelasController::class, 'getDatosPorExplotacion']);
 
 
@@ -34,3 +34,6 @@ Route::get('/rendimiento/{id}',[rendController::class, 'mostrarParcela']);
 Route::get('/tratamiento', [TratamientoController::class, 'mostrarTratamientos']);//esto te lleva al controlador de tratamientos
 
 Route::get('explotacion/{id}/aplicadores/', [TrabajadorController::class, 'mostrarAplicadores']);
+
+
+//Route::get('/ordenes/explotacion/{id}', OrdenesController::class, 'mostrarOrdenesPorExplotacion');
