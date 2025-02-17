@@ -8,23 +8,31 @@
 
 @if ($explotacion->count() > 0)
 <div class="d-flex flex-row mt-0">
+
+
     <!-- Columna para los <h3> -->
-    <div class="col-2 vh-100">
+
+
+    <div class="col-2 vh-100 d-flex flex-column justify-content-between">
         <div class="d-flex flex-column justify-content-around h-50 ps-2">
             <a class="menu2 {{ Request::is('general') ? 'active' : '' }}" href="{{ url('explotaciones/general') }}">General</a>
             <a class="menu2 {{ Request::is('parcelas') ? 'active' : '' }} " href="{{ url('explotaciones/parcelas') }}">Parcelas</a>
-            <a class="menu2 {{ Request::is('tareas') ? 'active' : '' }} " href="{{ url('explotaciones/tareas') }}">Tareas</a>
+            <a class="menu2 {{ Request::is('ordenes') ? 'active' : '' }} " href="{{ url('explotaciones/ordenes') }}">Ordenes</a>
             <a class="menu2 {{ Request::is('incidencias') ? 'active' : '' }} " href="{{ url('explotaciones/incidencias') }}">Incidencias</a>
             <a class="menu2 {{ Request::is('maquinas') ? 'active' : '' }} " href="{{ url('explotaciones/maquinas') }}">Máquinas</a>
+            <a class="menu2 {{ Request::is('pedidos') ? 'active' : '' }} " href="{{ url('explotaciones/pedidos') }}">Pedidos</a>
+
         </div>
     </div>
+
+
     <!-- Columna para el resto del contenido -->
     <div class="col-10">
         <div class="d-flex justify-content-end me-2">
-            <select class="d-flex form-select form-control expoSelect">
+            <select class="d-flex form-select form-control exploSelect mt-3" id="selectExplotacion">
                 <option selected disabled>Selecciona una opción</option>
-                @foreach ($explotacion as $item)
-                    <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                @foreach ($explotacion as $explo)
+                    <option value="{{ $explo->id }}">{{ $explo->nombre }}</option>
                 @endforeach
             </select>
         </div>
@@ -55,7 +63,8 @@
       <div class="modal-header">
         <h2 class="modal-title" id="exampleModalLabel">Nueva explotación</h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
+        card-body </div>
+
       <div class="modal-body p-5">
 
         <form>
@@ -188,3 +197,6 @@
 
 
 @endsection
+
+
+

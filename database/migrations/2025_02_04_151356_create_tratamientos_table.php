@@ -11,10 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('oauth_personal_access_clients', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->uuid('client_id');
+        Schema::create('tratamientos', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
+            $table->string('producto_quimico', 100);
+            $table->string('dosis', 100);
+            $table->string('nombre_tratamiento', 100);
+            $table->string('tempmax',100);
+            $table->string('tempmin',100);
+
         });
     }
 
@@ -23,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('oauth_personal_access_clients');
+        Schema::dropIfExists('tratamientos');
     }
 };

@@ -3,7 +3,7 @@
 @section('content2')
 
 
-<p>Seccion tareas</p>
+    <p>Seccion pedidos</p>
 
 
 

@@ -21,9 +21,9 @@ class explotacionController extends Controller
     }
 
 
-    public function tareas(){
+    public function ordenes(){
         $explotacion = Explotacion::all();
-        return view('explotaciones.tareas', ['explotacion' => $explotacion]);
+        return view('explotaciones.ordenes', ['explotacion' => $explotacion]);
     }
     public function incidencias(){
         $explotacion = Explotacion::all();
@@ -33,7 +33,10 @@ class explotacionController extends Controller
         $explotacion = Explotacion::all();
         return view('explotaciones.maquinas', ['explotacion' => $explotacion]);
     }
-
+    public function pedidos(){
+        $explotacion = Explotacion::all();
+        return view('explotaciones.pedidos', ['explotacion' => $explotacion]);
+    }
 
 
 
