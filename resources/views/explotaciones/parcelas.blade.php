@@ -46,10 +46,7 @@ async function actualizarContenido(data) {
     const idsCultivos = data.map(parcela => parcela.cultivo_id);
 
     try {
-        const domain = 'http://0.0.0.0'
-        const url = domain+`/api/cultivos_nombre?ids=${idsCultivos.join(",")}`;
-        const response = await fetch(url);
-        const cultivosData = await response.json();
+
 
         if (cultivosData.error) {
             alert("No hay datos disponibles");
@@ -75,7 +72,7 @@ async function actualizarContenido(data) {
                 onmouseover="this.style.backgroundColor='#ddd';"
                 onmouseout="this.style.backgroundColor='#f9f9f9';">
                     <td>${parcela.nombre}</td>
-                    <td>${cultivosData[parcela.cultivo_id] || "Desconocido"}</td>
+                    <td>${parcela.cultivo.nombre}</td>
                     <td>${parcela.tamanyo}</td>
             </tr>
             `;

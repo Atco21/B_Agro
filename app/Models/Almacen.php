@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Almacen extends Model
@@ -12,7 +13,7 @@ class Almacen extends Model
     protected $hidden = ['created_at', 'updated_at'];
 
     public function quimicos(){
-        return $this-belongsToMany(Quimico::class);
+        return $this->hasMany(Quimico::class, 'id');
     }
 
     public function pedidos(){

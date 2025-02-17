@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Quimico extends Model
@@ -12,6 +13,6 @@ class Quimico extends Model
     protected $hidden = ['created_at', 'updated_at'];
 
     public function almacen(){
-        return $this->belongsToMany(Almacen::class);
+        return $this->belongsTo(Almacen::class, 'id');
     }
 }
