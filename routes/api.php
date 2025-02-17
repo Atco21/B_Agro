@@ -33,4 +33,4 @@ Route::get('/rendimiento/{id}',[rendController::class, 'mostrarParcela']);
 
 Route::get('/tratamiento', [TratamientoController::class, 'mostrarTratamientos']);//esto te lleva al controlador de tratamientos
 
-Route::get('/aplicadores', [TrabajadorController::class, 'mostrarAplicadores']);
+Route::get('explotacion/{id}/aplicadores/', [TrabajadorController::class, 'mostrarAplicadores']);

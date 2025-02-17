@@ -43,19 +43,8 @@ async function actualizarContenido(data) {
     document.getElementById('previo').setAttribute('hidden', '');
     const contentDiv = document.getElementById("tabla");
 
-    const idsCultivos = data.map(parcela => parcela.cultivo_id);
 
     try {
-        const domain = 'http://0.0.0.0'
-        const url = domain+`/api/cultivos_nombre?ids=${idsCultivos.join(",")}`;
-        const response = await fetch(url);
-        const cultivosData = await response.json();
-
-        if (cultivosData.error) {
-            alert("No hay datos disponibles");
-            return;
-        }
-
         let html = `
             <table class="table" border="1" id="tabla_parcelas">
                 <thead>
@@ -69,13 +58,14 @@ async function actualizarContenido(data) {
         `;
 
         data.forEach(parcela => {
+            console.log();
             html += `
             <tr class="lineaParcela" id=${parcela.id}
                 style="cursor: pointer; background-color: #f9f9f9; transition: background 0.3s;"
                 onmouseover="this.style.backgroundColor='#ddd';"
                 onmouseout="this.style.backgroundColor='#f9f9f9';">
                     <td>${parcela.nombre}</td>
-                    <td>${cultivosData[parcela.cultivo_id] || "Desconocido"}</td>
+                    <td>${parcela.cultivo.nombre}</td>
                     <td>${parcela.tamanyo}</td>
             </tr>
             `;
@@ -190,7 +180,7 @@ window.onpopstate = function(event) {
 };
 </script>
 
-<div id="previo" >
+<div id="previo">
 
     <div class="d-flex justify-content-center align-items-center" style="height: 70vh;">
 
