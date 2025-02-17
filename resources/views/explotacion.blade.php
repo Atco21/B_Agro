@@ -14,14 +14,31 @@
 
 
     <div class="col-2 vh-100 d-flex flex-column justify-content-between">
-        <div class="d-flex flex-column justify-content-around h-50 ps-2">
-            <a class="menu2 {{ Request::is('general') ? 'active' : '' }}" href="{{ url('explotaciones/general') }}">General</a>
-            <a class="menu2 {{ Request::is('parcelas') ? 'active' : '' }} " href="{{ url('explotaciones/parcelas') }}">Parcelas</a>
-            <a class="menu2 {{ Request::is('ordenes') ? 'active' : '' }} " href="{{ url('explotaciones/ordenes') }}">Ordenes</a>
-            <a class="menu2 {{ Request::is('incidencias') ? 'active' : '' }} " href="{{ url('explotaciones/incidencias') }}">Incidencias</a>
-            <a class="menu2 {{ Request::is('maquinas') ? 'active' : '' }} " href="{{ url('explotaciones/maquinas') }}">Máquinas</a>
-            <a class="menu2 {{ Request::is('pedidos') ? 'active' : '' }} " href="{{ url('explotaciones/pedidos') }}">Pedidos</a>
 
+        <div class="d-flex flex-column justify-content-around h-50 ps-2">
+
+            <ul class="navbar-nav me-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link menu2  {{ Request::is('*general*') ? 'active' : '' }}" href="{{ url('explotaciones/general') }}">General</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu2  {{ Request::is('*parcelas*') ? 'active' : '' }} " href="{{ url('explotaciones/parcelas') }}">Parcelas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu2  {{ Request::is('*ordenes*') ? 'active' : '' }} " href="{{ url('explotaciones/ordenes') }}">Ordenes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu2  {{ Request::is('*incidencias*') ? 'active' : '' }} " href="{{ url('explotaciones/incidencias') }}">Incidencias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu2  {{ Request::is('*maquinas*') ? 'active' : '' }} " href="{{ url('explotaciones/maquinas') }}">Máquinas</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link menu2  {{ Request::is('*pedidos*') ? 'active' : '' }} " href="{{ url('explotaciones/pedidos') }}">Pedidos</a>
+                </li>
+
+            </ul>
         </div>
     </div>
 

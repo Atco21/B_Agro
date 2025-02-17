@@ -13,9 +13,12 @@ Route::get('/', function () {
 
 Route::get('/explotaciones', [explotacionController::class, 'index']);
 
-// dfiobvisfn
+//
 Route::get('/trabajadores', [TrabajadorController::class, 'index'])->name('trabajadores');
 Route::post('/trabajadores', [TrabajadorController::class, 'store'])->name('trabajadores.store');
+
+Route::get('/maquinas', [MaquinaController::class, 'index'])->name('maquinas');
+Route::post('/maquinas', [MaquinaController::class, 'store'])->name('maquinas.store');
 
 
 Route::get('/informes', function () {

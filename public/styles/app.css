@@ -3,14 +3,6 @@ body{
     font-family: "Inter", serif;
 }
 
-.nav-link{
-    color:white !important;
-    font-size: 20px !important;
-    font-weight: 600 !important;
-
-    margin: 0 1rem;
-    text-decoration: none;
-}
 
 .navbar{
 
@@ -22,9 +14,10 @@ body{
 
 }
 
+
+
 .nav-link{
 
-    color:white !important;
     font-size: 32px !important;
     font-weight: 600 !important;
 
@@ -95,6 +88,14 @@ body{
     overflow-y: auto;
 }
 
+
+
+.nav-link{
+
+    color: white !important;
+
+
+}
 
 .m1{
     max-width: 1465px;
@@ -193,10 +194,16 @@ h3{
 }
 
 .menu2{
+    text-decoration: none;
     font-size: 32px;
     font-weight: 600;
-    color:#4F4F4F;
+    color:#4F4F4F !important;
     margin-bottom: 1rem;
+}
+
+.menu1{
+    color: white;
+
 }
 
 .navbar{

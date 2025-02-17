@@ -2,8 +2,11 @@
 
 @section('content2')
 
-<script>
 
+
+
+<script>
+let idparc = 1;
 addEventListener('DOMContentLoaded', inicio);
 
 function inicio() {
@@ -112,7 +115,7 @@ async function rendimiento(id) {
 
 
     try {
-        const domain = 'localhost:';
+        const domain = 'http://localhost';
         const url = `${domain}/api/rendimiento/${id}`;
         const response = await fetch(url);
         const data = await response.json();
