@@ -115,9 +115,8 @@ async function rendimiento(id) {
 
 
     try {
-        const domain = 'http://localhost';
-        const url = `${domain}/api/rendimiento/${id}`;
-        const response = await fetch(url);
+
+        const response = await fetch(`/api/rendimiento/${id}`);
         const data = await response.json();
 
         if (data.error) {

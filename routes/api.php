@@ -8,6 +8,7 @@ use App\Http\Controllers\cultivoController;
 use App\Http\Controllers\rendController;
 use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\TrabajadorController;
+use App\Http\Controllers\MaquinaController;
 
 
 
@@ -36,6 +37,9 @@ Route::get('/tratamiento', [TratamientoController::class, 'mostrarTratamientos']
 Route::get('explotacion/{id}/aplicadores/', [TrabajadorController::class, 'mostrarAplicadores']);
 
 Route::get('/aplicadores', [TrabajadorController::class, 'mostrarAplicadores']);
+
+
+
 
 
 

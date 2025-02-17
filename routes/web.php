@@ -5,6 +5,8 @@ use App\Http\Controllers\explotacionController;
 use App\Http\Controllers\parcelasController;
 use App\Http\Controllers\rendController;
 use App\Http\Controllers\TrabajadorController;
+use App\Http\Controllers\MaquinaController;
+
 
 
 Route::get('/', function () {
@@ -16,9 +18,6 @@ Route::get('/explotaciones', [explotacionController::class, 'index']);
 //
 Route::get('/trabajadores', [TrabajadorController::class, 'index'])->name('trabajadores');
 Route::post('/trabajadores', [TrabajadorController::class, 'store'])->name('trabajadores.store');
-
-Route::get('/maquinas', [MaquinaController::class, 'index'])->name('maquinas');
-Route::post('/maquinas', [MaquinaController::class, 'store'])->name('maquinas.store');
 
 
 Route::get('/informes', function () {
@@ -38,5 +37,7 @@ Route::get('/explotaciones/parcelas/{id}',[parcelasController::class, 'listarPar
 
 Route::get('/explotaciones/parcelas/{idExplotacion}/{idParcela}/rendimiento', [rendController::class, 'index' ]);
 
+Route::get('/maquinas', [MaquinaController::class, 'index'])->name('maquinas');
+Route::post('/maquinas', [MaquinaController::class, 'store'])->name('maquinas.store');
 
 
