@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tratamientos', function (Blueprint $table) {
             $table->id(); //porque he camiado el nombre tenia que poner esto
             $table->timestamps();
+            //producto quimico seria id_quimico y hara una clave ajena a la tabla de quimicos
             $table->string('producto_quimico', 100);
             $table->string('dosis', 100);
             $table->string('nombre_tratamiento', 100);
