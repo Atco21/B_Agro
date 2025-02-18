@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Orden;
-use App\Models\Aplicadores
+use App\Models\Aplicadores;
+use App\Models\Explotacion;
 use Illuminate\Http\Request;
 
 class OrdenController extends Controller
@@ -13,7 +14,7 @@ class OrdenController extends Controller
      */
     public function index()
     {
-        $ordenes = Orden::all();
+        $ordenes = Orden::with('parcela')->get();
         return response()->json($ordenes);
     }
 
@@ -38,6 +39,14 @@ class OrdenController extends Controller
         $orden = Orden::create($request->all());
         return response()->json($orden, 201);
     }
+
+
+    public static function obtenerIdYAsunto()
+    {
+        // Devuelve los resultados solo con los campos id y asunto
+        return self::select('parcela_id', 'tarea')->get();
+    }
+
 
     /**
      * Muestra una orden específica.
@@ -88,4 +97,17 @@ class OrdenController extends Controller
         $aplicador = Trabajador::find(2);//jefe de campo y aplicador es lo mismo
         $orden->aplicadores()->attach($aplicador);
     }
+    // public function obtenerIdYAsunto()
+    // {
+    //     // Devuelve los resultados solo con los campos parcela_id y tarea
+    //     $ordenes = Orden::select('parcela_id', 'tarea')->get();
+    //     return response()->json($ordenes);
+    // }
+
 }
+
+
+
+
+
+

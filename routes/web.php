@@ -5,6 +5,7 @@ use App\Http\Controllers\explotacionController;
 use App\Http\Controllers\parcelasController;
 use App\Http\Controllers\rendController;
 use App\Http\Controllers\TrabajadorController;
+use App\http\Controllers\OrdenController;
 
 
 Route::get('/', function () {
@@ -34,6 +35,6 @@ Route::get('/explotaciones/parcelas/{id}',[parcelasController::class, 'listarPar
 
 
 Route::get('/explotaciones/parcelas/{idExplotacion}/{idParcela}/rendimiento', [rendController::class, 'index' ]);
-
+Route::get('/explolotaciones/ordenes', [OrdenController::class, 'index']);
 
 

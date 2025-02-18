@@ -31,4 +31,5 @@ Route::get('/parcelas/explotacion/{explotacion_id}/rendimiento',[parcelasControl
 Route::get('/rendimiento/{id}',[rendController::class, 'mostrarParcela']);
 
 Route::get('/tratamiento', [TratamientoController::class, 'mostrarTratamientos']);//esto te lleva al controlador de tratamientos
-Route::apiResource('ordenes', OrdenController::class);//cointrolador de orden
+Route::get('ordenes/explotacion', [OrdenController::class, 'index']);//cointrolador de orden
+
