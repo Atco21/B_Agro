@@ -4,7 +4,31 @@
 
 
 <script>
+addEventListener('DOMContentLoaded', inicio);
 
+function inicio() {
+    const select = document.querySelector(".exploSelect");
+
+    if (select) {
+        select.addEventListener("change", function() {
+            const id = select.value;
+            if (id) {
+                cargarMaquina(id);
+                actualizarURL(id);
+            }
+        });
+    }
+
+
+}
+
+
+function cargarMaquina(id){
+
+    fetch(`api/maquinas/explotacion/${id}`)
+
+
+}
 
 </script>
 

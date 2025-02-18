@@ -25,10 +25,10 @@ class MaquinaController extends Controller
         $validatedData = $request->validate([
             'explotacion_id' => 'required|integer|exists:explotaciones,id',
             'nombre' => 'required|string|max:255',
-            'matricula'=> 'required|string|max255',
+            'matricula'=> 'required|string|max:255',
             'capacidad'=> 'nullable|double|min:1',
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ])
+        ]);
         $imagenPath = null;
         if ($request->hasFile('imagen')) {
             $imagenPath = $request->file('imagen')->store('imagenes', 'public');
@@ -42,7 +42,8 @@ class MaquinaController extends Controller
 
 
         ]);
-        return response()->json($maquina, 201);
+        return redirect()->route('explotaciones.maquinas')->with('success', 'Trabajador registrado correctamente.');
+
     }
 
     public function update(Request $request, $id)
