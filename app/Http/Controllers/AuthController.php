@@ -22,12 +22,20 @@ class AuthController extends Controller
     {
         if (Auth::attempt(['usuario' => request('usuario'), 'password' => request('password')])) {
             $user = Auth::user();
-            $success['token'] =  $user->createToken('MyApp')->accessToken;
-            return response()->json(['success' => $success, 'user' => $user['rol']], $this->successStatus);
-        } else {
-            return response()->json(['error' => 'Unauthorised'], 401);
+            $token =  $user->createToken('MyApp')->accessToken;
+
+            session(['token' => $token]); // Guarda el token en la sesión
+
+            if ($user->rol == 'jefe de campo') {
+                return redirect()->route('explotaciones'); // Redirige a explotaciones
+            }
+
         }
+
+            return response()->json(['error' => 'Unauthorised'], 401);
     }
+
+
 
 
     /**

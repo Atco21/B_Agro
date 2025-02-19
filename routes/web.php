@@ -8,12 +8,16 @@ use App\Http\Controllers\TrabajadorController;
 use App\Http\Controllers\MaquinaController;
 
 
+Route::get('/', function(){
+    return view('layouts.login');
+});
 
-Route::get('/', function () {
+
+Route::get('/home', function () {
     return view('layouts.app');
 });
 
-Route::get('/explotaciones', [explotacionController::class, 'index']);
+Route::get('/explotaciones', [explotacionController::class, 'index'])->name('explotaciones');
 
 //
 Route::get('/trabajadores', [TrabajadorController::class, 'index'])->name('trabajadores');

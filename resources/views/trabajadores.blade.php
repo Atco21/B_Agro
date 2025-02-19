@@ -18,20 +18,20 @@
 </div>
 
 
-    @if (($trabajadores->count())>0)
+    @if (($users->count())>0)
 
 
-        @foreach ($trabajadores as $trabajador)
+        @foreach ($users as $user)
 
         <div class="card mt-3 ms-3 ms-4" style="width: 25rem;">
             <div class="d-flex flex-row mt-3 ms-3 align-items-center">
-                <img src="{{asset('storage/'.$trabajador->imagen)}}" alt="Foto de perfil" class="fotoPerfil">
-                <h4 class="card-title">{{$trabajador->nombre_completo}}</h4>
+                <img src="{{asset('storage/'.$user->imagen)}}" alt="Foto de perfil" class="fotoPerfil">
+                <h4 class="card-title">{{$user->nombre}}</h4>
             </div>
             <div class="card-body">
-                <h5 class="card-title">Explotación: <b>{{$trabajador->explotacion->nombre}}</b></h5>
-                <h5 class="card-title">Rol: <b>{{ $trabajador->rol }}</b></h5>
-                <h5 class="card-title">Estado: <b>{{ $trabajador->rol }}</b></h5>
+                <h5 class="card-title">Explotación: <b>{{$user->explotacion->nombre}}</b></h5>
+                <h5 class="card-title">Rol: <b>{{ $user->rol }}</b></h5>
+                <h5 class="card-title">Estado: <b>{{ $user->rol }}</b></h5>
             </div>
         </div>
 

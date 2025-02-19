@@ -23,8 +23,15 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'nombre',
+        'dni',
+        'telefono',
+        'email',
+        'fecha_nacimiento',
         'usuario',
         'password',
+        'rol',
+        'imagen',
+        'explotacion_id'
     ];
 
     /**
@@ -48,5 +55,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function explotacion()
+    {
+        return $this->belongsTo(Explotacion::class);
     }
 }

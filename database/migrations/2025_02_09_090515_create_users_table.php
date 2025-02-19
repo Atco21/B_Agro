@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('usuario', 255);
             $table->string('password', 255);
             $table->enum('rol',['jefe de campo', 'aplicador'])->nullable();
+            $table->foreignId('explotacion_id')->nullable()->constrained('explotaciones');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -11,7 +11,7 @@ use App\Http\Controllers\TrabajadorController;
 use App\Http\Controllers\MaquinaController;
 use App\Http\Controllers\AuthController;
 
-Route::post('login', [AuthController::class, 'login']);
+Route::post('login', [AuthController::class, 'login'])->name('login');
 
 Route::post('register', [TrabajadorController::class,'register']);
 

@@ -22,6 +22,7 @@ class TrabajadorSeeder extends Seeder
             'usuario' => 'juanperez',
             'password' => Hash::make('password123'),
             'rol' => 'jefe de campo',
+            'explotacion_id' => 1,
         ]);
 
         User::create([
@@ -33,6 +34,7 @@ class TrabajadorSeeder extends Seeder
             'usuario' => 'marialopez',
             'password' => Hash::make('password123'),
             'rol' => 'aplicador',
+            'explotacion_id' => 2,
         ]);
     }
 }
