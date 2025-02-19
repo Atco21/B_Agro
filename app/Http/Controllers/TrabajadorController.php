@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Trabajador;
+use App\Models\User;
 use App\Models\Explotacion;
 use Illuminate\Support\Facades\Hash;
+
 
 
 class TrabajadorController extends Controller
@@ -40,7 +41,7 @@ class TrabajadorController extends Controller
         if ($request->hasFile('imagen')) {
             $imagenPath = $request->file('imagen')->store('imagenes', 'public');
         }
-        $trabajador = Trabajador::create([
+        $trabajador = User::create([
             'nombre_completo' => $request->nombre_completo,
             'dni' => $request->dni,
             'telefono' => $request->telefono,
@@ -62,6 +63,51 @@ class TrabajadorController extends Controller
         $trabajadores = Trabajador::where('rol', 'aplicador')->get();
         return response()->json($trabajadores);
     }
+
+    public function register(Request $request)
+    {
+
+        dump($request->all());
+    // Validar los datos recibidos
+    $validatedData = $request->validate([
+        'nombre' => 'required|string|max:255',
+        'usuario' => 'required|string|unique:users,usuario',
+        'password' => 'required|string|min:6', // Usamos confirmed para comparar con password_confirmation
+    ]);
+    dump($validatedData);
+    try {
+        // Crear el usuario con la contraseña cifrada
+        $user = User::create([
+            'nombre' => 'alfred',
+            'usuario' => 'alfredcom',
+            'password' => Hash::make('alfred'),
+        ]);
+
+
+        dump($user);
+
+
+
+        // Generar un token de acceso
+        $token = $user->createToken('MyApp')->accessToken;
+
+        // Preparar la respuesta de éxito
+        return response()->json([
+            'success' => [
+                'token' => $token,
+                'name' => $user->name,
+            ]
+        ], 201); // Código HTTP 201: Creado
+    } catch (\Exception $e) {
+        // Manejar errores inesperados
+        return response()->json([
+            'error' => 'No se pudo registrar el usuario.',
+            'details' => $e->getMessage(),
+        ], 500); // Código HTTP 500: Error interno del servidor
+    }
+   }
+
+
 
 
 }

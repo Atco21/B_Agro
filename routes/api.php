@@ -9,8 +9,16 @@ use App\Http\Controllers\rendController;
 use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\TrabajadorController;
 use App\Http\Controllers\MaquinaController;
+use App\Http\Controllers\AuthController;
 
+Route::post('login', [AuthController::class, 'login']);
 
+Route::post('register', [TrabajadorController::class,'register']);
+
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('details', [TrabajadorController::class,'details']);
+    Route::get('logout', [TrabajadorController::class,'logout']);
+});
 
 
 Route::get('/explotaciones2', [ExplotacionController::class, 'index2']);
