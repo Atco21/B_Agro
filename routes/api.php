@@ -17,7 +17,7 @@ Route::get('/parcelas/{id}',[parcelasController::class, 'show']);
 Route::get('/parcelas/explotacion/{explotacion_id}',[parcelasController::class, 'porExplotacion']);
 Route::get('/aplicador1', [aplicadoresController::class, 'index']);
 Route::get('/quimicos', [quimicosController::class, 'mostrarQuimicos']);
-Route::get('/almacen/explotacion/{explotacion_id}', [almacenesController::class, 'porExplotacion']);
+
 
 
 

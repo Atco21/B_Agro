@@ -5,73 +5,76 @@
 
 
 <script>
+    addEventListener('DOMContentLoaded', inicio);
 
-function inicio() {
-    const select = document.querySelector(".expoSelect");
+    function inicio() {
+        const select = document.querySelector(".expoSelect");
 
-    if (select) {
-        select.addEventListener("change", function() {
-            const id = select.value;
-            if (id) {
-                cargarDatos(id);      // Carga parcelas
-                cargarAlmacen(id);    // Carga almacén y productos químicos
-                actualizarURL(id);
-            }
-        });
+        if (select) {
+            select.addEventListener("change", function() {
+                const id = select.value;
+                if (id) {
+                    cargarAlmacen(id);    // Carga almacén y productos químicos
+                    actualizarURL(id);
+                }
+            });
+        }
     }
-}
 
+    async function cargarAlmacen(id) {
+        fetch(`/almacen/explotacion/${id}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert("No se encontraron datos de almacenes");
+                } else {
+                    document.getElementById('almacen').removeAttribute('hidden');
+                    actualizarContenidoAlmacen(data);  // Utiliza 'data' en lugar de 'almacenes'
+                }
+            })
+            .catch(error => console.error("Error en la petición:", error));
+    }
 
-async function cargarAlmacen(id) {
-    fetch(`/api/almacen/explotacion/${id}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert("No se encontraron datos de almacenes");
-            } else {
-                document.getElementById('almacen').removeAttribute('hidden');
-                actualizarContenidoAlmacen(data);
-            }
-        })
-        .catch(error => console.error("Error en la petición:", error));
-}
+    async function actualizarContenidoAlmacen(data) {
+        document.getElementById('previo').setAttribute('hidden', '');
+        const contentDiv = document.getElementById("tabla_almacen");
 
-async function actualizarContenidoAlmacen(data) {
-    document.getElementById('previo').setAttribute('hidden', '');
-    const contentDiv = document.getElementById("tabla_almacen");
+        try{
+        let html = `
+            <table class="table" border="1" id="tabla_almacen_quimicos">
+                <thead>
+                    <tr>
+                        <th>Almacén</th>
+                        <th>Producto Químico</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
 
-
-    let html = `
-        <table class="table" border="1" id="tabla_almacen_quimicos">
-            <thead>
-                <tr>
-                    <th>Almacén</th>
-                    <th>Producto Químico</th>
-                    <th>Cantidad</th>
-                </tr>
-            </thead>
-            <tbody>
-    `;
-
-    almacenes.forEach(almacen => {
-        almacen.quimicos.forEach(quimico => {
-            html += `
-                <tr>
-                    <td>${almacen.nombre}</td>
-                    <td>${quimico.nombre}</td>
-                    <td>${quimico.cantidad}</td>
-                </tr>
-            `;
+        // Aquí, 'data' debe contener los almacenes y sus productos químicos
+        data.almacenes.forEach(almacen => {
+            almacen.quimicos.forEach(quimico => {
+                html += `
+                    <tr>
+                        <td>${almacen.nombre}</td>
+                        <td>${quimico.nombre}</td>
+                        <td>${quimico.cantidad}</td>
+                    </tr>
+                `;
+            });
         });
-    });
 
-    html += `</tbody></table>`;
-    contentDiv.innerHTML = html;
+        html += `</tbody></table>`;
+        contentDiv.innerHTML = html;
+    }catch(error){
+        console.error("Error obteniendo los nombres de los almacen:", error);
+        alert("Hubo un problema al cargar los datos.");
+    }
+    }
 
-}
+    </script>
 
-
-</script>
 {{-- <div class="col-10">
     <div class="d-flex justify-content-end me-2">
     <select name="almacen" id=""  class="d-flex form-select form-control expoSelect mt-3">
@@ -103,9 +106,7 @@ async function actualizarContenidoAlmacen(data) {
 </div>
 
 
-<div id="quimicos" hidden>
-    <h3>Productos Químicos en el Almacén</h3>
-</div>
+
 
 
 

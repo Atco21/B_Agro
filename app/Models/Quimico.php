@@ -13,6 +13,6 @@ class Quimico extends Model
     protected $hidden = ['created_at', 'updated_at'];
 
     public function almacen(){
-        return $this->belongsTo(Almacen::class, 'id');
+        return $this->hasMany(Almacen::class, 'id');
     }
 }

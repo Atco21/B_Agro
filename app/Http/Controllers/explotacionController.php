@@ -35,20 +35,32 @@ class explotacionController extends Controller
         $explotacion = Explotacion::all();
         return view('explotaciones.maquinas', ['explotacion' => $explotacion]);
     }
-    public function almacen()
-{
-    $explotacion = Explotacion::all();
-    $almacenes = Almacen::all(); // Cargar todos los almacenes
-    $quimicos = Quimico::all();
-
-    return view('explotaciones.almacen', [
-        'explotacion' => $explotacion,
+    public function almacen(Request $recibido) {
+        $explotacion = Explotacion::find($recibido);
+        $almacenes = Almacen::find($explotacion); // Cargar todos los almacenes
+        $quimicos = $almacenes->quimico();
+        return view('explotaciones.almacen',
+        [ 'explotacion' => $explotacion,
         'almacenes' => $almacenes,
-        'quimnicos' => $quimicos
-    ]);
-}
+        'quimicos' => $quimicos ]
+    );
+        }
 
 
+    public function mostrarAlmacenQuimico(){
+
+        $explotaciones = Explotacion::find($valor);
+
+        $almacen=Almacen::find(1);
+        $quimicos=$almacen->quimicos;
+
+
+        $quimico = Quimico::find(1);
+        $almacenes = $quimico->nombre;
+        foreach($almacenes as $almacen){
+            dd($almacen);
+        }
+    }
 
 
     public function index2(Request $request)
