@@ -18,27 +18,29 @@
 </div>
 
 
-    @if (($users->count())>0)
+    @if(($users->count())>0)
 
+    <div class="container d-flex flex-row flex-wrap justify-content-center">
 
         @foreach ($users as $user)
 
+
         <div class="card mt-3 ms-3 ms-4" style="width: 25rem;">
             <div class="d-flex flex-row mt-3 ms-3 align-items-center">
-                <img src="{{asset('storage/'.$user->imagen)}}" alt="Foto de perfil" class="fotoPerfil">
-                <h4 class="card-title">{{$user->nombre}}</h4>
+                <img src="{{asset('./assets/logoAgro.png')}}" alt="Foto de perfil" class="fotoPerfil" width="150px">
+                <h4 class="card-title ps-5">{{$user->nombre}}</h4>
             </div>
             <div class="card-body">
                 <h5 class="card-title">Explotación: <b>{{$user->explotacion->nombre}}</b></h5>
                 <h5 class="card-title">Rol: <b>{{ $user->rol }}</b></h5>
-                <h5 class="card-title">Estado: <b>{{ $user->rol }}</b></h5>
+                <h5 class="card-title">Estado: <b></b></h5>
             </div>
         </div>
 
 
         @endforeach
 
-
+    </div>
 
     @else
 
@@ -58,14 +60,14 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="{{ route('trabajadores.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="pb-5">
                             <h2 class="mb-3">1. Datos personales</h2>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="nombre_completo" class="form-label">Nombre completo:</label>
-                                    <input type="text" class="form-control" id="nombre_completo" name="nombre_completo" placeholder="Introduce nombre completo" required>
+                                    <label for="nombre" class="form-label">Nombre completo:</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Introduce nombre completo" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="dni" class="form-label">DNI:</label>
@@ -100,7 +102,7 @@
                                     <select class="form-select form-control" id="rol" name="rol" required>
                                         <option selected disabled>Selecciona una opción</option>
                                         <option value="jefe de campo">Jefe de campo</option>
-                                        <option value="trabajador">Trabajador</option>
+                                        <option value="aplicador">Aplicador</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">

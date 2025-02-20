@@ -26,7 +26,7 @@ class AuthController extends Controller
 
             session(['token' => $token]); // Guarda el token en la sesión
 
-            if ($user->rol == 'jefe de campo') {
+            if ($user->rol == 'admin') {
                 return redirect()->route('explotaciones'); // Redirige a explotaciones
             }
 

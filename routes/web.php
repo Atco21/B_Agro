@@ -17,11 +17,11 @@ Route::get('/home', function () {
     return view('layouts.app');
 });
 
+//middle
 Route::get('/explotaciones', [explotacionController::class, 'index'])->name('explotaciones');
 
 //
 Route::get('/trabajadores', [TrabajadorController::class, 'index'])->name('trabajadores');
-Route::post('/trabajadores', [TrabajadorController::class, 'store'])->name('trabajadores.store');
 
 
 Route::get('/informes', function () {

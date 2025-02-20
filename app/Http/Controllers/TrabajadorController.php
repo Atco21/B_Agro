@@ -14,7 +14,7 @@ class TrabajadorController extends Controller
     public function index()
     {
         $explotacion = Explotacion::all();
-        $users = User::all();
+        $users = User::where('rol', '!=', 'admin')->get();
         return view('trabajadores', compact('users'), compact('explotacion'));
 
 
@@ -25,13 +25,13 @@ class TrabajadorController extends Controller
     public function store(Request $request){
 
         $validatedData = $request->validate([
-            'nombre_completo' => 'required|string|max:255',
-            'dni' => 'required|string|max:9|unique:trabajadores,dni',
+            'nombre' => 'required|string|max:255',
+            'dni' => 'required|string|max:9|unique:users,dni',
             'telefono' => 'required|string|max:15',
-            'email' => 'required|email|unique:trabajadores,email',
+            'email' => 'required|email|unique:users,email',
             'direccion' => 'nullable|string|max:255',
             'fecha_nacimiento' => 'nullable|date',
-            'usuario' => 'required|string|unique:trabajadores,usuario',
+            'usuario' => 'required|string|unique:users,usuario',
             'password' => 'required|string|min:6',
             'rol' => 'required|string',
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
@@ -42,7 +42,7 @@ class TrabajadorController extends Controller
             $imagenPath = $request->file('imagen')->store('imagenes', 'public');
         }
         $trabajador = User::create([
-            'nombre_completo' => $request->nombre_completo,
+            'nombre' => $request->nombre,
             'dni' => $request->dni,
             'telefono' => $request->telefono,
             'email' => $request->email,
@@ -71,8 +71,11 @@ class TrabajadorController extends Controller
     // Validar los datos recibidos
     $validatedData = $request->validate([
         'nombre' => 'required|string|max:255',
-        'usuario' => 'required|string|unique:users,usuario',
-        'password' => 'required|string|min:6', // Usamos confirmed para comparar con password_confirmation
+        'dni' => 'required|string',
+        'email' => 'required|email',
+        'usuario' => 'required|string',
+        'password' => 'required|string|min:6',
+        'rol' => 'required|string',
     ]);
     dump($validatedData);
     try {

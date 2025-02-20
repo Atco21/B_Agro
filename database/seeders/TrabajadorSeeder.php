@@ -36,5 +36,18 @@ class TrabajadorSeeder extends Seeder
             'rol' => 'aplicador',
             'explotacion_id' => 2,
         ]);
+
+        User::create([
+            'nombre' => 'Alfred Comanescu',
+            'dni' => '12345678Z',
+            'telefono' => '663123456',
+            'email' => 'admin@admin.es',
+            'fecha_nacimiento' => '2005-06-07',
+            'usuario' => 'admin',
+            'password' => Hash::make('1234'),
+            'rol' => 'admin',
+        ]);
+
+        
     }
 }
