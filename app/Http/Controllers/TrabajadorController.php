@@ -71,19 +71,29 @@ class TrabajadorController extends Controller
     // Validar los datos recibidos
     $validatedData = $request->validate([
         'nombre' => 'required|string|max:255',
-        'dni' => 'required|string',
-        'email' => 'required|email',
-        'usuario' => 'required|string',
+        'dni' => 'required|string|unique:users,dni',
+        'telefono'=> 'nullable|string|max:9',
+        'email' => 'nullable|email',
+        'usuario' => 'required|string|unique:users,usuario',
         'password' => 'required|string|min:6',
         'rol' => 'required|string',
     ]);
-    dump($validatedData);
-    try {
+    $imagenPath = null;
+    if ($request->hasFile('imagen')) {
+        $imagenPath = $request->file('imagen')->store('imagenes', 'public');
+    }    try {
         // Crear el usuario con la contraseña cifrada
         $user = User::create([
-            'nombre' => 'alfred',
-            'usuario' => 'alfredcom',
-            'password' => Hash::make('alfred'),
+            'nombre' => $request->nombre,
+            'dni' => $request->dni,
+            'telefono' => $request->telefono,
+            'email' => $request->email,
+            'fecha_nacimiento' => $request->fecha_nacimiento,
+            'usuario' => $request->usuario,
+            'password' => Hash::make($request->password), // Encriptar contraseña
+            'rol' => $request->rol,
+            'imagen' => $imagenPath,
+            'explotacion_id' => $request->explotacion_id,
         ]);
 
 
@@ -98,7 +108,7 @@ class TrabajadorController extends Controller
         return response()->json([
             'success' => [
                 'token' => $token,
-                'name' => $user->name,
+                'nombre' => $user->nombre,
             ]
         ], 201); // Código HTTP 201: Creado
     } catch (\Exception $e) {
