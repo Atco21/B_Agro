@@ -107,55 +107,68 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 async function rendimiento(id) {
-
     seleccionar(id);
-
     idparc = id;
 
-
-
     try {
-
         const response = await fetch(`/api/rendimiento/${id}`);
         const data = await response.json();
 
         if (data.error) {
-            alert("No hay datos disponibles");
+            document.getElementById("rendimiento").innerHTML = "<p>No hay datos disponibles</p>";
             return;
         }
+
         const rendimiento = data[0];
+
         let html = `
 
-            <p>ID: ${rendimiento.id}</p>
-            <p>Parcela ID: ${rendimiento.parcela_id}</p>
-            <p>Cultivo sembrado: ${rendimiento.c_sembrada}</p>
-            <p>Cultivo recolectado: ${rendimiento.c_recolectada}</p>
-            <p>Cultivo esperado: ${rendimiento.c_esperada}</p>
-            <p>Costes de semilla: ${rendimiento.semillaCostes}</p>
-            <p>Costes de fertilizantes: ${rendimiento.fertilizantesCostes}</p>
-            <p>Otros costes: ${rendimiento.otrosCostes}</p>
-            <p>Precio por tonelada: ${rendimiento.precio_tonelada}</p>
-            <p>Total vendido: ${rendimiento.total_vendido}</p>
-            <p>Fecha de inicio: ${rendimiento.fecha_inicio}</p>
-            <p>Fecha de fin: ${rendimiento.fecha_fin}</p>
+        <div class="d-flex flex-column">
+            <div class="flex-row">
+                <h2>1. Productividad</h2>
+                <div class="d-flex justify-content-between">
+                    <div class="flex-row">
+                        <p><strong>Cantidad sembrada:</strong> ${rendimiento.c_sembrada} Tn</p>
+                        <p><strong>Cantidad recolectada:</strong> ${rendimiento.c_recolectada} Tn</p>
+                    </div>
+                    <div class="flex-row pe-3">
+                        <p><strong>Cantidad esperada:</strong> <input type="number" value="${rendimiento.c_esperada}" /> Tn</p>
+                        <p><strong>Rendimiento durante la última temporada:</strong> <span style="background-color: #d4edda; padding: 5px; border-radius: 5px;">${((rendimiento.c_recolectada / rendimiento.c_esperada) * 100).toFixed(2)}%</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-row">
+                <h2>2. Aspectos económicos</h2>
+                <p><strong>Coste semilla:</strong> ${rendimiento.semillaCostes}€</p>
+                <p><strong>Coste fertilizantes:</strong> ${rendimiento.fertilizantesCostes}€</p>
+                <p><strong>Otros costes:</strong> ${rendimiento.otrosCostes}€</p>
+                <p><strong>Precio por tonelada:</strong> ${rendimiento.precio_tonelada}€</p>
+                <p><strong>Total vendido (100%):</strong> ${rendimiento.total_vendido}€</p>
+            </div>
 
+            <div class="flex-row">
+            <h2>3. Fechas</h2>
+            <p><strong>Fecha de inicio:</strong> ${rendimiento.fecha_inicio}</p>
+            <p><strong>Fecha de fin:</strong> ${rendimiento.fecha_fin}</p>
+            </div>
+            <h2>4. Beneficio</h2>
+            <p style="color: green;"><strong>Ingresos:</strong> ${rendimiento.total_vendido}€</p>
+            <p style="color: red;"><strong>Total gastos:</strong> ${(
+                parseFloat(rendimiento.semillaCostes) +
+                parseFloat(rendimiento.fertilizantesCostes) +
+                parseFloat(rendimiento.otrosCostes)
+            ).toFixed(2)}€</p>
+        </div>
+        `;
 
-
-
-
-
-        `
         document.getElementById("rendimiento").innerHTML = html;
-
 
     } catch (error) {
         document.getElementById("rendimiento").innerHTML = "<p>No hay datos disponibles</p>";
         console.error("Error obteniendo el rendimiento de las parcelas:", error);
     }
-
-
-
 }
+
 
 
 
