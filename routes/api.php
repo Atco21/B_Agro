@@ -16,6 +16,7 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::post('register', [TrabajadorController::class,'register']);
 Route::post('/trabajadores', [TrabajadorController::class, 'register'])->name('register');
 
+Route::get('/aplicadores', [TrabajadorController::class, 'aplicadores'])->name('aplicadores');
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('details', [TrabajadorController::class,'details']);
@@ -46,7 +47,6 @@ Route::get('/tratamiento', [TratamientoController::class, 'mostrarTratamientos']
 
 Route::get('explotacion/{id}/aplicadores/', [TrabajadorController::class, 'mostrarAplicadores']);
 
-Route::get('/aplicadores', [TrabajadorController::class, 'mostrarAplicadores']);
 
 
 

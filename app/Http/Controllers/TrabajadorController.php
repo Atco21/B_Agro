@@ -21,6 +21,13 @@ class TrabajadorController extends Controller
     }
 
 
+    public function aplicadores(){
+
+        $trabajadores = User::where('rol', 'aplicador')->get();
+        return response()->json($trabajadores);
+    }
+
+
 
     // public function store(Request $request){
 
@@ -60,7 +67,7 @@ class TrabajadorController extends Controller
 
 
     public function mostrarAplicadores(){
-        $trabajadores = Trabajador::where('rol', 'aplicador')->get();
+        $trabajadores = User::where('rol', 'aplicador')->get();
         return response()->json($trabajadores);
     }
 
