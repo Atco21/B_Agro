@@ -2,13 +2,15 @@
 
 @section('content2')
 
+
+
+
 <script>
 let idparc = 1;
-
 addEventListener('DOMContentLoaded', inicio);
 
 function inicio() {
-    const select = document.querySelector(".expoSelect");
+    const select = document.querySelector(".exploSelect");
 
     if (select) {
         select.addEventListener("change", function() {
@@ -41,19 +43,8 @@ async function actualizarContenido(data) {
     document.getElementById('previo').setAttribute('hidden', '');
     const contentDiv = document.getElementById("tabla");
 
-    const idsCultivos = data.map(parcela => parcela.cultivo_id);
 
     try {
-        const domain = 'http://0.0.0.0'
-        const url = domain+`/api/cultivos_nombre?ids=${idsCultivos.join(",")}`;
-        const response = await fetch(url);
-        const cultivosData = await response.json();
-
-        if (cultivosData.error) {
-            alert("No hay datos disponibles");
-            return;
-        }
-
         let html = `
             <table class="table" border="1" id="tabla_parcelas">
                 <thead>
@@ -67,13 +58,14 @@ async function actualizarContenido(data) {
         `;
 
         data.forEach(parcela => {
+            console.log();
             html += `
             <tr class="lineaParcela" id=${parcela.id}
                 style="cursor: pointer; background-color: #f9f9f9; transition: background 0.3s;"
                 onmouseover="this.style.backgroundColor='#ddd';"
                 onmouseout="this.style.backgroundColor='#f9f9f9';">
                     <td>${parcela.nombre}</td>
-                    <td>${cultivosData[parcela.cultivo_id] || "Desconocido"}</td>
+                    <td>${parcela.cultivo.nombre}</td>
                     <td>${parcela.tamanyo}</td>
             </tr>
             `;
@@ -113,55 +105,68 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 async function rendimiento(id) {
-
     seleccionar(id);
-
     idparc = id;
-    alert(id)
-
 
     try {
-        const domain = window.location.origin;
-        const url = `${domain}/api/rendimiento/${id}`;
-        const response = await fetch(url);
+        const response = await fetch(`/api/rendimiento/${id}`);
         const data = await response.json();
 
         if (data.error) {
-            alert("No hay datos disponibles");
+            document.getElementById("rendimiento").innerHTML = "<p>No hay datos disponibles</p>";
             return;
         }
+
         const rendimiento = data[0];
+
         let html = `
 
-            <p>ID: ${rendimiento.id}</p>
-            <p>Parcela ID: ${rendimiento.parcela_id}</p>
-            <p>Cultivo sembrado: ${rendimiento.c_sembrada}</p>
-            <p>Cultivo recolectado: ${rendimiento.c_recolectada}</p>
-            <p>Cultivo esperado: ${rendimiento.c_esperada}</p>
-            <p>Costes de semilla: ${rendimiento.semillaCostes}</p>
-            <p>Costes de fertilizantes: ${rendimiento.fertilizantesCostes}</p>
-            <p>Otros costes: ${rendimiento.otrosCostes}</p>
-            <p>Precio por tonelada: ${rendimiento.precio_tonelada}</p>
-            <p>Total vendido: ${rendimiento.total_vendido}</p>
-            <p>Fecha de inicio: ${rendimiento.fecha_inicio}</p>
-            <p>Fecha de fin: ${rendimiento.fecha_fin}</p>
+        <div class="d-flex flex-column">
+            <div class="flex-row">
+                <h2>1. Productividad</h2>
+                <div class="d-flex justify-content-between">
+                    <div class="flex-row">
+                        <p><strong>Cantidad sembrada:</strong> ${rendimiento.c_sembrada} Tn</p>
+                        <p><strong>Cantidad recolectada:</strong> ${rendimiento.c_recolectada} Tn</p>
+                    </div>
+                    <div class="flex-row pe-3">
+                        <p><strong>Cantidad esperada:</strong> <input type="number" value="${rendimiento.c_esperada}" /> Tn</p>
+                        <p><strong>Rendimiento durante la última temporada:</strong> <span style="background-color: #d4edda; padding: 5px; border-radius: 5px;">${((rendimiento.c_recolectada / rendimiento.c_esperada) * 100).toFixed(2)}%</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-row">
+                <h2>2. Aspectos económicos</h2>
+                <p><strong>Coste semilla:</strong> ${rendimiento.semillaCostes}€</p>
+                <p><strong>Coste fertilizantes:</strong> ${rendimiento.fertilizantesCostes}€</p>
+                <p><strong>Otros costes:</strong> ${rendimiento.otrosCostes}€</p>
+                <p><strong>Precio por tonelada:</strong> ${rendimiento.precio_tonelada}€</p>
+                <p><strong>Total vendido (100%):</strong> ${rendimiento.total_vendido}€</p>
+            </div>
 
+            <div class="flex-row">
+            <h2>3. Fechas</h2>
+            <p><strong>Fecha de inicio:</strong> ${rendimiento.fecha_inicio}</p>
+            <p><strong>Fecha de fin:</strong> ${rendimiento.fecha_fin}</p>
+            </div>
+            <h2>4. Beneficio</h2>
+            <p style="color: green;"><strong>Ingresos:</strong> ${rendimiento.total_vendido}€</p>
+            <p style="color: red;"><strong>Total gastos:</strong> ${(
+                parseFloat(rendimiento.semillaCostes) +
+                parseFloat(rendimiento.fertilizantesCostes) +
+                parseFloat(rendimiento.otrosCostes)
+            ).toFixed(2)}€</p>
+        </div>
+        `;
 
-
-
-
-
-        `
         document.getElementById("rendimiento").innerHTML = html;
 
-
     } catch (error) {
+        document.getElementById("rendimiento").innerHTML = "<p>No hay datos disponibles</p>";
         console.error("Error obteniendo el rendimiento de las parcelas:", error);
     }
-
-
-
 }
+
 
 
 
@@ -187,7 +192,7 @@ window.onpopstate = function(event) {
 };
 </script>
 
-<div id="previo" >
+<div id="previo">
 
     <div class="d-flex justify-content-center align-items-center" style="height: 70vh;">
 
@@ -227,6 +232,7 @@ window.onpopstate = function(event) {
                         <td class="opciones_menu2">Incidencias</td>
                         <td class="opciones_menu2">Tratamientos</td>
                     </tr>
+
                 </table>
 
                 <div id="rendimiento">

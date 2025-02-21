@@ -17,8 +17,9 @@ return new class extends Migration
             $table->foreignId('explotacion_id')->constrained('explotaciones');
 
             $table->string('nombre');
-            $table->double('capacidad');
-            $table->integer('estado');
+            $table->string('matricula');
+            $table->double('capacidad')->nullable();
+            $table->integer('estado')->nullable();
             $table->string('imagen', 255)->nullable();
 
             $table->timestamps();

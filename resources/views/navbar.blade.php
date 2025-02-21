@@ -11,7 +11,7 @@
             <!-- Opciones principales a la izquierda -->
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('*explotaciones*') ? 'active' : '' }}" href="{{ url('/explotaciones') }}">Explotaciones</a>
+                    <a class="nav-link menu1 {{ Request::is('*explotaciones*') ? 'active' : '' }}" href="{{ url('/explotaciones') }}">Explotaciones</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('trabajadores') ? 'active' : '' }}" href="{{ url('/trabajadores') }}">Trabajadores</a>

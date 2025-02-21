@@ -9,6 +9,17 @@ use App\Http\Controllers\rendController;
 use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\OrdenController;
 
+Route::post('login', [AuthController::class, 'login'])->name('login');
+
+Route::post('register', [TrabajadorController::class,'register']);
+Route::post('/trabajadores', [TrabajadorController::class, 'register'])->name('register');
+
+Route::get('/aplicadores', [TrabajadorController::class, 'aplicadores'])->name('aplicadores');
+
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('details', [TrabajadorController::class,'details']);
+    Route::get('logout', [TrabajadorController::class,'logout']);
+});
 
 
 Route::get('/explotaciones2', [ExplotacionController::class, 'index2']);
@@ -33,3 +44,12 @@ Route::get('/rendimiento/{id}',[rendController::class, 'mostrarParcela']);
 Route::get('/tratamiento', [TratamientoController::class, 'mostrarTratamientos']);//esto te lleva al controlador de tratamientos
 Route::get('ordenes/explotacion', [OrdenController::class, 'index']);//cointrolador de orden
 
+Route::get('explotacion/{id}/aplicadores/', [TrabajadorController::class, 'mostrarAplicadores']);
+
+
+
+
+
+
+
+//Route::get('/ordenes/explotacion/{id}', OrdenesController::class, 'mostrarOrdenesPorExplotacion');

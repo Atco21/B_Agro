@@ -1,10 +1,15 @@
 @extends('explotacion')
 
 @section('content2')
+
+
 <script>
+
 addEventListener('DOMContentLoaded', inicio);
 
 function inicio() {
+
+>>>>>>> alfred
     const select = document.querySelector(".exploSelect");
 
     if (select) {

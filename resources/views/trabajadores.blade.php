@@ -18,27 +18,29 @@
 </div>
 
 
-    @if (($trabajadores->count())>0)
+    @if(($users->count())>0)
 
+    <div class="container d-flex flex-row flex-wrap justify-content-center">
 
-        @foreach ($trabajadores as $trabajador)
+        @foreach ($users as $user)
+
 
         <div class="card mt-3 ms-3 ms-4" style="width: 25rem;">
             <div class="d-flex flex-row mt-3 ms-3 align-items-center">
-                <img src="{{asset('storage/'.$trabajador->imagen)}}" alt="Foto de perfil" class="fotoPerfil">
-                <h4 class="card-title">{{$trabajador->nombre_completo}}</h4>
+                <img src="{{asset('./assets/logoAgro.png')}}" alt="Foto de perfil" class="fotoPerfil" width="150px">
+                <h4 class="card-title ps-5">{{$user->nombre}}</h4>
             </div>
             <div class="card-body">
-                <h5 class="card-title">Explotación: <b>{{$trabajador->explotacion->nombre}}</b></h5>
-                <h5 class="card-title">Rol: <b>{{ $trabajador->rol }}</b></h5>
-                <h5 class="card-title">Estado: <b>{{ $trabajador->rol }}</b></h5>
+                <h5 class="card-title">Explotación: <b>{{$user->explotacion->nombre}}</b></h5>
+                <h5 class="card-title">Rol: <b>{{ $user->rol }}</b></h5>
+                <h5 class="card-title">Estado: <b></b></h5>
             </div>
         </div>
 
 
         @endforeach
 
-
+    </div>
 
     @else
 
@@ -58,55 +60,54 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="{{ route('trabajadores.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="pb-5">
                             <h2 class="mb-3">1. Datos personales</h2>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="nombre_completo" class="form-label">Nombre completo:</label>
-                                    <input type="text" class="form-control" id="nombre_completo" placeholder="Introduce nombre completo" required>
+                                    <label for="nombre" class="form-label">Nombre completo:</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Introduce nombre completo" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="dni" class="form-label">DNI:</label>
-                                    <input type="text" class="form-control" id="dni" placeholder="Introduce DNI" required>
+                                    <input type="text" class="form-control" id="dni" name="dni" placeholder="Introduce DNI" required>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-6">
                                     <label for="email" class="form-label">Email:</label>
-                                    <input type="email" class="form-control" id="email" placeholder="Introduce email">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Introduce email" required>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col">
                                             <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento:</label>
-                                            <input type="date" class="form-control" id="fecha_nacimiento">
+                                            <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" required>
                                         </div>
                                         <div class="col">
                                             <label for="telefono" class="form-label">Número de teléfono:</label>
-                                            <input type="text" class="form-control" id="telefono" placeholder="Introduce teléfono">
+                                            <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Introduce teléfono" required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="mt-3">
-
                         </div>
+
                         <div class="pb-5">
                             <h2 class="mb-3">2. Tipo de empleado</h2>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="rol" class="form-label">Rol:</label>
-                                    <select class="form-select form-control" id="rol" required>
+                                    <select class="form-select form-control" id="rol" name="rol" required>
                                         <option selected disabled>Selecciona una opción</option>
-                                        <option value="1">Jefe de campo</option>
-                                        <option value="2">Aplicador</option>
+                                        <option value="jefe de campo">Jefe de campo</option>
+                                        <option value="aplicador">Aplicador</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="explotacion_id" class="form-label">Explotación:</label>
-                                    <select class="form-select form-control" id="explotacion_id" required>
+                                    <select class="form-select form-control" id="explotacion_id" name="explotacion_id" required>
                                         <option selected disabled>Selecciona una opción</option>
                                         @foreach ($explotacion as $explo)
                                             <option value="{{ $explo->id }}">{{ $explo->nombre }}</option>
@@ -121,31 +122,23 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="usuario" class="form-label">Usuario:</label>
-                                    <input type="text" class="form-control" id="usuario" placeholder="Introduce usuario" required>
+                                    <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Introduce usuario" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="password" class="form-label">Contraseña:</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Introduce contraseña" required>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Introduce contraseña" required>
                                 </div>
                             </div>
                             <div class="mt-3 col-md-6">
                                 <label for="imagen" class="form-label">Foto usuario:</label>
-                                <input type="file" class="form-control fotoinput" accept="image/png, image/jpeg" id="imagen">
-                            </div>
-                            <div class="col-md-6">
-
+                                <input type="file" class="form-control fotoinput" accept="image/png, image/jpeg" id="imagen" name="imagen">
                             </div>
                         </div>
 
-                </div>
-
-
-
-            </form>
-
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn button-secondary1">Añadir usuario</button>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn button-secondary1">Añadir usuario</button>
+                        </div>
+                    </form>
             </div>
 
         </div>

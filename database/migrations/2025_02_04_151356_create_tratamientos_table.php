@@ -21,7 +21,7 @@ return new class extends Migration
             $table->double('tempmax',100);
             $table->double('tempmin',100);
             $table->foreignId('id_jefedecampo')->constrained('trabajadores');
-          
+
 
         });
     }

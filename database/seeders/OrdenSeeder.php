@@ -30,10 +30,17 @@ class OrdenSeeder extends Seeder
             [
                 'estado' => 'Completada',
                 'fecha_inicio' => '2024-01-15',
+<<<<<<< HEAD
                 'fecha_fin' => null,
                 'tarea' => 'Siembra de maíz',
                 'id_jefecampo' => 1,
                 'aplicador_id' => 2,
+=======
+                'fecha_fin' => '2024-01-20',
+                'tarea' => 'Siembra de maíz',
+                'id_jefecampo' => 1,
+                'id_aplicador' => 2,
+>>>>>>> alfred
                 'parcela_id' => 2,
                 'id_tratamiento' => null,
                 'id_maquina' => null,
@@ -42,4 +49,8 @@ class OrdenSeeder extends Seeder
             ],
         ]);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> alfred

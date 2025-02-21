@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             ParcelaSeeder::class,
             TrabajadorSeeder::class,
             RendimientoSeeder::class,
-            OrdenSeeder::class,
+            OrdenSeeder::class
         ]);
     }
 }
