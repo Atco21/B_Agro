@@ -8,10 +8,13 @@ use App\Http\Controllers\cultivoController;
 use App\Http\Controllers\rendController;
 use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\OrdenController;
+use App\Http\Controllers\TrabajadorController;
+use App\Http\Controllers\AuthController;
 
-Route::post('login', [AuthController::class, 'login'])->name('login');
 
-Route::post('register', [TrabajadorController::class,'register']);
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+Route::post('/register', [TrabajadorController::class,'register']);
 Route::post('/trabajadores', [TrabajadorController::class, 'register'])->name('register');
 
 Route::get('/aplicadores', [TrabajadorController::class, 'aplicadores'])->name('aplicadores');
@@ -45,6 +48,8 @@ Route::get('/tratamiento', [TratamientoController::class, 'mostrarTratamientos']
 Route::get('ordenes/explotacion', [OrdenController::class, 'index']);//cointrolador de orden
 
 Route::get('explotacion/{id}/aplicadores/', [TrabajadorController::class, 'mostrarAplicadores']);
+
+Route::post('/ordenes', [OrdenController::class, 'actualizarDatosdeApi']);
 
 
 

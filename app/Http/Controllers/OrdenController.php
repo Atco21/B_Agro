@@ -97,12 +97,29 @@ class OrdenController extends Controller
         $aplicador = Trabajador::find(2);//jefe de campo y aplicador es lo mismo
         $orden->aplicadores()->attach($aplicador);
     }
-    // public function obtenerIdYAsunto()
-    // {
-    //     // Devuelve los resultados solo con los campos parcela_id y tarea
-    //     $ordenes = Orden::select('parcela_id', 'tarea')->get();
-    //     return response()->json($ordenes);
-    // }
+
+
+    public function actualizarDatosdeApi(Request $request)
+    {
+        dd($request->all());
+
+        $request->validate([
+            'estado' => 'required|string|max:50',
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'nullable|date|after_or_equal:fecha_inicio',
+            'id_administrador' => 'required|exists:trabajadores,id',
+            'tarea' => 'required|string|max:255',
+            'id_jefecampo' => 'required|exists:trabajadores,id',
+            'aplicador_id' => 'required|exists:trabajadores,id',
+            'parcela_id' => 'required|exists:parcelas,id',
+            'id_tratamiento' => 'required|exists:tratamientos,id',
+            'id_maquina' => 'nullable|exists:maquinas,id',
+        ]);
+
+        $orden = Orden::create($request->all());
+        return response()->json($orden, 201);
+    }
+
 
 }
 
