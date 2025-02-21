@@ -9,8 +9,8 @@ use App\Http\Controllers\quimicosController;
 use App\Http\Controllers\almacenesController;
 
 
-Route::get('/', function () {
-    return view('layouts.app');
+Route::get('/', function(){
+    return view('layouts.login');
 });
 
 // <<<<<<< HEAD

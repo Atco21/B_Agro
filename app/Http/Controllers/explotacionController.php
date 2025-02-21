@@ -39,8 +39,6 @@ class explotacionController extends Controller
         $explotacion = Explotacion::find($recibido);
         $almacenes = Almacen::find($explotacion); // Cargar todos los almacenes
         $quimicos = $almacenes->quimico();
-
-        $hola;
         return view('explotaciones.almacen',
         [ 'explotacion' => $explotacion,
         'almacenes' => $almacenes,
