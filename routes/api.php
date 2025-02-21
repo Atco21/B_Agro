@@ -11,10 +11,13 @@ use App\Http\Controllers\TrabajadorController;
 use App\Http\Controllers\MaquinaController;
 use App\Http\Controllers\AuthController;
 
+// Users
 Route::post('login', [AuthController::class, 'login'])->name('login');
 
 Route::post('register', [TrabajadorController::class,'register']);
 Route::post('/trabajadores', [TrabajadorController::class, 'register'])->name('register');
+
+Route::post('/crear_orden' ,[OrdenesController::class, 'crearOrden']);
 
 Route::get('/aplicadores', [TrabajadorController::class, 'aplicadores'])->name('aplicadores');
 
@@ -24,6 +27,9 @@ Route::group(['middleware' => 'auth:api'], function () {
 });
 
 
+
+
+//explotaciones y parcelas
 Route::get('/explotaciones2', [ExplotacionController::class, 'index2']);
 Route::get('/', [ExplotacionController::class, 'index']);
 
@@ -34,6 +40,7 @@ Route::get('/parcelas/explotacion/{explotacion_id}',[parcelasController::class, 
 Route::get('/explotaciones/datos/{id}',[parcelasController::class, 'getDatosPorExplotacion']);
 
 
+//cultivos
 Route::get('/cultivos_nombre/{id}',[cultivoController::class, 'getNombre']);
 Route::get('/cultivos_nombre', [CultivoController::class, 'getNombres']);
 
@@ -45,9 +52,10 @@ Route::get('/rendimiento/{id}',[rendController::class, 'mostrarParcela']);
 
 Route::get('/tratamiento', [TratamientoController::class, 'mostrarTratamientos']);//esto te lleva al controlador de tratamientos
 
-Route::get('explotacion/{id}/aplicadores/', [TrabajadorController::class, 'mostrarAplicadores']);
+//
 
 
+Route::get('/maquinas/explotacion/{id}', [MaquinaController::class, 'mostrarMaquinasPorExplotacion']);
 
 
 

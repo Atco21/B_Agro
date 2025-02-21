@@ -59,4 +59,11 @@ class MaquinaController extends Controller
         $maquina->delete();
         return response()->json(null, 204);
     }
+
+
+    public function mostrarMaquinasPorExplotacion($explotacion_id){
+        $maquinas = Maquina::where('explotacion_id', $explotacion_id)->get();
+        return response()->json($maquinas);
+    }r
+
 }

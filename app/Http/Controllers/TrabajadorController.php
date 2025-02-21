@@ -75,6 +75,7 @@ class TrabajadorController extends Controller
 
     public function register(Request $request){
 
+
         $validatedData = $request->validate([
             'nombre' => 'required|string|max:255',
             'dni' => 'required|string|unique:users,dni',
@@ -87,7 +88,10 @@ class TrabajadorController extends Controller
         $imagenPath = null;
         if ($request->hasFile('imagen')) {
             $imagenPath = $request->file('imagen')->store('imagenes', 'public');
-        }    try {
+        }
+
+
+        try {
             $user = User::create([
                 'nombre' => $request->nombre,
                 'dni' => $request->dni,
