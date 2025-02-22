@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             CultivoSeeder::class,
             ParcelaSeeder::class,
             TrabajadorSeeder::class,
+            MaquinaSeeder::class,
             RendimientoSeeder::class,
             OrdenSeeder::class
         ]);

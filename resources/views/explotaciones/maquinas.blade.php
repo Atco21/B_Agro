@@ -21,18 +21,67 @@ function inicio() {
 }
 
 
-function cargarMaquina(id){
+async function cargarMaquina(id){
 
     fetch(`http://localhost/api/maquinas/explotacion/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert("No hay datos");
+            } else {
+                document.getElementById('seccion').removeAttribute('hidden');
+                actualizarContenido(data);
+            }
+        })
+        .catch(error => console.error("Error en la petición:", error));
+}
+
+
+async function actualizarContenido(data){
+    let contentDiv  = document.getElementById('listado');
+    document.getElementById('previo').setAttribute('hidden', '');
+    let html = '';
+    try{
+
+
+    data.forEach(maquina => {
+
+        html +=`
+        <div class="card mt-3 ms-3 ms-4" style="width: 25rem;">
+            <div class="d-flex flex-row mt-3 ms-3 align-items-center">
+                <img src="{{asset('./assets/logoAgro.png')}}" alt="Foto máquina" class="fotoPerfil" width="150px">
+                <h4 class="card-title ps-5">${maquina.nombre}</h4>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Capacidad: <b>${maquina.capacidad || 'sin capacidad'}</b></h5>
+                <h5 class="card-title">Matricula: <b>${maquina.matricula || 'sin matrícula'}</b></h5>
+            </div>
+        </div>
+        `;
+
+
+    });
+    }catch (error) {
+        console.error("Error obteniendo los nombres de los cultivos:", error);
+        alert("Hubo un problema al cargar los datos.");
+    }
+    contentDiv.innerHTML = html;
+
+
 
 
 }
+
 
 function actualizarURL(id_explo) {
     const newURL = `/explotaciones/maquinas/${id_explo}`;
     history.pushState({ id: id_explo }, "", newURL);
 }
-
+window.onpopstate = function(event) {
+    if (event.state && event.state.id) {
+        cargarMaquina(event.state.id);
+    }
+};
 </script>
 
 <div id="previo">
@@ -55,6 +104,10 @@ function actualizarURL(id_explo) {
             Añadir máquina
         </button>
         </div>
+    </div>
+
+    <div id="listado">
+
     </div>
 
     <div class="modal" id="anadirMaquina" tabindex="-1" aria-labelledby="anadirUsuarioModal" aria-hidden="true">
@@ -113,7 +166,9 @@ function actualizarURL(id_explo) {
                 </form>
         </div>
     </div>
+
 </div>
+
 
 
 @endsection

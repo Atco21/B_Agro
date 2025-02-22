@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Maquina;
+use App\Models\Explotacion;
+
+
 
 class MaquinaController extends Controller
 {
@@ -64,6 +67,16 @@ class MaquinaController extends Controller
     public function mostrarMaquinasPorExplotacion($explotacion_id){
         $maquinas = Maquina::where('explotacion_id', $explotacion_id)->get();
         return response()->json($maquinas);
-    }r
+    }
+
+
+    public function listarParcelasPorExplotacion(){
+
+        $explotacion = Explotacion::all();
+
+
+        return view('explotaciones.maquinas', compact('explotacion'));
+
+    }
 
 }

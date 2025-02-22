@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+<script>
+
+    
+
+
+
+</script>
+
+
 <div class="d-flex flex-row mt-3 ms-3 align-items-center">
     <input type="search" class="form-control ms-3 w-25" placeholder="Buscar" aria-label="Buscar">
 
@@ -18,14 +27,17 @@
 </div>
 
 
+
     @if(($users->count())>0)
 
-    <div class="container d-flex flex-row flex-wrap justify-content-center">
+
+
+    <div class=" d-flex flex-wrap vw-100 m-3 overflow-auto vh-100">
 
         @foreach ($users as $user)
 
 
-        <div class="card mt-3 ms-3 ms-4" style="width: 25rem;">
+        <div class="card mt-3 ms-3 ms-4" style="width: 25em; height: 20em;">
             <div class="d-flex flex-row mt-3 ms-3 align-items-center">
                 <img src="{{asset('./assets/logoAgro.png')}}" alt="Foto de perfil" class="fotoPerfil" width="150px">
                 <h4 class="card-title ps-5">{{$user->nombre}}</h4>

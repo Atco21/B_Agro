@@ -36,7 +36,11 @@ Route::get('/explotaciones/incidencias', [ExplotacionController::class, 'inciden
 Route::get('/explotaciones/maquinas', [ExplotacionController::class, 'maquinas'])->name('explotaciones.maquinas');
 
 Route::get('/explotaciones/pedidos', [explotacionController::class, 'pedidos'])->name('explotaciones.pedidos');
-Route::get('/explotaciones/parcelas/{id}',[parcelasController::class, 'listarParcelasPorExplotacion']);
+
+
+Route::get('/explotaciones/parcelas/{id}',[parcelasController::class, 'listarMaquinasPorExplotacion']);
+
+
 
 
 Route::get('/explotaciones/parcelas/{idExplotacion}/{idParcela}/rendimiento', [rendController::class, 'index' ]);
@@ -45,3 +49,5 @@ Route::get('/maquinas', [MaquinaController::class, 'index'])->name('maquinas');
 Route::post('/maquinas', [MaquinaController::class, 'store'])->name('maquinas.store');
 
 
+Route::get('/explotaciones/maquinas/{id}', [MaquinaController::class, 'mostrarMaquinasPorExplotacion']);
+Route::get('/explotaciones/maquinas/{id}', [MaquinaController::class, 'listarParcelasPorExplotacion']);

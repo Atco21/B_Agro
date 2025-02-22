@@ -175,8 +175,6 @@ async function rendimiento(id) {
 function ordenes(id) {
 
 
-    alert("ordenes")
-    console.log("ayuda")
 
 
 

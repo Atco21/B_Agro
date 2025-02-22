@@ -7,46 +7,37 @@
 
 
 @if ($explotacion->count() > 0)
-<div class="d-flex flex-row mt-0">
 
-
-    <!-- Columna para los <h3> -->
-
-
-    <div class="col-2 vh-100 d-flex flex-column justify-content-between">
-
-        <div class="d-flex flex-column justify-content-around h-50 ps-2">
-
-            <ul class="navbar-nav me-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link menu2  {{ Request::is('*general*') ? 'active' : '' }}" href="{{ url('explotaciones/general') }}">General</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link menu2  {{ Request::is('*parcelas*') ? 'active' : '' }} " href="{{ url('explotaciones/parcelas') }}">Parcelas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link menu2  {{ Request::is('*ordenes*') ? 'active' : '' }} " href="{{ url('explotaciones/ordenes') }}">Ordenes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link menu2  {{ Request::is('*incidencias*') ? 'active' : '' }} " href="{{ url('explotaciones/incidencias') }}">Incidencias</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link menu2  {{ Request::is('*maquinas*') ? 'active' : '' }} " href="{{ url('explotaciones/maquinas') }}">Máquinas</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link menu2  {{ Request::is('*pedidos*') ? 'active' : '' }} " href="{{ url('explotaciones/pedidos') }}">Pedidos</a>
-                </li>
-
-            </ul>
-        </div>
+<div class="d-flex flex-row vh-100 w-100 overflow-hidden">
+    <!-- Menú lateral -->
+    <div class="col-2 d-flex flex-column justify-content-start bg-light h-100 p-3">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="menu2 nav-link {{ Request::is('*general*') ? 'active' : '' }}" href="{{ url('explotaciones/general') }}">General</a>
+            </li>
+            <li class="nav-item">
+                <a class="menu2 nav-link {{ Request::is('*parcelas*') ? 'active' : '' }}" href="{{ url('explotaciones/parcelas') }}">Parcelas</a>
+            </li>
+            <li class="nav-item">
+                <a class="menu2 nav-link {{  Request::is('*ordenes*') ? 'active' : '' }}" href="{{ url('explotaciones/ordenes') }}">Ordenes</a>
+            </li>
+            <li class="nav-item">
+                <a class="menu2 nav-link {{ Request::is('*incidencias*') ? 'active' : '' }}" href="{{ url('explotaciones/incidencias') }}">Incidencias</a>
+            </li>
+            <li class="nav-item">
+                <a class="menu2 nav-link {{ Request::is('*maquinas*') ? 'active' : '' }}" href="{{ url('explotaciones/maquinas') }}">Máquinas</a>
+            </li>
+            <li class="nav-item">
+                <a class="menu2 nav-link {{ Request::is('*pedidos*') ? 'active' : '' }}" href="{{ url('explotaciones/pedidos') }}">Pedidos</a>
+            </li>
+        </ul>
     </div>
 
 
-    <!-- Columna para el resto del contenido -->
-    <div class="col-10">
-        <div class="d-flex justify-content-end me-2">
-            <select class="d-flex form-select form-control exploSelect mt-3" id="selectExplotacion">
+    <!-- Contenido principal -->
+    <div class="col-10 d-flex flex-column h-100 p-3">
+        <div class="d-flex justify-content-end">
+            <select class="form-select exploSelect mt-3">
                 <option selected disabled>Selecciona una opción</option>
                 @foreach ($explotacion as $explo)
                     <option value="{{ $explo->id }}">{{ $explo->nombre }}</option>
@@ -55,9 +46,6 @@
         </div>
         @yield('content2')
     </div>
-
-
-
 </div>
 
 @else
