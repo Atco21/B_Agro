@@ -13,22 +13,22 @@
     <div class="col-2 d-flex flex-column justify-content-start bg-light h-100 p-3">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="menu2 nav-link {{ Request::is('*general*') ? 'active' : '' }}" href="{{ url('explotaciones/general') }}">General</a>
+                <a class="menu2 nav-link {{ Request::is('*general*') ? 'active2' : '' }}" href="{{ url('explotaciones/general') }}">General</a>
             </li>
             <li class="nav-item">
-                <a class="menu2 nav-link {{ Request::is('*parcelas*') ? 'active' : '' }}" href="{{ url('explotaciones/parcelas') }}">Parcelas</a>
+                <a class="menu2 nav-link {{ Request::is('*parcelas*') ? 'active2' : '' }}" href="{{ url('explotaciones/parcelas') }}">Parcelas</a>
             </li>
             <li class="nav-item">
-                <a class="menu2 nav-link {{  Request::is('*ordenes*') ? 'active' : '' }}" href="{{ url('explotaciones/ordenes') }}">Ordenes</a>
+                <a class="menu2 nav-link {{  Request::is('*ordenes*') ? 'active2' : '' }}" href="{{ url('explotaciones/ordenes') }}">Ordenes</a>
             </li>
             <li class="nav-item">
-                <a class="menu2 nav-link {{ Request::is('*incidencias*') ? 'active' : '' }}" href="{{ url('explotaciones/incidencias') }}">Incidencias</a>
+                <a class="menu2 nav-link {{ Request::is('*incidencias*') ? 'active2' : '' }}" href="{{ url('explotaciones/incidencias') }}">Incidencias</a>
             </li>
             <li class="nav-item">
-                <a class="menu2 nav-link {{ Request::is('*maquinas*') ? 'active' : '' }}" href="{{ url('explotaciones/maquinas') }}">Máquinas</a>
+                <a class="menu2 nav-link {{ Request::is('*maquinas*') ? 'active2' : '' }}" href="{{ url('explotaciones/maquinas') }}">Máquinas</a>
             </li>
             <li class="nav-item">
-                <a class="menu2 nav-link {{ Request::is('*pedidos*') ? 'active' : '' }}" href="{{ url('explotaciones/pedidos') }}">Pedidos</a>
+                <a class="menu2 nav-link {{ Request::is('*pedidos*') ? 'active2' : '' }}" href="{{ url('explotaciones/pedidos') }}">Pedidos</a>
             </li>
         </ul>
     </div>

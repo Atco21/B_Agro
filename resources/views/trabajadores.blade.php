@@ -6,17 +6,36 @@ addEventListener('DOMContentLoaded', inicio);
 
 function inicio() {
     const select = document.querySelector(".exploSelect");
+    const searchInput = document.getElementById("searchInput");
 
     select.selectedIndex = 0;
 
     if (select) {
         select.addEventListener("change", function() {
             const id = select.value;
+            searchInput.value=""
+
             if (id) {
                 cargarDatos(id);
             }
         });
     }
+
+
+
+    searchInput.addEventListener("input", function () {
+        const searchValue = searchInput.value.toLowerCase();
+        const users = document.querySelectorAll(".cuadroPersona");
+
+        users.forEach(user => {
+            const userName = user.querySelector(".card-title").innerText.toLowerCase();
+            if (userName.includes(searchValue)) {
+                user.style.display = "block";
+            } else {
+                user.style.display = "none";
+            }
+        });
+    });
 }
 
 function cargarDatos(id){
@@ -203,16 +222,7 @@ function cargarDatos(id){
                                     <input type="password" class="form-control" id="password" name="password" placeholder="Introduce contraseña" required>
                                 </div>
                             </div>
-                            <div class="mt-3 col-md-6">
-                                <label for="imagen" class="form-label">Foto usuario:</label>
-                                <input type="file" class="form-control fotoinput" accept="image/png, image/jpeg" id="imagen" name="imagen">
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="submit" class="btn button-secondary1">Añadir usuario</button>
-                        </div>
-                    </form>
+                            <div class="mtd
             </div>
 
         </div>

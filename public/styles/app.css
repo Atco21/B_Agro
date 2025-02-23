@@ -24,10 +24,14 @@ body{
 
 
 }
-
 a.active {
     font-weight: bold !important;
     text-decoration: underline !important;
+}
+a.active2 {
+    font-weight: bold !important;
+    text-decoration: underline !important;
+    color: #532301 !important;
 }
 
 
