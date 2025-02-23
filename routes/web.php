@@ -38,7 +38,7 @@ Route::get('/explotaciones/maquinas', [ExplotacionController::class, 'maquinas']
 Route::get('/explotaciones/pedidos', [explotacionController::class, 'pedidos'])->name('explotaciones.pedidos');
 
 
-Route::get('/explotaciones/parcelas/{id}',[parcelasController::class, 'listarMaquinasPorExplotacion']);
+Route::get('/explotaciones/parcelas/{id}',[parcelasController::class, 'listarParcelasPorExplotacion']);
 
 
 

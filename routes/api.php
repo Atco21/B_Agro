@@ -16,6 +16,8 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
 
 Route::post('register', [TrabajadorController::class,'register']);
 Route::post('/trabajadores', [TrabajadorController::class, 'register'])->name('register');
+Route::get('/trabajadores/{id}', [TrabajadorController::class,'filtroPorExplotacion'])->name('filtroPorExplotacion');
+
 
 Route::post('/crear_orden' ,[OrdenesController::class, 'crearOrden']);
 
@@ -52,6 +54,7 @@ Route::get('/tratamiento', [TratamientoController::class, 'mostrarTratamientos']
 
 
 Route::get('/maquinas/explotacion/{id}', [MaquinaController::class, 'mostrarMaquinasPorExplotacion']);
+
 
 
 

@@ -20,6 +20,12 @@ class TrabajadorController extends Controller
 
     }
 
+    public function filtroPorExplotacion($id){
+
+        $users = User::where('rol', '!=', 'admin')->where('explotacion_id', $id)->with('explotacion')->get();
+        return response()->json($users);
+    }
+
 
     public function aplicadores(){
 

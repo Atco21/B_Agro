@@ -2,8 +2,64 @@
 
 @section('content')
 <script>
+addEventListener('DOMContentLoaded', inicio);
 
-    
+function inicio() {
+    const select = document.querySelector(".exploSelect");
+
+    select.selectedIndex = 0;
+
+    if (select) {
+        select.addEventListener("change", function() {
+            const id = select.value;
+            if (id) {
+                cargarDatos(id);
+            }
+        });
+    }
+}
+
+function cargarDatos(id){
+    let html = "";
+    let contentDiv = document.getElementById('usuarios');
+
+
+    fetch(`http://0.0.0.0/api/trabajadores/${id}`)
+    .then(response => response.json())
+        .then(data => {
+            if (!data || data.length === 0) {
+                alert("No hay datos");
+                contentDiv.innerHTML = html;
+
+
+            } else {
+                data.forEach(user => {
+
+
+                    html += `
+                        <div class="card mt-3 ms-3 ms-4 cuadroPersona" style="width: 25em; height: 20em;">
+                            <div class="d-flex flex-row mt-3 ms-3 align-items-center">
+                                <img src="{{ asset('./assets/logoAgro.png') }}" alt="Foto de perfil" class="fotoPerfil" width="150px">
+                                <h4 class="card-title ps-5">${user.nombre}</h4>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Explotación: <b>${user.explotacion.nombre}</b></h5>
+                                <h5 class="card-title">Rol: <b>${user.rol}</b></h5>
+                                <h5 class="card-title">Estado: <b></b></h5>
+                            </div>
+                        </div>
+                    `;
+                });
+                contentDiv.innerHTML = html;
+
+            }
+
+        })
+        .catch(error => console.error("Error en la petición:", error));
+}
+
+
+
 
 
 
@@ -11,9 +67,9 @@
 
 
 <div class="d-flex flex-row mt-3 ms-3 align-items-center">
-    <input type="search" class="form-control ms-3 w-25" placeholder="Buscar" aria-label="Buscar">
+    <input type="search" id="searchInput" class="form-control ms-3 w-25" placeholder="Buscar" aria-label="Buscar">
 
-    <select class="form-select form-control expoSelect ms-3 w-auto">
+    <select class="form-select form-control exploSelect ms-3 w-auto">
         <option selected disabled>Selecciona una opción</option>
         @foreach ($explotacion as $explo)
             <option value="{{ $explo->id }}">{{ $explo->nombre }}</option>
@@ -32,12 +88,12 @@
 
 
 
-    <div class=" d-flex flex-wrap vw-100 m-3 overflow-auto vh-100">
+    <div class=" d-flex flex-wrap vw-100 m-3 overflow-auto vh-100 pb-5" id="usuarios">
 
         @foreach ($users as $user)
 
 
-        <div class="card mt-3 ms-3 ms-4" style="width: 25em; height: 20em;">
+        <div class="card mt-3 ms-3 ms-4 cuadroPersona" style="width: 25em; height: 20em;" >
             <div class="d-flex flex-row mt-3 ms-3 align-items-center">
                 <img src="{{asset('./assets/logoAgro.png')}}" alt="Foto de perfil" class="fotoPerfil" width="150px">
                 <h4 class="card-title ps-5">{{$user->nombre}}</h4>
@@ -50,11 +106,17 @@
         </div>
 
 
+
+
         @endforeach
 
     </div>
 
     @else
+
+
+    <h2>No existen usuarios</h2>
+
 
     @endif
 
