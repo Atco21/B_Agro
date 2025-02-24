@@ -1,7 +1,8 @@
+
 @extends('layouts.app')
 
 @section('content')
-
+@auth
 
 
 
@@ -196,12 +197,13 @@
 </script>
 
 
+
+
 @endif
 
 
 
+@else
 
 @endsection
-
-
 

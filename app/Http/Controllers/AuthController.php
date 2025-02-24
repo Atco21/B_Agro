@@ -18,22 +18,32 @@ class AuthController extends Controller
     public $successStatus = 200;
 
 
-    public function login()
-    {
-        if (Auth::attempt(['usuario' => request('usuario'), 'password' => request('password')])) {
-            $user = Auth::user();
-            $token =  $user->createToken('MyApp')->accessToken;
+    public function login(Request $request)
+{
+    // Validar los datos
+    $request->validate([
+        'usuario' => 'required',
+        'password' => 'required'
+    ]);
 
-            session(['token' => $token]); // Guarda el token en la sesión
+    // Intentar autenticar al usuario
+    if (Auth::attempt(['usuario' => $request->usuario, 'password' => $request->password])) {
+        // Obtener el usuario autenticado
+        $user = Auth::user();
 
-            if ($user->rol == 'admin') {
-                return redirect()->route('explotaciones'); // Redirige a explotaciones
-            }
+        // Generar el token con Passport
+        $token = $user->createToken('MyApp')->accessToken;
 
-        }
-
-            return response()->json(['error' => 'Unauthorised'], 401);
+        // Devolver el token al frontend
+        return response()->json([
+            'token' => $token
+        ]);
     }
+
+    // Si falla la autenticación, devolver error
+    return response()->json(['error' => 'Credenciales incorrectas'], 401);
+}
+
 
     public function loginAngular(Request $request)
     {

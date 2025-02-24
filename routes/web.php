@@ -18,9 +18,19 @@ Route::get('/home', function () {
 });
 
 //middle
-Route::get('/explotaciones', [explotacionController::class, 'index'])->name('explotaciones');
+// Proteger ruta de Blade con autenticación
+// Route::middleware(['auth'])->group(function () {
+
+//     // Solo accesible para administradores
+//     Route::middleware(['admin'])->get('/explotaciones', function () {
+//         return view('explotaciones');
+//     });
+// });
 
 //
+
+Route::get('/explotaciones', [TrabajadorController::class, 'index'])->name('explotaciones');
+
 Route::get('/trabajadores', [TrabajadorController::class, 'index'])->name('trabajadores');
 
 

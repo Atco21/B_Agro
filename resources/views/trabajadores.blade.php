@@ -24,12 +24,12 @@ function inicio() {
 
 
     searchInput.addEventListener("input", function () {
-        const searchValue = searchInput.value.toLowerCase();
+        const busqValue = searchInput.value.toLowerCase();
         const users = document.querySelectorAll(".cuadroPersona");
 
         users.forEach(user => {
-            const userName = user.querySelector(".card-title").innerText.toLowerCase();
-            if (userName.includes(searchValue)) {
+            const usuario = user.querySelector(".card-title").innerText.toLowerCase();
+            if (usuario.includes(busqValue)) {
                 user.style.display = "block";
             } else {
                 user.style.display = "none";
@@ -222,7 +222,7 @@ function cargarDatos(id){
                                     <input type="password" class="form-control" id="password" name="password" placeholder="Introduce contraseña" required>
                                 </div>
                             </div>
-                            <div class="mtd
+
             </div>
 
         </div>
