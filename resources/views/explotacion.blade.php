@@ -7,24 +7,24 @@
 
 <div class="d-flex flex-row vh-100 w-100 overflow-hidden">
     <!-- Menú lateral -->
-    <div class="col-2 d-flex flex-column justify-content-start bg-light h-100 p-3">
+    <div class="col-2 d-flex flex-column justify-content-center align-items-center bg-light h-100 p-3">
         <ul class="navbar-nav">
-            <li class="nav-item">
+            <li class="nav-item mb-4">
                 <a class="menu2 nav-link {{ Request::is('*general*') ? 'active2' : '' }}" href="{{ url('explotaciones/general') }}">General</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mb-4">
                 <a class="menu2 nav-link {{ Request::is('*parcelas*') ? 'active2' : '' }}" href="{{ url('explotaciones/parcelas') }}">Parcelas</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mb-4">
                 <a class="menu2 nav-link {{  Request::is('*ordenes*') ? 'active2' : '' }}" href="{{ url('explotaciones/ordenes') }}">Ordenes</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mb-4">
                 <a class="menu2 nav-link {{ Request::is('*incidencias*') ? 'active2' : '' }}" href="{{ url('explotaciones/incidencias') }}">Incidencias</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mb-4">
                 <a class="menu2 nav-link {{ Request::is('*maquinas*') ? 'active2' : '' }}" href="{{ url('explotaciones/maquinas') }}">Máquinas</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mb-4">
                 <a class="menu2 nav-link {{ Request::is('*pedidos*') ? 'active2' : '' }}" href="{{ url('explotaciones/pedidos') }}">Pedidos</a>
             </li>
         </ul>
@@ -33,14 +33,30 @@
 
     <!-- Contenido principal -->
     <div class="col-10 d-flex flex-column h-100 p-3">
-        <div class="d-flex justify-content-end">
-            <select class="form-select exploSelect mt-3">
+        <div class="d-flex justify-content-end align-items-center gap-3">
+            <button class="p-0" style="border: none; background:none; transform: scale(1.5);">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_1172_4174)">
+                    <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M11 16H21" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 11V21" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_1172_4174">
+                    <rect width="32" height="32" fill="white"/>
+                    </clipPath>
+                    </defs>
+                  </svg>
+            </button>
+
+            <select class="form-select exploSelect">
                 <option selected disabled>Selecciona una opción</option>
                 @foreach ($explotacion as $explo)
                     <option value="{{ $explo->id }}">{{ $explo->nombre }}</option>
                 @endforeach
             </select>
         </div>
+
         @yield('content2')
     </div>
 </div>
@@ -65,7 +81,7 @@
       <div class="modal-header">
         <h2 class="modal-title" id="exampleModalLabel">Nueva explotación</h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        card-body </div>
+      </div>
 
       <div class="modal-body p-5">
 
