@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Passport\Passport;
 
+use App\Models\Explotacion;
 
 use App\Models\User;
 
@@ -31,13 +32,17 @@ class AuthController extends Controller
         // Obtener el usuario autenticado
         $user = Auth::user();
 
-        // Generar el token con Passport
-        $token = $user->createToken('MyApp')->accessToken;
 
+
+        // Generar el token con Passport
+        $token = $user->createToken('agrocontrol')->accessToken;
+
+
+       // $explotacion = Explotacion::all();
+
+       return redirect()->to('/explotaciones');
         // Devolver el token al frontend
-        return response()->json([
-            'token' => $token
-        ]);
+      //  return view('explotacion', compact('explotacion'));
     }
 
     // Si falla la autenticación, devolver error

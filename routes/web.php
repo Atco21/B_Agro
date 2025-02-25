@@ -6,30 +6,42 @@ use App\Http\Controllers\parcelasController;
 use App\Http\Controllers\rendController;
 use App\Http\Controllers\TrabajadorController;
 use App\Http\Controllers\MaquinaController;
+use App\Http\Controllers\AuthController;
 
 
-Route::get('/', function(){
+Route::get('/login', function(){
     return view('layouts.login');
 });
+
+Route::post('login', [AuthController::class, 'login'])->name('login');
 
 
 Route::get('/home', function () {
     return view('layouts.app');
 });
 
+
+
 //middle
-// Proteger ruta de Blade con autenticación
-// Route::middleware(['auth'])->group(function () {
+//Route::get('/admin/explotaciones', [Explotacioncontroller::class, 'index'])->name('explotaciones')->middleware('admin');
 
-//     // Solo accesible para administradores
-//     Route::middleware(['admin'])->get('/explotaciones', function () {
-//         return view('explotaciones');
-//     });
-// });
 
-//
 
-Route::get('/explotaciones', [TrabajadorController::class, 'index'])->name('explotaciones');
+Route::group(['middleware' => 'admin'], function(){
+
+
+    Route::get('/explotaciones', [Explotacioncontroller::class, 'index'])->name('explotaciones');
+
+
+    // return view('explotacion', compact('explotacion'));
+
+    // dump(Auth::check());
+
+});
+
+
+
+//Route::get('/explotaciones', [TrabajadorController::class, 'index'])->name('explotaciones');
 
 Route::get('/trabajadores', [TrabajadorController::class, 'index'])->name('trabajadores');
 

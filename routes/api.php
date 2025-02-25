@@ -10,16 +10,16 @@ use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\TrabajadorController;
 use App\Http\Controllers\MaquinaController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrdenController;
+
 
 // Users
-Route::post('login', [AuthController::class, 'login'])->name('login');
 
 Route::post('register', [TrabajadorController::class,'register']);
 Route::post('/trabajadores', [TrabajadorController::class, 'register'])->name('register');
 Route::get('/trabajadores/{id}', [TrabajadorController::class,'filtroPorExplotacion'])->name('filtroPorExplotacion');
 
-
-Route::post('/crear_orden' ,[OrdenesController::class, 'crearOrden']);
+Route::post('/ordenes', [OrdenController::class, 'store']);
 
 Route::get('/aplicadores', [TrabajadorController::class, 'aplicadores'])->name('aplicadores');
 

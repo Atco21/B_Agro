@@ -2,10 +2,6 @@
 @extends('layouts.app')
 
 @section('content')
-@auth
-
-
-
 
 @if ($explotacion->count() > 0)
 
@@ -198,12 +194,14 @@
 
 
 
-
 @endif
 
 
 
-@else
 
 @endsection
+
+
+
+
 
