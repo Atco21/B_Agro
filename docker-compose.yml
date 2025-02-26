@@ -22,10 +22,10 @@ services:
             - sail
         depends_on:
             - mysql
-            - redis
-            - meilisearch
-            - mailpit
-            - selenium
+            # - redis
+            # - meilisearch
+            # - mailpit
+            # - selenium
             - phpmyadmin
     mysql:
         image: 'mysql/mysql-server:8.0'
