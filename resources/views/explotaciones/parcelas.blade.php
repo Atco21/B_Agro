@@ -127,40 +127,53 @@ async function rendimiento(id) {
         let html = `
 
         <div class="d-flex flex-column">
-            <div class="flex-row">
+            <div class="flex-row ms-2 mt-3">
                 <h2>1. Productividad</h2>
                 <div class="d-flex justify-content-between">
-                    <div class="flex-row">
+                    <div class="flex-row pe-5 ms-5">
                         <p><strong>Cantidad sembrada:</strong> ${rendimiento.c_sembrada} Tn</p>
                         <p><strong>Cantidad recolectada:</strong> ${rendimiento.c_recolectada} Tn</p>
                     </div>
-                    <div class="flex-row pe-3">
+                    <div class="flex-row me-auto ms-5">
                         <p><strong>Cantidad esperada:</strong> <input type="number" value="${rendimiento.c_esperada}" /> Tn</p>
                         <p><strong>Rendimiento durante la última temporada:</strong> <span style="background-color: #d4edda; padding: 5px; border-radius: 5px;">${((rendimiento.c_recolectada / rendimiento.c_esperada) * 100).toFixed(2)}%</span></p>
                     </div>
                 </div>
             </div>
-            <div class="flex-row">
+            <div class="flex-row ms-2">
                 <h2>2. Aspectos económicos</h2>
-                <p><strong>Coste semilla:</strong> ${rendimiento.semillaCostes}€</p>
-                <p><strong>Coste fertilizantes:</strong> ${rendimiento.fertilizantesCostes}€</p>
-                <p><strong>Otros costes:</strong> ${rendimiento.otrosCostes}€</p>
-                <p><strong>Precio por tonelada:</strong> ${rendimiento.precio_tonelada}€</p>
-                <p><strong>Total vendido (100%):</strong> ${rendimiento.total_vendido}€</p>
+                <div class="d-flex justify-content-between">
+                    <div class="flex-row pe-5 ms-5">
+                        <p><strong>Coste semilla:</strong> ${rendimiento.semillaCostes}€</p>
+                        <p><strong>Coste fertilizantes:</strong> ${rendimiento.fertilizantesCostes}€</p>
+                        <p><strong>Otros costes:</strong> ${rendimiento.otrosCostes}€</p>
+                    </div>
+                    <div class="flex-row me-auto ms-5">
+                        <p><strong>Precio por tonelada:</strong> ${rendimiento.precio_tonelada}€</p>
+                        <p><strong>Total vendido (100%):</strong> ${rendimiento.total_vendido}€</p>
+                    </div>
+                </div>
             </div>
-
-            <div class="flex-row">
-            <h2>3. Fechas</h2>
-            <p><strong>Fecha de inicio:</strong> ${rendimiento.fecha_inicio}</p>
-            <p><strong>Fecha de fin:</strong> ${rendimiento.fecha_fin}</p>
+            <div class="d-flex ms-2">
+                <div class="flex-col col-6">
+                    <h2>3. Fechas</h2>
+                    <div class="ms-5">
+                        <p><strong>Fecha de inicio:</strong> ${rendimiento.fecha_inicio}</p>
+                        <p><strong>Fecha de fin:</strong> ${rendimiento.fecha_fin}</p>
+                    </div>
+                </div>
+                <div class="flex-col col-6 ms-5">
+                    <h2>4. Beneficio</h2>
+                    <div class="ms-5">
+                        <p style="color: green;"><strong>Ingresos:</strong> ${rendimiento.total_vendido}€</p>
+                        <p   style="color: red;"><strong>Total gastos:</strong> ${(
+                            parseFloat(rendimiento.semillaCostes) +
+                            parseFloat(rendimiento.fertilizantesCostes) +
+                            parseFloat(rendimiento.otrosCostes)
+                        ).toFixed(2)}€</p>
+                    </div>
+                </div>
             </div>
-            <h2>4. Beneficio</h2>
-            <p style="color: green;"><strong>Ingresos:</strong> ${rendimiento.total_vendido}€</p>
-            <p style="color: red;"><strong>Total gastos:</strong> ${(
-                parseFloat(rendimiento.semillaCostes) +
-                parseFloat(rendimiento.fertilizantesCostes) +
-                parseFloat(rendimiento.otrosCostes)
-            ).toFixed(2)}€</p>
         </div>
         `;
 

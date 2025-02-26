@@ -27,7 +27,7 @@
                 <a class="menu2 nav-link {{ Request::is('*pedidos*') ? 'active2' : '' }}" href="{{ url('explotaciones/pedidos') }}" >Pedidos</a>
             </li>
             <li class="nav-item">
-                <a class="menu2 nav-link {{ Request::is('*incidencias*') ? 'active2' : '' }}" href="{{ url('explotaciones/incidencias') }}" style="border: none">Incidencias</a>
+                <a class="menu2 nav-link {{ Request::is('*incidencias*') ? 'active2' : '' }}" href="{{ url('explotaciones/incidencias') }}" style="border: none">Incidéncias</a>
             </li>
         </ul>
     </div>
@@ -35,20 +35,14 @@
 
     <!-- Contenido principal -->
     <div class="col-11 d-flex flex-column h-100 pe-5">
-        <div class="d-flex justify-content-end align-items-center gap-3 p-3">
-            <button class="p-0" style="border: none; background:none; transform: scale(1.5);">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_1172_4174)">
-                    <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M11 16H21" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M16 11V21" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                    </g>
-                    <defs>
-                    <clipPath id="clip0_1172_4174">
-                    <rect width="32" height="32" fill="white"/>
-                    </clipPath>
-                    </defs>
-                  </svg>
+        <div class="d-flex justify-content-end align-items-center gap-3 p-3 pe-4">
+            <button class="p-0" style="border: none; background:none; transform: scale(1.5);" title="Editar">
+                <svg width="30" height="30" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18.8277 43.8753H9.75C9.31902 43.8753 8.9057 43.7041 8.60095 43.3993C8.29621 43.0946 8.125 42.6812 8.125 42.2503V33.1726C8.1252 32.7422 8.29614 32.3295 8.60031 32.025L33.6497 6.97557C33.9544 6.67106 34.3676 6.5 34.7984 6.5C35.2292 6.5 35.6423 6.67106 35.947 6.97557L45.0247 16.0471C45.3292 16.3519 45.5003 16.765 45.5003 17.1958C45.5003 17.6266 45.3292 18.0398 45.0247 18.3445L19.9753 43.4C19.6708 43.7041 19.2581 43.8751 18.8277 43.8753Z" stroke="#01533E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M27.625 13L39 24.375" stroke="#01533E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M33.3125 18.6875L15.4375 36.5625" stroke="#01533E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M21.125 42.25L9.75 30.875" stroke="#01533E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
             </button>
 
             <select class="form-select exploSelect">
