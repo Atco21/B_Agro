@@ -50,7 +50,6 @@ class OrdenController extends Controller
 
     public static function obtenerIdYAsunto()
     {
-        // Devuelve los resultados solo con los campos id y asunto
         return self::select('parcela_id', 'tarea')->get();
     }
 
@@ -101,7 +100,7 @@ class OrdenController extends Controller
 
      public function insertarTablaIntermedia(){
         $orden=Orden::find(1);
-        $aplicador = Trabajador::find(2);//jefe de campo y aplicador es lo mismo
+        $aplicador = Trabajador::find(2);
         $orden->aplicadores()->attach($aplicador);
     }
 

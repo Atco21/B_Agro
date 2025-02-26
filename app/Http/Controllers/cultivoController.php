@@ -21,8 +21,8 @@ class cultivoController extends Controller
 
     public function getNombres(Request $request)
     {
-        // Obtener IDs de la URL en formato "1,2,3"
         $ids = explode(",", $request->query('ids'));
+
 
         // Buscar los cultivos en la base de datos
         $cultivos = Cultivo::whereIn('id', $ids)->pluck('nombre', 'id');

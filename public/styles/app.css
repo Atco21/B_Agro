@@ -11,7 +11,6 @@ body{
     border-top: 1px solid #e3e7ea;
     padding: 0.5rem 0;
 
-
 }
 
 
@@ -21,17 +20,33 @@ body{
     font-size: 32px !important;
     font-weight: 600 !important;
     color: white !important;
-
+    padding-top: 0.9em !important;
+    padding-bottom: 0.9em !important;
+    padding-left: 0.9em !important;
+    padding-right: 0.9em !important;
 
 }
 a.active {
-    font-weight: bold !important;
+    font-weight: 800 !important;
     text-decoration: underline !important;
+
 }
-a.active2 {
-    font-weight: bold !important;
+a.active2{
+    display: flex !important;
+    font-weight: 800 !important;
     text-decoration: underline !important;
-    color: #532301 !important;
+    background-color:  #024434 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 210px;
+
+}
+.menu2{
+    font-size: 30px !important;
+    font-weight: 600;
+    border-bottom:3px solid #028b69;
+    text-align: center;
+    width: 100%;
 }
 
 
@@ -192,15 +207,11 @@ h3{
 
 }
 
-.menu2{
-    font-size: 32px;
-    font-weight: 600;
-    color:#4F4F4F !important;
-    margin-bottom: 1rem;
-}
+
 
 .menu1{
     color: white;
+
 
 }
 
@@ -241,10 +252,13 @@ h3{
 #seccion2 tr {
     text-align: center;
     font-size: 24px;
+
+
 }
 #seccion2 td {
-    padding: 1.2em;
-    color: #4F4F4F;
+    height: 3.5em !important;
+    width: 25% !important;
+    background-color: #532301;
 }
 
 
@@ -274,6 +288,44 @@ h3{
 
     --bs-modal-border-color: none !important;
 }
-p{
+.th_verde{
 
+    background-color: #01533E !important;
+    color: white !important;
+    border-left: 3px solid black;
+    width: 33% !important;
+
+}
+.th_verde_primero{
+    width: 33% !important;
+    background-color: #01533E !important;
+    color: white !important;
+}
+
+
+.opciones_menu2 > a{
+
+    text-decoration: none !important;
+    color:white !important;
+
+
+}
+
+#vacio td{
+    background-color: white !important;
+    height: 3.5em !important;
+    border: none;
+
+}
+
+.nav-item {
+    width: 100% !important; /* Asegura que ocupe todo el ancho */
+
+}
+
+#barra{
+    background-color: #01533E !important;
+    width: 220px;
+    border-top:3px solid #028b69;
+    border-bottom:5px solid #028b69 !important;
 }

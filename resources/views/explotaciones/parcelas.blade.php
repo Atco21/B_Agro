@@ -16,6 +16,7 @@ function inicio() {
         select.addEventListener("change", function() {
             const id = select.value;
             if (id) {
+
                 cargarDatos(id);
                 actualizarURL(id);
             }
@@ -49,14 +50,14 @@ async function actualizarContenido(data) {
     try {
         let html = `
             <table class="table" border="1" id="tabla_parcelas">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Cultivo</th>
-                        <th>Tamaño</th>
-                    </tr>
-                </thead>
                 <tbody>
+                    <tr>
+                        <th class="th_verde_primero">Nombre</th>
+                        <th class="th_verde">Cultivo</th>
+                        <th class="th_verde">Tamaño</th>
+                    </tr>
+
+
         `;
 
         data.forEach(parcela => {
@@ -88,6 +89,8 @@ async function actualizarContenido(data) {
 
 
 function seleccionar(id) {
+    document.getElementById('vacio').setAttribute('hidden','');
+    document
     const lineas = document.querySelectorAll('.lineaParcela');
     lineas.forEach(linea => {
         if (linea.id == id) {
@@ -226,12 +229,20 @@ window.onpopstate = function(event) {
         <div class="w-50 mt-5 pe-5" id="seccion2">
             <div class="w-100 h-100 card">
                 <table class="table-bordered">
+                    <tbody>
+
                     <tr>
                         <td class="opciones_menu2"><a href="#" id="btnRendimiento">Rendimiento</a></td>
                         <td class="opciones_menu2"><a  href="#" id="btnOrdenes">Órdenes</a></td>
-                        <td class="opciones_menu2">Incidencias</td>
-                        <td class="opciones_menu2">Tratamientos</td>
+                        <td class="opciones_menu2"><a>Incidencias</a></td>
+                        <td class="opciones_menu2"><a>Tratamientos</a></td>
                     </tr>
+
+                        <tr id="vacio">
+                            <td colspan="4" style="border:none;"><p>Selecciona una parcela</p></td>
+                        </tr>
+
+                    </tbody>
 
                 </table>
 

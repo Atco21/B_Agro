@@ -5,35 +5,37 @@
 
 @if ($explotacion->count() > 0)
 
-<div class="d-flex flex-row vh-100 w-100 overflow-hidden">
+<div class="d-flex flex-row vh-100 w-100 overflow-hidden" >
     <!-- Menú lateral -->
-    <div class="col-2 d-flex flex-column justify-content-center align-items-center bg-light h-100 p-3">
+    <div class="col-2 d-flex flex-column justify-content-start align-items-center pt-5" id="barra">
+
         <ul class="navbar-nav">
-            <li class="nav-item mb-4">
+            <li class="nav-item">
                 <a class="menu2 nav-link {{ Request::is('*general*') ? 'active2' : '' }}" href="{{ url('explotaciones/general') }}">General</a>
             </li>
-            <li class="nav-item mb-4">
+            <li class="nav-item">
                 <a class="menu2 nav-link {{ Request::is('*parcelas*') ? 'active2' : '' }}" href="{{ url('explotaciones/parcelas') }}">Parcelas</a>
             </li>
-            <li class="nav-item mb-4">
-                <a class="menu2 nav-link {{  Request::is('*ordenes*') ? 'active2' : '' }}" href="{{ url('explotaciones/ordenes') }}">Ordenes</a>
+            <li class="nav-item">
+                <a class="menu2 nav-link {{  Request::is('*ordenes*') ? 'active2' : '' }} " href="{{ url('explotaciones/ordenes') }}">Órdenes</a>
             </li>
-            <li class="nav-item mb-4">
-                <a class="menu2 nav-link {{ Request::is('*incidencias*') ? 'active2' : '' }}" href="{{ url('explotaciones/incidencias') }}">Incidencias</a>
-            </li>
-            <li class="nav-item mb-4">
+
+            <li class="nav-item">
                 <a class="menu2 nav-link {{ Request::is('*maquinas*') ? 'active2' : '' }}" href="{{ url('explotaciones/maquinas') }}">Máquinas</a>
             </li>
-            <li class="nav-item mb-4">
-                <a class="menu2 nav-link {{ Request::is('*pedidos*') ? 'active2' : '' }}" href="{{ url('explotaciones/pedidos') }}">Pedidos</a>
+            <li class="nav-item">
+                <a class="menu2 nav-link {{ Request::is('*pedidos*') ? 'active2' : '' }}" href="{{ url('explotaciones/pedidos') }}" >Pedidos</a>
+            </li>
+            <li class="nav-item">
+                <a class="menu2 nav-link {{ Request::is('*incidencias*') ? 'active2' : '' }}" href="{{ url('explotaciones/incidencias') }}" style="border: none">Incidencias</a>
             </li>
         </ul>
     </div>
 
 
     <!-- Contenido principal -->
-    <div class="col-10 d-flex flex-column h-100 p-3">
-        <div class="d-flex justify-content-end align-items-center gap-3">
+    <div class="col-11 d-flex flex-column h-100 pe-5">
+        <div class="d-flex justify-content-end align-items-center gap-3 p-3">
             <button class="p-0" style="border: none; background:none; transform: scale(1.5);">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_1172_4174)">
