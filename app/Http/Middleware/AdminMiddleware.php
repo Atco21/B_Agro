@@ -15,7 +15,10 @@ class AdminMiddleware
             return $next($request);
         }
 
+
         return redirect()->route('explotaciones');  // Redirige a otro lugar si no es admin
     }
+
+
 
 }
