@@ -56,6 +56,44 @@ a.active2{
     transform: scale(1.2);
 }
 
+
+.btn-editar{
+
+    background-color: #532301;
+    color: white;
+
+}
+.btn-editar:active{
+
+    background-color: #532301;
+
+}
+.btn-editar:hover{
+
+    background-color: #5323016c;
+    color: white;
+
+}
+
+.btn-ver{
+    background-color: #028b69;
+    color: white !important;
+}
+.btn-ver:focus{
+    border: 2px solid #028b69 !important;
+    color: black !important;
+    height: 38px !important;
+    background-color: white !important;
+}
+
+.btn-ver:hover{
+    background-color: #035440 !important;
+    color: white !important;
+}
+
+
+
+
 .btn.button-primary{
     background-color: #01533E;
     color: white;
@@ -270,7 +308,6 @@ h3{
 
 
 .lineaParcela {
-    cursor: pointer;
     background-color: #f9f9f9 !important;
     transition: background 0.3s;
 }
@@ -300,12 +337,15 @@ h3{
     color: white !important;
     border-left: 3px solid black;
     width: 33% !important;
+    text-align: center;
 
 }
 .th_verde_primero{
     width: 33% !important;
     background-color: #01533E !important;
     color: white !important;
+    text-align: center;
+
 }
 
 
@@ -335,3 +375,6 @@ h3{
     border-top:3px solid #028b69;
     border-bottom:5px solid #028b69 !important;
 }
+
+
+

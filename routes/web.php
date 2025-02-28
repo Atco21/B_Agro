@@ -31,6 +31,7 @@ Route::group(['middleware' => 'admin'], function(){
 
 
     Route::get('/explotaciones', [Explotacioncontroller::class, 'index'])->name('explotaciones');
+    Route::get('/explotaciones/editar', [Explotacioncontroller::class, 'editar'])->name('explotaciones');
 
 
     // return view('explotacion', compact('explotacion'));

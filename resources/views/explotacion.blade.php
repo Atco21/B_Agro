@@ -36,7 +36,7 @@
     <!-- Contenido principal -->
     <div class="col-11 d-flex flex-column h-100 pe-5">
         <div class="d-flex justify-content-end align-items-center gap-3 p-3 pe-4">
-            <button class="p-0" style="border: none; background:none; transform: scale(1.5);" title="Editar">
+            <button class="p-0" style="border: none; background:none; transform: scale(1.5);" title="Editar" data-bs-toggle="modal" data-bs-target="#editarExplotaciones">
                 <svg width="30" height="30" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M18.8277 43.8753H9.75C9.31902 43.8753 8.9057 43.7041 8.60095 43.3993C8.29621 43.0946 8.125 42.6812 8.125 42.2503V33.1726C8.1252 32.7422 8.29614 32.3295 8.60031 32.025L33.6497 6.97557C33.9544 6.67106 34.3676 6.5 34.7984 6.5C35.2292 6.5 35.6423 6.67106 35.947 6.97557L45.0247 16.0471C45.3292 16.3519 45.5003 16.765 45.5003 17.1958C45.5003 17.6266 45.3292 18.0398 45.0247 18.3445L19.9753 43.4C19.6708 43.7041 19.2581 43.8751 18.8277 43.8753Z" stroke="#01533E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M27.625 13L39 24.375" stroke="#01533E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -56,6 +56,63 @@
         @yield('content2')
     </div>
 </div>
+
+<div class="modal fade mt-5" id="editarExplotaciones" tabindex="-1" aria-labelledby="editarExplotacionesModal" aria-hidden="true">
+
+
+    <div class="modal-dialog m1">
+
+        <div class="modal-content d-flex justify-content-center m2 ">
+
+          <div class="modal-header">
+            <h2 class="modal-title" id="exampleModalLabel">Explotaciones</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-5">
+
+            <div>
+
+                <table class="table" border="1" id="">
+                    <tbody>
+                        <tr>
+                            <th class="th_verde_primero">Nombre</th>
+                            <th class="th_verde">Tamaño</th>
+                            <th class="th_verde"></th>
+                        </tr>
+
+
+                        @foreach ($explotacion as $explo)
+
+                        <tr class="lineaParcela">
+
+                            <td class="text-center">{{$explo->nombre}}</td>
+                            <td class="text-center">{{$explo->tamanyo}}</td>
+                            <td class="d-flex justify-content-center">
+                                <button value="{{$explo->id}}" class="btn btn-ver" style="width: 100px;" data-bs-toggle="modal" data-bs-target="#verExplotacionSeleccionada">Ver</button>
+                                <button value="{{$explo->id}}" class="btn btn-editar ms-2" style="width: 100px;" data-bs-toggle="modal" data-bs-target="#editarExplotacionSeleccionada">Editar</button>
+                                <button value="{{$explo->id}}" class="btn btn-danger ms-2" style="width: 100px;">Eliminar</button>
+                            </td>
+
+
+                        </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+
 
 @else
 

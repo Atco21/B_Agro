@@ -14,6 +14,14 @@ class explotacionController extends Controller
         return view('explotacion', ['explotacion' => $explotacion]);
     }
 
+    public function editar(Request $request)
+    {
+        $explotacion = Explotacion::all();
+
+
+        return view('editarExplotaciones', compact('explotacion'));
+    }
+
     public function general()
     {
         $explotacion = Explotacion::all();
@@ -22,7 +30,6 @@ class explotacionController extends Controller
 
 
     public function ordenes(){
-        $explotacion = Explotacion::all();
         return view('explotaciones.ordenes', ['explotacion' => $explotacion]);
     }
     public function incidencias(){
