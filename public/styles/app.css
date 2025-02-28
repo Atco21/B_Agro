@@ -116,6 +116,12 @@ a.active2{
     background: white;
     border: none;
 }
+.m11{
+    max-width: 1300px;
+    background: white;
+    border: none;
+    margin-top: 9%;
+}
 
 .m2{
     max-height: 800px;
@@ -159,7 +165,7 @@ a.active2{
 
 .fotoinput{
 
-    width: 697px !important;
+    width: 600px !important;
 
 }
 
