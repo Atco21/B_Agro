@@ -7,7 +7,7 @@ use App\Models\Explotacion;
 
 class explotacionController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $explotacion = Explotacion::all();
         // $explotacion = [];

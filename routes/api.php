@@ -49,7 +49,15 @@ Route::get('ordenes/explotacion', [OrdenController::class, 'index']);//cointrola
 
 Route::get('explotacion/{id}/aplicadores/', [TrabajadorController::class, 'mostrarAplicadores']);
 
-Route::post('/ordenes', [OrdenController::class, 'actualizarDatosdeApi']);
+Route::post('/ordenes', [OrdenController::class, 'store']);
+
+Route::get('/ordenesPendientes', [OrdenController::class, 'ordenesPendientes'])->name('ordenesPendientes');
+
+Route::get('/ordenesCurso', [OrdenController::class, 'ordenesCurso'])->name('ordenesCurso');
+
+Route::get('/ordenesPausadas', [OrdenController::class, 'ordenesPausa'])->name('ordenesPausa');
+
+Route::get('/ordenesTerminadas', [OrdenController::class, 'ordenesTerminadas'])->name('ordenesTerminadas');
 
 
 

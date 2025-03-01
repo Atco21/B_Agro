@@ -24,17 +24,18 @@ class OrdenController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'estado' => 'required|string|max:50',
-            'fecha_inicio' => 'required|date',
+            'estado' => 'nullable|string|max:50',
+            'fecha_inicio' => 'nullable|date',
             'fecha_fin' => 'nullable|date|after_or_equal:fecha_inicio',
-            'id_administrador' => 'required|exists:trabajadores,id',
-            'tarea' => 'required|string|max:255',
-            'id_jefecampo' => 'required|exists:trabajadores,id',
-            'aplicador_id' => 'required|exists:trabajadores,id',
-            'parcela_id' => 'required|exists:parcelas,id',
-            'id_tratamiento' => 'required|exists:tratamientos,id',
-            'id_maquina' => 'nullable|exists:maquinas,id',
+            'horaOrden' => 'nullable|string',
+            'tarea' => 'nullable|string|max:255',
+            'jefecampo_id' => 'nullable|integer|exists:users,id',
+            'aplicador_id' => 'required|integer|exists:users,id',
+            'parcela_id' => 'required|integer|exists:parcelas,id',
+            'id_tratamiento' => 'nullable|integer|exists:tratamientos,id',
+            'id_maquina' => 'nullable|integer|exists:maquinas,id',
         ]);
+
 
         $orden = Orden::create($request->all());
         return response()->json($orden, 201);
@@ -99,32 +100,51 @@ class OrdenController extends Controller
     }
 
 
-    public function actualizarDatosdeApi(Request $request)
+    public function ordenesPendientes()
     {
-        dd($request->all());
 
-        $request->validate([
-            'estado' => 'required|string|max:50',
-            'fecha_inicio' => 'required|date',
-            'fecha_fin' => 'nullable|date|after_or_equal:fecha_inicio',
-            'id_administrador' => 'required|exists:trabajadores,id',
-            'tarea' => 'required|string|max:255',
-            'id_jefecampo' => 'required|exists:trabajadores,id',
-            'aplicador_id' => 'required|exists:trabajadores,id',
-            'parcela_id' => 'required|exists:parcelas,id',
-            'id_tratamiento' => 'required|exists:tratamientos,id',
-            'id_maquina' => 'nullable|exists:maquinas,id',
-        ]);
 
-        $orden = Orden::create($request->all());
-        return response()->json($orden, 201);
+    $ordenesPendientes = Orden::where('estado', 'pendiente')->with('parcela')->get();
+    return response()->json($ordenesPendientes)
+    ->header("Access-Control-Allow-Origin", "*")
+    ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    ->header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+
+
+
+    }
+public function ordenesCurso()
+    {
+     $ordenesCurso = Orden::where('estado', 'encurso')->with('parcela')->get();
+    return response()->json($ordenesCurso)
+    ->header("Access-Control-Allow-Origin", "*")
+    ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    ->header("Access-Control-Allow-Headers", "Content-Type, Authorization");
     }
 
 
+//pasado
+public function ordenesPausa()
+    {
+     $ordenesPausa = Orden::where('estado', 'pasado')->with('parcela')->get();
+    return response()->json($ordenesPausa)
+    ->header("Access-Control-Allow-Origin", "*")
+    ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    ->header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    }
+
+    //terminada
+
+public function ordenesTerminadas()
+    {
+     $ordenesTerminada = Orden::where('estado', 'terminada')->with('parcela')->get();
+    return response()->json($ordenesTerminada)
+    ->header("Access-Control-Allow-Origin", "*")
+    ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    ->header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    }
+
+    //cancelada
+
 }
-
-
-
-
-
-
