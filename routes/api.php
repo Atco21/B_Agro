@@ -11,8 +11,8 @@ use App\Http\Controllers\AuthLController;
 use App\Http\Controllers\AuthController;
 
 
-Route::post('login', [AuthController::class, 'login'])->name('login');
-Route::post('loginAngular', [AuthLController::class, 'loginAngular'])->name('loginAngular');
+// Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::post('loginAngular', [AuthController::class, 'loginAngular'])->name('loginAngular');
 
 Route::get('/explotaciones2', [ExplotacionController::class, 'index2']);
 // Route::get('/', [ExplotacionController::class, 'index']);
@@ -22,7 +22,7 @@ Route::get('/parcelas', [parcelasController::class, 'index']);
 Route::get('/parcelas/{id}', [parcelasController::class, 'show']);
 Route::get('/parcelas/explotacion/{explotacion_id}', [parcelasController::class, 'porExplotacion']);
 Route::get('/aplicador1', [aplicadoresController::class, 'index']);
-Route::get('/quimi6cos', [quimicosController::class, 'mostrarQuimicos']);
+Route::get('/quimicos', [quimicosController::class, 'mostrarQuimicos']);
 Route::get('/quimicos/pedidos', [quimicosController::class, 'hacerPedido']);
 Route::get('/almacenes', [almacenesController::class, 'index']);
 Route::get('/almacenes/{id}', [almacenesController::class, 'show']);

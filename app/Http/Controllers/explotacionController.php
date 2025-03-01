@@ -35,15 +35,15 @@ class explotacionController extends Controller
         $explotacion = Explotacion::all();
         return view('explotaciones.maquinas', ['explotacion' => $explotacion]);
     }
-    public function almacen($id) {
-        $explotacion = Explotacion::find($id);
+    public function almacen() {
+        $explotacion = Explotacion::find(1);
     
         if (!$explotacion) {
             return response()->json(['error' => 'Explotación no encontrada'], 404);
         }
     
         // Obtener almacenes de la explotación con los químicos asociados
-        $almacenes = Almacen::where('id_explotacion', $id)
+        $almacenes = Almacen::where('id_explotacion', 1)
             ->with(['quimicos' => function ($query) {
                 $query->select('quimicos.id', 'quimicos.nombre', 'almacen_quimico.cantidad');
             }])

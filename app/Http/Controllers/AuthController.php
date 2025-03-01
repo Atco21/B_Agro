@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Passport\Passport;
+use Illuminate\Support\Facades\Log;
 
 
 use App\Models\User;
@@ -48,9 +49,12 @@ class AuthController extends Controller
 
     public function loginAngular(Request $request)
     {
-        if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
+        // Log::info($request);
+        if (Auth::attempt(['usuario' => request('usuario'), 'password' => request('password')])) {
+            Log::info($request);
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')->accessToken;
+
             return response()->json(['success' => $success], $this->successStatus);
         } else {
             return response()->json(['error' => 'Unauthorised'], 401);
