@@ -12,7 +12,10 @@ class Quimico extends Model
     protected $fillable = ['nombre', 'tipo'];
     protected $hidden = ['created_at', 'updated_at'];
 
-    public function almacen(){
-        return $this->hasMany(Almacen::class, 'id');
+    public function almacenes()
+    {
+        return $this->belongsToMany(Almacen::class, 'almacen_quimico', 'id_quimico', 'id_almacen')
+            ->withPivot('cantidad') // Para obtener la cantidad del químico en cada almacén
+            ->withTimestamps();
     }
 }

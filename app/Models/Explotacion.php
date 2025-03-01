@@ -10,4 +10,8 @@ class Explotacion extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['nombre', 'direccion', 'localidad', 'tamanyo']; 
     protected $hidden = ['created_at', 'updated_at'];
+
+    public function almacen(){
+        return $this->hasOne(Almacen::class);
+    }
 }

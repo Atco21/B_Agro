@@ -39,7 +39,7 @@
 
         <h4 class="mb-3">Iniciar Sesión</h4>
 
-        <form method="post" action="{{ route('login') }}">
+        <form method="post" action="{{ route(name: 'login') }}">
             @csrf
             <div class="mb-3">
                 <label class="form-label">Usuario</label>

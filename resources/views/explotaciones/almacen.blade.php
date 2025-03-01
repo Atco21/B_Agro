@@ -22,56 +22,54 @@
     }
 
     async function cargarAlmacen(id) {
-        fetch(`/almacen/explotacion/${id}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    alert("No se encontraron datos de almacenes");
-                } else {
-                    document.getElementById('almacen').removeAttribute('hidden');
-                    actualizarContenidoAlmacen(data);  // Utiliza 'data' en lugar de 'almacenes'
-                }
-            })
-            .catch(error => console.error("Error en la petición:", error));
-    }
+    try {
+        let response = await fetch(`/almacen/explotacion/${id}`);
+        let data = await response.json();
 
-    async function actualizarContenidoAlmacen(data) {
-        document.getElementById('previo').setAttribute('hidden', '');
-        const contentDiv = document.getElementById("tabla_almacen");
-
-        try{
-        let html = `
-            <table class="table" border="1" id="tabla_almacen_quimicos">
-                <thead>
-                    <tr>
-                        <th>Almacén</th>
-                        <th>Producto Químico</th>
-                        <th>Cantidad</th>
-                    </tr>
-                </thead>
-                <tbody>
-        `;
-
-        // Aquí, 'data' debe contener los almacenes y sus productos químicos
-        data.almacenes.forEach(almacen => {
-            almacen.quimicos.forEach(quimico => {
-                html += `
-                    <tr>
-                        <td>${almacen.nombre}</td>
-                        <td>${quimico.nombre}</td>
-                        <td>${quimico.cantidad}</td>
-                    </tr>
-                `;
-            });
-        });
-
-        html += `</tbody></table>`;
-        contentDiv.innerHTML = html;
-    }catch(error){
-        console.error("Error obteniendo los nombres de los almacen:", error);
+        if (response.ok) {
+            document.getElementById('almacen').removeAttribute('hidden');
+            actualizarContenidoAlmacen(data);
+        } else {
+            alert(data.error);
+        }
+    } catch (error) {
+        console.error("Error en la petición:", error);
         alert("Hubo un problema al cargar los datos.");
     }
-    }
+}
+
+async function actualizarContenidoAlmacen(data) {
+    document.getElementById('previo').setAttribute('hidden', '');
+    const contentDiv = document.getElementById("tabla_almacen");
+
+    let html = `
+        <table class="table" border="1" id="tabla_almacen_quimicos">
+            <thead>
+                <tr>
+                    <th>Almacén</th>
+                    <th>Producto Químico</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    data.almacenes.forEach(almacen => {
+        almacen.quimicos.forEach(quimico => {
+            html += `
+                <tr>
+                    <td>${almacen.nombre}</td>
+                    <td>${quimico.nombre}</td>
+                    <td>${quimico.pivot.cantidad}</td>
+                </tr>
+            `;
+        });
+    });
+
+    html += `</tbody></table>`;
+    contentDiv.innerHTML = html;
+}
+
 
     </script>
 

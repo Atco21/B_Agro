@@ -12,8 +12,15 @@ class Almacen extends Model
     protected $fillable = ['nombre', 'id_explotacion'];
     protected $hidden = ['created_at', 'updated_at'];
 
-    public function quimicos(){
-        return $this->hasMany(Quimico::class, 'id');
+
+    public function explotacion(){
+        return $this->belongsTo(Explotacion::class);
+    }
+    public function quimicos()
+    {
+        return $this->belongsToMany(Quimico::class, 'almacen_quimico', 'id_almacen', 'id_quimico')
+            ->withPivot('cantidad') // Para acceder a la cantidad en la tabla intermedia
+            ->withTimestamps();
     }
 
     public function pedidos(){

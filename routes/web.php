@@ -19,7 +19,7 @@ Route::get('/', function(){
 // // });
 
 // =======
-Route::get('/explotaciones', [explotacionController::class, 'index']);
+Route::get('/explotaciones', [explotacionController::class, 'index'])->name('explotaciones');
 
 
 Route::get('/trabajadores', function () {
@@ -44,7 +44,7 @@ Route::get('/parcelas',[parcelasController::class, 'porExplotacion']);
 Route::get('/aplicador', [aplicadoresController::class, 'index']);
 Route::get('/almacen', [almacenesController::class, 'mostrarAlmacen']);
 Route::get('/explotaciones/almacen', [explotacionController::class, 'almacen'])->name('explotaciones.almacen');
-Route::get('/almacen/explotacion/{explotacion_id}', [almacenesController::class, 'porExplotacion']);
+Route::get('/almacen/explotacion/{id}', [explotacionController::class, 'almacen']);
 //Route::get('/mostrarAlmacen', [explotacionController@almacen])
 // Route::get('/pedidos', [pedidosController::class, 'index'])->name('pedidos.index');
 // Route::get('/pedidos', [quimicosController::class, 'mostrarQuimicos']);

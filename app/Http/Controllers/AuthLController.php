@@ -17,6 +17,9 @@ public $successStatus = 200;
             $user = Auth::user();
             $token = $user->createToken('MyApp')->accessToken;
             $success['token'] =  $user->createToken('MyApp')->accessToken;
+            $success['rol'] =  $user->rol;
+            $success['usuario'] =  $user->usuario;
+            $success['id'] =  $user->id;
             return response()->json(['success' => $success], $this->successStatus);
         } else {
             return response()->json(['error' => 'Unauthorised'], 401);
