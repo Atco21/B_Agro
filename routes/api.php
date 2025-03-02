@@ -10,6 +10,7 @@ use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\TrabajadorController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\IncidenciaController;
 
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -60,6 +61,10 @@ Route::get('/ordenesPausadas', [OrdenController::class, 'ordenesPausa'])->name('
 Route::get('/ordenesTerminadas', [OrdenController::class, 'ordenesTerminadas'])->name('ordenesTerminadas');
 
 
+
+Route::get('/incidenciasPersonal', [IncidenciaController::class, 'incidenciasPersonal']);
+Route::get('/incidenciasMaquina', [IncidenciaController::class, 'incidenciasMaquina']);
+Route::get('/incidenciasStock', [IncidenciaController::class, 'incidenciasStock']);
 
 
 

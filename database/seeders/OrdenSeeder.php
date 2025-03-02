@@ -15,7 +15,7 @@ class OrdenSeeder extends Seeder
     {
         DB::table('ordenes')->insert([
             [
-                'estado' => 'Pendiente',
+                'estado' => 'pendiente',
                 'fecha_inicio' => '2024-02-01',
                 'fecha_fin' => null,
                 'tarea' => 'Aplicación de fertilizante',
@@ -28,7 +28,7 @@ class OrdenSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'estado' => 'Completada',
+                'estado' => 'encurso',
                 'fecha_inicio' => '2024-01-15',
                 'fecha_fin' => null,
                 'tarea' => 'Siembra de maíz',

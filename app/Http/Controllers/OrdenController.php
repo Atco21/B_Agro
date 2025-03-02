@@ -100,10 +100,8 @@ class OrdenController extends Controller
     }
 
 
-    public function ordenesPendientes()
-    {
-
-
+    public function ordenesPendientes(){
+        
     $ordenesPendientes = Orden::where('estado', 'pendiente')->with('parcela')->get();
     return response()->json($ordenesPendientes)
     ->header("Access-Control-Allow-Origin", "*")
