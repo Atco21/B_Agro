@@ -33,7 +33,6 @@ class AuthController extends Controller
         $user = Auth::user();
 
 
-
         // Generar el token con Passport
         $token = $user->createToken('agrocontrol')->accessToken;
 
@@ -52,7 +51,7 @@ class AuthController extends Controller
 
     public function loginAngular(Request $request)
     {
-        if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
+        if (Auth::attempt(['usuario' => request('usuario'), 'password' => request('password')])) {
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')->accessToken;
             $success['rol'] = $user->rol;

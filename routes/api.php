@@ -29,7 +29,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 });
 
 
-
+Route::post('loginAngular', [AuthController::class, 'loginAngular'])->name('loginAngular');
 
 //explotaciones y parcelas
 Route::get('/explotaciones2', [ExplotacionController::class, 'index2']);
@@ -55,9 +55,17 @@ Route::get('/tratamiento', [TratamientoController::class, 'mostrarTratamientos']
 
 Route::get('/maquinas/explotacion/{id}', [MaquinaController::class, 'mostrarMaquinasPorExplotacion']);
 
+Route::get('/maquinas', [MaquinaController::class, 'index']);
 
 
+Route::post('/ordenes', [OrdenController::class, 'store']);
 
+Route::get('/ordenesPendientes', [OrdenController::class, 'ordenesPendientes'])->name('ordenesPendientes');
 
+Route::get('/ordenesCurso', [OrdenController::class, 'ordenesCurso'])->name('ordenesCurso');
+
+Route::get('/ordenesPausadas', [OrdenController::class, 'ordenesPausa'])->name('ordenesPausa');
+
+Route::get('/ordenesTerminadas', [OrdenController::class, 'ordenesTerminadas'])->name('ordenesTerminadas');
 
 //Route::get('/ordenes/explotacion/{id}', OrdenesController::class, 'mostrarOrdenesPorExplotacion');
