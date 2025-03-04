@@ -30,6 +30,7 @@ class explotacionController extends Controller
 
 
     public function ordenes(){
+        $explotacion = Explotacion::all();
         return view('explotaciones.ordenes', ['explotacion' => $explotacion]);
     }
     public function incidencias(){

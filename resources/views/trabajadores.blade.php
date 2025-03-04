@@ -16,7 +16,7 @@ function inicio() {
             searchInput.value=""
 
             if (id) {
-                cargarDatos(id);
+                //cargarDatos(id);
             }
         });
     }
@@ -38,44 +38,44 @@ function inicio() {
     });
 }
 
-function cargarDatos(id){
-    let html = "";
-    let contentDiv = document.getElementById('usuarios');
+// function cargarDatos(id){
+//     let html = "";
+//     let contentDiv = document.getElementById('usuarios');
 
 
-    fetch(`http://0.0.0.0/api/trabajadores/${id}`)
-    .then(response => response.json())
-        .then(data => {
-            if (!data || data.length === 0) {
-                alert("No hay datos");
-                contentDiv.innerHTML = html;
+//     fetch(`http://0.0.0.0/api/trabajadores/${id}`)
+//     .then(response => response.json())
+//         .then(data => {
+//             if (!data || data.length === 0) {
+//                 alert("No hay datos");
+//                 contentDiv.innerHTML = html;
 
 
-            } else {
-                data.forEach(user => {
+//             } else {
+//                 data.forEach(user => {
 
 
-                    html += `
-                        <div class="card mt-3 ms-3 ms-4 cuadroPersona" style="width: 25em; height: 20em;">
-                            <div class="d-flex flex-row mt-3 ms-3 align-items-center">
-                                <img src="{{ asset('./assets/logoAgro.png') }}" alt="Foto de perfil" class="fotoPerfil" width="150px">
-                                <h4 class="card-title ps-5">${user.nombre}</h4>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Explotación: <b>${user.explotacion.nombre}</b></h5>
-                                <h5 class="card-title">Rol: <b>${user.rol}</b></h5>
-                                <h5 class="card-title">Estado: <b></b></h5>
-                            </div>
-                        </div>
-                    `;
-                });
-                contentDiv.innerHTML = html;
+//                     html += `
+//                         <div class="card mt-3 ms-3 ms-4 cuadroPersona" style="width: 25em; height: 20em;">
+//                             <div class="d-flex flex-row mt-3 ms-3 align-items-center">
+//                                 <img src="{{ asset('./assets/logoAgro.png') }}" alt="Foto de perfil" class="fotoPerfil" width="150px">
+//                                 <h4 class="card-title ps-5">${user.nombre}</h4>
+//                             </div>
+//                             <div class="card-body">
+//                                 <h5 class="card-title">Explotación: <b>${user.explotacion.nombre}</b></h5>
+//                                 <h5 class="card-title">Rol: <b>${user.rol}</b></h5>
+//                                 <h5 class="card-title">Estado: <b></b></h5>
+//                             </div>
+//                         </div>
+//                     `;
+//                 });
+//                 contentDiv.innerHTML = html;
 
-            }
+//             }
 
-        })
-        .catch(error => console.error("Error en la petición:", error));
-}
+//         })
+//         .catch(error => console.error("Error en la petición:", error));
+// }
 
 
 
