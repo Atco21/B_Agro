@@ -125,8 +125,54 @@ class OrdenController extends Controller
         $orden = Orden::create($request->all());
         return response()->json($orden, 201);
     }
+    public function ordenesPendientes()
+    {
 
+
+    $ordenesPendientes = Orden::where('estado', 'pendiente')->with('parcela')->get();
+    return response()->json($ordenesPendientes)
+    ->header("Access-Control-Allow-Origin", "*")
+    ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    ->header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+
+
+
+    }
+public function ordenesCurso()
+    {
+     $ordenesCurso = Orden::where('estado', 'encurso')->with('parcela')->get();
+    return response()->json($ordenesCurso)
+    ->header("Access-Control-Allow-Origin", "*")
+    ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    ->header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    }
+
+
+//pasado
+public function ordenesPausa()
+    {
+     $ordenesPausa = Orden::where('estado', 'pasado')->with('parcela')->get();
+    return response()->json($ordenesPausa)
+    ->header("Access-Control-Allow-Origin", "*")
+    ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    ->header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    }
+
+    //terminada
+
+public function ordenesTerminadas()
+    {
+     $ordenesTerminada = Orden::where('estado', 'terminada')->with('parcela')->get();
+    return response()->json($ordenesTerminada)
+    ->header("Access-Control-Allow-Origin", "*")
+    ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    ->header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    }
+
+    //cancelada
 
 }
+
 
 
