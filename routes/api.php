@@ -19,6 +19,8 @@ Route::post('register', [TrabajadorController::class,'register']);
 Route::post('/trabajadores', [TrabajadorController::class, 'register'])->name('register');
 Route::get('/trabajadores/{id}', [TrabajadorController::class,'filtroPorExplotacion'])->name('filtroPorExplotacion');
 
+Route::get('/trabajadores/buscar/{id}', [TrabajadorController::class, 'buscarPorId'])->name('buscarPorId');
+
 Route::post('/ordenes', [OrdenController::class, 'store']);
 
 Route::get('/aplicadores', [TrabajadorController::class, 'aplicadores'])->name('aplicadores');

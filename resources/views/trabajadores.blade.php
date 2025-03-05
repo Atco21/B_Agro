@@ -38,44 +38,44 @@ function inicio() {
     });
 }
 
-// function cargarDatos(id){
-//     let html = "";
-//     let contentDiv = document.getElementById('usuarios');
+function cargarDatos(id){
+    let html = "";
+    let contentDiv = document.getElementById('usuarios');
 
 
-//     fetch(`http://0.0.0.0/api/trabajadores/${id}`)
-//     .then(response => response.json())
-//         .then(data => {
-//             if (!data || data.length === 0) {
-//                 alert("No hay datos");
-//                 contentDiv.innerHTML = html;
+    fetch(`http://0.0.0.0/api/trabajadores/${id}`)
+    .then(response => response.json())
+        .then(data => {
+            if (!data || data.length === 0) {
+                alert("No hay datos");
+                contentDiv.innerHTML = html;
 
 
-//             } else {
-//                 data.forEach(user => {
+            } else {
+                data.forEach(user => {
 
 
-//                     html += `
-//                         <div class="card mt-3 ms-3 ms-4 cuadroPersona" style="width: 25em; height: 20em;">
-//                             <div class="d-flex flex-row mt-3 ms-3 align-items-center">
-//                                 <img src="{{ asset('./assets/logoAgro.png') }}" alt="Foto de perfil" class="fotoPerfil" width="150px">
-//                                 <h4 class="card-title ps-5">${user.nombre}</h4>
-//                             </div>
-//                             <div class="card-body">
-//                                 <h5 class="card-title">Explotación: <b>${user.explotacion.nombre}</b></h5>
-//                                 <h5 class="card-title">Rol: <b>${user.rol}</b></h5>
-//                                 <h5 class="card-title">Estado: <b></b></h5>
-//                             </div>
-//                         </div>
-//                     `;
-//                 });
-//                 contentDiv.innerHTML = html;
+                    html += `
+                        <div class="card mt-3 ms-3 ms-4 cuadroPersona" style="width: 25em; height: 20em;">
+                            <div class="d-flex flex-row mt-3 ms-3 align-items-center">
+                                <img src="{{ asset('./assets/logoAgro.png') }}" alt="Foto de perfil" class="fotoPerfil" width="150px">
+                                <h4 class="card-title ps-5">${user.nombre}</h4>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Explotación: <b>${user.explotacion.nombre}</b></h5>
+                                <h5 class="card-title">Rol: <b>${user.rol}</b></h5>
+                                <h5 class="card-title">Estado: <b></b></h5>
+                            </div>
+                        </div>
+                    `;
+                });
+                contentDiv.innerHTML = html;
 
-//             }
+            }
 
-//         })
-//         .catch(error => console.error("Error en la petición:", error));
-// }
+        })
+        .catch(error => console.error("Error en la petición:", error));
+}
 
 
 
@@ -85,14 +85,27 @@ document.addEventListener("DOMContentLoaded", function () {
     cuadros.forEach(cuadro => {
         cuadro.addEventListener("click", function () {
 
-            console.log(user.id);
+            fetch(`http://0.0.0.0/api/trabajadores/buscar/${cuadro.id}`)
+            .then(response => response.json()
+                      .then(data => {
+                          if (!data || data.length === 0){
+                              alert("No hay datos");
+                            } else {
+                                data.forEach(user => {
+                                    document.getElementById("edit_nombre").value = user.nombre
+                                    document.getElementById("edit_explotacion_id").value = user.explotacion_id;
+                                    document.getElementById("edit_rol").value = user.rol;
+                                    document.getElementById("edit_email").value = user.email;
+                                    document.getElementById("edit_fecha_nacimiento").value = user.fechaNacimiento;
+                                    document.getElementById("edit_telefono").value = user.telefono;
+                                    document.getElementById("edit_usuario").value = user.usuario;
 
-            @foreach ($users as $user)
-                console.log($user)
-                if(user.id == $user.id){}
 
+                                })
+                            }}
+                        )
+                )
 
-            @endforeach
 
             // const nombre = user.querySelector("h4.card-title").innerText;
             // const explotacion = user.querySelector(".card-body h5:nth-child(1) b").innerText;
