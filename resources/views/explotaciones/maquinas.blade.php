@@ -37,40 +37,40 @@ async function cargarMaquina(id){
 }
 
 
-async function actualizarContenido(data){
-    let contentDiv  = document.getElementById('listado');
-    document.getElementById('previo').setAttribute('hidden', '');
-    let html = '';
-    try{
+// async function actualizarContenido(data){
+//     let contentDiv  = document.getElementById('listado');
+//     document.getElementById('previo').setAttribute('hidden', '');
+//     let html = '';
+//     try{
 
 
-    data.forEach(maquina => {
+//     data.forEach(maquina => {
 
-        html +=`
-        <div class="card mt-3 ms-3 ms-4" style="width: 25rem;">
-            <div class="d-flex flex-row mt-3 ms-3 align-items-center">
-                <img src="{{asset('./assets/logoAgro.png')}}" alt="Foto máquina" class="fotoPerfil" width="150px">
-                <h4 class="card-title ps-5">${maquina.nombre}</h4>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">Capacidad: <b>${maquina.capacidad || 'sin capacidad'}</b></h5>
-                <h5 class="card-title">Matricula: <b>${maquina.matricula || 'sin matrícula'}</b></h5>
-            </div>
-        </div>
-        `;
-
-
-    });
-    }catch (error) {
-        console.error("Error obteniendo los nombres de los cultivos:", error);
-        alert("Hubo un problema al cargar los datos.");
-    }
-    contentDiv.innerHTML = html;
+//         html +=`
+//         <div class="card mt-3 ms-3 ms-4" style="width: 25rem;">
+//             <div class="d-flex flex-row mt-3 ms-3 align-items-center">
+//                 <img src="{{asset('./assets/logoAgro.png')}}" alt="Foto máquina" class="fotoPerfil" width="150px">
+//                 <h4 class="card-title ps-5">${maquina.nombre}</h4>
+//             </div>
+//             <div class="card-body">
+//                 <h5 class="card-title">Capacidad: <b>${maquina.capacidad || 'sin capacidad'}</b></h5>
+//                 <h5 class="card-title">Matricula: <b>${maquina.matricula || 'sin matrícula'}</b></h5>
+//             </div>
+//         </div>
+//         `;
 
 
+//     });
+//     }catch (error) {
+//         console.error("Error obteniendo los nombres de los cultivos:", error);
+//         alert("Hubo un problema al cargar los datos.");
+//     }
+//     contentDiv.innerHTML = html;
 
 
-}
+
+
+// }
 
 
 function actualizarURL(id_explo) {
@@ -118,7 +118,16 @@ window.onpopstate = function(event) {
     </div>
 
     <div id="listado" class="">
-
+        //         <div class="card mt-3 ms-3 ms-4" style="width: 25rem;">
+            //             <div class="d-flex flex-row mt-3 ms-3 align-items-center">
+            //                 <img src="{{asset('./assets/logoAgro.png')}}" alt="Foto máquina" class="fotoPerfil" width="150px">
+            //                 <h4 class="card-title ps-5">${maquina.nombre}</h4>
+            //             </div>
+            //             <div class="card-body">
+            //                 <h5 class="card-title">Capacidad: <b>${maquina.capacidad || 'sin capacidad'}</b></h5>
+            //                 <h5 class="card-title">Matricula: <b>${maquina.matricula || 'sin matrícula'}</b></h5>
+            //             </div>
+            //         </div>
     </div>
 
     <div class="modal" id="anadirMaquina" tabindex="-1" class=" d-flex justify-content-center align-items-center" aria-labelledby="anadirUsuarioModal" aria-hidden="true">
