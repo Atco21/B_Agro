@@ -15,12 +15,12 @@ class OrdenSeeder extends Seeder
     {
         DB::table('ordenes')->insert([
             [
-                'estado' => 'Pendiente',
+                'estado' => 'pendiente',
                 'fecha_inicio' => '2024-02-01',
                 'fecha_fin' => null,
                 'tarea' => 'Aplicación de fertilizante',
-                'id_jefecampo' => 1,
-                'id_aplicador' => 2,
+                'jefecampo_id' => 1,
+                'aplicador_id' => 2,
                 'parcela_id' => 1,
                 'id_tratamiento' => null,
                 'id_maquina' => null,
@@ -28,12 +28,12 @@ class OrdenSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'estado' => 'Completada',
+                'estado' => 'completada',
                 'fecha_inicio' => '2024-01-15',
-                'fecha_fin' => '2024-01-20',
+                'fecha_fin' => null,
                 'tarea' => 'Siembra de maíz',
-                'id_jefecampo' => 1,
-                'id_aplicador' => 2,
+                'jefecampo_id' => 1,
+                'aplicador_id' => 2,
                 'parcela_id' => 2,
                 'id_tratamiento' => null,
                 'id_maquina' => null,

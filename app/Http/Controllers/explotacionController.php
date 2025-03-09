@@ -14,6 +14,14 @@ class explotacionController extends Controller
         return view('explotacion', ['explotacion' => $explotacion]);
     }
 
+    public function editar(Request $request)
+    {
+        $explotacion = Explotacion::all();
+
+
+        return view('editarExplotaciones', compact('explotacion'));
+    }
+
     public function general()
     {
         $explotacion = Explotacion::all();

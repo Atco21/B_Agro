@@ -1,47 +1,118 @@
+
 @extends('layouts.app')
 
 @section('content')
 
-
-
-
-
 @if ($explotacion->count() > 0)
-<div class="d-flex flex-row mt-0">
 
+<div class="d-flex flex-row vh-100 w-100 overflow-hidden" >
+    <!-- Menú lateral -->
+    <div class="col-2 d-flex flex-column justify-content-start align-items-center pt-5" id="barra">
 
-    <!-- Columna para los <h3> -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="menu2 nav-link {{ Request::is('*general*') ? 'active2' : '' }}" href="{{ url('explotaciones/general') }}">General</a>
+            </li>
+            <li class="nav-item">
+                <a class="menu2 nav-link {{ Request::is('*parcelas*') ? 'active2' : '' }}" href="{{ url('explotaciones/parcelas') }}">Parcelas</a>
+            </li>
+            <li class="nav-item">
+                <a class="menu2 nav-link {{  Request::is('*ordenes*') ? 'active2' : '' }} " href="{{ url('explotaciones/ordenes') }}">Órdenes</a>
+            </li>
 
-
-    <div class="col-2 vh-100 d-flex flex-column justify-content-between">
-        <div class="d-flex flex-column justify-content-around h-50 ps-2">
-            <a class="menu2 {{ Request::is('general') ? 'active' : '' }}" href="{{ url('explotaciones/general') }}">General</a>
-            <a class="menu2 {{ Request::is('parcelas') ? 'active' : '' }} " href="{{ url('explotaciones/parcelas') }}">Parcelas</a>
-            <a class="menu2 {{ Request::is('ordenes') ? 'active' : '' }} " href="{{ url('explotaciones/ordenes') }}">Ordenes</a>
-            <a class="menu2 {{ Request::is('incidencias') ? 'active' : '' }} " href="{{ url('explotaciones/incidencias') }}">Incidencias</a>
-            <a class="menu2 {{ Request::is('maquinas') ? 'active' : '' }} " href="{{ url('explotaciones/maquinas') }}">Máquinas</a>
-            <a class="menu2 {{ Request::is('pedidos') ? 'active' : '' }} " href="{{ url('explotaciones/pedidos') }}">Pedidos</a>
-
-        </div>
+            <li class="nav-item">
+                <a class="menu2 nav-link {{ Request::is('*maquinas*') ? 'active2' : '' }}" href="{{ url('explotaciones/maquinas') }}">Máquinas</a>
+            </li>
+            <li class="nav-item">
+                <a class="menu2 nav-link {{ Request::is('*pedidos*') ? 'active2' : '' }}" href="{{ url('explotaciones/pedidos') }}" >Pedidos</a>
+            </li>
+            <li class="nav-item">
+                <a class="menu2 nav-link {{ Request::is('*incidencias*') ? 'active2' : '' }}" href="{{ url('explotaciones/incidencias') }}" style="border: none">Incidéncias</a>
+            </li>
+        </ul>
     </div>
 
 
-    <!-- Columna para el resto del contenido -->
-    <div class="col-10">
-        <div class="d-flex justify-content-end me-2">
-            <select class="d-flex form-select form-control exploSelect mt-3" id="selectExplotacion">
+    <!-- Contenido principal -->
+    <div class="col-11 d-flex flex-column h-100 pe-5">
+        <div class="d-flex justify-content-end align-items-center gap-3 p-3 pe-4">
+            <button class="p-0" style="border: none; background:none; transform: scale(1.5);" title="Editar" data-bs-toggle="modal" data-bs-target="#editarExplotaciones">
+                <svg width="30" height="30" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18.8277 43.8753H9.75C9.31902 43.8753 8.9057 43.7041 8.60095 43.3993C8.29621 43.0946 8.125 42.6812 8.125 42.2503V33.1726C8.1252 32.7422 8.29614 32.3295 8.60031 32.025L33.6497 6.97557C33.9544 6.67106 34.3676 6.5 34.7984 6.5C35.2292 6.5 35.6423 6.67106 35.947 6.97557L45.0247 16.0471C45.3292 16.3519 45.5003 16.765 45.5003 17.1958C45.5003 17.6266 45.3292 18.0398 45.0247 18.3445L19.9753 43.4C19.6708 43.7041 19.2581 43.8751 18.8277 43.8753Z" stroke="#01533E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M27.625 13L39 24.375" stroke="#01533E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M33.3125 18.6875L15.4375 36.5625" stroke="#01533E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M21.125 42.25L9.75 30.875" stroke="#01533E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+            </button>
+
+            <select class="form-select exploSelect">
                 <option selected disabled>Selecciona una opción</option>
                 @foreach ($explotacion as $explo)
                     <option value="{{ $explo->id }}">{{ $explo->nombre }}</option>
                 @endforeach
             </select>
         </div>
+
         @yield('content2')
+    </div>
+</div>
+
+<div class="modal fade mt-5" id="editarExplotaciones" tabindex="-1" aria-labelledby="editarExplotacionesModal" aria-hidden="true">
+
+
+    <div class="modal-dialog m1">
+
+        <div class="modal-content d-flex justify-content-center m2 ">
+
+          <div class="modal-header">
+            <h2 class="modal-title" id="exampleModalLabel">Explotaciones</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-5">
+
+            <div>
+
+                <table class="table" border="1" id="">
+                    <tbody>
+                        <tr>
+                            <th class="th_verde_primero">Nombre</th>
+                            <th class="th_verde">Tamaño</th>
+                            <th class="th_verde"></th>
+                        </tr>
+
+
+                        @foreach ($explotacion as $explo)
+
+                        <tr class="lineaParcela">
+
+                            <td class="text-center">{{$explo->nombre}}</td>
+                            <td class="text-center">{{$explo->tamanyo}}</td>
+                            <td class="d-flex justify-content-center">
+                                <button value="{{$explo->id}}" class="btn btn-ver" style="width: 100px;" data-bs-toggle="modal" data-bs-target="#verExplotacionSeleccionada">Ver</button>
+                                <button value="{{$explo->id}}" class="btn btn-editar ms-2" style="width: 100px;" data-bs-toggle="modal" data-bs-target="#editarExplotacionSeleccionada">Editar</button>
+                                <button value="{{$explo->id}}" class="btn btn-danger ms-2" style="width: 100px;">Eliminar</button>
+                            </td>
+
+
+                        </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+
     </div>
 
 
-
 </div>
+
+
+
+
+
 
 @else
 
@@ -63,7 +134,7 @@
       <div class="modal-header">
         <h2 class="modal-title" id="exampleModalLabel">Nueva explotación</h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        card-body </div>
+      </div>
 
       <div class="modal-body p-5">
 
@@ -191,12 +262,15 @@
 </script>
 
 
+
 @endif
 
 
 
 
 @endsection
+
+
 
 
 

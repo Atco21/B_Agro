@@ -2,8 +2,11 @@
 
 @section('content2')
 
-<script>
 
+
+
+<script>
+let idparc = 1;
 addEventListener('DOMContentLoaded', inicio);
 
 function inicio() {
@@ -13,6 +16,7 @@ function inicio() {
         select.addEventListener("change", function() {
             const id = select.value;
             if (id) {
+
                 cargarDatos(id);
                 actualizarURL(id);
             }
@@ -46,14 +50,14 @@ async function actualizarContenido(data) {
     try {
         let html = `
             <table class="table" border="1" id="tabla_parcelas">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Cultivo</th>
-                        <th>Tamaño</th>
-                    </tr>
-                </thead>
                 <tbody>
+                    <tr>
+                        <th class="th_verde_primero">Nombre</th>
+                        <th class="th_verde">Cultivo</th>
+                        <th class="th_verde">Tamaño</th>
+                    </tr>
+
+
         `;
 
         data.forEach(parcela => {
@@ -85,6 +89,8 @@ async function actualizarContenido(data) {
 
 
 function seleccionar(id) {
+    document.getElementById('vacio').setAttribute('hidden','');
+    document
     const lineas = document.querySelectorAll('.lineaParcela');
     lineas.forEach(linea => {
         if (linea.id == id) {
@@ -104,64 +110,87 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 async function rendimiento(id) {
-
     seleccionar(id);
-
     idparc = id;
 
-
-
     try {
-        const domain = 'localhost:';
-        const url = `${domain}/api/rendimiento/${id}`;
-        const response = await fetch(url);
+        const response = await fetch(`/api/rendimiento/${id}`);
         const data = await response.json();
 
         if (data.error) {
-            alert("No hay datos disponibles");
+            document.getElementById("rendimiento").innerHTML = "<p>No hay datos disponibles</p>";
             return;
         }
+
         const rendimiento = data[0];
+
         let html = `
 
-            <p>ID: ${rendimiento.id}</p>
-            <p>Parcela ID: ${rendimiento.parcela_id}</p>
-            <p>Cultivo sembrado: ${rendimiento.c_sembrada}</p>
-            <p>Cultivo recolectado: ${rendimiento.c_recolectada}</p>
-            <p>Cultivo esperado: ${rendimiento.c_esperada}</p>
-            <p>Costes de semilla: ${rendimiento.semillaCostes}</p>
-            <p>Costes de fertilizantes: ${rendimiento.fertilizantesCostes}</p>
-            <p>Otros costes: ${rendimiento.otrosCostes}</p>
-            <p>Precio por tonelada: ${rendimiento.precio_tonelada}</p>
-            <p>Total vendido: ${rendimiento.total_vendido}</p>
-            <p>Fecha de inicio: ${rendimiento.fecha_inicio}</p>
-            <p>Fecha de fin: ${rendimiento.fecha_fin}</p>
+        <div class="d-flex flex-column">
+            <div class="flex-row ms-2 mt-3">
+                <h2>1. Productividad</h2>
+                <div class="d-flex justify-content-between">
+                    <div class="flex-row pe-5 ms-5">
+                        <p><strong>Cantidad sembrada:</strong> ${rendimiento.c_sembrada} Tn</p>
+                        <p><strong>Cantidad recolectada:</strong> ${rendimiento.c_recolectada} Tn</p>
+                    </div>
+                    <div class="flex-row me-auto ms-5">
+                        <p><strong>Cantidad esperada:</strong> <input type="number" value="${rendimiento.c_esperada}" /> Tn</p>
+                        <p><strong>Rendimiento durante la última temporada:</strong> <span style="background-color: #d4edda; padding: 5px; border-radius: 5px;">${((rendimiento.c_recolectada / rendimiento.c_esperada) * 100).toFixed(2)}%</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-row ms-2">
+                <h2>2. Aspectos económicos</h2>
+                <div class="d-flex justify-content-between">
+                    <div class="flex-row pe-5 ms-5">
+                        <p><strong>Coste semilla:</strong> ${rendimiento.semillaCostes}€</p>
+                        <p><strong>Coste fertilizantes:</strong> ${rendimiento.fertilizantesCostes}€</p>
+                        <p><strong>Otros costes:</strong> ${rendimiento.otrosCostes}€</p>
+                    </div>
+                    <div class="flex-row me-auto ms-5">
+                        <p><strong>Precio por tonelada:</strong> ${rendimiento.precio_tonelada}€</p>
+                        <p><strong>Total vendido (100%):</strong> ${rendimiento.total_vendido}€</p>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex ms-2">
+                <div class="flex-col col-6">
+                    <h2>3. Fechas</h2>
+                    <div class="ms-5">
+                        <p><strong>Fecha de inicio:</strong> ${rendimiento.fecha_inicio}</p>
+                        <p><strong>Fecha de fin:</strong> ${rendimiento.fecha_fin}</p>
+                    </div>
+                </div>
+                <div class="flex-col col-6 ms-5">
+                    <h2>4. Beneficio</h2>
+                    <div class="ms-5">
+                        <p style="color: green;"><strong>Ingresos:</strong> ${rendimiento.total_vendido}€</p>
+                        <p   style="color: red;"><strong>Total gastos:</strong> ${(
+                            parseFloat(rendimiento.semillaCostes) +
+                            parseFloat(rendimiento.fertilizantesCostes) +
+                            parseFloat(rendimiento.otrosCostes)
+                        ).toFixed(2)}€</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
 
-
-
-
-
-
-        `
         document.getElementById("rendimiento").innerHTML = html;
-
 
     } catch (error) {
         document.getElementById("rendimiento").innerHTML = "<p>No hay datos disponibles</p>";
         console.error("Error obteniendo el rendimiento de las parcelas:", error);
     }
-
-
-
 }
+
 
 
 
 function ordenes(id) {
 
 
-    alert("ordenes")
-    console.log("ayuda")
 
 
 
@@ -213,12 +242,20 @@ window.onpopstate = function(event) {
         <div class="w-50 mt-5 pe-5" id="seccion2">
             <div class="w-100 h-100 card">
                 <table class="table-bordered">
+                    <tbody>
+
                     <tr>
                         <td class="opciones_menu2"><a href="#" id="btnRendimiento">Rendimiento</a></td>
                         <td class="opciones_menu2"><a  href="#" id="btnOrdenes">Órdenes</a></td>
-                        <td class="opciones_menu2">Incidencias</td>
-                        <td class="opciones_menu2">Tratamientos</td>
+                        <td class="opciones_menu2"><a>Incidencias</a></td>
+                        <td class="opciones_menu2"><a>Tratamientos</a></td>
                     </tr>
+
+                        <tr id="vacio">
+                            <td colspan="4" style="border:none;"><p>Selecciona una parcela</p></td>
+                        </tr>
+
+                    </tbody>
 
                 </table>
 

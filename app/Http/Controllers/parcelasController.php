@@ -50,9 +50,9 @@ class ParcelasController extends Controller
     }
 
 
-    public function porExplotacion($explo_id){
+    public function porExplotacion($explotacion_id){
 
-        $parcelas = Parcela::with('cultivo')->where('explotacion_id', $explo_id)->get();
+        $parcelas = Parcela::with(['cultivo'])->where('explotacion_id', $explotacion_id)->get();
         return response()->json($parcelas);
     }
 

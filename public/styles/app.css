@@ -3,14 +3,6 @@ body{
     font-family: "Inter", serif;
 }
 
-.nav-link{
-    color:white !important;
-    font-size: 20px !important;
-    font-weight: 600 !important;
-
-    margin: 0 1rem;
-    text-decoration: none;
-}
 
 .navbar{
 
@@ -19,22 +11,42 @@ body{
     border-top: 1px solid #e3e7ea;
     padding: 0.5rem 0;
 
-
 }
+
+
 
 .nav-link{
 
-    color:white !important;
     font-size: 32px !important;
     font-weight: 600 !important;
+    color: white !important;
+    padding-top: 0.9em !important;
+    padding-bottom: 0.9em !important;
+    padding-left: 0.9em !important;
+    padding-right: 0.9em !important;
 
-    margin: 0 1rem;
-    text-decoration: none;
 }
+a.active {
+    font-weight: 800 !important;
+    text-decoration: underline !important;
 
-.navbar a.active {
-    font-weight: bold !important;
-    text-decoration: underline;
+}
+a.active2{
+    display: flex !important;
+    font-weight: 800 !important;
+    text-decoration: underline !important;
+    background-color:  #024434 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 210px;
+
+}
+.menu2{
+    font-size: 30px !important;
+    font-weight: 600;
+    border-bottom:3px solid #028b69;
+    text-align: center;
+    width: 100%;
 }
 
 
@@ -43,6 +55,44 @@ body{
     color: white;
     transform: scale(1.2);
 }
+
+
+.btn-editar{
+
+    background-color: #532301;
+    color: white;
+
+}
+.btn-editar:active{
+
+    background-color: #532301;
+
+}
+.btn-editar:hover{
+
+    background-color: #5323016c;
+    color: white;
+
+}
+
+.btn-ver{
+    background-color: #028b69;
+    color: white !important;
+}
+.btn-ver:focus{
+    border: 2px solid #028b69 !important;
+    color: black !important;
+    height: 38px !important;
+    background-color: white !important;
+}
+
+.btn-ver:hover{
+    background-color: #035440 !important;
+    color: white !important;
+}
+
+
+
 
 .btn.button-primary{
     background-color: #01533E;
@@ -96,10 +146,19 @@ body{
 }
 
 
+
+
+
 .m1{
     max-width: 1465px;
     background: white;
     border: none;
+}
+.m11{
+    max-width: 1300px;
+    background: white;
+    border: none;
+    margin-top: 9%;
 }
 
 .m2{
@@ -144,7 +203,7 @@ body{
 
 .fotoinput{
 
-    width: 697px !important;
+    width: 600px !important;
 
 }
 
@@ -192,11 +251,12 @@ h3{
 
 }
 
-.menu2{
-    font-size: 32px;
-    font-weight: 600;
-    color:#4F4F4F;
-    margin-bottom: 1rem;
+
+
+.menu1{
+    color: white;
+
+
 }
 
 .navbar{
@@ -236,16 +296,18 @@ h3{
 #seccion2 tr {
     text-align: center;
     font-size: 24px;
+
+
 }
 #seccion2 td {
-    padding: 1.2em;
-    color: #4F4F4F;
+    height: 3.5em !important;
+    width: 25% !important;
+    background-color: #532301;
 }
 
 
 
 .lineaParcela {
-    cursor: pointer;
     background-color: #f9f9f9 !important;
     transition: background 0.3s;
 }
@@ -269,3 +331,50 @@ h3{
 
     --bs-modal-border-color: none !important;
 }
+.th_verde{
+
+    background-color: #01533E !important;
+    color: white !important;
+    border-left: 3px solid black;
+    width: 33% !important;
+    text-align: center;
+
+}
+.th_verde_primero{
+    width: 33% !important;
+    background-color: #01533E !important;
+    color: white !important;
+    text-align: center;
+
+}
+
+
+.opciones_menu2 > a{
+
+    text-decoration: none !important;
+    color:white !important;
+
+
+}
+
+#vacio td{
+    background-color: white !important;
+    height: 3.5em !important;
+    border: none;
+
+}
+
+.nav-item {
+    width: 100% !important; /* Asegura que ocupe todo el ancho */
+
+}
+
+#barra{
+    background-color: #01533E !important;
+    width: 220px;
+    border-top:3px solid #028b69;
+    border-bottom:5px solid #028b69 !important;
+}
+
+
+

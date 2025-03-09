@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('ordenes', function (Blueprint $table) {
             $table->id();
-            $table->enum('estado',['pendiente', 'en curso', 'pausada', 'completada']);
+            $table->enum ('estado',['pendiente','pasado','encurso','terminada']);
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_fin')->nullable();
+            $table->string('horaOrden')->nullable();
             $table->string('tarea', 255);
             $table->foreignId('jefecampo_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->foreignId('aplicador_id')->constrained('users')->onDelete('cascade');
@@ -25,6 +26,8 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+
+
 
     /**
      * Reverse the migrations.
