@@ -15,6 +15,7 @@ use App\Http\Controllers\IncidenciaController;
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
+Route::post('/loginAngular', [AuthController::class, 'loginAngular'])->name('loginAngular');
 Route::post('/register', [TrabajadorController::class,'register']);
 Route::post('/trabajadores', [TrabajadorController::class, 'register'])->name('register');
 
