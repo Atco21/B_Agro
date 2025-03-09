@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
     cuadros.forEach(cuadro => {
         cuadro.addEventListener("click", function () {
 
-            fetch(`http://0.0.0.0/api/trabajadores/buscar/${cuadro.id}`)
+            fetch(`http://127.0.0.1:8000/api/trabajadores/buscar/${cuadro.id}`)
             .then(response => response.json()
                       .then(data => {
                           if (!data || data.length === 0){
@@ -93,13 +93,14 @@ document.addEventListener("DOMContentLoaded", function () {
                             } else {
                                 data.forEach(user => {
                                     document.getElementById("edit_nombre").value = user.nombre
+                                    edit_dni
+                                    document.getElementById("edit_dni").value = user.dni;
                                     document.getElementById("edit_explotacion_id").value = user.explotacion_id;
                                     document.getElementById("edit_rol").value = user.rol;
                                     document.getElementById("edit_email").value = user.email;
-                                    document.getElementById("edit_fecha_nacimiento").value = user.fechaNacimiento;
+                                    document.getElementById("edit_fecha_nacimiento").value = user.fecha_nacimiento;
                                     document.getElementById("edit_telefono").value = user.telefono;
                                     document.getElementById("edit_usuario").value = user.usuario;
-
 
                                 })
                             }}
