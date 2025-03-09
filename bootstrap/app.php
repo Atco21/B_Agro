@@ -20,3 +20,6 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
+    header('Access-Control-Allow-Origin: https://f-agro.pages.dev');
+    header('Access-Control-Allow-Credentials: true');
+
