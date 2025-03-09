@@ -28,7 +28,7 @@ class OrdenSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'estado' => 'completada',
+                'estado' => 'terminada',
                 'fecha_inicio' => '2024-01-15',
                 'fecha_fin' => null,
                 'tarea' => 'Siembra de maíz',
