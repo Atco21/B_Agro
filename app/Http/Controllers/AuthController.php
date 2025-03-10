@@ -47,14 +47,12 @@ class AuthController extends Controller
 }
 
 
-    public function loginAngular(Request $request)
+public function loginAngular(Request $request)
     {
-        // Log::info($request);
         if (Auth::attempt(['usuario' => request('usuario'), 'password' => request('password')])) {
-            Log::info($request);
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')->accessToken;
-
+            $success['rol'] = $user->rol;
             return response()->json(['success' => $success], $this->successStatus);
         } else {
             return response()->json(['error' => 'Unauthorised'], 401);

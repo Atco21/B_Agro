@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
             AlmacenQuimicoSeeder::class,
             PedidosTableSeeder::class,
             LineasDePedidosTableSeeder::class, 
+            MaquinaSeeder::class,
+            OrdenSeeder::class,
         ]);
     }
 }
