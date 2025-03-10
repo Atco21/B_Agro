@@ -20,7 +20,7 @@ class OrdenSeeder extends Seeder
                 'fecha_fin' => null,
                 'tarea' => 'Aplicación de fertilizante',
                 'jefecampo_id' => 1,
-                'aplicador_id' => 2,
+                'aplicador_id1' => 2,
                 'parcela_id' => 1,
                 'id_tratamiento' => null,
                 'id_maquina' => null,

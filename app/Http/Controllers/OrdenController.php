@@ -31,8 +31,7 @@ class OrdenController extends Controller
             'estado' => 'nullable|string|max:50',
             'fecha_inicio' => 'nullable|date',
             'fecha_fin' => 'nullable|date|after_or_equal:fecha_inicio',
-            'tarea' => 'ç
-            o|string|max:255',
+            'tarea' => 'nullable|string|max:255',
             'jefecampo_id' => 'nullable|integer|exists:users,id',
             'aplicador_id' => 'nullable|integer|exists:users,id',
             'parcela_id' => 'nullable|integer|exists:parcelas,id',
