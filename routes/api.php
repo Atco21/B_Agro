@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\explotacionController;
+use App\Http\Controllers\ExplotacionController;
 use App\Http\Controllers\parcelasController;
 use App\Http\Controllers\cultivoController;
 use App\Http\Controllers\rendController;
@@ -58,6 +58,8 @@ Route::get('/tratamiento', [TratamientoController::class, 'mostrarTratamientos']
 Route::get('/maquinas/explotacion/{id}', [MaquinaController::class, 'mostrarMaquinasPorExplotacion']);
 
 Route::get('/maquinas', [MaquinaController::class, 'index']);
+
+Route::get('/maquinas/buscar/{id}', [MaquinaController::class, 'buscarPorId'])->name('maquinas.update');
 
 
 Route::post('/ordenes', [OrdenController::class, 'store']);

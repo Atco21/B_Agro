@@ -133,4 +133,48 @@ class TrabajadorController extends Controller
 
 
 
+   public function update(Request $request, $id)
+{
+    $validatedData = $request->validate([
+        'nombre' => 'required|string|max:255',
+        'dni' => 'required|string|unique:users,dni,' . $id,
+        'telefono'=> 'nullable|string|max:9',
+        'email' => 'nullable|email|unique:users,email,' . $id,
+        'usuario' => 'required|string|unique:users,usuario,' . $id,
+        'password' => 'nullable|string|min:4',
+        'rol' => 'required|string',
+    ]);
+
+
+        $user = User::findOrFail($id);
+
+
+
+        $user->nombre = $request->nombre;
+        $user->dni = $request->dni;
+        $user->telefono = $request->telefono;
+        $user->email = $request->email;
+        $user->usuario = $request->usuario;
+        $user->rol = $request->rol;
+
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        if ($request->hasFile('imagen')) {
+            $imagenPath = $request->file('imagen')->store('imagenes', 'public');
+            $user->imagen = $imagenPath;
+        }
+
+        $user->explotacion_id = $request->explotacion_id;
+        $user->save();
+        return redirect()->route('trabajadores')->with('success', 'Usuario actualizado correctamente');
+
+}
+
+
+
+
+
+
 }

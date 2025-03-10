@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Explotacion;
+use App\Models\Maquina;
 
-class explotacionController extends Controller
+
+class ExplotacionController extends Controller
 {
     public function index(Request $request)
     {
         $explotacion = Explotacion::all();
         // $explotacion = [];
-        return view('explotacion', ['explotacion' => $explotacion]);
+        return view('explotacion', compact('explotacion'));
     }
 
     public function editar(Request $request)
@@ -25,25 +27,28 @@ class explotacionController extends Controller
     public function general()
     {
         $explotacion = Explotacion::all();
-        return view('explotaciones.general', ['explotacion' => $explotacion]);
+        return view('explotaciones.general', compact('explotacion'));
     }
 
 
     public function ordenes(){
         $explotacion = Explotacion::all();
-        return view('explotaciones.ordenes', ['explotacion' => $explotacion]);
+        return view('explotaciones.ordenes', compact('explotacion'));
     }
     public function incidencias(){
         $explotacion = Explotacion::all();
-        return view('explotaciones.incidencias', ['explotacion' => $explotacion]);
+        return view('explotaciones.incidencias', compact('explotacion'));
     }
+
     public function maquinas(){
         $explotacion = Explotacion::all();
-        return view('explotaciones.maquinas', ['explotacion' => $explotacion]);
+        $maquinas = Maquina::all();
+        return view('explotaciones.maquinas', compact('explotacion'), compact('maquinas'));
     }
+
     public function pedidos(){
         $explotacion = Explotacion::all();
-        return view('explotaciones.pedidos', ['explotacion' => $explotacion]);
+        return view('explotaciones.pedidos', compact('explotacion'));
     }
 
 
@@ -58,7 +63,7 @@ class explotacionController extends Controller
     public function parcelas()
     {
         $explotacion = Explotacion::all();
-        return view('explotaciones.parcelas', ['explotacion' => $explotacion]);
+        return view('explotaciones.parcelas', compact('explotacion'));
     }
 
 

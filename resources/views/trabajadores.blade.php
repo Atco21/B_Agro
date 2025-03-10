@@ -85,15 +85,15 @@ document.addEventListener("DOMContentLoaded", function () {
     cuadros.forEach(cuadro => {
         cuadro.addEventListener("click", function () {
 
-            fetch(`http://127.0.0.1:8000/api/trabajadores/buscar/${cuadro.id}`)
+            fetch(`http://0.0.0.0/api/trabajadores/buscar/${cuadro.id}`)
             .then(response => response.json()
                       .then(data => {
                           if (!data || data.length === 0){
                               alert("No hay datos");
                             } else {
                                 data.forEach(user => {
+                                    document.getElementById("edit_user_id").value = user.id;
                                     document.getElementById("edit_nombre").value = user.nombre
-                                    edit_dni
                                     document.getElementById("edit_dni").value = user.dni;
                                     document.getElementById("edit_explotacion_id").value = user.explotacion_id;
                                     document.getElementById("edit_rol").value = user.rol;
@@ -101,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                     document.getElementById("edit_fecha_nacimiento").value = user.fecha_nacimiento;
                                     document.getElementById("edit_telefono").value = user.telefono;
                                     document.getElementById("edit_usuario").value = user.usuario;
+                                    document.getElementById("password").value = user.password;
 
                                 })
                             }}
@@ -183,15 +184,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         <div class="modal" id="editarUsuario" tabindex="-1" aria-labelledby="editarUsuarioModal" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
+            <div class="modal-dialog m1">
+                <div class="modal-content m2">
                     <div class="modal-header">
                         <h2 class="modal-title">Editar usuario</h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body">
-                        <form action="{{ route('trabajadores.update') }}" method="POST">
+                        <form action="{{ route('trabajadores.update', $user->id) }}" method="POST" id="id">
                             @csrf
                             @method('PUT')
 

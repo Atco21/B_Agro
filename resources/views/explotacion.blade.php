@@ -27,7 +27,7 @@
                 <a class="menu2 nav-link {{ Request::is('*pedidos*') ? 'active2' : '' }}" href="{{ url('explotaciones/pedidos') }}" >Pedidos</a>
             </li>
             <li class="nav-item">
-                <a class="menu2 nav-link {{ Request::is('*incidencias*') ? 'active2' : '' }}" href="{{ url('explotaciones/incidencias') }}" style="border: none">Incidéncias</a>
+                <a class="menu2 nav-link {{ Request::is('*incidencias*') ? 'active2' : '' }}" href="{{ url('explotaciones/incidencias') }}" style="border: none">Incidencias</a>
             </li>
         </ul>
     </div>
@@ -45,7 +45,7 @@
                     </svg>
             </button>
 
-            <select class="form-select exploSelect">
+            <select class="form-select exploSelect me-3">
                 <option selected disabled>Selecciona una opción</option>
                 @foreach ($explotacion as $explo)
                     <option value="{{ $explo->id }}">{{ $explo->nombre }}</option>

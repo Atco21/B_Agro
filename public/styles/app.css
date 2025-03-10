@@ -378,3 +378,8 @@ h3{
 
 
 
+#listado {
+    max-height: 80vh; /* Ajusta este valor según lo necesites */
+    overflow-y: auto; /* Añade un scroll si hay muchas tarjetas */
+    padding-bottom: 20px; /* Espaciado inferior para evitar desbordamientos */
+}

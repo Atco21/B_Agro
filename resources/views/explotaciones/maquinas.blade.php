@@ -14,7 +14,6 @@ function inicio() {
             const id = select.value;
             if (id) {
                 cargarMaquina(id);
-                actualizarURL(id);
             }
         });
     }
@@ -23,14 +22,14 @@ function inicio() {
 
 async function cargarMaquina(id){
 
-    fetch(`http://localhost/api/maquinas/explotacion/${id}`)
+    fetch(`http://0.0.0.0/api/maquinas/explotacion/${id}`)
         .then(response => response.json())
         .then(data => {
             if (data.error) {
                 alert("No hay datos");
             } else {
                 document.getElementById('seccion').removeAttribute('hidden');
-                actualizarContenido(data);
+                //actualizarContenido(data);
             }
         })
         .catch(error => console.error("Error en la petición:", error));
@@ -71,31 +70,58 @@ async function cargarMaquina(id){
 
 
 // }
+document.addEventListener("DOMContentLoaded", function () {
+    const cuadros = document.querySelectorAll(".cuadroMaquina");
+    cuadros.forEach(cuadro => {
+        cuadro.addEventListener("click", function () {
+
+            fetch(`http://0.0.0.0/api/maquinas/buscar/${cuadro.id}`)
+            .then(response => response.json()
+                      .then(data => {
+                          if (!data || data.length === 0){
+                              alert("No hay datos");
+
+                            } else {
+                                console.log(data)
+                                document.getElementById("edit_nombre_maquina").value = data.nombre
+                                document.getElementById("edit_explotacion_id").value = data.explotacion_id;
 
 
-function actualizarURL(id_explo) {
-    const newURL = `/explotaciones/maquinas/${id_explo}`;
-    history.pushState({ id: id_explo }, "", newURL);
-}
-window.onpopstate = function(event) {
-    if (event.state && event.state.id) {
-        cargarMaquina(event.state.id);
-    }
-};
+                            }}
+                        )
+                )
+
+
+            // const nombre = user.querySelector("h4.card-title").innerText;
+            // const explotacion = user.querySelector(".card-body h5:nth-child(1) b").innerText;
+            // const rol = user.querySelector(".card-body h5:nth-child(2) b").innerText;
+            // const dni = user.getAttribute("data-dni");
+            // const email = user.getAttribute("data-email");
+            // const fechaNacimiento = user.getAttribute("data-fecha_nacimiento");
+            // const telefono = user.getAttribute("data-telefono");
+            // const usuario = user.getAttribute("data-usuario");
+
+            // document.getElementById("edit_nombre").value = nombre;
+            // document.getElementById("edit_explotacion_id").value = explotacion;
+            // document.getElementById("edit_rol").value = rol;
+            // document.getElementById("edit_dni").value = dni;
+            // document.getElementById("edit_email").value = email;
+            // document.getElementById("edit_fecha_nacimiento").value = fechaNacimiento;
+            // document.getElementById("edit_telefono").value = telefono;
+            // document.getElementById("edit_usuario").value = usuario;
+
+            let modal = new bootstrap.Modal(document.getElementById("editarMaquina"));
+            modal.show();
+        });
+    });
+});
+
+
 </script>
 
-<div id="previo">
-
-    <div class="d-flex justify-content-center align-items-center" style="height: 70vh;">
-
-    <h2>Selecciona una explotación</h2>
-
-    </div>
-
-</div>
 
 
-<div class="ps-3" id="seccion" hidden>
+<div class="ps-3 " id="seccion" >
 
     <div class="d-flex flex-row mt-3 align-items-center" >
         <input type="search" class="form-control ms-3 w-25" placeholder="Buscar" aria-label="Buscar">
@@ -117,17 +143,28 @@ window.onpopstate = function(event) {
         </div>
     </div>
 
-    <div id="listado" class="">
-        //         <div class="card mt-3 ms-3 ms-4" style="width: 25rem;">
-            //             <div class="d-flex flex-row mt-3 ms-3 align-items-center">
-            //                 <img src="{{asset('./assets/logoAgro.png')}}" alt="Foto máquina" class="fotoPerfil" width="150px">
-            //                 <h4 class="card-title ps-5">${maquina.nombre}</h4>
-            //             </div>
-            //             <div class="card-body">
-            //                 <h5 class="card-title">Capacidad: <b>${maquina.capacidad || 'sin capacidad'}</b></h5>
-            //                 <h5 class="card-title">Matricula: <b>${maquina.matricula || 'sin matrícula'}</b></h5>
-            //             </div>
-            //         </div>
+    <div id="listado">
+
+        <div class="row mb-5 pb-5">
+
+            @foreach ($maquinas as $maquina)
+                <div class="card mt-3 ms-3 ms-4 cuadroMaquina" style="width: 25rem;" id="{{$maquina->id}}">
+
+                    <div class="d-flex flex-row mt-3 ms-3 align-items-center">
+                        <img src="{{asset('./assets/logoAgro.png')}}" alt="Foto máquina" class="fotoPerfil" width="150px">
+                        <h4 class="card-title ps-5">{{$maquina->nombre}}</h4>
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">Capacidad: <b>{{$maquina->capacidad}}</b></h5>
+                        <h5 class="card-title">Matricula: <b>{{$maquina->matricula}}</b></h5>
+                        <h5 class="card-title">Explot: <b>{{$maquina->explotacion->nombre}}</b></h5>
+
+                    </div>
+                </div>
+            @endforeach
+
+        </div>
     </div>
 
     <div class="modal" id="anadirMaquina" tabindex="-1" class=" d-flex justify-content-center align-items-center" aria-labelledby="anadirUsuarioModal" aria-hidden="true">
@@ -142,7 +179,7 @@ window.onpopstate = function(event) {
                 </div>
 
                 <div class="modal-body">
-                    <form action="{{ route('maquinas.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('maquinas.store') }}" method="POST">
                         @csrf
                         <h2 class="mb-3">1. Datos  </h2>
                         <div class="pb-5 d-flex flex-row">
@@ -189,6 +226,67 @@ window.onpopstate = function(event) {
     </div>
 
 </div>
+
+
+
+<div class="modal" id="editarMaquina" tabindex="-1" aria-labelledby="editarMaquinaModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Editar Máquina</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('maquinas.update', $maquina->id) }}" method="POST" id="editMaquinaForm">
+                    @csrf
+                    @method('PUT')
+
+                    <!-- Campo oculto para el ID de la máquina -->
+                    <input type="hidden" id="edit_maquina_id" name="maquina_id" value="{{ $maquina->id }}">
+
+                    <h2 class="mb-3">1. Datos</h2>
+                    <div class="pb-5 d-flex flex-row">
+                        <div class="row w-100">
+                            <div class="col-md-6">
+                                <label for="nombre" class="form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="edit_nombre_maquina" name="nombre" value="{{ $maquina->nombre }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="matricula" class="form-label">Matricula:</label>
+                                <input type="text" class="form-control" id="edit_matricula" name="matricula" value="{{ $maquina->matricula }}" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pb-5 d-flex flex-row">
+                        <div class="row w-100">
+                            <div class="col-md-6">
+                                <label for="explotacion_id" class="form-label">Explotación:</label>
+                                <select class="form-select form-control" id="edit_explotacion_id" name="explotacion_id" required>
+                                    <option selected disabled>Selecciona una opción</option>
+                                    @foreach ($explotacion as $explo)
+                                        <option value="{{ $explo->id }}" @if($maquina->explotacion_id == $explo->id) selected @endif>{{ $explo->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="imagen" class="form-label">Foto máquina:</label>
+                                <input type="file" class="form-control" accept="image/png, image/jpeg" id="edit_imagen" name="imagenMaquina">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
 

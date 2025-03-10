@@ -65,18 +65,17 @@ class MaquinaController extends Controller
 
 
     public function mostrarMaquinasPorExplotacion($explotacion_id){
+
         $maquinas = Maquina::where('explotacion_id', $explotacion_id)->get();
-        return response()->json($maquinas);
+        return response()->json($maquinas);;
+    }
+
+    public function buscarPorId($id){
+        $maquina = Maquina::find($id);
+        return response()->json($maquina);
     }
 
 
-    public function listarParcelasPorExplotacion(){
 
-        $explotacion = Explotacion::all();
-
-
-        return view('explotaciones.maquinas', compact('explotacion'));
-
-    }
 
 }
