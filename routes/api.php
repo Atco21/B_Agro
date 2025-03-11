@@ -66,6 +66,7 @@ Route::get('/ordenesTerminadas', [OrdenController::class, 'ordenesTerminadas'])-
 Route::get('/incidenciasPersonal', [IncidenciaController::class, 'incidenciasPersonal']);
 Route::get('/incidenciasMaquina', [IncidenciaController::class, 'incidenciasMaquina']);
 Route::get('/incidenciasStock', [IncidenciaController::class, 'incidenciasStock']);
+Route::get('/aplicador/{id}',[TrabajadorController::class, 'buscarPorId']);
 
 
 

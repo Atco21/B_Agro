@@ -115,7 +115,10 @@ class TrabajadorController extends Controller
         }
    }
 
-
+        public function buscarPorId($id){
+            $trabajador = User::where('id', $id)->get();
+            return response()->json($trabajador);
+        }
 
 
 }
