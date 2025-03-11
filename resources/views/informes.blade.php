@@ -1,19 +1,31 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Informes</h1>
-    <p>Contenido de Informes...</p>
+<div class="mt-4 w-100">
+    <div class="row " style="height: 100% ;">
+        <!-- Columna de formulario -->
+        <div class="col-md-3 offset-md-1">
+            <h1 class="mb-4 text-center">Informes</h1>
+            <p class="text-center mb-4">Genera un informe en formato PDF especificando el rango de fechas.</p>
 
+            <form action="{{ route('ordenes.generar.pdf') }}" method="GET" class="bg-light p-4 rounded shadow-sm">
+                <div class="mb-3">
+                    <label for="fecha_inicio" class="form-label">Fecha de inicio:</label>
+                    <input type="date" name="fecha_inicio" id="fecha_inicio" class="form-control" required>
+                </div>
 
-    <form action="{{ route('ordenes.generar.pdf') }}" method="GET">
-        <label for="fecha_inicio">Fecha de inicio:</label>
-        <input type="date" name="fecha_inicio" id="fecha_inicio" required>
+                <div class="mb-3">
+                    <label for="fecha_fin" class="form-label">Fecha de fin:</label>
+                    <input type="date" name="fecha_fin" id="fecha_fin" class="form-control" required>
+                </div>
 
-        <label for="fecha_fin">Fecha de fin:</label>
-        <input type="date" name="fecha_fin" id="fecha_fin" required>
+                <button type="submit" class="btn btn-primary w-100">Generar PDF</button>
+            </form>
+        </div>
 
-
-        <button type="submit">Generar PDF</button>
-    </form>
-
+        <!-- Columna adicional (derecha) -->
+        <div class="col-md-6" style="background-color: #818181 ">
+        </div>
+    </div>
+</div>
 @endsection

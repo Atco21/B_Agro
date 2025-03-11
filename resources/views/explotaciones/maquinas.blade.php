@@ -2,7 +2,6 @@
 
 @section('content2')
 
-
 <script>
 addEventListener('DOMContentLoaded', inicio);
 
@@ -13,63 +12,79 @@ function inicio() {
         select.addEventListener("change", function() {
             const id = select.value;
             if (id) {
-                cargarMaquina(id);
+                filtrarMaquinasPorExplotacion(id);
             }
         });
     }
-}
 
+    document.getElementById("searchInput").addEventListener("input", function () {
+        const busqValue = this.value.toLowerCase();
+        const maquinas = document.querySelectorAll(".cuadroMaquina");
 
-async function cargarMaquina(id){
-
-    fetch(`http://0.0.0.0/api/maquinas/explotacion/${id}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert("No hay datos");
+        maquinas.forEach(maquina => {
+            const nombre = maquina.querySelector(".card-title").innerText.toLowerCase();
+            if (nombre.includes(busqValue)) {
+                maquina.style.display = "block";
             } else {
-                document.getElementById('seccion').removeAttribute('hidden');
-                //actualizarContenido(data);
+                maquina.style.display = "none";
             }
-        })
-        .catch(error => console.error("Error en la petición:", error));
+        });
+    });
 }
 
+function filtrarMaquinasPorExplotacion(id) {
+    const maquinas = document.querySelectorAll('.cuadroMaquina'); // o ajusta este selector según tu HTML
 
-// async function actualizarContenido(data){
-//     let contentDiv  = document.getElementById('listado');
-//     document.getElementById('previo').setAttribute('hidden', '');
-//     let html = '';
-//     try{
+    maquinas.forEach(maquina => {
+        const explotacionId = maquina.getAttribute("data-explotacion");
 
+        // Mostrar solo las máquinas que coinciden con la explotación seleccionada
+        if (explotacionId === id) {
+            maquina.style.display = 'block'; // Mostrar la máquina
+        } else {
+            maquina.style.display = 'none'; // Ocultar la máquina
+        }
+    });
+}
 
-//     data.forEach(maquina => {
+async function cargarMaquina(id) {
+    try {
+        const response = await fetch(`http://0.0.0.0/api/maquinas/explotacion/${id}`);
+        const data = await response.json();
+        if (data.error) {
+            alert("No hay datos");
+        } else {
+            document.getElementById('seccion').removeAttribute('hidden');
+            actualizarContenido(data);
+        }
+    } catch (error) {
+        console.error("Error en la petición:", error);
+    }
+}
 
-//         html +=`
-//         <div class="card mt-3 ms-3 ms-4" style="width: 25rem;">
-//             <div class="d-flex flex-row mt-3 ms-3 align-items-center">
-//                 <img src="{{asset('./assets/logoAgro.png')}}" alt="Foto máquina" class="fotoPerfil" width="150px">
-//                 <h4 class="card-title ps-5">${maquina.nombre}</h4>
-//             </div>
-//             <div class="card-body">
-//                 <h5 class="card-title">Capacidad: <b>${maquina.capacidad || 'sin capacidad'}</b></h5>
-//                 <h5 class="card-title">Matricula: <b>${maquina.matricula || 'sin matrícula'}</b></h5>
-//             </div>
-//         </div>
-//         `;
+async function actualizarContenido(data) {
+    let contentDiv = document.getElementById('listado');
+    document.getElementById('previo').setAttribute('hidden', '');
+    let html = '';
 
+    data.forEach(maquina => {
+        html += `
+            <div class="card mt-3 ms-3 ms-4" style="width: 25rem;" >
+                <div class="d-flex flex-row mt-3 ms-3 align-items-center">
+                    <img src="{{asset('./assets/logoAgro.png')}}" alt="Foto máquina" class="fotoPerfil" width="150px">
+                    <h4 class="card-title ps-5">${maquina.nombre}</h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Capacidad: <b>${maquina.capacidad || 'sin capacidad'}</b></h5>
+                    <h5 class="card-title">Matricula: <b>${maquina.matricula || 'sin matrícula'}</b></h5>
+                </div>
+            </div>
+        `;
+    });
 
-//     });
-//     }catch (error) {
-//         console.error("Error obteniendo los nombres de los cultivos:", error);
-//         alert("Hubo un problema al cargar los datos.");
-//     }
-//     contentDiv.innerHTML = html;
+    contentDiv.innerHTML = html;
+}
 
-
-
-
-// }
 document.addEventListener("DOMContentLoaded", function () {
     const cuadros = document.querySelectorAll(".cuadroMaquina");
 
@@ -84,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     return;
                 }
 
-                console.log(data); // Verifica qué devuelve la API
+                console.log(data);
 
                 // Asignar valores a los inputs del modal
                 document.getElementById("edit_nombre_maquina").value = data.nombre || "";
@@ -92,8 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("edit_explotacion_id").value = data.explotacion_id;
                 document.getElementById("edit_maquina_id").value = data.id ;
 
-
-                // Mostrar el modal correctamente
+                // Mostrar el modal
                 let modal = new bootstrap.Modal(document.getElementById("editarMaquina"));
                 modal.show();
 
@@ -104,11 +118,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-
 </script>
+
 <div class="modal" id="editarMaquina" tabindex="-1" aria-labelledby="editarMaquinaModal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal-dialog m11">
+        <div class="modal-content m2">
             <div class="modal-header">
                 <h2 class="modal-title">Editar Máquina</h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -163,11 +177,10 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
 </div>
 
-
 <div class="ps-3 " id="seccion" >
 
     <div class="d-flex flex-row mt-3 align-items-center" >
-        <input type="search" class="form-control ms-3 w-25" placeholder="Buscar" aria-label="Buscar">
+        <input type="search" class="form-control ms-3 w-25" id="searchInput" placeholder="Buscar" aria-label="Buscar">
         <div class="pe-2">
         <button type="button" class="btn ms-3" data-bs-toggle="modal" data-bs-target="#anadirMaquina">
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -191,20 +204,18 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="row mb-5 pb-5">
 
             @foreach ($maquinas as $maquina)
-                <div class="card mt-3 ms-3 ms-4 cuadroMaquina" style="width: 25rem;" id="{{$maquina->id}}">
-
-                    <div class="d-flex flex-row mt-3 ms-3 align-items-center">
-                        <img src="{{asset('./assets/logoAgro.png')}}" alt="Foto máquina" class="fotoPerfil" width="150px">
-                        <h4 class="card-title ps-5">{{$maquina->nombre}}</h4>
-                    </div>
-
-                    <div class="card-body">
-                        <h5 class="card-title">Capacidad: <b>{{$maquina->capacidad}}</b></h5>
-                        <h5 class="card-title">Matricula: <b>{{$maquina->matricula}}</b></h5>
-                        <h5 class="card-title">Explot: <b>{{$maquina->explotacion->nombre}}</b></h5>
-
-                    </div>
+            <div class="card mt-3 ms-3 ms-4 cuadroMaquina" style="width: 25rem;" id="{{$maquina->id}}" data-explotacion="{{$maquina->explotacion_id}}">
+                <div class="d-flex flex-row mt-3 ms-3 align-items-center">
+                    <img src="{{asset('./assets/logoAgro.png')}}" alt="Foto máquina" class="fotoPerfil" width="150px">
+                    <h4 class="card-title ps-5">{{$maquina->nombre}}</h4>
                 </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">Capacidad: <b>{{$maquina->capacidad}}</b></h5>
+                    <h5 class="card-title">Matricula: <b>{{$maquina->matricula}}</b></h5>
+                    <h5 class="card-title">Explot: <b>{{$maquina->explotacion->nombre}}</b></h5>
+                </div>
+            </div>
             @endforeach
 
         </div>
@@ -233,7 +244,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 </div>
                                 <div class="col-md-6">
                                     <label for="matricula" class="form-label">Matricula:</label>
-                                    <input type="text" class="form-control" id="matricula" name="matricula" placeholder="Introduce matricula" required>
+                                    <input type="text" class="form-control" id="matricula" name="matricula" placeholder="Introduce matrícula de la máquina" required>
                                 </div>
                             </div>
                         </div>
@@ -251,31 +262,21 @@ document.addEventListener("DOMContentLoaded", function () {
                                 </div>
                                 <div class="col-md-6">
                                     <label for="imagen" class="form-label">Foto máquina:</label>
-                                    <input type="file" class="form-control" accept="image/png, image/jpeg" id="imagenMaquina" name="imagenMaquina">
+                                    <input type="file" class="form-control" accept="image/png, image/jpeg" id="imagen" name="imagenMaquina">
                                 </div>
                             </div>
                         </div>
 
-
-                        <div class="pb-5">
-
-                        </div>
-
                         <div class="modal-footer">
-                            <button type="submit" class="btn button-secondary1">Añadir máquina</button>
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         </div>
-                </form>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
 </div>
-
-
-
-
-
-
-
-
 
 @endsection

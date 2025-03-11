@@ -383,3 +383,12 @@ h3{
     overflow-y: auto; /* Añade un scroll si hay muchas tarjetas */
     padding-bottom: 20px; /* Espaciado inferior para evitar desbordamientos */
 }
+
+
+.btn-primary{
+    background-color: #01533E !important;
+    border-color: #01533E !important;
+    color: white !important;
+    font-weight: 700 !important;
+    transition: transform 0.2s ease, background-color 0.2s ease !important;
+}

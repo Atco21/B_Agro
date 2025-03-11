@@ -201,8 +201,7 @@ public function ordenesTerminadas()
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
 
-        $ordenes = Orden::whereNotNull('id_tratamiento')
-            ->whereBetween('fecha_inicio', [$fechaInicio, $fechaFin])
+        $ordenes = Orden::where('fecha_inicio', [$fechaInicio, $fechaFin])
             ->orWhereBetween('fecha_fin', [$fechaInicio, $fechaFin])
             ->get();
 

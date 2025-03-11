@@ -13,15 +13,13 @@ function inicio() {
     if (select) {
         select.addEventListener("change", function() {
             const id = select.value;
-            searchInput.value=""
+            searchInput.value = "";
 
             if (id) {
-                //cargarDatos(id);
+                cargarDatos(id);
             }
         });
     }
-
-
 
     searchInput.addEventListener("input", function () {
         const busqValue = searchInput.value.toLowerCase();
@@ -37,7 +35,6 @@ function inicio() {
         });
     });
 }
-
 function cargarDatos(id){
     let html = "";
     let contentDiv = document.getElementById('usuarios');
@@ -160,13 +157,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    <div class=" d-flex flex-wrap vw-100 m-3 overflow-auto vh-100 pb-5" id="usuarios">
+    <div class=" d-flex flex-wrap vw-100  overflow-auto vh-75" id="usuarios">
 
         @foreach ($users as $user)
 
 
-        <div class="card mt-3 ms-3 ms-4 cuadroPersona" style="width: 25em; height: 20em;" id="{{ $user->id }}">
-            <div class="d-flex flex-row mt-3 ms-3 align-items-center">
+        <div class="card mb-2 ms-3 ms-4 cuadroPersona" style="width: 25em; height: 20em;" id="{{ $user->id }}">
+            <div class="d-flex flex-row  ms-3 align-items-center">
                 <img src="{{asset('./assets/logoAgro.png')}}" alt="Foto de perfil" class="fotoPerfil" width="150px">
                 <h4 class="card-title ps-5">{{$user->nombre}}</h4>
             </div>
@@ -181,6 +178,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         @endforeach
+    </div>
 
 
         <div class="modal" id="editarUsuario" tabindex="-1" aria-labelledby="editarUsuarioModal" aria-hidden="true">

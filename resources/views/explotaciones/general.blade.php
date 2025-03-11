@@ -2,6 +2,6 @@
 
 @section('content2')
 <div>
-    <p>seccion general</p>
+    <h2>Próximamente</h2>
 </div>
 @endsection
