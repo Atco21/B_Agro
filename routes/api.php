@@ -11,6 +11,7 @@ use App\Http\Controllers\AuthLController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\TratamientoController;
+use App\Http\Controllers\IncidenciaController;
 
 
 Route::post('login', [AuthController::class, 'login'])->name('login');
@@ -43,3 +44,4 @@ Route::get('/ordenesTerminadas', [OrdenController::class, 'ordenesTerminadas'])-
 
 
 
+Route::get('/incidencias', [IncidenciaController::class, 'incidencias']);

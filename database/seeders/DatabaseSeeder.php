@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             LineasDePedidosTableSeeder::class, 
             MaquinaSeeder::class,
             OrdenSeeder::class,
+            IncidenciaSeeder::class,
         ]);
     }
 }
