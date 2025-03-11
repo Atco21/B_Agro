@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExplotacionController;
-use App\Http\Controllers\parcelasController;
+use App\Http\Controllers\ParcelasController;
 use App\Http\Controllers\cultivoController;
 use App\Http\Controllers\rendController;
 use App\Http\Controllers\TratamientoController;
@@ -39,14 +39,14 @@ Route::get('/explotaciones2', [ExplotacionController::class, 'index2']);
 Route::get('/', [ExplotacionController::class, 'index']);
 
 
-Route::get('/parcelas',[parcelasController::class, 'index']);
-Route::get('/parcelas/{id}',[parcelasController::class, 'show']);
-Route::get('/parcelas/explotacion/{explotacion_id}',[parcelasController::class, 'porExplotacion']);
-Route::get('/explotaciones/datos/{id}',[parcelasController::class, 'getDatosPorExplotacion']);
+Route::get('/parcelas',[ParcelasController::class, 'index']);
+Route::get('/parcelas/{id}',[ParcelasController::class, 'show']);
+Route::get('/parcelas/explotacion/{explotacion_id}',[ParcelasController::class, 'porExplotacion']);
+Route::get('/explotaciones/datos/{id}',[ParcelasController::class, 'getDatosPorExplotacion']);
 
 
 
-Route::get('/parcelas/explotacion/{explotacion_id}/rendimiento',[parcelasController::class, 'porExplotacion']);
+Route::get('/parcelas/explotacion/{explotacion_id}/rendimiento',[ParcelasController::class, 'porExplotacion']);
 
 
 Route::get('/rendimiento/{id}',[rendController::class, 'mostrarParcela']);

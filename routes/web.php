@@ -2,7 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ExplotacionController;
-use App\Http\Controllers\parcelasController;
+use App\Http\Controllers\ParcelasController;
 use App\Http\Controllers\rendController;
 use App\Http\Controllers\TrabajadorController;
 use App\Http\Controllers\MaquinaController;
@@ -48,7 +48,7 @@ Route::group(['middleware' => 'admin'], function(){
     });
 
     Route::get('/explotaciones/general', [ExplotacionController::class, 'general'])->name('explotaciones.general');
-    Route::get('/explotaciones/parcelas', [parcelasController::class, 'listarParcelasPorExplotacion'])->name('parcelas.listar');
+    Route::get('/explotaciones/parcelas', [ParcelasController::class, 'listarParcelasPorExplotacion'])->name('parcelas.listar');
     Route::get('/explotaciones/ordenes', [ExplotacionController::class, 'ordenes'])->name('explotaciones.ordenes');
     Route::get('/explotaciones/incidencias', [ExplotacionController::class, 'incidencias'])->name('explotaciones.inciendias');
 
@@ -57,7 +57,7 @@ Route::group(['middleware' => 'admin'], function(){
     Route::get('/explotaciones/pedidos', [explotacionController::class, 'pedidos'])->name('explotaciones.pedidos');
 
 
-    Route::get('/explotaciones/parcelas/{id}',[parcelasController::class, 'listarParcelasPorExplotacion']);
+    Route::get('/explotaciones/parcelas/{id}',[ParcelasController::class, 'listarParcelasPorExplotacion']);
 
 
 
