@@ -17,7 +17,11 @@ class Orden extends Model
         'fecha_fin',
         'tarea',
         'jefecampo_id',
-        'aplicador_id',
+        'aplicador_id1',
+        'aplicador_id2',
+        'aplicador_id3',
+        'aplicador_id4',
+        'aplicador_id5',
         'parcela_id',
         'id_tratamiento',
         'id_maquina',
@@ -33,7 +37,7 @@ class Orden extends Model
 
     public function aplicadores() //relaciona Orden Aplicador
     {
-        return $this->belongsToMany(Trabajador::class);
+        return $this->belongsTo(User::class, 'aplicador_id1');
     }
 
 

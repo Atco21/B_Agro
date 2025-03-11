@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             ExploSeeder::class,
             CultivoSeeder::class,
             ParcelaSeeder::class,
+            TratamientoSeeder::class,
             TrabajadorSeeder::class,
             MaquinaSeeder::class,
             RendimientoSeeder::class,

@@ -133,8 +133,11 @@ class TrabajadorController extends Controller
 
 
 
-   public function update(Request $request, $id)
+   public function update(Request $request)
 {
+    $id = $request->user_id;
+
+
     $validatedData = $request->validate([
         'nombre' => 'required|string|max:255',
         'dni' => 'required|string|unique:users,dni,' . $id,

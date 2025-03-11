@@ -49,12 +49,13 @@ class MaquinaController extends Controller
 
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+
+        $id = $request->maquina_id;
         $maquina = Maquina::findOrFail($id);
         $maquina->update($request->all());
-        return response()->json($maquina, 200);
-    }
+        return redirect()->route('explotaciones.maquinas')->with('success', 'Maquina actualizada correctamente');    }
 
     public function delete(Request $request, $id)
     {

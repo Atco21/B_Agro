@@ -72,53 +72,96 @@ async function cargarMaquina(id){
 // }
 document.addEventListener("DOMContentLoaded", function () {
     const cuadros = document.querySelectorAll(".cuadroMaquina");
+
     cuadros.forEach(cuadro => {
-        cuadro.addEventListener("click", function () {
+        cuadro.addEventListener("click", async function () {
+            try {
+                const response = await fetch(`http://0.0.0.0/api/maquinas/buscar/${cuadro.id}`);
+                const data = await response.json();
 
-            fetch(`http://0.0.0.0/api/maquinas/buscar/${cuadro.id}`)
-            .then(response => response.json()
-                      .then(data => {
-                          if (!data || data.length === 0){
-                              alert("No hay datos");
+                if (!data) {
+                    alert("No hay datos");
+                    return;
+                }
 
-                            } else {
-                                console.log(data)
-                                document.getElementById("edit_nombre_maquina").value = data.nombre
-                                document.getElementById("edit_explotacion_id").value = data.explotacion_id;
+                console.log(data); // Verifica qué devuelve la API
 
-
-                            }}
-                        )
-                )
+                // Asignar valores a los inputs del modal
+                document.getElementById("edit_nombre_maquina").value = data.nombre || "";
+                document.getElementById("edit_matricula").value = data.matricula || "";
+                document.getElementById("edit_explotacion_id").value = data.explotacion_id;
+                document.getElementById("edit_maquina_id").value = data.id ;
 
 
-            // const nombre = user.querySelector("h4.card-title").innerText;
-            // const explotacion = user.querySelector(".card-body h5:nth-child(1) b").innerText;
-            // const rol = user.querySelector(".card-body h5:nth-child(2) b").innerText;
-            // const dni = user.getAttribute("data-dni");
-            // const email = user.getAttribute("data-email");
-            // const fechaNacimiento = user.getAttribute("data-fecha_nacimiento");
-            // const telefono = user.getAttribute("data-telefono");
-            // const usuario = user.getAttribute("data-usuario");
+                // Mostrar el modal correctamente
+                let modal = new bootstrap.Modal(document.getElementById("editarMaquina"));
+                modal.show();
 
-            // document.getElementById("edit_nombre").value = nombre;
-            // document.getElementById("edit_explotacion_id").value = explotacion;
-            // document.getElementById("edit_rol").value = rol;
-            // document.getElementById("edit_dni").value = dni;
-            // document.getElementById("edit_email").value = email;
-            // document.getElementById("edit_fecha_nacimiento").value = fechaNacimiento;
-            // document.getElementById("edit_telefono").value = telefono;
-            // document.getElementById("edit_usuario").value = usuario;
-
-            let modal = new bootstrap.Modal(document.getElementById("editarMaquina"));
-            modal.show();
+            } catch (error) {
+                console.error("Error en la petición:", error);
+                alert("Hubo un error al cargar los datos.");
+            }
         });
     });
 });
 
-
 </script>
+<div class="modal" id="editarMaquina" tabindex="-1" aria-labelledby="editarMaquinaModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Editar Máquina</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('maquinas.update') }}" method="POST" id="editMaquinaForm">
+                    @csrf
+                    @method('PUT')
 
+                    <!-- Campo oculto para el ID de la máquina -->
+                    <input type="hidden" id="edit_maquina_id" name="maquina_id">
+
+                    <h2 class="mb-3">1. Datos</h2>
+                    <div class="pb-5 d-flex flex-row">
+                        <div class="row w-100">
+                            <div class="col-md-6">
+                                <label for="nombre" class="form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="edit_nombre_maquina" name="nombre" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="matricula" class="form-label">Matricula:</label>
+                                <input type="text" class="form-control" id="edit_matricula" name="matricula" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pb-5 d-flex flex-row">
+                        <div class="row w-100">
+                            <div class="col-md-6">
+                                <label for="explotacion_id" class="form-label">Explotación:</label>
+                                <select class="form-select form-control" id="edit_explotacion_id" name="explotacion_id" required>
+                                    <option selected disabled>Selecciona una opción</option>
+                                    @foreach ($explotacion as $explo)
+                                        <option value="{{ $explo->id }}">{{ $explo->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="imagen" class="form-label">Foto máquina:</label>
+                                <input type="file" class="form-control" accept="image/png, image/jpeg" id="edit_imagen" name="imagenMaquina">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <div class="ps-3 " id="seccion" >
@@ -143,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
     </div>
 
-    <div id="listado">
+    <div id="listado" class="overflow-hidden">
 
         <div class="row mb-5 pb-5">
 
@@ -229,62 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-<div class="modal" id="editarMaquina" tabindex="-1" aria-labelledby="editarMaquinaModal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Editar Máquina</h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('maquinas.update', $maquina->id) }}" method="POST" id="editMaquinaForm">
-                    @csrf
-                    @method('PUT')
 
-                    <!-- Campo oculto para el ID de la máquina -->
-                    <input type="hidden" id="edit_maquina_id" name="maquina_id" value="{{ $maquina->id }}">
-
-                    <h2 class="mb-3">1. Datos</h2>
-                    <div class="pb-5 d-flex flex-row">
-                        <div class="row w-100">
-                            <div class="col-md-6">
-                                <label for="nombre" class="form-label">Nombre:</label>
-                                <input type="text" class="form-control" id="edit_nombre_maquina" name="nombre" value="{{ $maquina->nombre }}" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="matricula" class="form-label">Matricula:</label>
-                                <input type="text" class="form-control" id="edit_matricula" name="matricula" value="{{ $maquina->matricula }}" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pb-5 d-flex flex-row">
-                        <div class="row w-100">
-                            <div class="col-md-6">
-                                <label for="explotacion_id" class="form-label">Explotación:</label>
-                                <select class="form-select form-control" id="edit_explotacion_id" name="explotacion_id" required>
-                                    <option selected disabled>Selecciona una opción</option>
-                                    @foreach ($explotacion as $explo)
-                                        <option value="{{ $explo->id }}" @if($maquina->explotacion_id == $explo->id) selected @endif>{{ $explo->nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="imagen" class="form-label">Foto máquina:</label>
-                                <input type="file" class="form-control" accept="image/png, image/jpeg" id="edit_imagen" name="imagenMaquina">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 

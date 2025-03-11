@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
 
                     <div class="modal-body">
-                        <form action="{{ route('trabajadores.update', $user->id) }}" method="POST" id="id">
+                        <form action="{{ route('trabajadores.update') }}" method="POST" id="id">
                             @csrf
                             @method('PUT')
 

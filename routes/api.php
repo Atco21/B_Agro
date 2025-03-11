@@ -11,6 +11,7 @@ use App\Http\Controllers\TrabajadorController;
 use App\Http\Controllers\MaquinaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrdenController;
+use App\Http\Controllers\IncidenciaController;
 
 
 // Users
@@ -59,7 +60,7 @@ Route::get('/maquinas/explotacion/{id}', [MaquinaController::class, 'mostrarMaqu
 
 Route::get('/maquinas', [MaquinaController::class, 'index']);
 
-Route::get('/maquinas/buscar/{id}', [MaquinaController::class, 'buscarPorId'])->name('maquinas.update');
+Route::get('/maquinas/buscar/{id}', [MaquinaController::class, 'buscarPorId'])->name('maquinas.buscarPorId');
 
 
 Route::post('/ordenes', [OrdenController::class, 'store']);
@@ -70,6 +71,20 @@ Route::get('/ordenesCurso', [OrdenController::class, 'ordenesCurso'])->name('ord
 
 Route::get('/ordenesPausadas', [OrdenController::class, 'ordenesPausa'])->name('ordenesPausa');
 
+
+
 Route::get('/ordenesTerminadas', [OrdenController::class, 'ordenesTerminadas'])->name('ordenesTerminadas');
 
+
+Route::get('/orden/{id}', [OrdenController::class, 'ordenById'])->name('ordenById');
+
+
 //Route::get('/ordenes/explotacion/{id}', OrdenesController::class, 'mostrarOrdenesPorExplotacion');
+
+
+Route::get('/incidenciasPersonal', [IncidenciaController::class, 'incidenciasPersonal']);
+Route::get('/incidenciasMaquina', [IncidenciaController::class, 'incidenciasMaquina']);
+Route::get('/incidenciasStock', [IncidenciaController::class, 'incidenciasStock']);
+
+
+Route::get('aplicador/{id}', [TrabajadorController::class, 'buscarPorId']);

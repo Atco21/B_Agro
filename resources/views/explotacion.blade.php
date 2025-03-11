@@ -83,7 +83,7 @@
 
                         @foreach ($explotacion as $explo)
 
-                        <tr class="lineaParcela">
+                        <tr class="lineasExplotaciones">
 
                             <td class="text-center">{{$explo->nombre}}</td>
                             <td class="text-center">{{$explo->tamanyo}}</td>

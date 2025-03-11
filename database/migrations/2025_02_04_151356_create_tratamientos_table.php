@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('tratamientos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('producto_quimico', 100);
-            $table->string('dosis', 100);
-            $table->string('nombre_tratamiento', 100);
-            $table->string('tempmax',100);
-            $table->string('tempmin',100);
+            $table->string('nombre', 100);
+            $table->string('producto_quimico', 100)->nullable();
+            $table->string('descripcion', 100)->nullable();
+            $table->string('dosis', 100)->nullable();
+            $table->string('tempmax',100)->nullable();
+            $table->string('tempmin',100)->nullable();
 
         });
     }

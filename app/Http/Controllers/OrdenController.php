@@ -7,6 +7,10 @@ use App\Models\Aplicadores;
 use App\Models\Explotacion;
 use Illuminate\Http\Request;
 
+
+use PDF; // Asegúrate de importar la fachada correctamente
+
+
 class OrdenController extends Controller
 {
     /**
@@ -140,7 +144,7 @@ class OrdenController extends Controller
     }
 public function ordenesCurso()
     {
-     $ordenesCurso = Orden::where('estado', 'encurso')->with('parcela')->get();
+     $ordenesCurso = Orden::where('estado', 'en curso')->with('parcela')->get();
     return response()->json($ordenesCurso)
     ->header("Access-Control-Allow-Origin", "*")
     ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
@@ -151,18 +155,29 @@ public function ordenesCurso()
 //pasado
 public function ordenesPausa()
     {
-     $ordenesPausa = Orden::where('estado', 'pasado')->with('parcela')->get();
+     $ordenesPausa = Orden::where('estado', 'pausada')->with('parcela')->get();
     return response()->json($ordenesPausa)
     ->header("Access-Control-Allow-Origin", "*")
     ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
     ->header("Access-Control-Allow-Headers", "Content-Type, Authorization");
     }
 
+    public function ordenById($id)
+    {
+     $orden = Orden::where('id', $id)->with('parcela')->with('aplicadores')->get();
+    return response()->json($orden)
+    ->header("Access-Control-Allow-Origin", "*")
+    ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    ->header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    }
+
+
+
     //terminada
 
 public function ordenesTerminadas()
     {
-     $ordenesTerminada = Orden::where('estado', 'terminada')->with('parcela')->get();
+     $ordenesTerminada = Orden::where('estado', 'completada')->with('parcela')->get();
     return response()->json($ordenesTerminada)
     ->header("Access-Control-Allow-Origin", "*")
     ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
@@ -170,6 +185,35 @@ public function ordenesTerminadas()
     }
 
     //cancelada
+
+
+
+
+
+
+
+
+
+
+    public function generarPdf(Request $request)
+    {
+        // Captura las fechas de inicio y fin desde el formulario
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+
+        $ordenes = Orden::whereNotNull('id_tratamiento')
+            ->whereBetween('fecha_inicio', [$fechaInicio, $fechaFin])
+            ->orWhereBetween('fecha_fin', [$fechaInicio, $fechaFin])
+            ->get();
+
+        // Si necesitas filtrar también por algún tratamiento específico
+
+
+        $pdf = PDF::loadView('pdf.ordenes', compact('ordenes', 'fechaInicio', 'fechaFin'));
+
+        // Genera el PDF y lo descarga
+        return $pdf->download('informe.pdf');
+    }
 
 }
 

@@ -7,6 +7,8 @@ use App\Http\Controllers\rendController;
 use App\Http\Controllers\TrabajadorController;
 use App\Http\Controllers\MaquinaController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrdenController;
+use App\Http\Controllers\PDFController;
 
 
 Route::get('/', function(){
@@ -37,7 +39,7 @@ Route::group(['middleware' => 'admin'], function(){
 
     Route::get('/trabajadores', [TrabajadorController::class, 'index'])->name('trabajadores');
 
-    Route::put('/trabajadores/{id}', [TrabajadorController::class, 'update'])->name('trabajadores.update');
+    Route::put('/trabajadores', [TrabajadorController::class, 'update'])->name('trabajadores.update');
 
 
 
@@ -71,6 +73,7 @@ Route::group(['middleware' => 'admin'], function(){
     // return view('explotacion', compact('explotacion'));
 
     // dump(Auth::check());
+    Route::put('/maquinas', [MaquinaController::class, 'update'])->name('maquinas.update');
 
 });
 
@@ -78,6 +81,7 @@ Route::group(['middleware' => 'admin'], function(){
 
 
 
+Route::get('pdf', [OrdenController::class, 'generarPdf'])->name('ordenes.generar.pdf');
 
 
 
