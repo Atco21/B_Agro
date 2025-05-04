@@ -8,7 +8,7 @@ use App\Models\Explotacion;
 use Illuminate\Http\Request;
 
 
-use PDF; // Asegúrate de importar la fachada correctamente
+use PDF;
 
 
 class OrdenController extends Controller
@@ -18,8 +18,8 @@ class OrdenController extends Controller
      */
     public function index()
     {
-        $ordenes = Orden::with('parcela')->get();
-        return response()->json($ordenes);
+        $explotaciones = Explotacion::all();
+        return view('explotaciones.ordenes', ['explotacion'=>$explotaciones]); // usa el nombre correcto de tu vista Blade
     }
 
     /**
@@ -99,7 +99,6 @@ class OrdenController extends Controller
         $orden->delete();
         return response()->json(['message' => 'Orden eliminada correctamente']);
     }
-     //INSERTAR Tabla intermedia de orden y aplicador que es muchos a muchos M/M
 
      public function insertarTablaIntermedia(){
         $orden=Orden::find(1);
@@ -187,7 +186,14 @@ public function ordenesTerminadas()
     //cancelada
 
 
-
+    public function mostrarOrdenesPorExplotacion($id)
+    {
+        $ordenes = Orden::where('explotacion_id', $id)->with('parcela')->get();
+        return response()->json($ordenes)
+        ->header("Access-Control-Allow-Origin", "*")
+        ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+        ->header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    }
 
 
 
@@ -205,7 +211,6 @@ public function ordenesTerminadas()
             ->orWhereBetween('fecha_fin', [$fechaInicio, $fechaFin])
             ->get();
 
-        // Si necesitas filtrar también por algún tratamiento específico
 
 
         $pdf = PDF::loadView('pdf.ordenes', compact('ordenes', 'fechaInicio', 'fechaFin'));

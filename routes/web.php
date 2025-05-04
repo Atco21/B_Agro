@@ -67,7 +67,7 @@ Route::group(['middleware' => 'admin'], function(){
     Route::get('/explotaciones/maquinas', [ExplotacionController::class, 'maquinas'])->name('explotaciones.maquinas');
     Route::post('/maquinas', [MaquinaController::class, 'store'])->name('maquinas.store');
 
-
+    Route::get('/explotaciones/ordenes/{id?}', [OrdenController::class, 'index'])->name('explotaciones.ordenes');
 
 
     // return view('explotacion', compact('explotacion'));

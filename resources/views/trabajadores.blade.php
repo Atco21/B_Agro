@@ -40,11 +40,16 @@ function cargarDatos(id){
     let contentDiv = document.getElementById('usuarios');
 
 
-    fetch(`http://0.0.0.0/api/trabajadores/${id}`)
+    fetch(`http://127.0.0.1:8000/api/trabajadores/${id}`)
     .then(response => response.json())
         .then(data => {
             if (!data || data.length === 0) {
-                alert("No hay datos");
+                html = `
+
+                    <div class="alert alert-danger p-5 ms-5" role="alert">
+                        No se han encontrado resultados.
+                    </div>
+                `;
                 contentDiv.innerHTML = html;
 
 
@@ -86,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(response => response.json()
                       .then(data => {
                           if (!data || data.length === 0){
-                              alert("No hay datos");
+                            return
                             } else {
                                 data.forEach(user => {
                                     document.getElementById("edit_user_id").value = user.id;

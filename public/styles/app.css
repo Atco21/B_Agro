@@ -392,3 +392,20 @@ h3{
     font-weight: 700 !important;
     transition: transform 0.2s ease, background-color 0.2s ease !important;
 }
+
+
+.filter-btn {
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 2px solid #01533E;
+    background-color: white;
+    color: #01533E;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.filter-btn.active {
+    background-color: #01533E;
+    color: white;
+}

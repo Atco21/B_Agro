@@ -25,6 +25,7 @@ return new class extends Migration
             $table->foreignId('parcela_id')->constrained('parcelas')->onDelete('cascade');
             $table->foreignId('id_tratamiento')->nullable()->constrained('tratamientos')->onDelete('cascade');
             $table->foreignId('id_maquina')->nullable()->constrained('maquina');
+            $table->foreignId('explotacion_id')->constrained('explotaciones')->onDelete('cascade');
             $table->timestamps();
         });
     }

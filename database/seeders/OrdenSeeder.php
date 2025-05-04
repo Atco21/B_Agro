@@ -13,7 +13,7 @@ class OrdenSeeder extends Seeder
     public function run(): void
     {
         DB::table('ordenes')->insert([
-            // 📌 Órdenes Pendientes
+            //  Órdenes Pendientes
             [
                 'estado' => 'pendiente',
                 'fecha_inicio' => '2024-02-01',
@@ -26,6 +26,7 @@ class OrdenSeeder extends Seeder
                 'id_maquina' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'explotacion_id' => 1,
             ],
             [
                 'estado' => 'pendiente',
@@ -39,6 +40,7 @@ class OrdenSeeder extends Seeder
                 'id_maquina' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'explotacion_id' => 1,
             ],
             [
                 'estado' => 'pendiente',
@@ -52,6 +54,8 @@ class OrdenSeeder extends Seeder
                 'id_maquina' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'explotacion_id' => 2,
+
             ],
             [
                 'estado' => 'pendiente',
@@ -65,9 +69,11 @@ class OrdenSeeder extends Seeder
                 'id_maquina' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'explotacion_id' => 1,
+
             ],
 
-            // 📌 Órdenes En Curso
+            //  Órdenes En Curso
             [
                 'estado' => 'en curso',
                 'fecha_inicio' => '2024-01-10',
@@ -80,6 +86,7 @@ class OrdenSeeder extends Seeder
                 'id_maquina' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'explotacion_id' => 1,
             ],
             [
                 'estado' => 'en curso',
@@ -93,6 +100,8 @@ class OrdenSeeder extends Seeder
                 'id_maquina' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'explotacion_id' => 2,
+
             ],
             [
                 'estado' => 'en curso',
@@ -106,6 +115,8 @@ class OrdenSeeder extends Seeder
                 'id_maquina' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'explotacion_id' => 1,
+
             ],
             [
                 'estado' => 'en curso',
@@ -119,9 +130,11 @@ class OrdenSeeder extends Seeder
                 'id_maquina' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'explotacion_id' => 1,
+
             ],
 
-            // 📌 Órdenes Pausadas
+            //  Órdenes Pausadas
             [
                 'estado' => 'pausada',
                 'fecha_inicio' => '2024-01-05',
@@ -134,6 +147,8 @@ class OrdenSeeder extends Seeder
                 'id_maquina' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'explotacion_id' => 1,
+
             ],
             [
                 'estado' => 'pausada',
@@ -147,6 +162,8 @@ class OrdenSeeder extends Seeder
                 'id_maquina' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'explotacion_id' => 2,
+
             ],
             [
                 'estado' => 'pausada',
@@ -160,6 +177,8 @@ class OrdenSeeder extends Seeder
                 'id_maquina' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'explotacion_id' => 1,
+
             ],
             [
                 'estado' => 'pausada',
@@ -173,9 +192,11 @@ class OrdenSeeder extends Seeder
                 'id_maquina' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'explotacion_id' => 1,
+
             ],
 
-            // 📌 Órdenes Completadas
+            // Órdenes Completadas
             [
                 'estado' => 'completada',
                 'fecha_inicio' => '2024-01-02',
@@ -188,6 +209,8 @@ class OrdenSeeder extends Seeder
                 'id_maquina' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'explotacion_id' => 1,
+
             ],
             [
                 'estado' => 'completada',
@@ -201,6 +224,8 @@ class OrdenSeeder extends Seeder
                 'id_maquina' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'explotacion_id' => 1,
+
             ],
             [
                 'estado' => 'completada',
@@ -214,6 +239,8 @@ class OrdenSeeder extends Seeder
                 'id_maquina' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'explotacion_id' => 1,
+
             ],
             [
                 'estado' => 'completada',
@@ -227,6 +254,8 @@ class OrdenSeeder extends Seeder
                 'id_maquina' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'explotacion_id' => 1,
+
             ],
             [
                 'estado' => 'completada',
@@ -240,6 +269,7 @@ class OrdenSeeder extends Seeder
                 'id_maquina' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'explotacion_id' => 1,
             ],
             [
                 'estado' => 'completada',
@@ -253,6 +283,7 @@ class OrdenSeeder extends Seeder
                 'id_maquina' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'explotacion_id' => 1,
             ],
         ]);
     }

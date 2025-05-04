@@ -25,6 +25,7 @@ class Orden extends Model
         'parcela_id',
         'id_tratamiento',
         'id_maquina',
+        'explotacion_id'
     ];
 
     protected $dates = ['fecha_inicio', 'fecha_fin'];

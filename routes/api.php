@@ -26,6 +26,9 @@ Route::post('/ordenes', [OrdenController::class, 'store']);
 
 Route::get('/aplicadores', [TrabajadorController::class, 'aplicadores'])->name('aplicadores');
 
+Route::get('ordenes/explotacion/{id}', [OrdenController::class, 'mostrarOrdenesPorExplotacion'])->name('filtroOrdenesPorExplotacion');
+
+
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('details', [TrabajadorController::class,'details']);
     Route::get('logout', [TrabajadorController::class,'logout']);
