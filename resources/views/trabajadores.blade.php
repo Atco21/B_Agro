@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
     cuadros.forEach(cuadro => {
         cuadro.addEventListener("click", function () {
 
-            fetch(`http://0.0.0.0/api/trabajadores/buscar/${cuadro.id}`)
+            fetch(`http://127.0.0.1:8000/api/trabajadores/buscar/${cuadro.id}`)
             .then(response => response.json()
                       .then(data => {
                           if (!data || data.length === 0){
@@ -162,12 +162,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    <div class=" d-flex flex-wrap vw-100  overflow-auto vh-75" id="usuarios">
+    <div class=" d-flex flex-wrap vw-100 mt-4  overflow-auto vh-75" id="usuarios">
 
         @foreach ($users as $user)
 
 
-        <div class="card mb-2 ms-3 ms-4 cuadroPersona" style="width: 25em; height: 20em;" id="{{ $user->id }}">
+        <div class="card mb-2 pt-3 ms-4 cuadroPersona" style="width: 25em; height: 20em;" id="{{ $user->id }}">
             <div class="d-flex flex-row  ms-3 align-items-center">
                 <img src="{{asset('./assets/logoAgro.png')}}" alt="Foto de perfil" class="fotoPerfil" width="150px">
                 <h4 class="card-title ps-5">{{$user->nombre}}</h4>

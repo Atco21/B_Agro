@@ -19,7 +19,53 @@ class OrdenController extends Controller
     public function index()
     {
         $explotaciones = Explotacion::all();
-        return view('explotaciones.ordenes', ['explotacion'=>$explotaciones]); // usa el nombre correcto de tu vista Blade
+        $ordenes = Orden::all();
+
+        $totalOrdenes = [];
+        $todasOrdenesExplotacion = [
+            'pendientes' => 0,
+            'enCurso' => 0,
+            'pausadas' => 0,
+            'completadas' => 0,
+        ];
+
+        foreach ($ordenes as $orden) {
+            $idExplotacion = $orden->explotacion_id;
+
+            if (!isset($totalOrdenes[$idExplotacion])) {
+                $totalOrdenes[$idExplotacion] = [
+                    'pendientes' => 0,
+                    'enCurso' => 0,
+                    'pausadas' => 0,
+                    'completadas' => 0,
+                ];
+            }
+
+            // Contar según el estado
+            switch ($orden->estado) {
+                case 'pendiente':
+                    $totalOrdenes[$idExplotacion]['pendientes']++;
+                    $todasOrdenesExplotacion['pendientes']++;
+                    break;
+                case 'en curso':
+                    $totalOrdenes[$idExplotacion]['enCurso']++;
+                    $todasOrdenesExplotacion['enCurso']++;
+
+                    break;
+                case 'pausada':
+                    $totalOrdenes[$idExplotacion]['pausadas']++;
+                    $todasOrdenesExplotacion['pausadas']++;
+
+                    break;
+                case 'completada':
+                    $totalOrdenes[$idExplotacion]['completadas']++;
+                    $todasOrdenesExplotacion['completadas']++;
+                    break;
+            }
+        }
+
+
+        return view('explotaciones.ordenes', ['explotacion'=>$explotaciones, 'ordenes'=>$totalOrdenes]);
     }
 
     /**

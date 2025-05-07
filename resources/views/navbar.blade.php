@@ -22,9 +22,16 @@
             </ul>
 
             <!-- Opciones de usuario a la derecha -->
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Mi perfil</a>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Mi perfil <i class="bi bi-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-menu custom-dropdown" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Editar usuario</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><b>Cerrar sesión</b></a></li>
+                    </ul>
                 </li>
             </ul>
         </div>

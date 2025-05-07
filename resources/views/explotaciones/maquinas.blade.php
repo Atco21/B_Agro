@@ -49,7 +49,7 @@ function filtrarMaquinasPorExplotacion(id) {
 
 async function cargarMaquina(id) {
     try {
-        const response = await fetch(`http://0.0.0.0/api/maquinas/explotacion/${id}`);
+        const response = await fetch(`http://127.0.0.1:8000/api/maquinas/explotacion/${id}`);
         const data = await response.json();
         if (data.error) {
             alert("No hay datos");
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
     cuadros.forEach(cuadro => {
         cuadro.addEventListener("click", async function () {
             try {
-                const response = await fetch(`http://0.0.0.0/api/maquinas/buscar/${cuadro.id}`);
+                const response = await fetch(`http://127.0.0.1:8000/api/maquinas/buscar/${cuadro.id}`);
                 const data = await response.json();
 
                 if (!data) {
@@ -204,7 +204,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="row mb-5 pb-5">
 
             @foreach ($maquinas as $maquina)
-            <div class="card mt-3 ms-3 ms-4 cuadroMaquina" style="width: 25rem;" id="{{$maquina->id}}" data-explotacion="{{$maquina->explotacion_id}}">
+            <div class="card mt-3 ms-4 cuadroMaquina" style="width: 25rem;" id="{{$maquina->id}}" data-explotacion="{{$maquina->explotacion_id}}">
                 <div class="d-flex flex-row mt-3 ms-3 align-items-center">
                     <img src="{{asset('./assets/logoAgro.png')}}" alt="Foto máquina" class="fotoPerfil" width="150px">
                     <h4 class="card-title ps-5">{{$maquina->nombre}}</h4>

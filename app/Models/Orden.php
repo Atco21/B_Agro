@@ -57,4 +57,9 @@ class Orden extends Model
     {
         return $this->belongsTo(Maquina::class);
     }
+
+    public function explotacion()
+    {
+        return $this->belongsTo(Explotacion::class);
+    }
 }

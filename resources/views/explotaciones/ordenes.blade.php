@@ -1,6 +1,7 @@
 @extends('explotacion')
 
 @section('content2')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
 
@@ -108,15 +109,60 @@ async function actualizarContenido(data){
 
 }
 
-
 </script>
-
 
 <div id="previo">
 
-    <div class="d-flex justify-content-center align-items-center" style="height: 70vh;">
+    <div class="d-flex">
 
-    <h2>Selecciona una explotación</h2>
+        <div class="ms-5">
+            {{-- <canvas id="graficoOrdenes" width="400" height="200"></canvas> --}}
+
+            <h2 class="mb-3">Resumen de órdenes por explotación</h2>
+            @foreach ($explotacion as $exp)
+                @php
+                    $resumen = $ordenes[$exp->id] ?? ['pendientes' => 0, 'enCurso' => 0, 'pausadas' => 0, 'completadas' => 0];
+                @endphp
+
+                <h3 class="mt-4 mb-2">{{ $exp->nombre }}</h3>
+                <div class="resumen">
+                    <div class="resumen-card">
+                        <h6>Pendientes</h6>
+                        <div class="cantidad">{{ $resumen['pendientes'] }}</div>
+                    </div>
+                    <div class="resumen-card">
+                        <h6>En curso</h6>
+                        <div class="cantidad">{{ $resumen['enCurso'] }}</div>
+                    </div>
+                    <div class="resumen-card">
+                        <h6>Pausadas</h6>
+                        <div class="cantidad">{{ $resumen['pausadas'] }}</div>
+                    </div>
+                    <div class="resumen-card">
+                        <h6>Completadas</h6>
+                        <div class="cantidad">{{ $resumen['completadas'] }}</div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+
+
+
+        {{-- @foreach ($explotacion as $exp)
+        @php
+            $resumen = $ordenes[$exp->id] ?? ['pendientes' => 0, 'enCurso' => 0, 'pausadas' => 0, 'completadas' => 0];
+        @endphp
+
+        <h4>{{ $exp->nombre }}</h4>
+        <ul>
+            <li>Pendientes: {{ $resumen['pendientes'] }}</li>
+            <li>En curso: {{ $resumen['enCurso'] }}</li>
+            <li>Pausadas: {{ $resumen['pausadas'] }}</li>
+            <li>Completadas: {{ $resumen['completadas'] }}</li>
+        </ul>
+        @endforeach --}}
+
 
     </div>
 
@@ -142,6 +188,7 @@ async function actualizarContenido(data){
     </div>
 
 </div>
+
 
 
 
