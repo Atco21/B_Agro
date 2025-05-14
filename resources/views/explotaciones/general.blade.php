@@ -4,32 +4,33 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
-<div class="d-flex flex-row justify-content-between">
 
-    <div class="w-25 h-100 ms-5">
-        <canvas id="graficoOrdenes" width="200" height="100"></canvas>
 
-    </div>
-    <div class="resumen ms-5 mt-4 me-5">
-        <div class="d-flex align-items-center">
-            <h2 class="me-4">Ordenes</h2>
+<div class="w-50 ms-2">
 
-            <div class="resumen-g-card">
-                <h6>Pendientes</h6>
-                <div class="cantidad">{{ $todasOrdenes['pendientes'] }}</div>
+    <div class="d-flex flex-row align-items-center align-content-center h-75">
+
+        <canvas id="graficoOrdenes" width="10" height="10"></canvas>
+
+        <div class="resumen mt-5 pt-5">
+            <div class="align-items-center p-2">
+                <div class="resumen-g-card" style="background-color: rgb(0, 66, 21) !important; color:white;">
+                    <h6>Pendientes</h6>
+                    <div class="cantidad">{{ $todasOrdenes['pendientes'] }}</div>
+                </div>
+                <div class="resumen-g-card" style="background-color: rgb(14, 217, 69) !important; color:black;">
+                    <h6>En curso</h6>
+                    <div class="cantidad">{{ $todasOrdenes['enCurso'] }}</div>
+                </div>
+                <div class="resumen-g-card"style="background-color: rgb(216, 255, 226) !important; color:black;">
+                    <h6>Pausadas</h6>
+                    <div class="cantidad">{{ $todasOrdenes['pausadas'] }}</div>
+                </div>
             </div>
-            <div class="resumen-g-card">
-                <h6>En curso</h6>
-                <div class="cantidad">{{ $todasOrdenes['enCurso'] }}</div>
-            </div>
-            <div class="resumen-g-card">
-                <h6>Pausadas</h6>
-                <div class="cantidad">{{ $todasOrdenes['pausadas'] }}</div>
-            </div>
+
         </div>
 
     </div>
-
 </div>
 
 
@@ -40,7 +41,6 @@
     const chart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ['Pendientes', 'En curso', 'Pausadas'],
             datasets: [{
                 label: 'Número de órdenes',
                 data: [
@@ -49,10 +49,17 @@
                     resumen.pausadas,
                 ],
                 backgroundColor: [
-                    'rgba(255, 205, 86, 0.8)',
-                    'rgba(54, 162, 235, 0.8)',
-                    'rgba(201, 203, 207, 0.8)',
-                ]
+
+                    'rgb(0, 66, 21)',
+                    'rgb(14, 217, 69)',
+                    'rgb(216, 255, 226)',
+                ],
+                borderColor: [
+                'rgba(0, 0, 0, 0.5)',
+                'rgba(0, 0, 0, 0.5)',
+                'rgba(0, 0, 0, 0.5)',
+            ],
+            borderWidth: 1
             }]
         },
         options: {
@@ -60,7 +67,10 @@
             plugins: {
                 title: {
                     display: true,
-                    text: 'Resumen total de órdenes'
+                    text: 'Resumen total de órdenes',
+                    font: {
+                        size: 20
+                    }
                 }
             }
         }

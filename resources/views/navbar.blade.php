@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid w-100">
         <!-- Logo -->
-        <a class="navbar-brand" href="{{ url('/explotaciones') }}">
+        <a class="navbar-brand" href="{{ url('/explotaciones/general') }}">
             <img src="{{url('assets/logoAgro.png')}}" width="80" alt="Logo">
         </a>
 

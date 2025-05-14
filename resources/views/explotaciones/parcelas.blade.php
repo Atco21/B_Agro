@@ -5,9 +5,14 @@
 
 
 
+
 <script>
 let idparc = 1;
 addEventListener('DOMContentLoaded', inicio);
+
+    document.addEventListener('DOMContentLoaded', function() {
+        let exploSelect = document.getElementById('exploOpciones').removeAttribute('hidden');
+    });
 
 function inicio() {
     const select = document.querySelector(".exploSelect");
@@ -16,6 +21,7 @@ function inicio() {
         select.addEventListener("change", function() {
             const id = select.value;
             if (id) {
+                let exploSelect2 = document.getElementById('btnLapiz').removeAttribute('hidden');
 
                 cargarDatos(id);
                 actualizarURL(id);

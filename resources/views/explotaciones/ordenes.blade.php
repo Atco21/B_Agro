@@ -101,7 +101,6 @@ async function actualizarContenido(data){
             <td class="text-center border-2" >${pendientes[i] ? pendientes[i].tarea : ''}</td>
             <td class="text-center border-2" >${enCurso[i] ? enCurso[i].tarea : ''}</td>
             <td class="text-center border-2" >${pausadas[i] ? pausadas[i].tarea : ''}</td>
-            <td class="text-center border-2" >${completadas[i] ? completadas[i].tarea : ''}</td>
         `;
         tbody.appendChild(tr);
     }
@@ -127,20 +126,16 @@ async function actualizarContenido(data){
                 <h3 class="mt-4 mb-2">{{ $exp->nombre }}</h3>
                 <div class="resumen">
                     <div class="resumen-card">
-                        <h6>Pendientes</h6>
-                        <div class="cantidad">{{ $resumen['pendientes'] }}</div>
-                    </div>
-                    <div class="resumen-card">
                         <h6>En curso</h6>
                         <div class="cantidad">{{ $resumen['enCurso'] }}</div>
                     </div>
                     <div class="resumen-card">
-                        <h6>Pausadas</h6>
-                        <div class="cantidad">{{ $resumen['pausadas'] }}</div>
+                        <h6>Pendientes</h6>
+                        <div class="cantidad">{{ $resumen['pendientes'] }}</div>
                     </div>
                     <div class="resumen-card">
-                        <h6>Completadas</h6>
-                        <div class="cantidad">{{ $resumen['completadas'] }}</div>
+                        <h6>Pausadas</h6>
+                        <div class="cantidad">{{ $resumen['pausadas'] }}</div>
                     </div>
                 </div>
             @endforeach

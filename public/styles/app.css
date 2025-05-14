@@ -432,13 +432,13 @@ h3{
 .resumen-g-card {
     background-color: #028b69;
     color: white;
-    padding: 1rem 2rem;
+    padding: 0.5em;
     border-radius: 10px;
     text-align: center;
     min-width: 120px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     width: 200px ;
-    margin-right:1.2em;
+    margin-bottom:1.2em;
 }
 
 .resumen-card h6 {
