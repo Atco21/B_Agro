@@ -34,7 +34,6 @@ Route::get('/home', function () {
 Route::group(['middleware' => 'admin'], function(){
 
 
-    Route::get('/explotaciones', [Explotacioncontroller::class, 'index'])->name('explotaciones');
     Route::get('/explotaciones/editar', [Explotacioncontroller::class, 'editar'])->name('explotaciones');
 
     Route::get('/trabajadores', [TrabajadorController::class, 'index'])->name('trabajadores');
