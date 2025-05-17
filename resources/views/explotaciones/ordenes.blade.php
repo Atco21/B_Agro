@@ -27,6 +27,18 @@ function inicio() {
     }
     history.replaceState({}, "", "/explotaciones/ordenes/");
 
+    document.querySelectorAll(".explotacion-tarjeta").forEach(tarjeta => {
+        tarjeta.addEventListener("click", function () {
+            const select = document.querySelector(".exploSelect");
+            const id = this.dataset.id;
+
+            if (!select || !id) return;
+
+            select.value = id;
+
+            select.dispatchEvent(new Event("change"));
+        });
+    });
 
 }
 
@@ -104,20 +116,21 @@ async function cargarDatos(id) {
                 @php
                     $resumen = $ordenes[$exp->id] ?? ['pendientes' => 0, 'enCurso' => 0, 'pausadas' => 0, 'completadas' => 0];
                 @endphp
-
-                <h3 class="mt-4 mb-2">{{ $exp->nombre }}</h3>
-                <div class="resumen">
-                    <div class="resumen-card">
-                        <h6>En curso</h6>
-                        <div class="cantidad">{{ $resumen['enCurso'] }}</div>
-                    </div>
-                    <div class="resumen-card">
-                        <h6>Pendientes</h6>
-                        <div class="cantidad">{{ $resumen['pendientes'] }}</div>
-                    </div>
-                    <div class="resumen-card">
-                        <h6>Pausadas</h6>
-                        <div class="cantidad">{{ $resumen['pausadas'] }}</div>
+                <div class="explotacion-tarjeta" data-id={{$exp->id}}>
+                    <h3 class="mt-4 mb-2">{{ $exp->nombre }}</h3>
+                    <div class="resumen">
+                        <div class="resumen-tarjeta">
+                            <h6>En curso</h6>
+                            <div class="cantidad">{{ $resumen['enCurso'] }}</div>
+                        </div>
+                        <div class="resumen-tarjeta">
+                            <h6>Pendientes</h6>
+                            <div class="cantidad">{{ $resumen['pendientes'] }}</div>
+                        </div>
+                        <div class="resumen-tarjeta">
+                            <h6>Pausadas</h6>
+                            <div class="cantidad">{{ $resumen['pausadas'] }}</div>
+                        </div>
                     </div>
                 </div>
             @endforeach

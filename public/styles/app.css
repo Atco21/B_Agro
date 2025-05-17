@@ -417,7 +417,7 @@ h3{
     margin-bottom: 2rem;
 }
 
-.resumen-card {
+.resumen-tarjeta {
     background-color: #028b69;
     color: white;
     padding: 1rem 2rem;
@@ -428,7 +428,7 @@ h3{
     width: 200px ;
 }
 
-.resumen-g-card {
+.resumen-g-tarjeta {
     background-color: #028b69;
     color: white;
     padding: 0.5em;
@@ -440,12 +440,12 @@ h3{
     margin-bottom:1.2em;
 }
 
-.resumen-card h6 {
+.resumen-tarjeta h6 {
     margin: 0;
     font-size: 1rem;
 }
 
-.resumen-card .cantidad {
+.resumen-tarjeta .cantidad {
     font-size: 1.5rem;
     font-weight: bold;
 }
