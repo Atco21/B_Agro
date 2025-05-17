@@ -38,13 +38,11 @@ window.onpopstate = function(event) {
     if (event.state && event.state.id) {
         cargarDatos(event.state.id);
 
-        // Sincroniza visualmente el <select>
         const select = document.querySelector(".exploSelect");
         if (select) {
             select.value = event.state.id;
         }
     } else {
-        // Si vuelves al estado inicial (sin ID)
         const select = document.querySelector(".exploSelect");
         if (select) {
             select.selectedIndex = 0;
@@ -72,8 +70,23 @@ async function cargarDatos(id) {
 
 
 
-async function actualizarContenido(data){
+ function actualizarContenido(data){
+    console.log(data);
+    const tbody = document.querySelector("#tabla_ordenes tbody");
+    tbody.innerHTML = "";
 
+    data.forEach(orden => {
+        const fila = document.createElement("tr");
+        fila.classList.add("linea_orden");
+
+        fila.innerHTML = `
+            <td>${orden.tarea}</td>
+            <td>${orden.fecha_inicio}</td>
+            <td>${orden.parcela.nombre}</td>
+        `;
+
+        tbody.appendChild(fila);
+    });
 
 }
 
@@ -143,41 +156,29 @@ async function actualizarContenido(data){
             </span>
             <input type="search" class="form-control" placeholder="Buscar" id="textoBusqueda">
         </div>
-
-        <div class="row">
-    <div class="col-md-6">
-        <table class="table" border="1" id="tabla_ordenes">
-            <thead>
-                <tr>
-                    <th class="th_verde_primero">Tarea</th>
-                    <th class="th_verde">Fecha</th>
-                    <th class="th_verde">Parcela</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="border: 2px solid black !important;">geroiugnerioun</td>
-                    <td>2025-05-13</td>
-                    <td>Parcela 1</td>
-                </tr>
-                <tr>
-                    <td>geroiugnerioun</td>
-                    <td>2025-05-14</td>
-                    <td>Parcela 2</td>
-                </tr>
-                <tr>
-                    <td>geroiugnerioun</td>
-                    <td>2025-05-15</td>
-                    <td>Parcela 3</td>
-                </tr>
-            </tbody>
-        </table>
     </div>
 
-    <div class="col-md-6" style="border: 2px solid black">
-        <p>Contenido lateral</p>
-    </div>
-</div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="table-wrapper">
+                <table id="tabla_ordenes">
+                    <thead>
+                        <tr>
+                            <th class="th_verde_primero">Tarea</th>
+                            <th class="th_verde">Fecha</th>
+                            <th class="th_verde">Parcela</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-6" style="border: 2px solid black">
+            <p>Contenido lateral</p>
+        </div>
     </div>
 </div>
 

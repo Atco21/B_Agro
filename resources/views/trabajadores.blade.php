@@ -7,11 +7,12 @@ addEventListener('DOMContentLoaded', inicio);
 function inicio() {
     const select = document.querySelector(".exploSelect");
     const searchInput = document.getElementById("searchInput");
+    const contentDiv = document.getElementById("usuarios");
 
     select.selectedIndex = 0;
 
     if (select) {
-        select.addEventListener("change", function() {
+        select.addEventListener("change", function () {
             const id = select.value;
             searchInput.value = "";
 
@@ -34,31 +35,54 @@ function inicio() {
             }
         });
     });
+
+    contentDiv.addEventListener("click", function (e) {
+        const cuadro = e.target.closest(".cuadroPersona");
+        if (!cuadro) return;
+
+        fetch(`http://127.0.0.1:8000/api/trabajadores/buscar/${cuadro.id}`)
+            .then(response => response.json())
+            .then(data => {
+                if (!data || data.length === 0) return;
+
+                const user = data[0];
+
+                document.getElementById("edit_user_id").value = user.id;
+                document.getElementById("edit_nombre").value = user.nombre;
+                document.getElementById("edit_dni").value = user.dni;
+                document.getElementById("edit_explotacion_id").value = user.explotacion_id;
+                document.getElementById("edit_rol").value = user.rol;
+                document.getElementById("edit_email").value = user.email;
+                document.getElementById("edit_fecha_nacimiento").value = user.fecha_nacimiento;
+                document.getElementById("edit_telefono").value = user.telefono;
+                document.getElementById("edit_usuario").value = user.usuario;
+                document.getElementById("password").value = user.password;
+
+                const modal = new bootstrap.Modal(document.getElementById("editarUsuario"));
+                modal.show();
+            })
+            .catch(error => console.error("Error al buscar el usuario:", error));
+    });
 }
-function cargarDatos(id){
+
+function cargarDatos(id) {
     let html = "";
     let contentDiv = document.getElementById('usuarios');
 
-
     fetch(`http://127.0.0.1:8000/api/trabajadores/${id}`)
-    .then(response => response.json())
+        .then(response => response.json())
         .then(data => {
             if (!data || data.length === 0) {
                 html = `
-
                     <div class="alert alert-danger p-5 ms-5" role="alert">
                         No se han encontrado resultados.
                     </div>
                 `;
                 contentDiv.innerHTML = html;
-
-
             } else {
                 data.forEach(user => {
-
-
                     html += `
-                        <div class="card mt-3 ms-3 ms-4 cuadroPersona" style="width: 25em; height: 20em;">
+                        <div class="card mt-3 ms-3 ms-4 cuadroPersona" id="${user.id}" style="width: 25em; height: 20em; cursor: pointer;">
                             <div class="d-flex flex-row mt-3 ms-3 align-items-center">
                                 <img src="{{ asset('./assets/logoAgro.png') }}" alt="Foto de perfil" class="fotoPerfil" width="150px">
                                 <h4 class="card-title ps-5">${user.nombre}</h4>
@@ -72,71 +96,10 @@ function cargarDatos(id){
                     `;
                 });
                 contentDiv.innerHTML = html;
-
             }
-
         })
         .catch(error => console.error("Error en la petición:", error));
 }
-
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    const cuadros = document.querySelectorAll(".cuadroPersona");
-    cuadros.forEach(cuadro => {
-        cuadro.addEventListener("click", function () {
-
-            fetch(`http://127.0.0.1:8000/api/trabajadores/buscar/${cuadro.id}`)
-            .then(response => response.json()
-                      .then(data => {
-                          if (!data || data.length === 0){
-                            return
-                            } else {
-                                data.forEach(user => {
-                                    document.getElementById("edit_user_id").value = user.id;
-                                    document.getElementById("edit_nombre").value = user.nombre
-                                    document.getElementById("edit_dni").value = user.dni;
-                                    document.getElementById("edit_explotacion_id").value = user.explotacion_id;
-                                    document.getElementById("edit_rol").value = user.rol;
-                                    document.getElementById("edit_email").value = user.email;
-                                    document.getElementById("edit_fecha_nacimiento").value = user.fecha_nacimiento;
-                                    document.getElementById("edit_telefono").value = user.telefono;
-                                    document.getElementById("edit_usuario").value = user.usuario;
-                                    document.getElementById("password").value = user.password;
-
-                                })
-                            }}
-                        )
-                )
-
-
-            // const nombre = user.querySelector("h4.card-title").innerText;
-            // const explotacion = user.querySelector(".card-body h5:nth-child(1) b").innerText;
-            // const rol = user.querySelector(".card-body h5:nth-child(2) b").innerText;
-            // const dni = user.getAttribute("data-dni");
-            // const email = user.getAttribute("data-email");
-            // const fechaNacimiento = user.getAttribute("data-fecha_nacimiento");
-            // const telefono = user.getAttribute("data-telefono");
-            // const usuario = user.getAttribute("data-usuario");
-
-            // document.getElementById("edit_nombre").value = nombre;
-            // document.getElementById("edit_explotacion_id").value = explotacion;
-            // document.getElementById("edit_rol").value = rol;
-            // document.getElementById("edit_dni").value = dni;
-            // document.getElementById("edit_email").value = email;
-            // document.getElementById("edit_fecha_nacimiento").value = fechaNacimiento;
-            // document.getElementById("edit_telefono").value = telefono;
-            // document.getElementById("edit_usuario").value = usuario;
-
-            let modal = new bootstrap.Modal(document.getElementById("editarUsuario"));
-            modal.show();
-        });
-    });
-});
-
-
-
 </script>
 
 

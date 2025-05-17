@@ -10,19 +10,16 @@
 let idparc = 1;
 addEventListener('DOMContentLoaded', inicio);
 
-    document.addEventListener('DOMContentLoaded', function() {
-        let exploSelect = document.getElementById('exploOpciones').removeAttribute('hidden');
-    });
 
 function inicio() {
     const select = document.querySelector(".exploSelect");
+    let exploSelect = document.getElementById('exploOpciones').removeAttribute('hidden');
 
     if (select) {
         select.addEventListener("change", function() {
             const id = select.value;
             if (id) {
                 let exploSelect2 = document.getElementById('btnLapiz').removeAttribute('hidden');
-
                 cargarDatos(id);
                 actualizarURL(id);
             }
@@ -52,7 +49,6 @@ async function actualizarContenido(data) {
     document.getElementById('previo').setAttribute('hidden', '');
     const contentDiv = document.getElementById("tabla");
 
-
     try {
         let html = `
             <table class="table" border="1" id="tabla_parcelas">
@@ -61,10 +57,7 @@ async function actualizarContenido(data) {
                         <th class="th_verde_primero">Nombre</th>
                         <th class="th_verde">Cultivo</th>
                         <th class="th_verde">Tamaño</th>
-                    </tr>
-
-
-        `;
+                    </tr>`;
 
         data.forEach(parcela => {
             console.log();
@@ -93,7 +86,6 @@ async function actualizarContenido(data) {
     }
 }
 
-
 function seleccionar(id) {
     document.getElementById('vacio').setAttribute('hidden','');
     document
@@ -107,13 +99,10 @@ function seleccionar(id) {
     });
 }
 
-
-
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('btnRendimiento').addEventListener('click', () => rendimiento(idparc));
     document.getElementById('btnOrdenes').addEventListener('click', () => ordenes(idparc));
 });
-
 
 async function rendimiento(id) {
     seleccionar(id);
@@ -192,15 +181,6 @@ async function rendimiento(id) {
 }
 
 
-
-
-function ordenes(id) {
-
-
-
-
-
-}
 
 function actualizarURL(id_explo) {
     const newURL = `/explotaciones/parcelas/${id_explo}`;

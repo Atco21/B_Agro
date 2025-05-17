@@ -39,7 +39,7 @@ class AuthController extends Controller
 
        // $explotacion = Explotacion::all();
 
-       return redirect()->to('/explotaciones');
+       return redirect()->to('/explotaciones/general');
         // Devolver el token al frontend
       //  return view('explotacion', compact('explotacion'));
     }
