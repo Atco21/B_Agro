@@ -88,17 +88,30 @@ async function cargarDatos(id) {
     tbody.innerHTML = "";
 
     data.forEach(orden => {
-        const fila = document.createElement("tr");
-        fila.classList.add("linea_orden");
 
-        fila.innerHTML = `
+ =          const fila =
+            `<tr class="linea_orden" id=${orden.id} onclick="seleccionar(${orden.id})">
             <td>${orden.tarea}</td>
             <td>${orden.fecha_inicio}</td>
+            <td>${orden.estado}</td>
             <td>${orden.parcela.nombre}</td>
+            </tr>
         `;
 
         tbody.appendChild(fila);
     });
+
+    function seleccionar(id) {
+    document
+    const lineas = document.querySelectorAll('.linea_orden');
+    lineas.forEach(linea => {
+        if (linea.id == id) {
+            linea.classList.add('seleccionada');
+        } else {
+            linea.classList.remove('seleccionada');
+        }
+    });
+}
 
 }
 
@@ -109,7 +122,6 @@ async function cargarDatos(id) {
     <div class="d-flex">
 
         <div class="ms-5">
-            {{-- <canvas id="graficoOrdenes" width="400" height="200"></canvas> --}}
 
             <h2 class="mb-3">Resumen de órdenes por explotación</h2>
             @foreach ($explotacion as $exp)
@@ -139,19 +151,7 @@ async function cargarDatos(id) {
 
 
 
-        {{-- @foreach ($explotacion as $exp)
-        @php
-            $resumen = $ordenes[$exp->id] ?? ['pendientes' => 0, 'enCurso' => 0, 'pausadas' => 0, 'completadas' => 0];
-        @endphp
 
-        <h4>{{ $exp->nombre }}</h4>
-        <ul>
-            <li>Pendientes: {{ $resumen['pendientes'] }}</li>
-            <li>En curso: {{ $resumen['enCurso'] }}</li>
-            <li>Pausadas: {{ $resumen['pausadas'] }}</li>
-            <li>Completadas: {{ $resumen['completadas'] }}</li>
-        </ul>
-        @endforeach --}}
 
 
     </div>
@@ -172,25 +172,25 @@ async function cargarDatos(id) {
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-7">
             <div class="table-wrapper">
-                <table id="tabla_ordenes">
-                    <thead>
+                <table id="tabla_ordenes" border="1" class="table">
+                    <thead clas>
                         <tr>
                             <th class="th_verde_primero">Tarea</th>
                             <th class="th_verde">Fecha</th>
+                            <th class="th_verde">Estado</th>
                             <th class="th_verde">Parcela</th>
                         </tr>
                     </thead>
                     <tbody>
-
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <div class="col-md-6" style="border: 2px solid black">
-            <p>Contenido lateral</p>
+        <div class="col-md-5" style="border: 2px solid black">
+
         </div>
     </div>
 </div>

@@ -14,15 +14,15 @@
 
         <div class="resumen mt-5 pt-5">
             <div class="align-items-center p-2">
-                <div class="resumen-g-card" style="background-color: rgb(0, 66, 21) !important; color:white;">
+                <div class="resumen-g-tarjeta" style="background-color: rgb(0, 66, 21) !important; color:white;">
                     <h6>Pendientes</h6>
                     <div class="cantidad">{{ $todasOrdenes['pendientes'] }}</div>
                 </div>
-                <div class="resumen-g-card" style="background-color: rgb(14, 217, 69) !important; color:black;">
+                <div class="resumen-g-tarjeta" style="background-color: rgb(14, 217, 69) !important; color:black;">
                     <h6>En curso</h6>
                     <div class="cantidad">{{ $todasOrdenes['enCurso'] }}</div>
                 </div>
-                <div class="resumen-g-card"style="background-color: rgb(216, 255, 226) !important; color:black;">
+                <div class="resumen-g-tarjeta"style="background-color: rgb(216, 255, 226) !important; color:black;">
                     <h6>Pausadas</h6>
                     <div class="cantidad">{{ $todasOrdenes['pausadas'] }}</div>
                 </div>

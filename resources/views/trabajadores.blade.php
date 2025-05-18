@@ -343,16 +343,7 @@ function cargarDatos(id) {
 
     </div>
 
-
-
 </div>
-
-
-
-
-
-
-
 
 
 

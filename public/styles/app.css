@@ -335,8 +335,7 @@ h3{
 
     background-color: #01533E !important;
     color: white !important;
-    border-left: 3px solid black;
-    width: 33% !important;
+    border-left: 3px solid black !important;
     text-align: center;
 
 }
@@ -454,7 +453,7 @@ h3{
 }
 
 #tabla_ordenes{
-    font-size: 24px;
+    font-size: 20px !important;
     width: 100%;
     border-collapse: collapse;
 }
@@ -470,7 +469,7 @@ h3{
 
 
 .table-wrapper {
-    max-height: 50% ;
+    max-height: 40% !important;
     overflow-y: auto;
 
 }
@@ -488,5 +487,6 @@ h3{
 thead th {
     position: sticky;
     top: 0;
-    z-index: 2;
+    z-index: 0;
 }
+
