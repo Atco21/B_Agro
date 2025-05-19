@@ -19,6 +19,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('informes') ? 'active' : '' }}" href="{{ url('/informes') }}">Informes</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('informes') ? 'active' : '' }}" href="{{ url('/informes') }}">Ventas</a>
+                </li>
             </ul>
 
             <!-- Opciones de usuario a la derecha -->

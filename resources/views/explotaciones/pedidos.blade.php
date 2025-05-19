@@ -3,7 +3,7 @@
 @section('content2')
 
 
-    <p>Seccion pedidos</p>
+    <p>Seccion almacén</p>
 
 
 

@@ -24,7 +24,7 @@
                 <a class="menu2 nav-link {{ Request::is('*maquinas*') ? 'active2' : '' }}" href="{{ url('explotaciones/maquinas') }}">Máquinas</a>
             </li>
             <li class="nav-item">
-                <a class="menu2 nav-link {{ Request::is('*pedidos*') ? 'active2' : '' }}" href="{{ url('explotaciones/pedidos') }}" >Pedidos</a>
+                <a class="menu2 nav-link {{ Request::is('*almacen*') ? 'active2' : '' }}" href="{{ url('explotaciones/almacen') }}" >Almacén</a>
             </li>
             <li class="nav-item">
                 <a class="menu2 nav-link {{ Request::is('*incidencias*') ? 'active2' : '' }}" href="{{ url('explotaciones/incidencias') }}" style="border: none">Incidencias</a>
