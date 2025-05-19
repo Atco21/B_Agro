@@ -331,12 +331,14 @@ h3{
 
     --bs-modal-border-color: none !important;
 }
-.th_verde{
 
+.th_verde{
     background-color: #01533E !important;
     color: white !important;
-    border-left: 3px solid black !important;
     text-align: center;
+    position: sticky; /* Añade esto si no está */
+    top: 0;
+    z-index: 2; /* Asegura que esté por encima de las filas */
 
 }
 .th_verde_primero{
@@ -409,6 +411,23 @@ h3{
     color: white;
 }
 
+.explotacion-tarjeta{
+
+    cursor: pointer;
+    background-color: #028b6952;
+    padding-top: 0.5em ;
+    padding-left: 1em ;
+    padding-bottom: 0.5em ;
+    padding-right: 1em ;
+
+    border-radius: 15px ;
+
+
+
+    margin-bottom: 2em;
+
+}
+
 
 .resumen{
     display: flex;
@@ -468,15 +487,16 @@ h3{
 
 
 
-.table-wrapper {
-    max-height: 40% !important;
+.table-wrapped {
+    max-height: 60% !important;
     overflow-y: auto;
-
+    overflow-x: hidden;
 }
 
 #tabla_ordenes {
     width: 100%;
     border-collapse: collapse;
+
 }
 
 #tabla_ordenes td {
@@ -488,5 +508,14 @@ thead th {
     position: sticky;
     top: 0;
     z-index: 0;
+
 }
 
+#bodyTabla{
+    margin-top: 2.0em !important;
+}
+
+#filtroEstado{
+    margin-right: 1em;
+    font-size: 20px !important;
+}
