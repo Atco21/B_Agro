@@ -57,7 +57,6 @@ async function actualizarContenido(data) {
                         <th class="th_verde_primero">Nombre</th>
                         <th class="th_verde">Cultivo</th>
                         <th class="th_verde">Tamaño</th>
-                        <th>aaaaaaaaaaa</th>
                     </tr>`;
 
         data.forEach(parcela => {

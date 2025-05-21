@@ -19,11 +19,13 @@ class DatabaseSeeder extends Seeder
             ExploSeeder::class,
             CultivoSeeder::class,
             ParcelaSeeder::class,
+            QuimicoSeeder::class,
             TratamientoSeeder::class,
             TrabajadorSeeder::class,
             MaquinaSeeder::class,
             RendimientoSeeder::class,
-            OrdenSeeder::class
+            OrdenSeeder::class,
+            AlmacenSeeder::class,
         ]);
     }
 }

@@ -53,7 +53,7 @@ Route::group(['middleware' => 'admin'], function(){
 
 
 
-    Route::get('/explotaciones/almacen', [explotacionController::class, 'pedidos'])->name('explotaciones.pedidos');
+    Route::get('/explotaciones/almacen', [explotacionController::class, 'almacen'])->name('explotaciones.pedidos');
 
 
     Route::get('/explotaciones/parcelas/{id}',[ParcelasController::class, 'listarParcelasPorExplotacion']);

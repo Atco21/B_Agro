@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Explotacion;
 use App\Models\Maquina;
 use App\Models\Orden;
+use App\Models\Almacen;
+
 
 
 class ExplotacionController extends Controller
@@ -64,9 +66,10 @@ class ExplotacionController extends Controller
         return view('explotaciones.maquinas', compact('explotacion'), compact('maquinas'));
     }
 
-    public function pedidos(){
+    public function almacen(){
         $explotacion = Explotacion::all();
-        return view('explotaciones.pedidos', compact('explotacion'));
+        $almacenes =  Almacen::with(['explotacion'])->get();
+        return view('explotaciones.almacen', compact('explotacion'), compact('almacenes'));
     }
 
     public function index2(Request $request)

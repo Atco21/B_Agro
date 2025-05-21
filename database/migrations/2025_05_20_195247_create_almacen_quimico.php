@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('almacen_cosecha', function (Blueprint $table) {
+        Schema::create('almacen_quimico', function (Blueprint $table) {
             $table->id();
-
             $table->foreignId('almacen_id')->constrained('almacen')->onDelete('cascade');
-            $table->foreignId('cosecha_id')->constrained('cosecha')->onDelete('cascade');
-
-            $table->unique(['almacen_id', 'cosecha_id']);
-            $table->enum('unidad_medida',['u', 'g', 'kg','T']);
-            $table->decimal('precioPorMedida', 10, 2)->nullable();
-
+            $table->foreignId('quimico_id')->constrained('quimico')->onDelete('cascade');
+            $table->integer('cantidad');
+            $table->enum('unidad',['u', 'g', 'ml', 'L']);
+            $table->integer('stock_minimo')->default(0);
+            $table->integer('stock_maximo')->default(0);
+            $table->integer('stock')->default(0);
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('almacen_cosecha');
+        Schema::dropIfExists('almacen_quimico');
     }
 };
