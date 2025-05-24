@@ -40,7 +40,7 @@
             <!-- Contenido principal -->
             <div class="col-11 d-flex flex-column h-100 pe-5">
                 <div class="d-flex justify-content-end align-items-center gap-3 p-3 pe-4">
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#crearexplotacion" id="btnCrearExplo2">
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#crearexplotacion" id="btnCrearExplo2" hidden>
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_1172_4174)">
@@ -62,7 +62,7 @@
 
                     <button class="p-0" style="border: none; background:none; transform: scale(1.5);" title="Editar"
                         data-bs-toggle="modal" data-bs-target="#editarExplotaciones" id="btnLapiz" hidden>
-                        <svg width="30" height="30" viewBox="0 0 52 52" fill="none"
+                        <svg width="28" height="28" viewBox="0 0 52 52" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M18.8277 43.8753H9.75C9.31902 43.8753 8.9057 43.7041 8.60095 43.3993C8.29621 43.0946 8.125 42.6812 8.125 42.2503V33.1726C8.1252 32.7422 8.29614 32.3295 8.60031 32.025L33.6497 6.97557C33.9544 6.67106 34.3676 6.5 34.7984 6.5C35.2292 6.5 35.6423 6.67106 35.947 6.97557L45.0247 16.0471C45.3292 16.3519 45.5003 16.765 45.5003 17.1958C45.5003 17.6266 45.3292 18.0398 45.0247 18.3445L19.9753 43.4C19.6708 43.7041 19.2581 43.8751 18.8277 43.8753Z"

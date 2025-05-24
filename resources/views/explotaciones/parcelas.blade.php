@@ -14,6 +14,8 @@ addEventListener('DOMContentLoaded', inicio);
 function inicio() {
     const select = document.querySelector(".exploSelect");
     let exploSelect = document.getElementById('exploOpciones').removeAttribute('hidden');
+    let aniadirBoton = document.getElementById('btnCrearExplo2').removeAttribute('hidden');
+
 
     if (select) {
         select.addEventListener("change", function() {

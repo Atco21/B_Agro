@@ -20,7 +20,7 @@
                     <a class="nav-link {{ Request::is('informes') ? 'active' : '' }}" href="{{ url('/informes') }}">Informes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('informes') ? 'active' : '' }}" href="{{ url('/informes') }}">Ventas</a>
+                    <a class="nav-link {{ Request::is('ventas') ? 'active' : '' }}" href="{{ url('/ventas') }}">Ventas</a>
                 </li>
             </ul>
 

@@ -137,31 +137,34 @@
                         console.log(orden);
                         cuadro.innerHTML = `
 
-                        <h2 class="fw-bold text-center mb-3 mt-2">Tarea ${orden[0].estado}</h2>
+                        <h2 class="fw-bold text-center mb-3 mt-5">Órden ${orden[0].estado}</h2>
 
                         <div class="d-flex align-items-center mb-2">
-                            <span>Fecha: <strong>${orden[0].fecha_inicio}</strong></span>
+                            <img src="{{url('images/Tarea-Icon.svg')}}" class="me-3"><span>Tarea: <strong>${orden[0].tarea}</strong></span>
                         </div>
 
                         <div class="d-flex align-items-center mb-2">
-                            <span>Máquina: <strong>${orden[0].maquina?.nombre || 'Sin asignar'}</strong></span>
+                            <img src="{{url('images/Fecha-Icon.svg')}}" class="me-3"><span>Fecha: <strong>${orden[0].fecha_inicio}</strong></span>
                         </div>
 
                         <div class="d-flex align-items-center mb-2">
-                            <span>Tratamiento: <strong>${orden[0].tratamiento?.nombre || 'Ninguno'}</strong></span>
+                            <img src="{{url('images/Maquina-Icon.svg')}}" class="me-3"><span>Máquina: <strong>${orden[0].maquina?.nombre || 'Sin asignar'}</strong></span>
                         </div>
 
-                        <div class="border rounded px-2 py-1">
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="{{url('images/Tratamiento-Icon.svg')}}" class="me-3"><span>Tratamiento: <strong>${orden[0].tratamiento?.nombre || 'Ninguno'}</strong></span>
+                        </div>
+
+                        <div class="border rounded px-2 py-1 mb-3">
                             <div class="d-flex align-items-center mb-1">
-                                <span class="fw-semibold">Aplicadores</span>
+                                <img src="{{url('images/Persona-Icon.svg')}}" class="me-3"><span class="fw-semibold">Aplicadores</span>
                             </div>
                             <div class="d-flex align-items-center">
-                                <span>${orden[0].aplicadores?.nombre || 'Sin asignar'}</span>
+                                <img src="{{url('images/FotoAbatar.png')}}" class="me-3"><span>${orden[0].aplicadores?.nombre || 'Sin asignar'}</span>
                                 <i class="bi bi-caret-down ms-auto"></i>
                             </div>
                         </div>
                 `;
-                        cuadro.removeAttribute('hidden');
                     }
                 })
                 .catch(error => console.error("Error al mostrar la orden:", error));
@@ -178,10 +181,10 @@
                 @foreach ($explotacion as $exp)
                     @php
                         $resumen = $ordenes[$exp->id] ?? [
-                            'pendientes' => 0,
-                            'enCurso' => 0,
-                            'pausadas' => 0,
-                            'completadas' => 0,
+                            'Pendientes' => 0,
+                            'En curso' => 0,
+                            'Pausadas' => 0,
+                            'Completadas' => 0,
                         ];
                     @endphp
                     <div class="explotacion-tarjeta" data-id={{ $exp->id }} ">
@@ -189,15 +192,15 @@
                         <div class="resumen d-flex flex-wrap gap-3">
                             <div class="resumen-tarjeta">
                                 <h6>En curso</h6>
-                                <div class="cantidad">{{ $resumen['enCurso'] }}</div>
+                                <div class="cantidad">{{ $resumen['En curso'] }}</div>
                             </div>
                             <div class="resumen-tarjeta">
                                 <h6>Pendientes</h6>
-                                <div class="cantidad">{{ $resumen['pendientes'] }}</div>
+                                <div class="cantidad">{{ $resumen['Pendientes'] }}</div>
                             </div>
                             <div class="resumen-tarjeta">
                                 <h6>Pausadas</h6>
-                                <div class="cantidad">{{ $resumen['pausadas'] }}</div>
+                                <div class="cantidad">{{ $resumen['Pausadas'] }}</div>
                             </div>
                         </div>
                     </div>
@@ -251,10 +254,13 @@
                         </table>
                     </div>
                 </div>
+                <div class="col-md-4 ms-4 d-flex flex-column justify-content-between" id="cuadroDetalles" hidden>
+                    <div class="d-flex align-items-center justify-content-center h-100">
+                        <h3>
+                            Selecciona una orden para ver los detalles
+                        </h3>
 
-                <div class="col-md-4 ms-4"
-                    style="border: 2px solid black; height: 500px !important; font-size:28px !important; margin-top: 2.5em !important;"
-                    id="cuadroDetalles" hidden>
+                    </div>
                 </div>
             </div>
         </div>

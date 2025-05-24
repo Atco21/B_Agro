@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('ordenes', function (Blueprint $table) {
             $table->id();
-            $table->enum('estado',['pendiente', 'en curso', 'pausada', 'completada']);
+            $table->enum('estado',['Pendiente', 'En curso', 'Pausada', 'Completada']);
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_fin')->nullable();
             $table->string('tarea', 255);

@@ -38,16 +38,16 @@ class ExplotacionController extends Controller
         foreach ($ordenes as $orden) {
 
             switch ($orden->estado) {
-                case 'pendiente':
+                case 'Pendiente':
                     $todasOrdenes['pendientes']++;
                     break;
-                case 'en curso':
+                case 'En curso':
                     $todasOrdenes['enCurso']++;
                     break;
-                case 'pausada':
+                case 'Pausada':
                     $todasOrdenes['pausadas']++;
                     break;
-                case 'completada':
+                case 'Completada':
                     $todasOrdenes['completadas']++;
                     break;
             }

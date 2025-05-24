@@ -12,7 +12,7 @@ function inicio(){
 </script>
 
 
-<div class="ms-5" id="previoAlmacen">
+<div class="ms-5" id="previoAlmacen" hidden>
     <div class="d-flex flex-row">
         <div class="ms-auto pe-3">
             <button href="" class="btn btn-primary mb-2 me-4 "><h4>Agregar almacén</h4></button>
@@ -44,6 +44,39 @@ function inicio(){
         </div>
         @endforeach
     </div>
+
+</div>
+
+
+<div class="ms-5" id="almacenOpciones">
+
+    <div></div>
+        <div class="d-flex flex-row mb-3">
+            <div class="me-auto pe-3">
+                <button href="" class="btn botonAlmacen"><h4>Añadir stock</h4></button>
+                <button href="" class="btn botonAlmacen"><h4>Agregar químico</h4></button>
+            </div>
+        </div>
+
+        <div class="d-flex align-items-center oveflow-auto flex-wrap">
+
+            <table class="table text-center w-50">
+                <thead>
+                    <tr>
+                        <th class="th_verde_primero">Nombre</th>
+                        <th class="th_verde">Tipo</th>
+                        <th class="th_verde">Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaAlmacen">
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+
 
 </div>
 

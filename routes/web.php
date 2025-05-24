@@ -8,6 +8,7 @@ use App\Http\Controllers\TrabajadorController;
 use App\Http\Controllers\MaquinaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrdenController;
+use App\Http\Controllers\VentasController;
 use App\Http\Controllers\PDFController;
 
 
@@ -40,7 +41,7 @@ Route::group(['middleware' => 'admin'], function(){
 
     Route::put('/trabajadores', [TrabajadorController::class, 'update'])->name('trabajadores.update');
 
-
+    Route::get('/ventas', [VentasController::class, 'index'])->name('ventas');
 
     Route::get('/informes', function () {
         return view('informes');

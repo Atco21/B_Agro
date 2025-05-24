@@ -15,7 +15,7 @@ class OrdenSeeder extends Seeder
         DB::table('ordenes')->insert([
             //  Órdenes Pendientes
             [
-                'estado' => 'pendiente',
+                'estado' => 'Pendiente',
                 'fecha_inicio' => '2024-02-01',
                 'fecha_fin' => null,
                 'tarea' => 'Aplicación de fertilizante',
@@ -29,7 +29,7 @@ class OrdenSeeder extends Seeder
                 'explotacion_id' => 1,
             ],
             [
-                'estado' => 'pendiente',
+                'estado' => 'Pendiente',
                 'fecha_inicio' => '2024-02-10',
                 'fecha_fin' => null,
                 'tarea' => 'Riego de campo',
@@ -43,7 +43,7 @@ class OrdenSeeder extends Seeder
                 'explotacion_id' => 1,
             ],
             [
-                'estado' => 'pendiente',
+                'estado' => 'Pendiente',
                 'fecha_inicio' => '2024-02-15',
                 'fecha_fin' => null,
                 'tarea' => 'Monitoreo de plagas',
@@ -58,7 +58,7 @@ class OrdenSeeder extends Seeder
 
             ],
             [
-                'estado' => 'pendiente',
+                'estado' => 'Pendiente',
                 'fecha_inicio' => '2024-02-20',
                 'fecha_fin' => null,
                 'tarea' => 'Aplicación de herbicida',
@@ -73,9 +73,9 @@ class OrdenSeeder extends Seeder
 
             ],
 
-            //  Órdenes En Curso
+            //  Órdenes En curso
             [
-                'estado' => 'en curso',
+                'estado' => 'En curso',
                 'fecha_inicio' => '2024-01-10',
                 'fecha_fin' => null,
                 'tarea' => 'Siembra de trigo',
@@ -89,7 +89,7 @@ class OrdenSeeder extends Seeder
                 'explotacion_id' => 1,
             ],
             [
-                'estado' => 'en curso',
+                'estado' => 'En curso',
                 'fecha_inicio' => '2024-01-12',
                 'fecha_fin' => null,
                 'tarea' => 'Cosecha de maíz',
@@ -104,7 +104,7 @@ class OrdenSeeder extends Seeder
 
             ],
             [
-                'estado' => 'en curso',
+                'estado' => 'En curso',
                 'fecha_inicio' => '2024-01-18',
                 'fecha_fin' => null,
                 'tarea' => 'Labranza del suelo',
@@ -119,7 +119,7 @@ class OrdenSeeder extends Seeder
 
             ],
             [
-                'estado' => 'en curso',
+                'estado' => 'En curso',
                 'fecha_inicio' => '2024-01-22',
                 'fecha_fin' => null,
                 'tarea' => 'Cosecha de girasol',
@@ -136,7 +136,7 @@ class OrdenSeeder extends Seeder
 
             //  Órdenes Pausadas
             [
-                'estado' => 'pausada',
+                'estado' => 'Pausada',
                 'fecha_inicio' => '2024-01-05',
                 'fecha_fin' => null,
                 'tarea' => 'Control de plagas',
@@ -151,7 +151,7 @@ class OrdenSeeder extends Seeder
 
             ],
             [
-                'estado' => 'pausada',
+                'estado' => 'Pausada',
                 'fecha_inicio' => '2024-01-08',
                 'fecha_fin' => null,
                 'tarea' => 'Aplicación de fungicida',
@@ -166,7 +166,7 @@ class OrdenSeeder extends Seeder
 
             ],
             [
-                'estado' => 'pausada',
+                'estado' => 'Pausada',
                 'fecha_inicio' => '2024-01-15',
                 'fecha_fin' => null,
                 'tarea' => 'Monitoreo del suelo',
@@ -181,7 +181,7 @@ class OrdenSeeder extends Seeder
 
             ],
             [
-                'estado' => 'pausada',
+                'estado' => 'Pausada',
                 'fecha_inicio' => '2024-01-20',
                 'fecha_fin' => null,
                 'tarea' => 'Podado de árboles',
@@ -198,7 +198,7 @@ class OrdenSeeder extends Seeder
 
             // Órdenes Completadas
             [
-                'estado' => 'completada',
+                'estado' => 'Completada',
                 'fecha_inicio' => '2024-01-02',
                 'fecha_fin' => '2024-01-04',
                 'tarea' => 'Siembra de maíz',
@@ -213,7 +213,7 @@ class OrdenSeeder extends Seeder
 
             ],
             [
-                'estado' => 'completada',
+                'estado' => 'Completada',
                 'fecha_inicio' => '2023-12-10',
                 'fecha_fin' => '2023-12-15',
                 'tarea' => 'Riego por aspersión',
@@ -228,7 +228,7 @@ class OrdenSeeder extends Seeder
 
             ],
             [
-                'estado' => 'completada',
+                'estado' => 'Completada',
                 'fecha_inicio' => '2024-01-06',
                 'fecha_fin' => '2024-01-07',
                 'tarea' => 'Aplicación de fertilizante',
@@ -243,7 +243,7 @@ class OrdenSeeder extends Seeder
 
             ],
             [
-                'estado' => 'completada',
+                'estado' => 'Completada',
                 'fecha_inicio' => '2024-01-10',
                 'fecha_fin' => '2024-01-11',
                 'tarea' => 'Riego de campo',
@@ -258,7 +258,7 @@ class OrdenSeeder extends Seeder
 
             ],
             [
-                'estado' => 'completada',
+                'estado' => 'Completada',
                 'fecha_inicio' => '2024-01-18',
                 'fecha_fin' => '2024-01-19',
                 'tarea' => 'Monitoreo de plagas',
@@ -272,7 +272,7 @@ class OrdenSeeder extends Seeder
                 'explotacion_id' => 1,
             ],
             [
-                'estado' => 'completada',
+                'estado' => 'Completada',
                 'fecha_inicio' => '2024-01-22',
                 'fecha_fin' => '2024-01-23',
                 'tarea' => 'Aplicación de herbicida',

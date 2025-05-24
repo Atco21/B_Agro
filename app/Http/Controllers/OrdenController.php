@@ -23,10 +23,10 @@ class OrdenController extends Controller
 
         $totalOrdenes = [];
         $todasOrdenesExplotacion = [
-            'pendientes' => 0,
-            'enCurso' => 0,
-            'pausadas' => 0,
-            'completadas' => 0,
+            'Pendientes' => 0,
+            'En curso' => 0,
+            'Pausadas' => 0,
+            'Completadas' => 0,
         ];
 
         foreach ($ordenes as $orden) {
@@ -34,32 +34,32 @@ class OrdenController extends Controller
 
             if (!isset($totalOrdenes[$idExplotacion])) {
                 $totalOrdenes[$idExplotacion] = [
-                    'pendientes' => 0,
-                    'enCurso' => 0,
-                    'pausadas' => 0,
-                    'completadas' => 0,
+                    'Pendientes' => 0,
+                    'En curso' => 0,
+                    'Pausadas' => 0,
+                    'Completadas' => 0,
                 ];
             }
 
             // Contar según el estado
             switch ($orden->estado) {
-                case 'pendiente':
-                    $totalOrdenes[$idExplotacion]['pendientes']++;
-                    $todasOrdenesExplotacion['pendientes']++;
+                case 'Pendiente':
+                    $totalOrdenes[$idExplotacion]['Pendientes']++;
+                    $todasOrdenesExplotacion['Pendientes']++;
                     break;
-                case 'en curso':
-                    $totalOrdenes[$idExplotacion]['enCurso']++;
-                    $todasOrdenesExplotacion['enCurso']++;
+                case 'En curso':
+                    $totalOrdenes[$idExplotacion]['En curso']++;
+                    $todasOrdenesExplotacion['En curso']++;
 
                     break;
-                case 'pausada':
-                    $totalOrdenes[$idExplotacion]['pausadas']++;
-                    $todasOrdenesExplotacion['pausadas']++;
+                case 'Pausada':
+                    $totalOrdenes[$idExplotacion]['Pausadas']++;
+                    $todasOrdenesExplotacion['Pausadas']++;
 
                     break;
-                case 'completada':
-                    $totalOrdenes[$idExplotacion]['completadas']++;
-                    $todasOrdenesExplotacion['completadas']++;
+                case 'Completada':
+                    $totalOrdenes[$idExplotacion]['Completadas']++;
+                    $todasOrdenesExplotacion['Completadas']++;
                     break;
             }
         }
