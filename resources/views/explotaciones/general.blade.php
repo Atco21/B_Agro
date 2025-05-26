@@ -1,80 +1,114 @@
 @extends('explotacion')
 
 @section('content2')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
+    <div class="d-flex flex-row">
+        <div class="ms-2 col-md-5">
 
+            <div class="d-flex flex-column align-items-center align-content-center h-25">
+                <h3>Resumen total órdenes</h3>
+                <div class="d-flex flex-row" style="height: 250px !important;">
+                    <canvas id="graficoOrdenes"></canvas>
 
-<div class="w-50 ms-2">
+                    <div class="resumen">
+                        <div class="align-items-center p-2">
+                            <div class="resumen-g-tarjeta" style="background-color: rgb(0, 66, 21) !important; color:white;">
+                                <h6>Pendientes</h6>
+                                <div class="cantidad">{{ $todasOrdenes['pendientes'] }}</div>
+                            </div>
+                            <div class="resumen-g-tarjeta" style="background-color: rgb(14, 217, 69) !important; color:black;">
+                                <h6>En curso</h6>
+                                <div class="cantidad">{{ $todasOrdenes['enCurso'] }}</div>
+                            </div>
+                            <div class="resumen-g-tarjeta"style="background-color: rgb(216, 255, 226) !important; color:black;">
+                                <h6>Pausadas</h6>
+                                <div class="cantidad">{{ $todasOrdenes['pausadas'] }}</div>
+                            </div>
+                        </div>
 
-    <div class="d-flex flex-row align-items-center align-content-center h-75">
-
-        <canvas id="graficoOrdenes" width="10" height="10"></canvas>
-
-        <div class="resumen mt-5 pt-5">
-            <div class="align-items-center p-2">
-                <div class="resumen-g-tarjeta" style="background-color: rgb(0, 66, 21) !important; color:white;">
-                    <h6>Pendientes</h6>
-                    <div class="cantidad">{{ $todasOrdenes['pendientes'] }}</div>
-                </div>
-                <div class="resumen-g-tarjeta" style="background-color: rgb(14, 217, 69) !important; color:black;">
-                    <h6>En curso</h6>
-                    <div class="cantidad">{{ $todasOrdenes['enCurso'] }}</div>
-                </div>
-                <div class="resumen-g-tarjeta"style="background-color: rgb(216, 255, 226) !important; color:black;">
-                    <h6>Pausadas</h6>
-                    <div class="cantidad">{{ $todasOrdenes['pausadas'] }}</div>
+                    </div>
                 </div>
             </div>
 
+
+
+        </div>
+
+        <div class="col-md-5 text-center">
+            <h4>Listado de químicos en peligro</h4>
+
+            @if ($quimicosPeligro->isEmpty())
+                <p>No hay químicos en peligro actualmente.</p>
+            @else
+                <table class="table table-bordered mt-3">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="th_verde_primero">Nombre</th>
+                            <th class="th_verde">Almacén</th>
+                            <th class="th_verde">Stock</th>
+                            <th class="th_verde">Stock Mínimo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($quimicosPeligro as $q)
+                            <tr>
+                                <td>{{ $q->quimico->nombre ?? 'Sin nombre' }}</td>
+                                <td>{{ $q->almacen->nombre ." ". $q->almacen->explotacion->nombre}}</td>
+                                <td>{{ $q->stock }}</td>
+                                <td>{{ $q->stock_minimo }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
         </div>
 
     </div>
-</div>
 
 
-<script>
-    const resumen = @json($todasOrdenes);
+    <script>
+        const resumen = @json($todasOrdenes);
 
-    const ctx = document.getElementById('graficoOrdenes').getContext('2d');
-    const chart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            datasets: [{
-                label: 'Número de órdenes',
-                data: [
-                    resumen.pendientes,
-                    resumen.enCurso,
-                    resumen.pausadas,
-                ],
-                backgroundColor: [
+        const ctx = document.getElementById('graficoOrdenes').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    label: 'Número de órdenes',
+                    data: [
+                        resumen.pendientes,
+                        resumen.enCurso,
+                        resumen.pausadas,
+                    ],
+                    backgroundColor: [
 
-                    'rgb(0, 66, 21)',
-                    'rgb(14, 217, 69)',
-                    'rgb(216, 255, 226)',
-                ],
-                borderColor: [
-                'rgba(0, 0, 0, 0.5)',
-                'rgba(0, 0, 0, 0.5)',
-                'rgba(0, 0, 0, 0.5)',
-            ],
-            borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Resumen total de órdenes',
-                    font: {
-                        size: 20
-                    }
+                        'rgb(0, 66, 21)',
+                        'rgb(14, 217, 69)',
+                        'rgb(216, 255, 226)',
+                    ],
+                    borderColor: [
+                        'rgba(0, 0, 0, 0.5)',
+                        'rgba(0, 0, 0, 0.5)',
+                        'rgba(0, 0, 0, 0.5)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    // title: {
+                    //     display: true,
+                    //     text: 'Resumen total de órdenes',
+                    //     font: {
+                    //         size: 20
+                    //     }
+                    // }
                 }
             }
-        }
-    });
-</script>
+        });
+    </script>
 
 @endsection

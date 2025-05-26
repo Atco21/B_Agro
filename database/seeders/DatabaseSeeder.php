@@ -26,6 +26,10 @@ class DatabaseSeeder extends Seeder
             RendimientoSeeder::class,
             OrdenSeeder::class,
             AlmacenSeeder::class,
+            AlmacenQuimicosSeeder::class,
+            AlmacenCosechaSeeder::class,
+            IncidenciaSeeder::class,
+
         ]);
     }
 }

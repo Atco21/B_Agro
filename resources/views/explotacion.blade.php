@@ -40,7 +40,8 @@
             <!-- Contenido principal -->
             <div class="col-11 d-flex flex-column h-100 pe-5">
                 <div class="d-flex justify-content-end align-items-center gap-3 p-3 pe-4">
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#crearexplotacion" id="btnCrearExplo2" hidden>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#crearexplotacion"
+                        id="btnCrearExplo2" hidden>
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_1172_4174)">
@@ -82,6 +83,10 @@
                             <option value="{{ $explo->id }}">{{ $explo->nombre }}</option>
                         @endforeach
                     </select>
+
+                <button class="btn btn-primary" id="gestionarExplotaciones" hidden>
+                    <h4>Gestionar explotaciones</h4>
+                </button>
                 </div>
 
                 @yield('content2')
@@ -150,57 +155,51 @@
                                 </div>
                             </div>
                         </form>
-
                     </div>
-
                     <div class="modal-footer d-flex justify-content-end">
-
                         <button type="button" class="btn button-secondary">Crear explotación</button>
                     </div>
-
                 </div>
             </div>
         </div>
+        <div class="modal fade w-100" id="crearparcela" tabindex="-1" aria-labelledby="crearParcelaLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content d-flex justify-content-center">
 
-        <div class="modal fade w-100" id="crearparcela" tabindex="-1" aria-labelledby="crearParcelaLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content d-flex justify-content-center">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="crearParcelaLabel">Crear parcela</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
 
-            <!-- HEADER -->
-            <div class="modal-header">
-                <h3 class="modal-title" id="crearParcelaLabel">Crear parcela</h3>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row mb-3 mx-2">
+                                <label for="nombreParcela" class="form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="nombreParcela" placeholder="Nombre">
+                            </div>
+                            <div class="row mb-3 mx-2">
+                                <label for="cultivoParcela" class="form-label">Cultivo:</label>
+                                <select class="form-select form-control" id="cultivoParcela">
+                                    <option selected>Elige una opción</option>
+                                    <option value="patatas">Patatas</option>
+                                    <option value="tomates">Tomates</option>
+                                </select>
+                            </div>
+                            <div class="row mb-3 mx-2">
+                                <label for="tamanyoParcela" class="form-label">Tamaño: (ha)</label>
+                                <input type="number" class="form-control" id="tamanyoParcela" placeholder="1"
+                                    min="1">
+                            </div>
+                        </form>
+                    </div>
 
-            <!-- BODY -->
-            <div class="modal-body">
-                <form>
-                <div class="row mb-3 mx-2">
-                    <label for="nombreParcela" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control" id="nombreParcela" placeholder="Nombre">
+                    <div class="modal-footer modal-dialog-centered d-flex justify-content-center">
+                        <button type="button" class="btn button-secondary1">Crear parcela</button>
+                    </div>
+
                 </div>
-                <div class="row mb-3 mx-2">
-                    <label for="cultivoParcela" class="form-label">Cultivo:</label>
-                    <select class="form-select form-control" id="cultivoParcela">
-                    <option selected>Elige una opción</option>
-                    <option value="patatas">Patatas</option>
-                    <option value="tomates">Tomates</option>
-                    </select>
-                </div>
-                <div class="row mb-3 mx-2">
-                    <label for="tamanyoParcela" class="form-label">Tamaño: (ha)</label>
-                    <input type="number" class="form-control" id="tamanyoParcela" placeholder="1" min="1">
-                </div>
-                </form>
             </div>
-
-            <!-- FOOTER -->
-            <div class="modal-footer modal-dialog-centered d-flex justify-content-center">
-                <button type="button" class="btn button-secondary1">Crear parcela</button>
-            </div>
-
-            </div>
-        </div>
         </div>
 
         <div class="modal fade mt-5" id="editarExplotaciones" tabindex="-1" aria-labelledby="editarExplotacionesModal"
@@ -250,14 +249,9 @@
 
                                 </tbody>
                             </table>
-
-
                         </div>
                     </div>
-
                 </div>
-
-
             </div>
         @else
             <div class="d-flex align-items-center justify-content-center" style="height: 75vh;">
@@ -280,9 +274,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
-
                         <div class="modal-body p-5">
-
                             <form>
                                 <div class="campos row mb-3">
                                     <div class="col">
@@ -335,9 +327,7 @@
                                     </div>
                                 </div>
                             </form>
-
                         </div>
-
                         <div class="modal-footer d-flex justify-content-end">
 
                             <button type="button" class="btn button-secondary">Crear explotación</button>
@@ -346,66 +336,61 @@
                     </div>
                 </div>
             </div>
-
-
-
-
-           <div class="modal fade w-100" id="crearparcela" tabindex="-1" aria-labelledby="crearParcelaLabel" aria-hidden="true">
+            <div class="modal fade w-100" id="crearparcela" tabindex="-1" aria-labelledby="crearParcelaLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content d-flex justify-content-center">
 
-                    <!-- HEADER -->
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="crearParcelaLabel">Crear parcela</h3>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+                        <!-- HEADER -->
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="crearParcelaLabel">Crear parcela</h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
 
-                    <!-- BODY -->
-                    <div class="modal-body">
-                        <form>
-                        <div class="row mb-3 mx-2">
-                            <label for="nombreParcela" class="form-label">Nombre:</label>
-                            <input type="text" class="form-control" id="nombreParcela" placeholder="Nombre">
+                        <!-- BODY -->
+                        <div class="modal-body">
+                            <form>
+                                <div class="row mb-3 mx-2">
+                                    <label for="nombreParcela" class="form-label">Nombre:</label>
+                                    <input type="text" class="form-control" id="nombreParcela" placeholder="Nombre">
+                                </div>
+                                <div class="row mb-3 mx-2">
+                                    <label for="cultivoParcela" class="form-label">Cultivo:</label>
+                                    <select class="form-select form-control" id="cultivoParcela">
+                                        <option selected>Elige una opción</option>
+                                        <option value="patatas">Patatas</option>
+                                        <option value="tomates">Tomates</option>
+                                    </select>
+                                </div>
+                                <div class="row mb-3 mx-2">
+                                    <label for="tamanyoParcela" class="form-label">Tamaño: (ha)</label>
+                                    <input type="number" class="form-control" id="tamanyoParcela" placeholder="1"
+                                        min="1">
+                                </div>
+                            </form>
                         </div>
-                        <div class="row mb-3 mx-2">
-                            <label for="cultivoParcela" class="form-label">Cultivo:</label>
-                            <select class="form-select form-control" id="cultivoParcela">
-                            <option selected>Elige una opción</option>
-                            <option value="patatas">Patatas</option>
-                            <option value="tomates">Tomates</option>
-                            </select>
-                        </div>
-                        <div class="row mb-3 mx-2">
-                            <label for="tamanyoParcela" class="form-label">Tamaño: (ha)</label>
-                            <input type="number" class="form-control" id="tamanyoParcela" placeholder="1" min="1">
-                        </div>
-                        </form>
-                    </div>
 
-                    <!-- FOOTER -->
-                    <div class="modal-footer modal-dialog-centered d-flex justify-content-center">
-                        <button type="button" class="btn button-secondary1">Crear parcela</button>
-                    </div>
+                        <!-- FOOTER -->
+                        <div class="modal-footer modal-dialog-centered d-flex justify-content-center">
+                            <button type="button" class="btn button-secondary1">Crear parcela</button>
+                        </div>
 
                     </div>
                 </div>
-                </div>
+            </div>
 
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    $('#crearparcela').on('show.bs.modal', function() {
+                        $('#crearexplotacion').modal('hide');
+                    });
 
-
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    $('#crearparcela').on('show.bs.modal', function() {
-                                        $('#crearexplotacion').modal('hide');
-                                    });
-
-                                    $('#crearparcela').on('hidden.bs.modal', function() {
-                                        $('#crearexplotacion').modal('show');
-                                    });
-                                });
-                            </script>
+                    $('#crearparcela').on('hidden.bs.modal', function() {
+                        $('#crearexplotacion').modal('show');
+                    });
+                });
+            </script>
     @endif
-
-
 
 @endsection

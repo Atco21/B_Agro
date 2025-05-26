@@ -7,18 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Incidencia extends Model
 {
-    use HasFactory;
-
-    protected $table = 'incidencia'; // Nombre de la tabla en la BD
+    protected $table = 'incidencia';
 
     protected $fillable = [
         'fecha',
+        'descripcion',
+        'solucion',
         'estado',
         'tipo',
-        'orden_id'
+        'orden_id',
+        'user_id',
     ];
 
-    public function Orden(){
+    public function orden()
+    {
         return $this->belongsTo(Orden::class);
+    }
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

@@ -7,6 +7,8 @@ use App\Models\Explotacion;
 use App\Models\Maquina;
 use App\Models\Orden;
 use App\Models\Almacen;
+use App\Models\Incidencia;
+
 
 
 
@@ -52,13 +54,61 @@ class ExplotacionController extends Controller
                     break;
             }
         }
-        return view('explotaciones.general', compact('explotacion'), compact('todasOrdenes'));
+        $quimicosPeligro = collect();
+        foreach ($explotacion as $exp) {
+            foreach ($exp->almacenes as $almacen) {
+                $quimicos = \App\Models\AlmacenQuimico::where('almacen_id', $almacen->id)
+                    ->with('quimico')
+                    ->whereColumn('stock', '<', 'stock_minimo')
+                    ->get();
+
+                $quimicosPeligro = $quimicosPeligro->merge($quimicos);
+            }
+        }
+
+
+
+        return view('explotaciones.general', compact('explotacion', 'todasOrdenes', 'quimicosPeligro'));
+
+
     }
 
-    public function incidencias(){
-        $explotacion = Explotacion::all();
-        return view('explotaciones.incidencias', compact('explotacion'));
+public function incidencias()
+{
+    $explotacion = Explotacion::all();
+
+    $incidencias = Incidencia::all();
+
+    $totalIncidencias = [];
+
+    foreach ($incidencias as $incidencia) {
+        $idExp = $incidencia->orden->explotacion_id;
+        dump('Valor de idExp: '.$idExp);
+        if (!isset($totalIncidencias[$idExp])) {
+            $totalIncidencias[$idExp] = [
+                'personal' => 0,
+                'stock'    => 0,
+                'maquina'  => 0,
+            ];
+        }
+
+        switch ($incidencia->tipo) {
+            case 'personal':
+                $totalIncidencias[$idExp]['personal']++;
+                break;
+            case 'stock':
+                $totalIncidencias[$idExp]['stock']++;
+                break;
+            case 'maquina':
+                $totalIncidencias[$idExp]['maquina']++;
+                break;
+        }
+
+        dump($totalIncidencias);
     }
+
+    return view('explotaciones.incidencias', compact('explotacion', 'totalIncidencias'));
+}
 
     public function maquinas(){
         $explotacion = Explotacion::all();
@@ -68,7 +118,7 @@ class ExplotacionController extends Controller
 
     public function almacen(){
         $explotacion = Explotacion::all();
-        $almacenes =  Almacen::with(['explotacion'])->get();
+        $almacenes =  Almacen::with(['explotacion', 'quimicosEnPeligro.quimico'])->get();
         return view('explotaciones.almacen', compact('explotacion'), compact('almacenes'));
     }
 

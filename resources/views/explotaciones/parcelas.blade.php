@@ -15,13 +15,17 @@ function inicio() {
     const select = document.querySelector(".exploSelect");
     let exploSelect = document.getElementById('exploOpciones').removeAttribute('hidden');
     let aniadirBoton = document.getElementById('btnCrearExplo2').removeAttribute('hidden');
+    document.getElementById('btnLapiz').removeAttribute('hidden');
+    document.getElementById('btnCrearExplo2').removeAttribute('hidden');
 
 
     if (select) {
         select.addEventListener("change", function() {
             const id = select.value;
             if (id) {
-                let exploSelect2 = document.getElementById('btnLapiz').removeAttribute('hidden');
+                document.getElementById('btnLapiz').removeAttribute('hidden');
+                document.getElementById('btnCrearExplo2').removeAttribute('hidden');
+
                 cargarDatos(id);
                 actualizarURL(id);
             }

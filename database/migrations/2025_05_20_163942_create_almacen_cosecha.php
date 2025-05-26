@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('almacen_id')->constrained('almacen')->onDelete('cascade');
-            $table->foreignId('cosecha_id')->constrained('cosecha')->onDelete('cascade');
+            $table->foreignId('cultivo_id')->constrained('cultivos')->onDelete('cascade');
 
-            $table->unique(['almacen_id', 'cosecha_id']);
-            $table->enum('unidad_medida',['u', 'g', 'kg','T']);
-            $table->decimal('precioPorMedida', 10, 2)->nullable();
+            $table->integer('stock')->default(0);
+
+            $table->unique(['almacen_id', 'cultivo_id']);
+            $table->enum('unidad',['u', 'g', 'kg','T']);
+            $table->decimal('precioPorUnidad', 10, 2)->nullable();
 
             $table->timestamps();
         });

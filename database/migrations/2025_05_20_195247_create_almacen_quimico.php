@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('almacen_id')->constrained('almacen')->onDelete('cascade');
             $table->foreignId('quimico_id')->constrained('quimico')->onDelete('cascade');
-            $table->integer('cantidad');
             $table->enum('unidad',['u', 'g', 'ml', 'L']);
             $table->integer('stock_minimo')->default(0);
             $table->integer('stock_maximo')->default(0);
