@@ -26,7 +26,7 @@ class Almacen extends Model
     {
         return $this->hasMany(Quimico::class, 'almacen_id');
     }
-    
+
     public function quimicosEnPeligro()
     {
         return $this->hasMany(AlmacenQuimico::class, 'almacen_id')

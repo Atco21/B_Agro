@@ -81,6 +81,13 @@ Route::group(['middleware' => 'admin'], function(){
     Route::put('/maquinas', [MaquinaController::class, 'update'])->name('maquinas.update');
 
     Route::put('/almacen/quimico', [AlmacenController::class, 'updateQuimico'])->name('almacen.quimico.update');
+
+
+
+    Route::get('/ventas/facturas', [VentasController::class, 'facturas'])->name('ventas.facturas');
+    Route::get('/ventas/clientes', [VentasController::class, 'clientes'])->name('ventas.clientes');
+
+
 });
 
 

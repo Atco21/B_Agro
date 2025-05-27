@@ -18,8 +18,11 @@ class AlmacenCosecha extends Model
     ];
 
 
-        public function cultivo()
-    {
+        public function cultivo(){
         return $this->belongsTo(Cultivo::class);
+    }
+
+        public function almacen(){
+        return $this->belongsTo(Almacen::class);
     }
 }
