@@ -95,5 +95,6 @@ Route::get('/incidenciasPersonal', [IncidenciaController::class, 'incidenciasPer
 Route::get('/incidenciasMaquina', [IncidenciaController::class, 'incidenciasMaquina']);
 Route::get('/incidenciasStock', [IncidenciaController::class, 'incidenciasStock']);
 
+Route::get('/incidencias/explotacion/${id}', [IncidenciaController::class, 'incidenciaPorExplotacion'])->name('incidenciaPorExplotacion');
 
 Route::get('aplicador/{id}', [TrabajadorController::class, 'buscarPorId']);

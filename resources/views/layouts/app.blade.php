@@ -13,7 +13,7 @@
 
    </head>
 <body class="overflow-hidden">
-    @include('navbar')
+    @include('layouts.navbar')
 
     <div>
         @yield('content')

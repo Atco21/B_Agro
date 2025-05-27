@@ -67,8 +67,15 @@ class ExplotacionController extends Controller
         }
 
 
+        $incidencias = Incidencia::with('orden')->get();
+        $incidenciasCounts = [];
+        foreach ($incidencias as $inc) {
+        $expId = $inc->orden->explotacion_id;
+        $incidenciasCounts[$expId] = ($incidenciasCounts[$expId] ?? 0) + 1;
+    }
 
-        return view('explotaciones.general', compact('explotacion', 'todasOrdenes', 'quimicosPeligro'));
+
+        return view('explotaciones.general', compact('explotacion', 'todasOrdenes', 'quimicosPeligro', 'incidenciasCounts'));
 
 
     }
@@ -77,37 +84,30 @@ public function incidencias()
 {
     $explotacion = Explotacion::all();
 
-    $incidencias = Incidencia::all();
+    // Todas las incidencias (con la relación a orden para acceder a explotacion_id)
+    $incidencias = Incidencia::with('orden')->get();
 
-    $totalIncidencias = [];
+    // Contadores por tipo para cada explotación
+    $incidenciasCounts = [];
+    foreach ($incidencias as $inc) {
+        $expId = $inc->orden->explotacion_id;
 
-    foreach ($incidencias as $incidencia) {
-        $idExp = $incidencia->orden->explotacion_id;
-        dump('Valor de idExp: '.$idExp);
-        if (!isset($totalIncidencias[$idExp])) {
-            $totalIncidencias[$idExp] = [
+        if (! isset($incidenciasCounts[$expId])) {
+            $incidenciasCounts[$expId] = [
                 'personal' => 0,
                 'stock'    => 0,
                 'maquina'  => 0,
             ];
         }
 
-        switch ($incidencia->tipo) {
-            case 'personal':
-                $totalIncidencias[$idExp]['personal']++;
-                break;
-            case 'stock':
-                $totalIncidencias[$idExp]['stock']++;
-                break;
-            case 'maquina':
-                $totalIncidencias[$idExp]['maquina']++;
-                break;
-        }
-
-        dump($totalIncidencias);
+        // Incrementa según el tipo de incidencia
+        $incidenciasCounts[$expId][$inc->tipo]++;
     }
 
-    return view('explotaciones.incidencias', compact('explotacion', 'totalIncidencias'));
+    return view(
+        'explotaciones.incidencias',
+        compact('explotacion', 'incidenciasCounts')
+    );
 }
 
     public function maquinas(){

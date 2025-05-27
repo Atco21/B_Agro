@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="mt-4 w-100">
-    <div class="row " style="height: 100% ;">
+    <div class="row justify-content-center" style="height: 100% ;">
         <!-- Columna de formulario -->
-        <div class="col-md-3 offset-md-1">
+        <div class="col-md-4">
             <h1 class="mb-4 text-center">Informes</h1>
             <p class="text-center mb-4">Genera un informe en formato PDF especificando el rango de fechas.</p>
 
@@ -23,9 +23,7 @@
             </form>
         </div>
 
-        <!-- Columna adicional (derecha) -->
-        <div class="col-md-6" style="background-color: #818181 ">
-        </div>
+
     </div>
 </div>
 @endsection

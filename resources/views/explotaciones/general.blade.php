@@ -4,7 +4,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
-    <div class="d-flex flex-row">
+    <div class="d-flex flex-row ms-5">
         <div class="ms-2 col-md-5">
 
             <div class="d-flex flex-column align-items-center align-content-center h-25">
@@ -67,7 +67,27 @@
 
     </div>
 
+    <div class="d-flex flex-row ms-5">
 
+
+        <div class=" mt-5 text-center col-md-5" id="incidenciasPorExplotacion">
+            <h3 class="">Incidencias por explotación</h3>
+            <div class="col">
+                @foreach($explotacion as $exp)
+                    @php
+                        $count = $incidenciasCounts[$exp->id] ?? 0;
+                    @endphp
+                    <div class="align-items-center justify-content-center m-2">
+                        <div class="tarjeta-info">
+                            <div class="text-center">
+                                <h4>{{ $exp->nombre }} <incidencia class="p-2"><strong>{{ $count }}</strong></incidencia></h4>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
     <script>
         const resumen = @json($todasOrdenes);
 

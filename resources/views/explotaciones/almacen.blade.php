@@ -207,13 +207,13 @@
 
 
             @foreach ($almacenes as $almacen)
-                <div class="almacen-tarjeta m-2 flex-column w-25" data-id="{{ $almacen->explotacion->id }}"
+                <div class="almacen-tarjeta m-2 flex-column w-25 overflow-auto" data-id="{{ $almacen->explotacion->id }}"
                     style="height: 300px !important">
                     <div class="flex-column align-items-center">
                         <div class="resumen-tarjeta mt-2 w-100" data-id="{{ $almacen->explotacion->id }}">
-                            <h3 class="mt-4 mb-2 text-center">
+                            <H4 class="mt-4 mb-2 text-center text-truncate">
                                 {{ $almacen->nombre . ' - ' . $almacen->explotacion->nombre }}
-                            </h3>
+                            </H4>
                         </div>
                         <div class="resumen-tarjeta-peligro mt-5 w-100 " data-id="{{ $almacen->id }}">
                         </div>

@@ -554,3 +554,43 @@ thead th {
  cursor: pointer;
 
 }
+
+
+.incidencia-tarjeta{
+    cursor: pointer;
+    background-color: #028b6952;
+    padding-top: 0.5em ;
+    padding-left: 1em ;
+    padding-bottom: 0.5em ;
+    padding-right: 1em ;
+
+    border-radius: 15px ;
+
+
+
+    margin-bottom: 2em;
+}
+
+.incidencia-resumen-tarjeta{
+
+    background-color: #028b69;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+
+}
+
+incidencia{
+
+    background-color: #028b69;
+    border-radius: 5px;
+    
+}
+.tarjeta-info{
+    background-color: #01533E;
+    padding: 1em;
+    color: white;
+}

@@ -20,4 +20,8 @@ class IncidenciaController extends Controller{
         $incidenciasStock = Incidencia::where('tipo', 'stock')->get();
         return response()->json($incidenciasStock);
     }
+
+    public function incidenciaPorExplotacion(){
+        
+    }
 }
