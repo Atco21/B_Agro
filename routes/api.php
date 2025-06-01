@@ -13,6 +13,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\IncidenciaController;
 use App\Http\Controllers\AlmacenController;
+use App\Http\Controllers\FacturaController;
 
 
 
@@ -32,7 +33,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('logout', [TrabajadorController::class,'logout']);
 });
 
-Route::post('loginAngular', [AuthController::class, 'loginAngular'])->name('loginAngular');
+Route::post('/loginAngular', [AuthController::class, 'loginAngular'])->name('loginAngular');
+Route::middleware('auth:api')->group(function () {
+    Route::get('/me', [AuthController::class, 'me']);
+});
+
 
 //explotaciones y parcelas
 Route::get('/explotaciones2', [ExplotacionController::class, 'index2']);
@@ -74,7 +79,6 @@ Route::get('/orden/{id}',  [OrdenController::class, 'show'])->name('ordenById');
 Route::get('/ordenesTerminadas', [OrdenController::class, 'ordenesTerminadas'])->name('ordenesTerminadas');
 
 
-Route::get('/orden/{id}', [OrdenController::class, 'ordenById'])->name('ordenById');
 
 
 
@@ -84,7 +88,7 @@ Route::get('/almacen/cosecha/{id}', [AlmacenController::class, 'cosecha'])->name
 
 Route::get('/almacen/explotacion/{id}', [AlmacenController::class, 'almacenExplotacion'])->name('almacenExplotacion');
 
-//Route::get('/ordenes/explotacion/{id}', OrdenesController::class, 'mostrarOrdenesPorExplotacion');
+Route::get('/ordenes/explotacion/{id}', [OrdenController::class, 'mostrarOrdenesPorExplotacion']);
 
 Route::get('/almacen/explotacion/quimicosPeligro/{id}', [AlmacenController::class, 'quimicosPeligro'])->name('quimicoPeligro');
 
@@ -95,6 +99,7 @@ Route::get('/incidenciasPersonal', [IncidenciaController::class, 'incidenciasPer
 Route::get('/incidenciasMaquina', [IncidenciaController::class, 'incidenciasMaquina']);
 Route::get('/incidenciasStock', [IncidenciaController::class, 'incidenciasStock']);
 
-Route::get('/incidencias/explotacion/${id}', [IncidenciaController::class, 'incidenciaPorExplotacion'])->name('incidenciaPorExplotacion');
+Route::get('/incidencias/explotacion/{id}', [IncidenciaController::class, 'incidenciaPorExplotacion']);
 
 Route::get('aplicador/{id}', [TrabajadorController::class, 'buscarPorId']);
+Route::get('/facturas', [FacturaController::class, 'indexJson']);

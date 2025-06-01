@@ -234,7 +234,7 @@ public function ordenesTerminadas()
 
     public function mostrarOrdenesPorExplotacion($id)
     {
-        $ordenes = Orden::where('explotacion_id', $id)->with('parcela')->get();
+        $ordenes = Orden::where('explotacion_id', $id)->with('parcela')->with('explotacion')->with('maquina')->with('aplicadores')->get();
         return response()->json($ordenes)
         ->header("Access-Control-Allow-Origin", "*")
         ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")

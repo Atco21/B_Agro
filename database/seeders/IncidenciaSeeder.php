@@ -13,27 +13,29 @@ class IncidenciaSeeder extends Seeder
     public function run(): void
     {
         DB::table('incidencia')->insert([
-            // Orden 9: Incidencia de personal
+            // Orden 9: Incidencia de Personal
             [
                 'fecha'       => now(),
-                'descripcion' => 'No he podido realizar la orden debido a un imprevisto personal.',
+                'descripcion' => 'No he podido realizar la orden debido a un imprevisto Personal.',
                 'solucion'    => null,
-                'estado'      => 'pendiente',
-                'tipo'        => 'personal',
+                'estado'      => 'Pendiente',
+                'tipo'        => 'Personal',
                 'user_id'     => null,
                 'orden_id'    => 9,
+                'explotacion_id' => 1,
                 'created_at'  => now(),
                 'updated_at'  => now(),
             ],
-            // Orden 10: Incidencia de stock
+            // Orden 10: Incidencia de Stock
             [
                 'fecha'       => now(),
-                'descripcion' => 'No se pudo ejecutar la orden por falta de stock de productos.',
+                'descripcion' => 'No se pudo ejecutar la orden por falta de Stock de productos.',
                 'solucion'    => null,
-                'estado'      => 'pendiente',
-                'tipo'        => 'stock',
+                'estado'      => 'Pendiente',
+                'tipo'        => 'Stock',
                 'user_id'     => null,
                 'orden_id'    => 10,
+                'explotacion_id' => 2,
                 'created_at'  => now(),
                 'updated_at'  => now(),
             ],
@@ -42,22 +44,24 @@ class IncidenciaSeeder extends Seeder
                 'fecha'       => now(),
                 'descripcion' => 'La máquina asignada se estropeó antes de completar la tarea.',
                 'solucion'    => null,
-                'estado'      => 'pendiente',
-                'tipo'        => 'maquina',
+                'estado'      => 'Pendiente',
+                'tipo'        => 'Maquina',
                 'user_id'     => null,
                 'orden_id'    => 11,
+                'explotacion_id' => 1,
                 'created_at'  => now(),
                 'updated_at'  => now(),
             ],
-            // Orden 12: Incidencia de personal
+            // Orden 12: Incidencia de Personal
             [
                 'fecha'       => now(),
                 'descripcion' => 'No he podido completar la orden por motivos de salud.',
                 'solucion'    => null,
-                'estado'      => 'pendiente',
-                'tipo'        => 'personal',
+                'estado'      => 'Pendiente',
+                'tipo'        => 'Personal',
                 'user_id'     => null,
                 'orden_id'    => 12,
+                'explotacion_id' => 1,
                 'created_at'  => now(),
                 'updated_at'  => now(),
             ],

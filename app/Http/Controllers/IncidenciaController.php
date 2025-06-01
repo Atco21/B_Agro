@@ -21,7 +21,11 @@ class IncidenciaController extends Controller{
         return response()->json($incidenciasStock);
     }
 
-    public function incidenciaPorExplotacion(){
-        
+    public function incidenciaPorExplotacion($id){
+
+        $incidencias = Incidencia::where('explotacion_id', $id)->with('orden')->get();
+
+        return response()->json($incidencias);
+
     }
 }

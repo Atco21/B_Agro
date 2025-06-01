@@ -17,6 +17,7 @@ class Incidencia extends Model
         'tipo',
         'orden_id',
         'user_id',
+        'explotacion_id'
     ];
 
     public function orden()

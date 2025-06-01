@@ -17,10 +17,11 @@ return new class extends Migration
             $table->date('fecha');
             $table->string('descripcion');
             $table->string('solucion')->nullable();
-            $table->enum('estado',['pendiente','resuelta']);
-            $table->enum ('tipo',['personal','stock','maquina']);
+            $table->enum('estado',['Pendiente','Resuelta']);
+            $table->enum ('tipo',['Personal','Stock','Maquina']);
             $table->foreignId('user_id')->nullable()->constrained('users');
             $table->foreignId('orden_id')->nullable()->constrained('ordenes')->onDelete('cascade');
+            $table->foreignId('explotacion_id')->constrained('explotaciones')->onDelete('cascade');
         });
     }
 

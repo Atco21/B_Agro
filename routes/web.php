@@ -10,6 +10,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\VentasController;
 use App\Http\Controllers\AlmacenController;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\FacturaController;
 
 use App\Http\Controllers\PDFController;
 
@@ -87,7 +89,11 @@ Route::group(['middleware' => 'admin'], function(){
     Route::get('/ventas/facturas', [VentasController::class, 'facturas'])->name('ventas.facturas');
     Route::get('/ventas/clientes', [VentasController::class, 'clientes'])->name('ventas.clientes');
 
+    Route::resource('clientes', VentasController::class);
 
+    Route::resource('facturas', FacturaController::class);
+    Route::get('facturas/{factura}/pdf', [FacturaController::class, 'descargarPdf'])
+        ->name('facturas.pdf');
 });
 
 
@@ -95,7 +101,6 @@ Route::group(['middleware' => 'admin'], function(){
 
 
 Route::get('pdf', [OrdenController::class, 'generarPdf'])->name('ordenes.generar.pdf');
-
 
 
 
