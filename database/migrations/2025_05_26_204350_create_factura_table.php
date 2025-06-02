@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('cliente_id')->constrained('clientes')->onDelete('cascade');
             $table->date('fecha')->default(now());
             $table->enum('tipo_pago', ['efectivo', 'tarjeta', 'transferencia', 'cheque'])->default('efectivo');
-            $table->enum('estado', ['pendiente', 'pagada', 'vencida'])->default('pendiente');
+            $table->enum('estado', ['pendiente', 'pagada'])->default('pendiente');
             $table->decimal('neto', 12, 2);
             $table->decimal('impuestos', 12, 2);
             $table->decimal('total', 14, 2);

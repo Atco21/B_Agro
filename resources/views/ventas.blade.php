@@ -12,7 +12,7 @@
 
                 <li class="nav-item">
                     <a class="menu2 nav-link {{ Request::is('*parcelas*') ? 'active2' : '' }}"
-                        href="{{ url('ventas/facturas') }}">Facturas</a>
+                        href="{{ url('ventas/facturas') }}">Pedidos</a>
                 </li>
             </ul>
         </div>

@@ -18,7 +18,7 @@
                             <td>${new Date(f.fecha).toLocaleDateString()}</td>
                             <td>
                                 <a href="/facturas/${f.id}" class="btn btn-sm btn-info">Ver</a>
-                                <a href="/facturas/${f.id}/pdf" class="btn btn-sm btn-success">PDF</a>
+                                <a href="/facturas/${f.id}/pdf" class="btn btn-sm btn-success">Generar Factura PDF</a>
 
                             </td>
                         </tr>`;
@@ -139,12 +139,12 @@
     <div class="w-100 p-5">
         <div class="d-flex">
             <div class="flex-row w-100">
-                <h1>Facturación</h1>
+                <h1>Pedidos</h1>
 
                 <div class="row">
                     <div class="mt-5 ps-0">
                         <button class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#modalCrearFactura">
-                            Crear factura
+                            Crear pedido
                         </button>
                     </div>
                     <table class="table w-75" id="historialFacturas">
@@ -344,7 +344,7 @@
                         Cancelar
                     </button>
                     <button type="submit" class="btn btn-primary" form="formCrearFactura">
-                        Guardar factura
+                        Guardar pedido
                     </button>
                 </div>
             </div>

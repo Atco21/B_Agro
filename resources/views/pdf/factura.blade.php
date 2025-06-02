@@ -2,6 +2,8 @@
 <html>
 
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <meta charset="utf-8">
     <title>Factura {{ $factura->numero }}</title>
     <style>
@@ -40,8 +42,7 @@
         .datos-empresa,
         .datos-cliente {
             width: 100%;
-            border: 1px solid #444;
-            border-collapse: collapse;
+            border: 2px solid #444;
         }
 
         .datos-empresa td,
@@ -72,28 +73,27 @@
 
         .tabla-lineas {
             width: 100%;
-            border-collapse: collapse;
             margin-bottom: 20px;
         }
 
         .tabla-lineas th,
         .tabla-lineas td {
-            border: 1px solid #444;
             padding: 6px;
             text-align: left;
         }
 
         .tabla-lineas th {
-            background-color: #f0f0f0;
+            background-color: #028b69;
+            color: white;
         }
 
-        .text-right {
-            text-align: right;
+        .text-center {
+            text-align: center !important;
         }
 
         .totales {
             width: 100%;
-            margin-top: 10px;
+            margin-top: 25px;
         }
 
         .totales td {
@@ -209,40 +209,50 @@
             <tr>
                 <th style="width: 30%;">Explotación</th>
                 <th style="width: 30%;">Cultivo</th>
-                <th style="width: 10%;">Cantidad</th>
-                <th style="width: 15%;">Precio Unit.</th>
-                <th style="width: 15%;">Subtotal</th>
+                <th class="text-center" style="width: 10%;">Cantidad</th>
+                <th class="text-center" style="width: 15%;">Precio Unit.</th>
+                <th class="text-center" style="width: 15%;">Subtotal</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="text-center">
             @foreach ($factura->lineas as $linea)
                 <tr>
                     <td>{{ $linea->explotacion->nombre }}</td>
                     <td>{{ $linea->cultivo->nombre }}</td>
-                    <td class="text-right">{{ number_format($linea->cantidad, 2, ',', '.') }}</td>
-                    <td class="text-right">{{ number_format($linea->precio_unitario, 2, ',', '.') }}</td>
-                    <td class="text-right">{{ number_format($linea->subtotal, 2, ',', '.') }}</td>
+                    <td class="text-center">{{ number_format($linea->cantidad, 2, ',', '.') }}</td>
+                    <td class="text-center">{{ number_format($linea->precio_unitario, 2, ',', '.') }}</td>
+                    <td class="text-center">{{ number_format($linea->subtotal, 2, ',', '.') }}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 
     {{-- Totales finales --}}
-    <table class="totales">
+    <table class="totales" border="0">
         <tr>
             <td class="label">Total Neto:</td>
             <td class="valor">{{ number_format($factura->neto, 2, ',', '.') }}</td>
         </tr>
         <tr>
-            <td class="label">Impuestos (21%):</td>
+            <td class="label">I.V.A: (21%) </td>
             <td class="valor">{{ number_format($factura->impuestos, 2, ',', '.') }}</td>
         </tr>
         <tr>
-            <td class="label"><strong>Total Factura:</strong></td>
-            <td class="valor"><strong>{{ number_format($factura->total, 2, ',', '.') }}</strong></td>
+            <td class="label"><strong>
+                    <h3>Total Factura:</h3>
+                </strong></td>
+            <td class="valor"><strong>
+                    <h3>{{ number_format($factura->total, 2, ',', '.') }}</h3>
+                </strong></td>
         </tr>
     </table>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
+</script>
 
 </html>
