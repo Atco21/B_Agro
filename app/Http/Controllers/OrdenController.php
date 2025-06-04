@@ -71,29 +71,30 @@ class OrdenController extends Controller
     /**
      * Almacena una nueva orden en la base de datos.
      */
-    public function store(Request $request)
+ public function store(Request $request)
     {
-
-
-
-
-        $request->validate([
-            'estado' => 'nullable|string|max:50',
-            'fecha_inicio' => 'nullable|date',
-            'fecha_fin' => 'nullable|date|after_or_equal:fecha_inicio',
-            'tarea' => 'nullable|string|max:255',
-            'jefecampo_id' => 'nullable|integer|exists:users,id',
-            'aplicador_id' => 'nullable|integer|exists:users,id',
-            'parcela_id' => 'nullable|integer|exists:parcelas,id',
-            'id_tratamiento' => 'nullable|integer|exists:tratamientos,id',
-            'id_maquina' => 'nullable|integer|exists:maquinas,id',
+        $validated = $request->validate([
+            'estado'           => 'required|in:Pendiente,En curso,Pausada,Completada',
+            'fecha_inicio'     => 'nullable|date',
+            'fecha_fin'        => 'nullable|date',
+            'tarea'            => 'required|string|max:255',
+            'jefecampo_id'     => 'nullable|exists:users,id',
+            'aplicador_id1'    => 'required|exists:users,id',
+            'aplicador_id2'    => 'nullable|exists:users,id',
+            'aplicador_id3'    => 'nullable|exists:users,id',
+            'aplicador_id4'    => 'nullable|exists:users,id',
+            'parcela_id'       => 'required|exists:parcelas,id',
+            'id_tratamiento'   => 'nullable|exists:tratamientos,id',
+            'id_maquina'       => 'nullable|exists:maquina,id',
+            'explotacion_id'   => 'required|exists:explotaciones,id',
         ]);
 
+        // Crea la orden directamente usando los campos validados
+        $orden = Orden::create($validated);
 
 
-
-        $orden = Orden::create($request->all());
-        return response()->json($orden, 201);
+    // Solo devolvemos el modelo recién creado, con código HTTP 201
+    return response()->json($orden, 201);
     }
 
 

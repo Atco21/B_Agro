@@ -28,6 +28,9 @@ Route::post('/ordenes', [OrdenController::class, 'store']);
 Route::get('/aplicadores', [TrabajadorController::class, 'aplicadores'])->name('aplicadores');
 Route::get('ordenes/explotacion/{id}', [OrdenController::class, 'mostrarOrdenesPorExplotacion'])->name('filtroOrdenesPorExplotacion');
 
+
+Route::post('/crearorden', [OrdenController::class, 'store']);
+
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('details', [TrabajadorController::class,'details']);
     Route::get('logout', [TrabajadorController::class,'logout']);
@@ -64,7 +67,7 @@ Route::get('/maquinas', [MaquinaController::class, 'index']);
 Route::get('/maquinas/buscar/{id}', [MaquinaController::class, 'buscarPorId'])->name('maquinas.buscarPorId');
 
 
-Route::post('/ordenes', [OrdenController::class, 'store']);
+Route::post('/crearorden', [OrdenController::class, 'store']);
 
 Route::get('/ordenesPendientes', [OrdenController::class, 'ordenesPendientes'])->name('ordenesPendientes');
 
