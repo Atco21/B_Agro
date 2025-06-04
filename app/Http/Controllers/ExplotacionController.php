@@ -94,9 +94,9 @@ public function incidencias()
 
         if (! isset($incidenciasCounts[$expId])) {
             $incidenciasCounts[$expId] = [
-                'personal' => 0,
-                'stock'    => 0,
-                'maquina'  => 0,
+                'Personal' => 0,
+                'Stock'    => 0,
+                'Maquina'  => 0,
             ];
         }
 

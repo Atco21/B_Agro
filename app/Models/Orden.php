@@ -49,7 +49,7 @@ class Orden extends Model
 
     public function tratamiento()
     {
-        return $this->belongsTo(Tratamiento::class);
+        return $this->belongsTo(Tratamiento::class, 'id_tratamiento');
     }
 
     public function maquina()

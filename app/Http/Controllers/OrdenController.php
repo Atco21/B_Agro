@@ -249,20 +249,33 @@ public function ordenesTerminadas()
 
     public function generarPdf(Request $request)
     {
-        // Captura las fechas de inicio y fin desde el formulario
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
+        // 1. Validar las fechas y el ID de explotación
+        $request->validate([
+            'fecha_inicio'    => 'required|date',
+            'fecha_fin'       => 'required|date|after_or_equal:fecha_inicio',
+            'explotacion_id'  => 'required|exists:explotaciones,id',
+        ]);
 
-        $ordenes = Orden::where('fecha_inicio', [$fechaInicio, $fechaFin])
-            ->orWhereBetween('fecha_fin', [$fechaInicio, $fechaFin])
+        $fechaInicio     = $request->input('fecha_inicio');
+        $fechaFin        = $request->input('fecha_fin');
+        $explotacionId   = $request->input('explotacion_id');
+
+        $ordenes = Orden::where('explotacion_id', $explotacionId)
+            ->whereBetween('fecha_inicio', [$fechaInicio, $fechaFin])
+            ->where('estado', 'Completada')
+            ->whereNotNull('id_tratamiento')
+            ->with('tratamiento') // se cargará correctamente
+            ->orderBy('fecha_inicio', 'asc')
             ->get();
 
 
+        // 3
+        $explotacion = Explotacion::find($explotacionId);
 
-        $pdf = PDF::loadView('pdf.ordenes', compact('ordenes', 'fechaInicio', 'fechaFin'));
+        $pdf = PDF::loadView('pdf.ordenes', compact('ordenes', 'fechaInicio', 'fechaFin', 'explotacion'));
 
-        // Genera el PDF y lo descarga
-        return $pdf->download('informe.pdf');
+        // 5. Descargar el PDF (o devolver inline, según prefieras)
+        return $pdf->download('informe_ordenes_'.$explotacion->nombre.'_'.$fechaInicio.'_a_'.$fechaFin.'.pdf');
     }
 
 }

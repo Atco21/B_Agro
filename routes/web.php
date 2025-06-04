@@ -12,7 +12,7 @@ use App\Http\Controllers\VentasController;
 use App\Http\Controllers\AlmacenController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\FacturaController;
-
+use App\Models\Explotacion;
 use App\Http\Controllers\PDFController;
 
 
@@ -48,7 +48,8 @@ Route::group(['middleware' => 'admin'], function(){
     Route::get('/ventas', [VentasController::class, 'index'])->name('ventas');
 
     Route::get('/informes', function () {
-        return view('informes');
+        $explotaciones = Explotacion::all();
+        return view('informes', compact('explotaciones'));
     });
 
     Route::get('/explotaciones/general', [ExplotacionController::class, 'general'])->name('explotaciones.general');

@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="mt-4 w-100">
-        <div class="row justify-content-center" style="height: 100% ;">
+        <div class="row justify-content-center" style="height: 100%;">
             <!-- Columna de formulario -->
             <div class="col-md-4">
                 <h1 class="mb-4 text-center">Informes</h1>
-                <p class="text-center mb-4">Genera un informe en formato PDF especificando el rango de fechas.</p>
+                <p class="text-center mb-4">Genera un informe en formato PDF especificando el rango de fechas y la explotación.</p>
 
                 <form action="{{ route('ordenes.generar.pdf') }}" method="GET" class="bg-light p-4 rounded shadow-sm">
                     <div class="mb-3">
@@ -19,11 +19,19 @@
                         <input type="date" name="fecha_fin" id="fecha_fin" class="form-control" required>
                     </div>
 
+                    <div class="mb-3">
+                        <label for="explotacion_id" class="form-label">Explotación:</label>
+                        <select name="explotacion_id" id="explotacion_id" class="form-select exploSelect w-100" required>
+                            <option value="" selected disabled>Selecciona una explotación</option>
+                            @foreach($explotaciones as $exp)
+                                <option value="{{ $exp->id }}">{{ $exp->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <button type="submit" class="btn btn-primary w-100">Generar PDF</button>
                 </form>
             </div>
-
-
         </div>
     </div>
 @endsection

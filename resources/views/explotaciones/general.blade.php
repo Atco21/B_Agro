@@ -8,7 +8,7 @@
         <div class="ms-2 col-md-5">
 
             <div class="d-flex flex-column align-items-center align-content-center h-25">
-                <h3>Resumen total órdenes</h3>
+                <h3>Resumen total órdenes para hoy</h3>
                 <div class="d-flex flex-row" style="height: 250px !important;">
                     <canvas id="graficoOrdenes"></canvas>
 
@@ -37,10 +37,10 @@
         </div>
 
         <div class="col-md-5 text-center">
-            <h4>Listado de químicos en peligro</h4>
+            <h4>Listado de químicos en ruptura</h4>
 
             @if ($quimicosPeligro->isEmpty())
-                <p>No hay químicos en peligro actualmente.</p>
+                <p>No hay químicos con ruptura actualmente.</p>
             @else
                 <table class="table table-bordered mt-3">
                     <thead class="table-dark">
@@ -70,7 +70,7 @@
     <div class="d-flex flex-row ms-5">
 
 
-        <div class=" mt-5 text-center col-md-5" id="incidenciasPorExplotacion">
+        <div class=" pt-5 mt-5 text-center col-md-5" id="incidenciasPorExplotacion">
             <h3 class="">Incidencias por explotación</h3>
             <div class="col">
                 @foreach($explotacion as $exp)

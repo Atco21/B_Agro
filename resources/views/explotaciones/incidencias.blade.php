@@ -71,7 +71,7 @@
             @foreach ($explotacion as $exp)
 
                 @php
-                    $cnt = $incidenciasCounts[$exp->id] ?? ['personal' => 0, 'stock' => 0, 'maquina' => 0];
+                    $cnt = $incidenciasCounts[$exp->id] ?? ['Personal' => 0, 'Stock' => 0, 'Maquina' => 0];
                 @endphp
                 <div class="col-md-3 mb-3">
                     <div class="card h-100 incidencia-tarjeta" data-id="{{ $exp->id }} ">
@@ -81,14 +81,14 @@
                         <div class="resumen d-flecx flex-column">
                             <div class="incidencia-resumen-tarjeta">
 
-                                <h3>Personal: <strong>{{ $cnt['personal'] }}</strong></h3>
+                                <h3>Personal: <strong>{{ $cnt['Personal'] }}</strong></h3>
                             </div>
 
                             <div class="incidencia-resumen-tarjeta ">
-                                <h3>Stock: <strong>{{ $cnt['stock'] }}</strong></h3>
+                                <h3>Stock: <strong>{{ $cnt['Stock'] }}</strong></h3>
                             </div>
                             <div class="incidencia-resumen-tarjeta">
-                                <h3>Máquina: <strong>{{ $cnt['maquina'] }}</strong></h3>
+                                <h3>Máquina: <strong>{{ $cnt['Maquina'] }}</strong></h3>
                             </div>
                         </div>
                     </div>

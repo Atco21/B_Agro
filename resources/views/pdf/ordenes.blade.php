@@ -42,12 +42,14 @@
     <tbody>
         @forelse($ordenes as $orden)
             <tr>
+                @php
+                @endphp
                 <td>{{ $orden->id }}</td>
                 <td>{{ $orden->estado }}</td>
                 <td>{{ $orden->tarea }}</td>
                 <td>{{ $orden->fecha_inicio }}</td>
                 <td>{{ $orden->fecha_fin }}</td>
-                <td>{{ $orden->tratamiento->nombre ?? 'No asignado' }}</td>
+                <td>{{ $orden->tratamiento->nombre ?? ''}}</td>
                 <td>{{ $orden->parcela->nombre ?? 'No asignada' }}</td>
             </tr>
         @empty
