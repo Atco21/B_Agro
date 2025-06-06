@@ -87,7 +87,7 @@ Route::group(['middleware' => 'admin'], function(){
 
 
 
-    Route::get('/ventas/facturas', [VentasController::class, 'facturas'])->name('ventas.facturas');
+    Route::get('/ventas/pedidos', [VentasController::class, 'facturas'])->name('ventas.facturas');
     Route::get('/ventas/clientes', [VentasController::class, 'clientes'])->name('ventas.clientes');
 
     Route::resource('clientes', VentasController::class);

@@ -1,7 +1,7 @@
 @extends('ventas')
 
 @section('content3')
-    <div class="w-100 m-2 p-5">
+    <div class="w-75 m-2 p-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1>Clientes</h1>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearCliente">

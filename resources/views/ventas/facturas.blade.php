@@ -5,7 +5,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Cargar historial de facturas (usando la ruta web de controlador)
             fetch(
-                'http://192.168.31.27:8000/api/facturas') // Asumimos que en FacturaController añadimos un método JSON para index
+                    'http://192.168.31.27:8000/api/facturas'
+                    ) // Asumimos que en FacturaController añadimos un método JSON para index
                 .then(res => res.json())
                 .then(facturas => {
                     const tbody = document.querySelector('#historialFacturas tbody');
@@ -138,31 +139,33 @@
 
     <div class="w-100 p-5">
         <div class="d-flex">
-            <div class="flex-row w-100">
+            <div class="d-flex justify-content-between align-items-center mb-4 w-75">
                 <h1>Pedidos</h1>
-
-                <div class="row">
-                    <div class="mt-5 ps-0">
-                        <button class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#modalCrearFactura">
-                            Crear pedido
-                        </button>
-                    </div>
-                    <table class="table w-75" id="historialFacturas">
-                        <thead>
-                            <tr>
-                                <th class="th_verde_primero">Cliente</th>
-                                <th class="th_verde">Total</th>
-                                <th class="th_verde">Fecha</th>
-                                <th class="th_verde">Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-center">
-                            {{-- Se llenará vía JS --}}
-                        </tbody>
-                    </table>
-                </div>
+                <button class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#modalCrearCliente">
+                    Crear pedido
+                </button>
             </div>
         </div>
+        <div class="row ps-2">
+            <div class="mt-5 ps-0">
+
+            </div>
+            <table class="table w-75" id="historialFacturas">
+                <thead>
+                    <tr>
+                        <th class="th_verde_primero">Cliente</th>
+                        <th class="th_verde">Total</th>
+                        <th class="th_verde">Fecha</th>
+                        <th class="th_verde">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    {{-- Se llenará vía JS --}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
     </div>
 
     {{-- Modal “Crear factura” --}}
@@ -171,7 +174,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content" style="width: 900px">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalCrearFacturaLabel">Crear nueva factura</h5>
+                    <h5 class="modal-title" id="modalCrearFacturaLabel">Crear nuevo pedido</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
                 <div class="modal-body">
