@@ -77,7 +77,7 @@ Route::get('/ordenesPausadas', [OrdenController::class, 'ordenesPausa'])->name('
 
 Route::get('/orden/{id}',  [OrdenController::class, 'show'])->name('ordenById');
 
-
+Route::put('orden/{id}', [OrdenController::class, 'update'])->name('actualizarOrden');
 
 Route::get('/ordenesTerminadas', [OrdenController::class, 'ordenesTerminadas'])->name('ordenesTerminadas');
 

@@ -118,23 +118,33 @@ class OrdenController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // 1. Buscamos la orden o lanzamos 404
         $orden = Orden::findOrFail($id);
 
-        $request->validate([
-            'estado' => 'sometimes|string|max:50',
-            'fecha_inicio' => 'sometimes|date',
-            'fecha_fin' => 'nullable|date|after_or_equal:fecha_inicio',
-            'id_administrador' => 'sometimes|exists:trabajadores,id',
-            'tarea' => 'sometimes|string|max:255',
-            'id_jefecampo' => 'sometimes|exists:trabajadores,id',
-            'aplicador_id' => 'sometimes|exists:trabajadores,id',
-            'parcela_id' => 'sometimes|exists:parcelas,id',
-            'id_tratamiento' => 'sometimes|exists:tratamientos,id',
-            'id_maquina' => 'nullable|exists:maquinas,id',
+        // 2. Validamos sólo los campos que van en $fillable
+        $data = $request->validate([
+            'estado'           => 'sometimes|string|max:50',
+            'fecha_inicio'     => 'sometimes|date',
+            'fecha_fin'        => 'nullable|date|after_or_equal:fecha_inicio',
+            'tarea'            => 'sometimes|string|max:255',
+            'jefecampo_id'     => 'sometimes|exists:trabajadores,id',
+            'aplicador_id1'    => 'sometimes|exists:trabajadores,id',
+            'aplicador_id2'    => 'sometimes|exists:trabajadores,id',
+            'aplicador_id3'    => 'sometimes|exists:trabajadores,id',
+            'aplicador_id4'    => 'sometimes|exists:trabajadores,id',
+            'aplicador_id5'    => 'sometimes|exists:trabajadores,id',
+            'parcela_id'       => 'sometimes|exists:parcelas,id',
+            'id_tratamiento'   => 'sometimes|exists:tratamientos,id',
+            'id_maquina'       => 'nullable|exists:maquinas,id',
+            'explotacion_id'   => 'sometimes|exists:explotaciones,id',
         ]);
 
-        $orden->update($request->all());
-        return response()->json($orden);
+        // 3. Rellenamos la instancia y guardamos
+        $orden->fill($data);
+        $orden->save();
+
+        // 4. Respondemos con la orden actualizada
+        return response()->json($orden, 200);
     }
 
     /**
@@ -156,7 +166,6 @@ class OrdenController extends Controller
 
     public function actualizarDatosdeApi(Request $request)
     {
-        dd($request->all());
 
         $request->validate([
             'estado' => 'required|string|max:50',
@@ -171,7 +180,7 @@ class OrdenController extends Controller
             'id_maquina' => 'nullable|exists:maquinas,id',
         ]);
 
-        $orden = Orden::create($request->all());
+        $orden = update($request->all());
         return response()->json($orden, 201);
     }
     public function ordenesPendientes()
