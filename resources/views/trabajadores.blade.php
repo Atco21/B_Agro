@@ -57,6 +57,7 @@
                         document.getElementById("edit_telefono").value = user.telefono;
                         document.getElementById("edit_usuario").value = user.usuario;
                         document.getElementById("password").value = user.password;
+                        document.getElementById("deleteForm").action = `/trabajadores/${user.id}`;
 
                         const modal = new bootstrap.Modal(document.getElementById("editarUsuario"));
                         modal.show();
@@ -234,15 +235,23 @@
                             </div>
 
                             <div class="modal-footer">
+
                                 <button type="submit" class="btn btn-primary">Guardar cambios</button>
                                 <button type="button" class="btn btn-secondary"
                                     data-bs-dismiss="modal">Cancelar</button>
+                        </form>
+                        <form id="deleteForm" action="" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <div class="d-flex me-auto">
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
                             </div>
-
                         </form>
                     </div>
+
                 </div>
             </div>
+        </div>
         </div>
     @else
         <h2>No existen usuarios</h2>

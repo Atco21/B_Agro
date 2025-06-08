@@ -137,22 +137,22 @@
                         console.log(orden);
                         cuadro.innerHTML = `
 
-                        <h2 class="fw-bold text-center mb-3 mt-5">Órden ${orden[0].estado}</h2>
+                        <h2 class="fw-bold text-center mb-3 mt-5">Órden ${orden.estado}</h2>
 
                         <div class="d-flex align-items-center mb-2">
-                            <img src="{{url('images/Tarea-Icon.svg')}}" class="me-3"><span>Tarea: <strong>${orden[0].tarea}</strong></span>
+                            <img src="{{url('images/Tarea-Icon.svg')}}" class="me-3"><span>Tarea: <strong>${orden   .tarea}</strong></span>
                         </div>
 
                         <div class="d-flex align-items-center mb-2">
-                            <img src="{{url('images/Fecha-Icon.svg')}}" class="me-3"><span>Fecha: <strong>${orden[0].fecha_inicio}</strong></span>
+                            <img src="{{url('images/Fecha-Icon.svg')}}" class="me-3"><span>Fecha: <strong>${orden   .fecha_inicio}</strong></span>
                         </div>
 
                         <div class="d-flex align-items-center mb-2">
-                            <img src="{{url('images/Maquina-Icon.svg')}}" class="me-3"><span>Máquina: <strong>${orden[0].maquina?.nombre || 'Sin asignar'}</strong></span>
+                            <img src="{{url('images/Maquina-Icon.svg')}}" class="me-3"><span>Máquina: <strong>${orden   .maquina?.nombre || 'Sin asignar'}</strong></span>
                         </div>
 
                         <div class="d-flex align-items-center mb-2">
-                            <img src="{{url('images/Tratamiento-Icon.svg')}}" class="me-3"><span>Tratamiento: <strong>${orden[0].tratamiento?.nombre || 'Ninguno'}</strong></span>
+                            <img src="{{url('images/Tratamiento-Icon.svg')}}" class="me-3"><span>Tratamiento: <strong>${orden   .tratamiento?.nombre || 'Ninguno'}</strong></span>
                         </div>
 
                         <div class="border rounded px-2 py-1 mb-3">
@@ -160,7 +160,7 @@
                                 <img src="{{url('images/Persona-Icon.svg')}}" class="me-3"><span class="fw-semibold">Aplicadores</span>
                             </div>
                             <div class="d-flex align-items-center">
-                                <img src="{{url('images/FotoAbatar.png')}}" class="me-3"><span>${orden[0].aplicadores?.nombre || 'Sin asignar'}</span>
+                                <img src="{{url('images/FotoAbatar.png')}}" class="me-3"><span>${orden  .aplicadores?.nombre || 'Sin asignar'}</span>
                                 <i class="bi bi-caret-down ms-auto"></i>
                             </div>
                         </div>
@@ -173,9 +173,9 @@
 
     <div id="previo">
 
-        <div class="d-flex">
+        <div class="d-flex h-25 mb-3">
 
-            <div class="ms-5">
+            <div class="ms-5 h-50">
 
                 <h2 class="mb-3">Resumen de órdenes por explotación</h2>
                 @foreach ($explotacion as $exp)
@@ -239,7 +239,7 @@
                         </select>
                     </div>
 
-                    <div class="table-wrapped">
+                    <div class="table-wrapped" id="tablaOrdenes">
                         <table id="tabla_ordenes" border="1" class="table">
                             <thead>
                                 <tr>
@@ -264,4 +264,5 @@
                 </div>
             </div>
         </div>
+    </div>
     @endsection

@@ -23,9 +23,30 @@ class IncidenciaController extends Controller{
 
     public function incidenciaPorExplotacion($id){
 
-        $incidencias = Incidencia::where('explotacion_id', $id)->with('orden')->get();
+    $incidencias = Incidencia::where('explotacion_id', $id)->where('estado', 'Pendiente')
+            ->with([
+                'orden.parcela',
+                'orden.maquina',
+                'orden.tratamiento',
+                'orden.aplicadores',
+            ])
+            ->get();
 
-        return response()->json($incidencias);
+    return response()->json($incidencias);
+    }
 
+        public function update(Request $request, $id)
+    {
+
+        $incidencia = Incidencia::findOrFail($id);
+
+        $data = $request->validate([
+            'solucion' => 'sometimes|string',
+            'estado'   => 'sometimes|string|in:Pendiente,Pausada,Resuelta',
+        ]);
+
+        $incidencia->update($data);
+
+        return response()->json($incidencia, 200);
     }
 }

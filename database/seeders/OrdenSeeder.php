@@ -13,7 +13,7 @@ class OrdenSeeder extends Seeder
     public function run(): void
     {
         DB::table('ordenes')->insert([
-            //  Órdenes Pendientes
+            // Órdenes Pendientes (aplicador_id1 en [2,4,6])
             [
                 'estado' => 'Pendiente',
                 'fecha_inicio' => '2024-02-01',
@@ -24,9 +24,9 @@ class OrdenSeeder extends Seeder
                 'parcela_id' => 1,
                 'id_tratamiento' => 1,
                 'id_maquina' => null,
+                'explotacion_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'explotacion_id' => 1,
             ],
             [
                 'estado' => 'Pendiente',
@@ -34,28 +34,13 @@ class OrdenSeeder extends Seeder
                 'fecha_fin' => null,
                 'tarea' => 'Riego de campo',
                 'jefecampo_id' => 2,
-                'aplicador_id1' => 3,
+                'aplicador_id1' => 4,
                 'parcela_id' => 2,
                 'id_tratamiento' => 1,
                 'id_maquina' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
                 'explotacion_id' => 1,
-            ],
-            [
-                'estado' => 'Pendiente',
-                'fecha_inicio' => '2024-02-15',
-                'fecha_fin' => null,
-                'tarea' => 'Monitoreo de plagas',
-                'jefecampo_id' => 3,
-                'aplicador_id1' => 1,
-                'parcela_id' => 3,
-                'id_tratamiento' => 1,
-                'id_maquina' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'explotacion_id' => 2,
-
             ],
             [
                 'estado' => 'Pendiente',
@@ -63,31 +48,16 @@ class OrdenSeeder extends Seeder
                 'fecha_fin' => null,
                 'tarea' => 'Aplicación de herbicida',
                 'jefecampo_id' => 1,
-                'aplicador_id1' => 2,
+                'aplicador_id1' => 6,
                 'parcela_id' => 4,
                 'id_tratamiento' => 2,
                 'id_maquina' => 2,
+                'explotacion_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'explotacion_id' => 1,
-
             ],
 
-            //  Órdenes En curso
-            [
-                'estado' => 'En curso',
-                'fecha_inicio' => '2024-01-10',
-                'fecha_fin' => null,
-                'tarea' => 'Siembra de trigo',
-                'jefecampo_id' => 2,
-                'aplicador_id1' => 3,
-                'parcela_id' => 1,
-                'id_tratamiento' => 1,
-                'id_maquina' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-                'explotacion_id' => 1,
-            ],
+            // Órdenes En curso (aplicador_id1 en [2,4,6])
             [
                 'estado' => 'En curso',
                 'fecha_inicio' => '2024-01-12',
@@ -98,25 +68,9 @@ class OrdenSeeder extends Seeder
                 'parcela_id' => 2,
                 'id_tratamiento' => 1,
                 'id_maquina' => 2,
-                'created_at' => now(),
-                'updated_at' => now(),
                 'explotacion_id' => 2,
-
-            ],
-            [
-                'estado' => 'En curso',
-                'fecha_inicio' => '2024-01-18',
-                'fecha_fin' => null,
-                'tarea' => 'Labranza del suelo',
-                'jefecampo_id' => 3,
-                'aplicador_id1' => 1,
-                'parcela_id' => 3,
-                'id_tratamiento' => 1,
-                'id_maquina' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'explotacion_id' => 1,
-
             ],
             [
                 'estado' => 'En curso',
@@ -124,108 +78,59 @@ class OrdenSeeder extends Seeder
                 'fecha_fin' => null,
                 'tarea' => 'Cosecha de girasol',
                 'jefecampo_id' => 2,
-                'aplicador_id1' => 3,
+                'aplicador_id1' => 4,
                 'parcela_id' => 4,
                 'id_tratamiento' => 1,
                 'id_maquina' => 2,
-                'created_at' => now(),
-                'updated_at' => now(),
                 'explotacion_id' => 1,
-
-            ],
-
-            //  Órdenes Pausadas
-            [
-                'estado' => 'Pausada',
-                'fecha_inicio' => '2024-01-05',
-                'fecha_fin' => null,
-                'tarea' => 'Control de plagas',
-                'jefecampo_id' => 1,
-                'aplicador_id1' => 2,
-                'parcela_id' => 1,
-                'id_tratamiento' => 1,
-                'id_maquina' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'explotacion_id' => 1,
-
             ],
-            [
-                'estado' => 'Pausada',
-                'fecha_inicio' => '2024-01-08',
-                'fecha_fin' => null,
-                'tarea' => 'Aplicación de fungicida',
-                'jefecampo_id' => 3,
-                'aplicador_id1' => 1,
-                'parcela_id' => 2,
-                'id_tratamiento' => 1,
-                'id_maquina' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-                'explotacion_id' => 2,
 
-            ],
-            [
-                'estado' => 'Pausada',
-                'fecha_inicio' => '2024-01-15',
-                'fecha_fin' => null,
-                'tarea' => 'Monitoreo del suelo',
-                'jefecampo_id' => 2,
-                'aplicador_id1' => 3,
-                'parcela_id' => 3,
-                'id_tratamiento' => 1,
-                'id_maquina' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
-                'explotacion_id' => 1,
-
-            ],
+            // Órdenes Pausadas (aplicador_id1 en [2,4,6])
             [
                 'estado' => 'Pausada',
                 'fecha_inicio' => '2024-01-20',
                 'fecha_fin' => null,
                 'tarea' => 'Podado de árboles',
                 'jefecampo_id' => 1,
-                'aplicador_id1' => 2,
+                'aplicador_id1' => 6,
                 'parcela_id' => 4,
                 'id_tratamiento' => 1,
                 'id_maquina' => null,
+                'explotacion_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'explotacion_id' => 1,
-
             ],
-
-            // Órdenes Completadas
             [
-                'estado' => 'Completada',
-                'fecha_inicio' => '2024-01-02',
-                'fecha_fin' => '2024-01-04',
-                'tarea' => 'Siembra de maíz',
+                'estado' => 'Pausada',
+                'fecha_inicio' => '2024-01-20',
+                'fecha_fin' => null,
+                'tarea' => 'Cortar maleza',
                 'jefecampo_id' => 1,
-                'aplicador_id1' => 2,
-                'parcela_id' => 1,
+                'aplicador_id1' => 4,
+                'parcela_id' => 2,
                 'id_tratamiento' => 1,
-                'id_maquina' => 1,
+                'id_maquina' => 2,
+                'explotacion_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'explotacion_id' => 1,
-
             ],
+
+            // Órdenes Completadas (aplicador_id1 en [2,4,6])
             [
                 'estado' => 'Completada',
                 'fecha_inicio' => '2023-12-10',
                 'fecha_fin' => '2023-12-15',
                 'tarea' => 'Riego por aspersión',
                 'jefecampo_id' => 2,
-                'aplicador_id1' => 3,
+                'aplicador_id1' => 4,
                 'parcela_id' => 2,
                 'id_tratamiento' => 1,
                 'id_maquina' => null,
+                'explotacion_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'explotacion_id' => 1,
-
             ],
             [
                 'estado' => 'Completada',
@@ -237,56 +142,10 @@ class OrdenSeeder extends Seeder
                 'parcela_id' => 1,
                 'id_tratamiento' => 1,
                 'id_maquina' => null,
+                'explotacion_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'explotacion_id' => 1,
-
-            ],
-            [
-                'estado' => 'Completada',
-                'fecha_inicio' => '2024-01-10',
-                'fecha_fin' => '2024-01-11',
-                'tarea' => 'Riego de campo',
-                'jefecampo_id' => 2,
-                'aplicador_id1' => 3,
-                'parcela_id' => 2,
-                'id_tratamiento' => 1,
-                'id_maquina' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-                'explotacion_id' => 1,
-
-            ],
-            [
-                'estado' => 'Completada',
-                'fecha_inicio' => '2024-01-18',
-                'fecha_fin' => '2024-01-19',
-                'tarea' => 'Monitoreo de plagas',
-                'jefecampo_id' => 3,
-                'aplicador_id1' => 1,
-                'parcela_id' => 3,
-                'id_tratamiento' => 1,
-                'id_maquina' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
-                'explotacion_id' => 1,
-            ],
-            [
-                'estado' => 'Completada',
-                'fecha_inicio' => '2024-01-22',
-                'fecha_fin' => '2024-01-23',
-                'tarea' => 'Aplicación de herbicida',
-                'jefecampo_id' => 1,
-                'aplicador_id1' => 2,
-                'parcela_id' => 4,
-                'id_tratamiento' => 2,
-                'id_maquina' => 2,
-                'created_at' => now(),
-                'updated_at' => now(),
-                'explotacion_id' => 1,
             ],
         ]);
     }
 }
-
-

@@ -64,17 +64,16 @@ class AuthController extends Controller
 
      public function me(Request $request)
     {
-        /**
-         * Como esta ruta está protegida con middleware 'auth:api',
-         * si el token no es válido nunca entra aquí y ya devuelve 401.
-         */
-        $user = $request->user(); // o Auth::user()
-        // Puedes devolver los campos que necesites en Flutter
+
+
+        $user = $request->user(); 
+
         return response()->json([
+            'id'      => $user->id,
             'usuario' => $user->usuario,
             'email'   => $user->email,
             'rol'     => $user->rol,
-            // cualquier otro dato que quieras exponer...
+
         ], 200);
     }
 

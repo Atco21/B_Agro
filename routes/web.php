@@ -44,6 +44,10 @@ Route::group(['middleware' => 'admin'], function(){
     Route::get('/trabajadores', [TrabajadorController::class, 'index'])->name('trabajadores');
 
     Route::put('/trabajadores', [TrabajadorController::class, 'update'])->name('trabajadores.update');
+    Route::delete('/trabajadores/{id}', [TrabajadorController::class, 'destroy'])
+     ->name('trabajadores.destroy');
+
+
 
     Route::get('/ventas', [VentasController::class, 'index'])->name('ventas');
 
@@ -92,7 +96,15 @@ Route::group(['middleware' => 'admin'], function(){
 
     Route::resource('clientes', VentasController::class);
 
+
     Route::resource('facturas', FacturaController::class);
+
+    
+
+
+
+
+
     Route::get('facturas/{factura}/pdf', [FacturaController::class, 'descargarPdf'])
         ->name('facturas.pdf');
 });

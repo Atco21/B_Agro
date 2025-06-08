@@ -95,6 +95,8 @@ Route::get('/ordenes/explotacion/{id}', [OrdenController::class, 'mostrarOrdenes
 
 Route::get('/almacen/explotacion/quimicosPeligro/{id}', [AlmacenController::class, 'quimicosPeligro'])->name('quimicoPeligro');
 
+Route::get('ordenes/aplicadores/{id}', [OrdenController::class, 'ordenesPorAplicador'])->name('ordenesPorAplicador');
+
 
 
 
@@ -103,6 +105,10 @@ Route::get('/incidenciasMaquina', [IncidenciaController::class, 'incidenciasMaqu
 Route::get('/incidenciasStock', [IncidenciaController::class, 'incidenciasStock']);
 
 Route::get('/incidencias/explotacion/{id}', [IncidenciaController::class, 'incidenciaPorExplotacion']);
+
+
+    Route::put('/incidencia/{id}', [IncidenciaController::class, 'update']);
+
 
 Route::get('aplicador/{id}', [TrabajadorController::class, 'buscarPorId']);
 Route::get('/facturas', [FacturaController::class, 'indexJson']);

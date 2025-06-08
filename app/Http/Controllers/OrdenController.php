@@ -113,43 +113,34 @@ class OrdenController extends Controller
         return response()->json($orden);
     }
 
-    /**
-     * Actualiza una orden en la base de datos.
-     */
     public function update(Request $request, $id)
     {
-        // 1. Buscamos la orden o lanzamos 404
         $orden = Orden::findOrFail($id);
 
-        // 2. Validamos sólo los campos que van en $fillable
         $data = $request->validate([
             'estado'           => 'sometimes|string|max:50',
             'fecha_inicio'     => 'sometimes|date',
             'fecha_fin'        => 'nullable|date|after_or_equal:fecha_inicio',
             'tarea'            => 'sometimes|string|max:255',
-            'jefecampo_id'     => 'sometimes|exists:trabajadores,id',
-            'aplicador_id1'    => 'sometimes|exists:trabajadores,id',
-            'aplicador_id2'    => 'sometimes|exists:trabajadores,id',
-            'aplicador_id3'    => 'sometimes|exists:trabajadores,id',
-            'aplicador_id4'    => 'sometimes|exists:trabajadores,id',
-            'aplicador_id5'    => 'sometimes|exists:trabajadores,id',
+            'jefecampo_id'     => 'sometimes|exists:users,id',
+            'aplicador_id1'    => 'sometimes|exists:users,id',
+            'aplicador_id2'    => 'sometimes|exists:users,id',
+            'aplicador_id3'    => 'sometimes|exists:users,id',
+            'aplicador_id4'    => 'sometimes|exists:users,id',
+            'aplicador_id5'    => 'sometimes|exists:users,id',
             'parcela_id'       => 'sometimes|exists:parcelas,id',
             'id_tratamiento'   => 'sometimes|exists:tratamientos,id',
             'id_maquina'       => 'nullable|exists:maquinas,id',
             'explotacion_id'   => 'sometimes|exists:explotaciones,id',
         ]);
 
-        // 3. Rellenamos la instancia y guardamos
         $orden->fill($data);
         $orden->save();
 
-        // 4. Respondemos con la orden actualizada
         return response()->json($orden, 200);
     }
 
-    /**
-     * Elimina una orden de la base de datos.
-     */
+
     public function destroy($id)
     {
         $orden = Orden::findOrFail($id);
@@ -230,7 +221,7 @@ public function ordenesPausa()
 
     //terminada
 
-public function ordenesTerminadas()
+    public function ordenesTerminadas()
     {
      $ordenesTerminada = Orden::where('estado', 'completada')->with('parcela')->get();
     return response()->json($ordenesTerminada)
@@ -252,6 +243,13 @@ public function ordenesTerminadas()
     }
 
 
+
+    public function ordenesPorAplicador($id)
+    {
+        $ordenes = Orden::where('aplicador_id1', $id)->with('parcela')->with('explotacion')->with('maquina')->with('aplicadores')->with('tratamiento')->get();
+
+        return response()->json($ordenes);
+    }
 
 
 

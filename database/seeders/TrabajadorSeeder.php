@@ -28,12 +28,12 @@ class TrabajadorSeeder extends Seeder
 
         // Usuario 2
         User::create([
-            'nombre' => 'María López',
+            'nombre' => 'Maria Martin',
             'dni' => '87654321B',
             'telefono' => '601987654',
             'email' => 'maria@example.com',
             'fecha_nacimiento' => '1985-09-20',
-            'usuario' => 'marialopez',
+            'usuario' => 'maria',
             'password' => Hash::make('1234'),
             'rol' => 'aplicador',
             'explotacion_id' => 2,
@@ -66,12 +66,12 @@ class TrabajadorSeeder extends Seeder
 
         // Usuario 5
         User::create([
-            'nombre' => 'Ana Rodríguez',
+            'nombre' => 'Laura Rodríguez',
             'dni' => '98765432D',
             'telefono' => '603456789',
-            'email' => 'ana@example.com',
+            'email' => 'laura@example.com',
             'fecha_nacimiento' => '1988-11-10',
-            'usuario' => 'anarodriguez',
+            'usuario' => 'laurarodriguez',
             'password' => Hash::make('1234'),
             'rol' => 'jefe de campo',
             'explotacion_id' => 3,
@@ -92,12 +92,12 @@ class TrabajadorSeeder extends Seeder
 
         // Usuario 7
         User::create([
-            'nombre' => 'Pedro Sánchez',
+            'nombre' => 'Pedro Romero',
             'dni' => '45678901F',
             'telefono' => '605678901',
             'email' => 'pedro@example.com',
             'fecha_nacimiento' => '1993-02-13',
-            'usuario' => 'pedrosanchez',
+            'usuario' => 'pedro',
             'password' => Hash::make('1234'),
             'rol' => 'aplicador',
             'explotacion_id' => 3,

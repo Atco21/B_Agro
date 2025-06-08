@@ -424,7 +424,7 @@ h3{
 
 
 
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 
 }
 
@@ -587,10 +587,14 @@ incidencia{
 
     background-color: #028b69;
     border-radius: 5px;
-    
+
 }
 .tarjeta-info{
     background-color: #01533E;
     padding: 1em;
     color: white;
+}
+
+#tablaOrdenes{
+    height: 35% !important;
 }
