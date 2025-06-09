@@ -62,7 +62,7 @@ Route::group(['middleware' => 'admin'], function(){
     Route::get('/explotaciones/ordenes', [OrdenController::class, 'index'])->name('explotaciones.ordenes');
     Route::get('/explotaciones/incidencias', [ExplotacionController::class, 'incidencias'])->name('explotaciones.inciendias');
 
-
+    Route::post('/explotaciones', [ExplotacionController::class, 'store'])->name('explotaciones.store');
 
     Route::get('/explotaciones/almacen', [explotacionController::class, 'almacen'])->name('explotaciones.almacen');
     Route::get('/explotaciones/almacen/{id}', function () {
@@ -82,6 +82,8 @@ Route::group(['middleware' => 'admin'], function(){
 
     Route::get('/explotaciones/ordenes/{id?}', [OrdenController::class, 'index'])->name('explotaciones.ordenes');
 
+    Route::delete('/maquina/{id}', [MaquinaController::class, 'destroy'])
+        ->name('maquinas.destroy');
 
     // return view('explotacion', compact('explotacion'));
 

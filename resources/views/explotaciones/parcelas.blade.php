@@ -2,10 +2,6 @@
 
 @section('content2')
 
-
-
-
-
 <script>
 let idparc = 1;
 addEventListener('DOMContentLoaded', inicio);
@@ -14,9 +10,8 @@ addEventListener('DOMContentLoaded', inicio);
 function inicio() {
     const select = document.querySelector(".exploSelect");
     let exploSelect = document.getElementById('exploOpciones').removeAttribute('hidden');
-    let aniadirBoton = document.getElementById('btnCrearExplo2').removeAttribute('hidden');
+    document.getElementById('btnNuevaExplotacion').removeAttribute('hidden');
     document.getElementById('btnLapiz').removeAttribute('hidden');
-    document.getElementById('btnCrearExplo2').removeAttribute('hidden');
 
 
     if (select) {
@@ -201,13 +196,15 @@ window.onpopstate = function(event) {
 </script>
 
 <div id="previo">
-
-    <div class="d-flex justify-content-center align-items-center" style="height: 70vh;">
-
-    <h2>Selecciona una explotación</h2>
-
+    <div class="d-flex flex-wrap justify-content-center align-items-center" style="height: 70vh; gap: 1rem; padding: 1rem;">
+        @foreach ($explotacion as $exp)
+            <div class="card tarjeta-info" style="cursor: pointer;" id="{{ $exp->id }}" onclick="cargarDatos({{ $exp->id }})">
+                <div class="card-body text-center">
+                    <h2 class="card-title">{{ $exp->nombre }}</h2>
+                </div>
+            </div>
+        @endforeach
     </div>
-
 </div>
 
 <div id="secciones" hidden>

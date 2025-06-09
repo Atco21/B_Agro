@@ -18,6 +18,10 @@ class Explotacion extends Model
     {
         return $this->hasMany(Almacen::class);
     }
+    public function parcelas()
+    {
+    return $this->hasMany(Parcela::class);
+    }
 }
 
 

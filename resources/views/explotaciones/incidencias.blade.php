@@ -3,8 +3,8 @@
 @section('content2')
     <script>
         document.addEventListener('DOMContentLoaded', inicio);
+        document.getElementById('btnNuevaExplotacion').setAttribute('hidden', '');
 
-            document.getElementById('exploOpciones').removeAttribute('hidden');
 
         function inicio() {
             document.getElementById('previo').removeAttribute('hidden');

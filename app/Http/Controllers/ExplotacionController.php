@@ -8,7 +8,9 @@ use App\Models\Maquina;
 use App\Models\Orden;
 use App\Models\Almacen;
 use App\Models\Incidencia;
-
+use App\Models\Cultivo;
+use App\Models\AlmacenQuimico;
+use App\Models\Parcela;
 
 
 
@@ -70,12 +72,12 @@ class ExplotacionController extends Controller
         $incidencias = Incidencia::with('orden')->where('estado', 'Pendiente')->get();
         $incidenciasCounts = [];
         foreach ($incidencias as $inc) {
-        $expId = $inc->orden->explotacion_id;
-        $incidenciasCounts[$expId] = ($incidenciasCounts[$expId] ?? 0) + 1;
-    }
+            $expId = $inc->orden->explotacion_id;
+            $incidenciasCounts[$expId] = ($incidenciasCounts[$expId] ?? 0) + 1;
+        }
+        $cultivos = [];
 
-
-        return view('explotaciones.general', compact('explotacion', 'todasOrdenes', 'quimicosPeligro', 'incidenciasCounts'));
+        return view('explotaciones.general', compact('explotacion', 'todasOrdenes', 'quimicosPeligro', 'incidenciasCounts', 'cultivos'));
 
 
     }
@@ -83,6 +85,8 @@ class ExplotacionController extends Controller
 public function incidencias()
 {
     $explotacion = Explotacion::all();
+
+    $cultivos = Cultivo::all();
 
     $incidencias = Incidencia::with('orden')->where('estado', 'Pendiente')->get();
 
@@ -103,20 +107,24 @@ public function incidencias()
 
     return view(
         'explotaciones.incidencias',
-        compact('explotacion', 'incidenciasCounts')
+        compact('explotacion', 'incidenciasCounts', 'cultivos')
     );
 }
 
     public function maquinas(){
         $explotacion = Explotacion::all();
         $maquinas = Maquina::all();
-        return view('explotaciones.maquinas', compact('explotacion'), compact('maquinas'));
+        $cultivos = Cultivo::all();
+
+        return view('explotaciones.maquinas', compact('explotacion'), compact('maquinas', 'cultivos'));
     }
 
     public function almacen(){
         $explotacion = Explotacion::all();
+        $cultivos = Cultivo::all();
+
         $almacenes =  Almacen::with(['explotacion', 'quimicosEnPeligro.quimico'])->get();
-        return view('explotaciones.almacen', compact('explotacion'), compact('almacenes'));
+        return view('explotaciones.almacen', compact('explotacion'), compact('almacenes', 'cultivos'));
     }
 
     public function index2(Request $request)
@@ -128,7 +136,47 @@ public function incidencias()
     public function parcelas()
     {
         $explotacion = Explotacion::all();
-        return view('explotaciones.parcelas', compact('explotacion'));
+        $cultivos = Cultivo::all();
+
+        return view('explotaciones.parcelas', compact('explotacion', 'cultivos'));
+    }
+
+    public function store(Request $request)
+    {
+        // Validar datos de la explotación
+        $data = $request->validate([
+            'nombre'     => 'required|string|max:255',
+            'direccion'  => 'nullable|string|max:255',
+            'localidad'  => 'nullable|string|max:255',
+            'tamanyo'    => 'nullable|numeric|min:0',
+            'parcelas'               => 'nullable|array',
+            'parcelas.*.nombre'      => 'required_with:parcelas|string|max:255',
+            'parcelas.*.cultivo_id'  => 'required_with:parcelas|exists:cultivos,id',
+            'parcelas.*.tamanyo'     => 'required_with:parcelas|numeric|min:0',
+        ]);
+
+        // Crear la explotación
+        $explotacion = Explotacion::create([
+            'nombre'    => $data['nombre'],
+            'direccion' => $data['direccion'] ?? null,
+            'localidad' => $data['localidad'] ?? null,
+            'tamanyo'   => $data['tamanyo']   ?? 0,
+        ]);
+
+        // Si vienen parcelas, las guardamos asociadas
+        if (! empty($data['parcelas'])) {
+            foreach ($data['parcelas'] as $parc) {
+                $explotacion->parcelas()->create([
+                    'nombre'     => $parc['nombre'],
+                    'cultivo_id' => $parc['cultivo_id'],
+                    'tamanyo'    => $parc['tamanyo'],
+                ]);
+            }
+        }
+
+        return redirect()
+            ->route('explotaciones.general')
+            ->with('success', 'Explotación creada correctamente.');
     }
 
 }

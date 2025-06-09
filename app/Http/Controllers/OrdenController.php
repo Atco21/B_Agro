@@ -6,6 +6,8 @@ use App\Models\Orden;
 use App\Models\Aplicadores;
 use App\Models\Explotacion;
 use App\Models\Incidencia;
+use App\Models\Cultivo;
+
 use Illuminate\Http\Request;
 
 
@@ -19,6 +21,7 @@ class OrdenController extends Controller
     {
         $explotaciones = Explotacion::all();
         $ordenes = Orden::all();
+        $cultivos = Cultivo::all();
 
         $totalOrdenes = [];
         $todasOrdenesExplotacion = [
@@ -63,7 +66,7 @@ class OrdenController extends Controller
         }
 
 
-        return view('explotaciones.ordenes', ['explotacion'=>$explotaciones, 'ordenes'=>$totalOrdenes]);
+        return view('explotaciones.ordenes', ['explotacion'=>$explotaciones, 'ordenes'=>$totalOrdenes, 'cultivos'=>$cultivos]);
     }
 
  public function store(Request $request)
@@ -100,7 +103,7 @@ class OrdenController extends Controller
 
     public function show($id)
     {
-        $orden = Orden::findOrFail($id);
+        $orden = Orden::where('id', $id)->with('parcela', 'aplicadores', 'tratamiento', 'maquina')->get();
         return response()->json($orden);
     }
 

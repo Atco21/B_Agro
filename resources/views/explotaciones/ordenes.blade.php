@@ -11,7 +11,7 @@
             const select = document.querySelector(".exploSelect");
             document.getElementById('ordenes').setAttribute('hidden', '');
             document.getElementById('previo').removeAttribute('hidden');
-            document.getElementById('exploOpciones').removeAttribute('hidden');
+            document.getElementById('btnNuevaExplotacion').setAttribute('hidden', '');
 
             if (select) {
                 select.selectedIndex = 0;
@@ -137,22 +137,22 @@
                         console.log(orden);
                         cuadro.innerHTML = `
 
-                        <h2 class="fw-bold text-center mb-3 mt-5">Órden ${orden.estado}</h2>
+                        <h2 class="fw-bold text-center mb-3 mt-5">Órden ${orden[0].estado}</h2>
 
                         <div class="d-flex align-items-center mb-2">
-                            <img src="{{url('images/Tarea-Icon.svg')}}" class="me-3"><span>Tarea: <strong>${orden   .tarea}</strong></span>
+                            <img src="{{url('images/Tarea-Icon.svg')}}" class="me-3"><span>Tarea: <strong>${orden[0].tarea}</strong></span>
                         </div>
 
                         <div class="d-flex align-items-center mb-2">
-                            <img src="{{url('images/Fecha-Icon.svg')}}" class="me-3"><span>Fecha: <strong>${orden   .fecha_inicio}</strong></span>
+                            <img src="{{url('images/Fecha-Icon.svg')}}" class="me-3"><span>Fecha: <strong>${orden[0].fecha_inicio}</strong></span>
                         </div>
 
                         <div class="d-flex align-items-center mb-2">
-                            <img src="{{url('images/Maquina-Icon.svg')}}" class="me-3"><span>Máquina: <strong>${orden   .maquina?.nombre || 'Sin asignar'}</strong></span>
+                            <img src="{{url('images/Maquina-Icon.svg')}}" class="me-3"><span>Máquina: <strong>${orden[0].maquina?.nombre || 'Sin asignar'}</strong></span>
                         </div>
 
                         <div class="d-flex align-items-center mb-2">
-                            <img src="{{url('images/Tratamiento-Icon.svg')}}" class="me-3"><span>Tratamiento: <strong>${orden   .tratamiento?.nombre || 'Ninguno'}</strong></span>
+                            <img src="{{url('images/Tratamiento-Icon.svg')}}" class="me-3"><span>Tratamiento: <strong>${orden[0].tratamiento?.nombre || 'Ninguno'}</strong></span>
                         </div>
 
                         <div class="border rounded px-2 py-1 mb-3">
@@ -160,7 +160,7 @@
                                 <img src="{{url('images/Persona-Icon.svg')}}" class="me-3"><span class="fw-semibold">Aplicadores</span>
                             </div>
                             <div class="d-flex align-items-center">
-                                <img src="{{url('images/FotoAbatar.png')}}" class="me-3"><span>${orden  .aplicadores?.nombre || 'Sin asignar'}</span>
+                                <img src="{{url('images/FotoAbatar.png')}}" class="me-3"><span>${orden[0].aplicadores?.nombre || 'Sin asignar'}</span>
                                 <i class="bi bi-caret-down ms-auto"></i>
                             </div>
                         </div>
@@ -187,7 +187,7 @@
                             'Completadas' => 0,
                         ];
                     @endphp
-                    <div class="explotacion-tarjeta" data-id={{ $exp->id }} ">
+                    <div class="explotacion-tarjeta" data-id={{ $exp->id }} " onclick="cargarDatos({{ $exp->id }})">
                         <h3 class="mt-4 mb-2">{{ $exp->nombre }}</h3>
                         <div class="resumen d-flex flex-wrap gap-3">
                             <div class="resumen-tarjeta">
@@ -213,11 +213,11 @@
 
         <div id="ordenes" class="ms-5" hidden>
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-7 mt-5">
 
                     <div class="d-flex justify-content-between gap-3 mb-3">
                         <!-- Cuadro de búsqueda -->
-                        <div class="input-group w-25" id="cuadroBusqueda">
+                        {{-- <div class="input-group w-25" id="cuadroBusqueda">
                             <span class="input-group-text">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -227,19 +227,19 @@
                                 </svg>
                             </span>
                             <input type="search" class="form-control" placeholder="Buscar" id="textoBusqueda">
-                        </div>
+                        </div> --}}
 
 
-                        <select class="form-select w-25" id="filtroEstado">
+                        {{-- <select class="form-select w-25" id="filtroEstado">
                             <option value="Todas" selected>Todas</option>
                             <option value="Pendientes">Pendientes</option>
                             <option value="Pausadas">Pausadas</option>
                             <option value="En_curso">En curso</option>
                             <option value="Completadas">Completadas</option>
-                        </select>
+                        </select> --}}
                     </div>
 
-                    <div class="table-wrapped" id="tablaOrdenes">
+                    <div class="table-wrapped mt-5" id="tablaOrdenes">
                         <table id="tabla_ordenes" border="1" class="table">
                             <thead>
                                 <tr>

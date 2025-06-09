@@ -75,7 +75,13 @@ class MaquinaController extends Controller
         $maquina = Maquina::find($id);
         return response()->json($maquina);
     }
+    public function destroy($id)
+    {
+        $maquina = Maquina::findOrFail($id);
+        $maquina->delete();
 
+        return back()->with('success', 'Máquina eliminada correctamente.');
+    }
 
 
 
