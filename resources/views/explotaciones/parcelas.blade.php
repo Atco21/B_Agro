@@ -230,37 +230,6 @@ window.onpopstate = function(event) {
             </div>
         </div>
 
-
-        <div class="w-50 mt-5 pe-5" id="seccion2">
-            <div class="w-100 h-100 card align-content-center">
-                <table class="table-bordered">
-                    <tbody>
-
-                    <tr>
-                        <td class="opciones_menu2"><a href="#" id="btnRendimiento">Rendimiento</a></td>
-                        <td class="opciones_menu2"><a  href="#" id="btnOrdenes">Órdenes</a></td>
-                        <td class="opciones_menu2"><a>Incidencias</a></td>
-                        <td class="opciones_menu2"><a>Tratamientos</a></td>
-                    </tr>
-
-                    <tr id="vacio" style="border: none;" class="mt-5">
-                        <td colspan="4" style="border:none;" class="mt-5 pt-5"><p>Selecciona una parcela</p></td>
-                    </tr>
-
-                    </tbody>
-
-                </table>
-
-                <div id="rendimiento">
-
-
-
-
-
-                </div>
-
-            </div>
-        </div>
     </div>
 </div>
 @endsection

@@ -20,7 +20,6 @@ class AlmacenQuimico extends Model
         'stock',
     ];
 
-    // Relaciones
 
     public function almacen()
     {

@@ -25,7 +25,6 @@
             font-size: 24px;
         }
 
-        /* Contenedor que agrupa empresa y cliente lado a lado */
         .datos-encabezado {
             width: 100%;
             border-collapse: collapse;
@@ -34,14 +33,14 @@
 
         .datos-encabezado td {
             vertical-align: top;
-            width: 50%;
+            width: 25%;
             padding: 0 10px;
         }
 
-        /* Estilos para bloques internos (empresa y cliente) */
         .datos-empresa,
         .datos-cliente {
             width: 100%;
+            height: 200px;
             border: 2px solid #444;
         }
 
@@ -56,7 +55,6 @@
             width: 30%;
         }
 
-        /* Mantengo el estilo de datos-factura para las demás secciones */
         .datos-factura {
             width: 100%;
             margin-bottom: 20px;
@@ -107,25 +105,22 @@
 
         .totales .valor {
             text-align: right;
+
             width: 20%;
         }
+
     </style>
 </head>
 
 <body>
 
-    {{-- Encabezado --}}
     <div class="encabezado">
         <h1>Factura N.º {{ $factura->numero }}</h1>
     </div>
 
-    {{--
-      Tabla que agrupa, en dos columnas, la información de la empresa (izquierda)
-      y la información del cliente (derecha), justo debajo del número de factura
-    --}}
+
     <table class="datos-encabezado">
         <tr>
-            <!-- Columna izquierda: datos de la empresa -->
             <td>
                 <table class="datos-empresa">
                     <tr>
@@ -152,7 +147,6 @@
                 </table>
             </td>
 
-            <!-- Columna derecha: datos del cliente -->
             <td>
                 <table class="datos-cliente">
                     <tr>
@@ -187,7 +181,6 @@
         </tr>
     </table>
 
-    {{-- Datos de la factura (fecha, tipo de pago, estado) --}}
     <table class="datos-factura">
         <tr>
             <td class="etiqueta">Fecha:</td>
@@ -203,7 +196,6 @@
         </tr>
     </table>
 
-    {{-- Tabla de líneas de la factura --}}
     <table class="tabla-lineas">
         <thead>
             <tr>
@@ -227,7 +219,6 @@
         </tbody>
     </table>
 
-    {{-- Totales finales --}}
     <table class="totales" border="0">
         <tr>
             <td class="label">Total Neto:</td>

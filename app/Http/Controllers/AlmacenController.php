@@ -9,12 +9,10 @@ use App\Models\Quimico;
 use App\Models\AlmacenQuimico;
 use App\Models\AlmacenCosecha;
 
-// Asegúrate de que el modelo Almacen esté correctamente importado
 class AlmacenController extends Controller
 {
     public function quimicos($id){
 
-        // Obtener los productos químicos del almacén
         $productosQuimicos = AlmacenQuimico::where('almacen_id', $id)->with('quimico')->get();
 
         return response()->json($productosQuimicos, 200);
@@ -42,16 +40,14 @@ class AlmacenController extends Controller
 
     public function quimicosPeligro($id)
     {
-        // Validar que el almacén exista
         $almacen = Almacen::find($id);
         if (!$almacen) {
             return response()->json(['error' => 'Almacén no encontrado'], 404);
         }
 
-        // Buscar químicos cuyo stock está por debajo del mínimo
         $quimicosPeligro = AlmacenQuimico::where('almacen_id', $id)
             ->whereColumn('stock', '<', 'stock_minimo')
-            ->with('quimico') // Carga la relación con la tabla quimico
+            ->with('quimico')
             ->get();
 
         return response()->json($quimicosPeligro);

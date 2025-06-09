@@ -118,15 +118,6 @@
             },
             options: {
                 responsive: true,
-                plugins: {
-                    // title: {
-                    //     display: true,
-                    //     text: 'Resumen total de órdenes',
-                    //     font: {
-                    //         size: 20
-                    //     }
-                    // }
-                }
             }
         });
     </script>

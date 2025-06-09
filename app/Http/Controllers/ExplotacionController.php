@@ -67,7 +67,7 @@ class ExplotacionController extends Controller
         }
 
 
-        $incidencias = Incidencia::with('orden')->get();
+        $incidencias = Incidencia::with('orden')->where('estado', 'Pendiente')->get();
         $incidenciasCounts = [];
         foreach ($incidencias as $inc) {
         $expId = $inc->orden->explotacion_id;
@@ -84,10 +84,8 @@ public function incidencias()
 {
     $explotacion = Explotacion::all();
 
-    // Todas las incidencias (con la relación a orden para acceder a explotacion_id)
-    $incidencias = Incidencia::with('orden')->get();
+    $incidencias = Incidencia::with('orden')->where('estado', 'Pendiente')->get();
 
-    // Contadores por tipo para cada explotación
     $incidenciasCounts = [];
     foreach ($incidencias as $inc) {
         $expId = $inc->orden->explotacion_id;
@@ -100,7 +98,6 @@ public function incidencias()
             ];
         }
 
-        // Incrementa según el tipo de incidencia
         $incidenciasCounts[$expId][$inc->tipo]++;
     }
 

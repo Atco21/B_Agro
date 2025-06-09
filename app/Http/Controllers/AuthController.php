@@ -21,30 +21,23 @@ class AuthController extends Controller
 
     public function login(Request $request)
 {
-    // Validar los datos
     $request->validate([
         'usuario' => 'required',
         'password' => 'required'
     ]);
 
-    // Intentar autenticar al usuario
     if (Auth::attempt(['usuario' => $request->usuario, 'password' => $request->password])) {
-        // Obtener el usuario autenticado
         $user = Auth::user();
 
 
-        // Generar el token con Passport
         $token = $user->createToken('agrocontrol')->accessToken;
 
 
-       // $explotacion = Explotacion::all();
 
        return redirect()->to('/explotaciones/general');
-        // Devolver el token al frontend
-      //  return view('explotacion', compact('explotacion'));
+
     }
 
-    // Si falla la autenticación, devolver error
     return response()->json(['error' => 'Credenciales incorrectas'], 401);
 }
 
@@ -66,7 +59,7 @@ class AuthController extends Controller
     {
 
 
-        $user = $request->user(); 
+        $user = $request->user();
 
         return response()->json([
             'id'      => $user->id,
@@ -80,11 +73,7 @@ class AuthController extends Controller
 
 
 
-    /**
-     * details api
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function details()
     {
         $user = Auth::user();
@@ -93,10 +82,6 @@ class AuthController extends Controller
 
 
 
-        /**
-     * logout api
-     *
-     */
     public function logout(Request $request)
     {
 

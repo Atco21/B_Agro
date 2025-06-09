@@ -25,12 +25,29 @@ class FacturaController extends Controller
     }
         public function indexJson()
     {
-        // Eager-load de cliente para cada factura
         $facturas = Factura::with('cliente')->with('lineas')->with('lineas.explotacion', 'lineas.cultivo')
             ->orderBy('fecha', 'desc')
             ->get();
 
         return response()->json($facturas);
+    }
+
+    public function cambiarEstado(Request $request, $id)
+    {
+
+        $factura = Factura::findOrFail($id);
+        // Validar el estado recibido
+
+        $request->validate([
+            'estado' => 'required|in:pendiente,pagada,vencida',
+        ]);
+
+        $factura->update(['estado' => $request->estado]);
+
+        return response()->json(['message' => 'Estado actualizado correctamente.']);
+        return redirect()
+            ->route('facturas.index')
+            ->with('success', 'Estado de la factura actualizado correctamente.');
     }
 
 

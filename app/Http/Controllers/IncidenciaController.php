@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Incidencia;
+use App\Models\Orden;
+
 use Illuminate\Http\Request;
 
 class IncidenciaController extends Controller{
@@ -25,6 +27,7 @@ class IncidenciaController extends Controller{
 
     $incidencias = Incidencia::where('explotacion_id', $id)->where('estado', 'Pendiente')
             ->with([
+                'orden',
                 'orden.parcela',
                 'orden.maquina',
                 'orden.tratamiento',

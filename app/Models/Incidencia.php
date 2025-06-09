@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Orden;
+
 
 class Incidencia extends Model
 {
@@ -22,7 +24,7 @@ class Incidencia extends Model
 
     public function orden()
     {
-        return $this->belongsTo(Orden::class);
+        return $this->belongsTo(Orden::class, 'orden_id');
     }
 
     public function usuario()

@@ -22,11 +22,9 @@
                         if (data.error) {
                             tarjeta.innerHTML = "<p>Error al cargar químicos en peligro</p>";
                         } else {
-                            // Mostrar número total
                             const total = data.length;
                             let html = `<h4>Químicos en peligro -> <b><i>${total}</i></b></h4>`;
 
-                            // Listado
                             html +=
                                 `<div class="quimicos-peligro mt-3" style="overflow-y: auto; font-size: 1.2em"><ul>`;
                             data.forEach(q => {

@@ -180,12 +180,7 @@ class TrabajadorController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        // Si es petición Ajax (fetch) devolvemos JSON
-        if ($request->wantsJson()) {
-            return response()->json(['message' => 'Usuario eliminado']);
-        }
 
-        // Si es petición normal, redirigimos de vuelta al listado
         return redirect()
             ->route('trabajadores')
             ->with('success', 'Usuario eliminado correctamente');

@@ -13,7 +13,6 @@ class TrabajadorSeeder extends Seeder
      */
     public function run(): void
     {
-        // Usuario 1
         User::create([
             'nombre' => 'Juan Pérez',
             'dni' => '12345678A',
@@ -26,7 +25,6 @@ class TrabajadorSeeder extends Seeder
             'explotacion_id' => 1,
         ]);
 
-        // Usuario 2
         User::create([
             'nombre' => 'Maria Martin',
             'dni' => '87654321B',
@@ -39,7 +37,6 @@ class TrabajadorSeeder extends Seeder
             'explotacion_id' => 2,
         ]);
 
-        // Usuario 3
         User::create([
             'nombre' => 'Alfred Comanescu',
             'dni' => '12345678Z',
@@ -51,7 +48,6 @@ class TrabajadorSeeder extends Seeder
             'rol' => 'admin',
         ]);
 
-        // Usuario 4
         User::create([
             'nombre' => 'Carlos Gómez',
             'dni' => '23456789C',
@@ -64,7 +60,6 @@ class TrabajadorSeeder extends Seeder
             'explotacion_id' => 1,
         ]);
 
-        // Usuario 5
         User::create([
             'nombre' => 'Laura Rodríguez',
             'dni' => '98765432D',
@@ -77,7 +72,6 @@ class TrabajadorSeeder extends Seeder
             'explotacion_id' => 3,
         ]);
 
-        // Usuario 6
         User::create([
             'nombre' => 'Luis García',
             'dni' => '34567890E',
@@ -90,7 +84,6 @@ class TrabajadorSeeder extends Seeder
             'explotacion_id' => 2,
         ]);
 
-        // Usuario 7
         User::create([
             'nombre' => 'Pedro Romero',
             'dni' => '45678901F',

@@ -98,7 +98,21 @@ Route::get('/almacen/explotacion/quimicosPeligro/{id}', [AlmacenController::clas
 Route::get('ordenes/aplicadores/{id}', [OrdenController::class, 'ordenesPorAplicador'])->name('ordenesPorAplicador');
 
 
+Route::put('orden/iniciar/{id}', [OrdenController::class, 'iniciarOrden'])->name('iniciarOrden');
 
+
+Route::options('orden/incidencia', function () {
+    return response()->noContent()
+        ->header('Access-Control-Allow-Origin', '*')
+        ->header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+        ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+});
+
+
+Route::post('orden/incidencia', [OrdenController::class, 'pausarOrden'])->name('pausarOrden');
+Route::put('orden/finalizar/{id}', [OrdenController::class, 'completarOrden'])->name('completarOrden');
+
+Route::put('/facturas/${id}/cambiar-estado', [FacturaController::class, 'cambiarEstado'])->name('facturas.cambiarEstado');
 
 Route::get('/incidenciasPersonal', [IncidenciaController::class, 'incidenciasPersonal']);
 Route::get('/incidenciasMaquina', [IncidenciaController::class, 'incidenciasMaquina']);

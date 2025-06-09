@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Orden;
 use App\Models\Aplicadores;
 use App\Models\Explotacion;
+use App\Models\Incidencia;
 use Illuminate\Http\Request;
 
 
@@ -13,9 +14,7 @@ use PDF;
 
 class OrdenController extends Controller
 {
-    /**
-     * Muestra una lista de órdenes.
-     */
+
     public function index()
     {
         $explotaciones = Explotacion::all();
@@ -41,7 +40,6 @@ class OrdenController extends Controller
                 ];
             }
 
-            // Contar según el estado
             switch ($orden->estado) {
                 case 'Pendiente':
                     $totalOrdenes[$idExplotacion]['Pendientes']++;
@@ -68,9 +66,6 @@ class OrdenController extends Controller
         return view('explotaciones.ordenes', ['explotacion'=>$explotaciones, 'ordenes'=>$totalOrdenes]);
     }
 
-    /**
-     * Almacena una nueva orden en la base de datos.
-     */
  public function store(Request $request)
     {
         $validated = $request->validate([
@@ -89,11 +84,9 @@ class OrdenController extends Controller
             'explotacion_id'   => 'required|exists:explotaciones,id',
         ]);
 
-        // Crea la orden directamente usando los campos validados
         $orden = Orden::create($validated);
 
 
-    // Solo devolvemos el modelo recién creado, con código HTTP 201
     return response()->json($orden, 201);
     }
 
@@ -104,9 +97,7 @@ class OrdenController extends Controller
     }
 
 
-    /**
-     * Muestra una orden específica.
-     */
+
     public function show($id)
     {
         $orden = Orden::findOrFail($id);
@@ -198,7 +189,6 @@ public function ordenesCurso()
     }
 
 
-//pasado
 public function ordenesPausa()
     {
      $ordenesPausa = Orden::where('estado', 'pausada')->with('parcela')->get();
@@ -219,7 +209,6 @@ public function ordenesPausa()
 
 
 
-    //terminada
 
     public function ordenesTerminadas()
     {
@@ -230,7 +219,6 @@ public function ordenesPausa()
     ->header("Access-Control-Allow-Headers", "Content-Type, Authorization");
     }
 
-    //cancelada
 
 
     public function mostrarOrdenesPorExplotacion($id)
@@ -251,6 +239,60 @@ public function ordenesPausa()
         return response()->json($ordenes);
     }
 
+
+    public function iniciarOrden(Request $request, $id)
+    {
+        $orden = Orden::findOrFail($id);
+        $orden->estado = 'En curso';
+        $orden->fecha_inicio = now();
+        $orden->save();
+
+        return response()->json($orden, 200);
+    }
+
+    public function completarOrden(Request $request, $id)
+    {
+        $orden = Orden::findOrFail($id);
+        $orden->estado = 'Completada';
+        $orden->fecha_fin = now();
+        $orden->save();
+
+        return response()->json($orden, 200);
+    }
+
+    public function pausarOrden(Request $request)
+    {
+    try {
+        $info = $request->validate([
+            'orden_id'    => 'required|exists:ordenes,id',
+            'tipo'        => 'required|string',
+            'descripcion' => 'required|string',
+            'explotacion_id' => 'required|exists:explotaciones,id',
+        ]);
+        $incidencia = Incidencia::create([
+            'tipo'        => $info['tipo'],
+            'descripcion' => $info['descripcion'],
+            'explotacion_id' => $info['explotacion_id'],
+            'orden_id'   => $info['orden_id'],
+            'fecha'  => now(),
+            'estado' => 'Pendiente',
+        ]);
+        $orden = Orden::findOrFail($info['orden_id']);
+        $orden->estado = 'Pausada';
+        $orden->save();
+
+
+        return response()->json($incidencia, 201)
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+            ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    } catch (\Throwable $e) {
+        return response()->json([
+            'error'   => $e->getMessage(),
+            'trace'   => $e->getTraceAsString(),
+        ], 500);
+    }
+    }
 
 
 

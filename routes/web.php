@@ -47,6 +47,7 @@ Route::group(['middleware' => 'admin'], function(){
     Route::delete('/trabajadores/{id}', [TrabajadorController::class, 'destroy'])
      ->name('trabajadores.destroy');
 
+    Route::put('/facturas/{id}/cambiar-estado', [FacturaController::class, 'cambiarEstado'])->name('facturas.cambiarEstado');
 
 
     Route::get('/ventas', [VentasController::class, 'index'])->name('ventas');
@@ -99,7 +100,7 @@ Route::group(['middleware' => 'admin'], function(){
 
     Route::resource('facturas', FacturaController::class);
 
-    
+
 
 
 

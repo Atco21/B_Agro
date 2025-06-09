@@ -43,7 +43,6 @@ class VentasController extends Controller
 
     public function store(Request $request)
     {
-        // Validación de los campos enviados desde el formulario
         $validated = $request->validate([
             'nombre_completo' => 'required|string|max:255',
             'dni_nif'         => 'required|string|max:50|unique:clientes,dni_nif',
@@ -53,15 +52,12 @@ class VentasController extends Controller
             'es_empresa'      => 'sometimes|boolean',
         ]);
 
-        // Si el checkbox "es_empresa" no viene en el request, lo forzamos a false
         if (! isset($validated['es_empresa'])) {
             $validated['es_empresa'] = false;
         }
 
-        // Crea el cliente en la base de datos
         Cliente::create($validated);
 
-        // Redirige de vuelta al listado con mensaje de éxito (ajusta la ruta si la tienes diferente)
         return redirect()
             ->route('ventas.clientes')
             ->with('success', 'Cliente creado correctamente.');
