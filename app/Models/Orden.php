@@ -25,35 +25,40 @@ class Orden extends Model
         'parcela_id',
         'id_tratamiento',
         'id_maquina',
+        'explotacion_id'
     ];
 
     protected $dates = ['fecha_inicio', 'fecha_fin'];
 
-    // Relaciones con otras tablas
-    public function jefeCampo() //relaciona Orden con jefecampo (Una orden tiene un trabajador)
+    public function jefeCampo()
     {
         return $this->belongsTo(Trabajador::class);
     }
 
-    public function aplicadores() //relaciona Orden Aplicador
+    public function aplicadores()
     {
         return $this->belongsTo(User::class, 'aplicador_id1');
     }
 
 
 
-    public function parcela() //relaciona Oreden con parcela
+    public function parcela()
     {
         return $this->belongsTo(Parcela::class);
     }
 
     public function tratamiento()
     {
-        return $this->belongsTo(Tratamiento::class);
+        return $this->belongsTo(Tratamiento::class, 'id_tratamiento');
     }
 
     public function maquina()
     {
         return $this->belongsTo(Maquina::class);
+    }
+
+    public function explotacion()
+    {
+        return $this->belongsTo(Explotacion::class);
     }
 }

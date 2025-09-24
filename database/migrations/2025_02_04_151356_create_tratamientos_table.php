@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('nombre', 100);
-            $table->string('producto_quimico', 100)->nullable();
+            $table->foreignId('quimico_id')->constrained('quimico')->onDelete('cascade');
             $table->string('descripcion', 100)->nullable();
             $table->string('dosis', 100)->nullable();
             $table->string('tempmax',100)->nullable();

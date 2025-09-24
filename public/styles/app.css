@@ -151,6 +151,7 @@ a.active2{
 
 .m1{
     max-width: 1465px;
+
     background: white;
     border: none;
 }
@@ -162,7 +163,7 @@ a.active2{
 }
 
 .m2{
-    max-height: 800px;
+    max-height: 950px;
     background: white;
 
 }
@@ -317,7 +318,6 @@ h3{
 }
 
 .lineaParcela.seleccionada {
-    background-color: #007bff !important; /* Azul Bootstrap */
     color: white !important;
 }
 .table tbody tr.seleccionada {
@@ -331,13 +331,14 @@ h3{
 
     --bs-modal-border-color: none !important;
 }
-.th_verde{
 
+.th_verde{
     background-color: #01533E !important;
     color: white !important;
-    border-left: 3px solid black;
-    width: 33% !important;
     text-align: center;
+    position: sticky; /* Añade esto si no está */
+    top: 0;
+    z-index: 2; /* Asegura que esté por encima de las filas */
 
 }
 .th_verde_primero{
@@ -391,4 +392,213 @@ h3{
     color: white !important;
     font-weight: 700 !important;
     transition: transform 0.2s ease, background-color 0.2s ease !important;
+}
+
+
+.filter-btn {
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 2px solid #01533E;
+    background-color: white;
+    color: #01533E;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.filter-btn.active {
+    background-color: #01533E;
+    color: white;
+}
+
+.explotacion-tarjeta{
+
+    cursor: pointer;
+    background-color: #028b6952;
+    padding-top: 0.5em ;
+    padding-left: 1em ;
+    padding-bottom: 0.5em ;
+    padding-right: 1em ;
+
+    border-radius: 15px ;
+
+
+
+    margin-bottom: 1em;
+
+}
+
+
+.resumen{
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.resumen-tarjeta {
+    background-color: #028b69;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 120px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    width: 200px ;
+}
+
+.resumen-g-tarjeta {
+    background-color: #028b69;
+    color: white;
+    padding: 0.5em;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 120px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    width: 200px ;
+    margin-bottom:1.2em;
+}
+
+.resumen-tarjeta h6 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.resumen-tarjeta .cantidad {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.custom-dropdown {
+    margin-top: -1.5em !important; /* Ajusta el margen según sea necesario */
+}
+
+#tabla_ordenes{
+    font-size: 20px !important;
+    width: 100% !important;
+    border-collapse: collapse;
+}
+
+.cBOrdenes{
+    width: 200px !important;
+}
+
+.linea_orden {
+    text-align: center !important;
+}
+
+
+
+.table-wrapped {
+    max-height: 60% !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#tabla_ordenes {
+    width: 100%;
+    height: 70vh;
+    border-collapse: collapse;
+
+}
+
+#tabla_ordenes td {
+    text-align: center !important;
+    height: 2.5em !important;
+
+}
+thead th {
+    position: sticky;
+    top: 0;
+    z-index: 0;
+
+}
+
+#bodyTabla{
+    margin-top: 2.0em !important;
+}
+
+#filtroEstado{
+    margin-right: 1em;
+    font-size: 20px !important;
+}
+
+.almacen-tarjeta{
+
+    cursor: pointer;
+    background-color: #028b6952;
+    padding: 1em ;
+    border-radius: 10px ;
+    box-shadow: 0 7px 15px rgba(0,0,0,0.2);
+
+}
+
+#cuadroDetalles{
+    border: 2px solid #028b69;
+    height: 520px !important;
+    font-size:28px !important;
+    margin-top: 2.5em !important;
+}
+
+
+.botonAlmacen{
+
+    background-color: #028b69 !important;
+    color: white !important;
+    font-weight: 700 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-right: 1em !important;
+
+}
+
+#tablaAlmacen{
+
+ cursor: pointer;
+
+}
+
+
+.incidencia-tarjeta{
+    cursor: pointer;
+    background-color: #028b6952;
+    padding-top: 0.5em ;
+    padding-left: 1em ;
+    padding-bottom: 0.5em ;
+    padding-right: 1em ;
+
+    border-radius: 15px ;
+
+
+
+    margin-bottom: 2em;
+}
+
+.incidencia-resumen-tarjeta{
+
+    background-color: #028b69;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+
+}
+
+incidencia{
+
+    background-color: #028b69;
+    border-radius: 5px;
+
+}
+.tarjeta-info{
+    background-color: #01533E;
+    padding: 1em;
+    color: white;
+}
+
+#tablaOrdenes{
+    height: 35% !important;
+}
+#clientesContainer{
+    width: 83% !important;
 }

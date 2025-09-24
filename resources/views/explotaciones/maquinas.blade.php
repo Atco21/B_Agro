@@ -6,6 +6,8 @@
 addEventListener('DOMContentLoaded', inicio);
 
 function inicio() {
+    document.getElementById('btnNuevaExplotacion').setAttribute('hidden', '');
+
     const select = document.querySelector(".exploSelect");
 
     if (select) {
@@ -33,23 +35,22 @@ function inicio() {
 }
 
 function filtrarMaquinasPorExplotacion(id) {
-    const maquinas = document.querySelectorAll('.cuadroMaquina'); // o ajusta este selector según tu HTML
+    const maquinas = document.querySelectorAll('.cuadroMaquina');
 
     maquinas.forEach(maquina => {
         const explotacionId = maquina.getAttribute("data-explotacion");
 
-        // Mostrar solo las máquinas que coinciden con la explotación seleccionada
         if (explotacionId === id) {
-            maquina.style.display = 'block'; // Mostrar la máquina
+            maquina.style.display = 'block';
         } else {
-            maquina.style.display = 'none'; // Ocultar la máquina
+            maquina.style.display = 'none';
         }
     });
 }
 
 async function cargarMaquina(id) {
     try {
-        const response = await fetch(`http://0.0.0.0/api/maquinas/explotacion/${id}`);
+        const response = await fetch(`http://127.0.0.1:8000/api/maquinas/explotacion/${id}`);
         const data = await response.json();
         if (data.error) {
             alert("No hay datos");
@@ -91,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
     cuadros.forEach(cuadro => {
         cuadro.addEventListener("click", async function () {
             try {
-                const response = await fetch(`http://0.0.0.0/api/maquinas/buscar/${cuadro.id}`);
+                const response = await fetch(`http://127.0.0.1:8000/api/maquinas/buscar/${cuadro.id}`);
                 const data = await response.json();
 
                 if (!data) {
@@ -101,13 +102,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 console.log(data);
 
-                // Asignar valores a los inputs del modal
                 document.getElementById("edit_nombre_maquina").value = data.nombre || "";
                 document.getElementById("edit_matricula").value = data.matricula || "";
                 document.getElementById("edit_explotacion_id").value = data.explotacion_id;
                 document.getElementById("edit_maquina_id").value = data.id ;
+                document.getElementById("deleteForm").action = `/maquina/${data.id}`;
 
-                // Mostrar el modal
+
                 let modal = new bootstrap.Modal(document.getElementById("editarMaquina"));
                 modal.show();
 
@@ -132,7 +133,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     @csrf
                     @method('PUT')
 
-                    <!-- Campo oculto para el ID de la máquina -->
                     <input type="hidden" id="edit_maquina_id" name="maquina_id">
 
                     <h2 class="mb-3">1. Datos</h2>
@@ -170,8 +170,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </form>
+
+
+                        <form id="deleteForm" action="" method="POST" onsubmit="return confirm('¿Seguro que deseas eliminar esta máquina?');" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger ms-auto">Eliminar</button>
+                        </form>
                     </div>
-                </form>
             </div>
         </div>
     </div>
@@ -204,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="row mb-5 pb-5">
 
             @foreach ($maquinas as $maquina)
-            <div class="card mt-3 ms-3 ms-4 cuadroMaquina" style="width: 25rem;" id="{{$maquina->id}}" data-explotacion="{{$maquina->explotacion_id}}">
+            <div class="card mt-3 ms-4 cuadroMaquina" style="width: 25rem;" id="{{$maquina->id}}" data-explotacion="{{$maquina->explotacion_id}}">
                 <div class="d-flex flex-row mt-3 ms-3 align-items-center">
                     <img src="{{asset('./assets/logoAgro.png')}}" alt="Foto máquina" class="fotoPerfil" width="150px">
                     <h4 class="card-title ps-5">{{$maquina->nombre}}</h4>

@@ -175,6 +175,17 @@ class TrabajadorController extends Controller
 
 }
 
+ public function destroy(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+
+        return redirect()
+            ->route('trabajadores')
+            ->with('success', 'Usuario eliminado correctamente');
+    }
+
 
 
 

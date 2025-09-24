@@ -13,7 +13,7 @@ class Parcela extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['explotacion_id', 'cultivo_n', 'nombre', 'area'];
+    protected $fillable = ['explotacion_id', 'cultivo_id', 'nombre', 'tamanyo'];
 
     public function explotacion()
     {

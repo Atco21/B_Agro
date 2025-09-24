@@ -24,7 +24,6 @@ class cultivoController extends Controller
         $ids = explode(",", $request->query('ids'));
 
 
-        // Buscar los cultivos en la base de datos
         $cultivos = Cultivo::whereIn('id', $ids)->pluck('nombre', 'id');
 
         return response()->json($cultivos);

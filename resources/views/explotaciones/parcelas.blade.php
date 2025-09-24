@@ -2,20 +2,24 @@
 
 @section('content2')
 
-
-
-
 <script>
 let idparc = 1;
 addEventListener('DOMContentLoaded', inicio);
 
+
 function inicio() {
     const select = document.querySelector(".exploSelect");
+    let exploSelect = document.getElementById('exploOpciones').removeAttribute('hidden');
+    document.getElementById('btnNuevaExplotacion').removeAttribute('hidden');
+    document.getElementById('btnLapiz').removeAttribute('hidden');
+
 
     if (select) {
         select.addEventListener("change", function() {
             const id = select.value;
             if (id) {
+                document.getElementById('btnLapiz').removeAttribute('hidden');
+                document.getElementById('btnCrearExplo2').removeAttribute('hidden');
 
                 cargarDatos(id);
                 actualizarURL(id);
@@ -46,7 +50,6 @@ async function actualizarContenido(data) {
     document.getElementById('previo').setAttribute('hidden', '');
     const contentDiv = document.getElementById("tabla");
 
-
     try {
         let html = `
             <table class="table" border="1" id="tabla_parcelas">
@@ -55,10 +58,7 @@ async function actualizarContenido(data) {
                         <th class="th_verde_primero">Nombre</th>
                         <th class="th_verde">Cultivo</th>
                         <th class="th_verde">Tamaño</th>
-                    </tr>
-
-
-        `;
+                    </tr>`;
 
         data.forEach(parcela => {
             console.log();
@@ -87,7 +87,6 @@ async function actualizarContenido(data) {
     }
 }
 
-
 function seleccionar(id) {
     document.getElementById('vacio').setAttribute('hidden','');
     document
@@ -101,13 +100,10 @@ function seleccionar(id) {
     });
 }
 
-
-
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('btnRendimiento').addEventListener('click', () => rendimiento(idparc));
     document.getElementById('btnOrdenes').addEventListener('click', () => ordenes(idparc));
 });
-
 
 async function rendimiento(id) {
     seleccionar(id);
@@ -187,15 +183,6 @@ async function rendimiento(id) {
 
 
 
-
-function ordenes(id) {
-
-
-
-
-
-}
-
 function actualizarURL(id_explo) {
     const newURL = `/explotaciones/parcelas/${id_explo}`;
     history.pushState({ id: id_explo }, "", newURL);
@@ -209,13 +196,15 @@ window.onpopstate = function(event) {
 </script>
 
 <div id="previo">
-
-    <div class="d-flex justify-content-center align-items-center" style="height: 70vh;">
-
-    <h2>Selecciona una explotación</h2>
-
+    <div class="d-flex flex-wrap justify-content-center align-items-center" style="height: 70vh; gap: 1rem; padding: 1rem;">
+        @foreach ($explotacion as $exp)
+            <div class="card tarjeta-info" style="cursor: pointer;" id="{{ $exp->id }}" onclick="cargarDatos({{ $exp->id }})">
+                <div class="card-body text-center">
+                    <h2 class="card-title">{{ $exp->nombre }}</h2>
+                </div>
+            </div>
+        @endforeach
     </div>
-
 </div>
 
 <div id="secciones" hidden>
@@ -238,37 +227,6 @@ window.onpopstate = function(event) {
             </div>
         </div>
 
-
-        <div class="w-50 mt-5 pe-5" id="seccion2">
-            <div class="w-100 h-100 card align-content-center">
-                <table class="table-bordered">
-                    <tbody>
-
-                    <tr>
-                        <td class="opciones_menu2"><a href="#" id="btnRendimiento">Rendimiento</a></td>
-                        <td class="opciones_menu2"><a  href="#" id="btnOrdenes">Órdenes</a></td>
-                        <td class="opciones_menu2"><a>Incidencias</a></td>
-                        <td class="opciones_menu2"><a>Tratamientos</a></td>
-                    </tr>
-
-                    <tr id="vacio" style="border: none;" class="mt-5">
-                        <td colspan="4" style="border:none;" class="mt-5 pt-5"><p>Selecciona una parcela</p></td>
-                    </tr>
-
-                    </tbody>
-
-                </table>
-
-                <div id="rendimiento">
-
-
-
-
-
-                </div>
-
-            </div>
-        </div>
     </div>
 </div>
 @endsection

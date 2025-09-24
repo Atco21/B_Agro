@@ -5,49 +5,92 @@ namespace App\Http\Controllers;
 use App\Models\Orden;
 use App\Models\Aplicadores;
 use App\Models\Explotacion;
+use App\Models\Incidencia;
+use App\Models\Cultivo;
+
 use Illuminate\Http\Request;
 
 
-use PDF; // Asegúrate de importar la fachada correctamente
+use PDF;
 
 
 class OrdenController extends Controller
 {
-    /**
-     * Muestra una lista de órdenes.
-     */
+
     public function index()
     {
-        $ordenes = Orden::with('parcela')->get();
-        return response()->json($ordenes);
+        $explotaciones = Explotacion::all();
+        $ordenes = Orden::all();
+        $cultivos = Cultivo::all();
+
+        $totalOrdenes = [];
+        $todasOrdenesExplotacion = [
+            'Pendientes' => 0,
+            'En curso' => 0,
+            'Pausadas' => 0,
+            'Completadas' => 0,
+        ];
+
+        foreach ($ordenes as $orden) {
+            $idExplotacion = $orden->explotacion_id;
+
+            if (!isset($totalOrdenes[$idExplotacion])) {
+                $totalOrdenes[$idExplotacion] = [
+                    'Pendientes' => 0,
+                    'En curso' => 0,
+                    'Pausadas' => 0,
+                    'Completadas' => 0,
+                ];
+            }
+
+            switch ($orden->estado) {
+                case 'Pendiente':
+                    $totalOrdenes[$idExplotacion]['Pendientes']++;
+                    $todasOrdenesExplotacion['Pendientes']++;
+                    break;
+                case 'En curso':
+                    $totalOrdenes[$idExplotacion]['En curso']++;
+                    $todasOrdenesExplotacion['En curso']++;
+
+                    break;
+                case 'Pausada':
+                    $totalOrdenes[$idExplotacion]['Pausadas']++;
+                    $todasOrdenesExplotacion['Pausadas']++;
+
+                    break;
+                case 'Completada':
+                    $totalOrdenes[$idExplotacion]['Completadas']++;
+                    $todasOrdenesExplotacion['Completadas']++;
+                    break;
+            }
+        }
+
+
+        return view('explotaciones.ordenes', ['explotacion'=>$explotaciones, 'ordenes'=>$totalOrdenes, 'cultivos'=>$cultivos]);
     }
 
-    /**
-     * Almacena una nueva orden en la base de datos.
-     */
-    public function store(Request $request)
+ public function store(Request $request)
     {
-
-
-
-
-        $request->validate([
-            'estado' => 'nullable|string|max:50',
-            'fecha_inicio' => 'nullable|date',
-            'fecha_fin' => 'nullable|date|after_or_equal:fecha_inicio',
-            'tarea' => 'nullable|string|max:255',
-            'jefecampo_id' => 'nullable|integer|exists:users,id',
-            'aplicador_id' => 'nullable|integer|exists:users,id',
-            'parcela_id' => 'nullable|integer|exists:parcelas,id',
-            'id_tratamiento' => 'nullable|integer|exists:tratamientos,id',
-            'id_maquina' => 'nullable|integer|exists:maquinas,id',
+        $validated = $request->validate([
+            'estado'           => 'required|in:Pendiente,En curso,Pausada,Completada',
+            'fecha_inicio'     => 'nullable|date',
+            'fecha_fin'        => 'nullable|date',
+            'tarea'            => 'required|string|max:255',
+            'jefecampo_id'     => 'nullable|exists:users,id',
+            'aplicador_id1'    => 'required|exists:users,id',
+            'aplicador_id2'    => 'nullable|exists:users,id',
+            'aplicador_id3'    => 'nullable|exists:users,id',
+            'aplicador_id4'    => 'nullable|exists:users,id',
+            'parcela_id'       => 'required|exists:parcelas,id',
+            'id_tratamiento'   => 'nullable|exists:tratamientos,id',
+            'id_maquina'       => 'nullable|exists:maquina,id',
+            'explotacion_id'   => 'required|exists:explotaciones,id',
         ]);
 
+        $orden = Orden::create($validated);
 
 
-
-        $orden = Orden::create($request->all());
-        return response()->json($orden, 201);
+    return response()->json($orden, 201);
     }
 
 
@@ -57,49 +100,47 @@ class OrdenController extends Controller
     }
 
 
-    /**
-     * Muestra una orden específica.
-     */
+
     public function show($id)
     {
-        $orden = Orden::findOrFail($id);
+        $orden = Orden::where('id', $id)->with('parcela', 'aplicadores', 'tratamiento', 'maquina')->get();
         return response()->json($orden);
     }
 
-    /**
-     * Actualiza una orden en la base de datos.
-     */
     public function update(Request $request, $id)
     {
         $orden = Orden::findOrFail($id);
 
-        $request->validate([
-            'estado' => 'sometimes|string|max:50',
-            'fecha_inicio' => 'sometimes|date',
-            'fecha_fin' => 'nullable|date|after_or_equal:fecha_inicio',
-            'id_administrador' => 'sometimes|exists:trabajadores,id',
-            'tarea' => 'sometimes|string|max:255',
-            'id_jefecampo' => 'sometimes|exists:trabajadores,id',
-            'aplicador_id' => 'sometimes|exists:trabajadores,id',
-            'parcela_id' => 'sometimes|exists:parcelas,id',
-            'id_tratamiento' => 'sometimes|exists:tratamientos,id',
-            'id_maquina' => 'nullable|exists:maquinas,id',
+        $data = $request->validate([
+            'estado'           => 'sometimes|string|max:50',
+            'fecha_inicio'     => 'sometimes|date',
+            'fecha_fin'        => 'nullable|date|after_or_equal:fecha_inicio',
+            'tarea'            => 'sometimes|string|max:255',
+            'jefecampo_id'     => 'sometimes|exists:users,id',
+            'aplicador_id1'    => 'sometimes|exists:users,id',
+            'aplicador_id2'    => 'sometimes|exists:users,id',
+            'aplicador_id3'    => 'sometimes|exists:users,id',
+            'aplicador_id4'    => 'sometimes|exists:users,id',
+            'aplicador_id5'    => 'sometimes|exists:users,id',
+            'parcela_id'       => 'sometimes|exists:parcelas,id',
+            'id_tratamiento'   => 'sometimes|exists:tratamientos,id',
+            'id_maquina'       => 'nullable|exists:maquinas,id',
+            'explotacion_id'   => 'sometimes|exists:explotaciones,id',
         ]);
 
-        $orden->update($request->all());
-        return response()->json($orden);
+        $orden->fill($data);
+        $orden->save();
+
+        return response()->json($orden, 200);
     }
 
-    /**
-     * Elimina una orden de la base de datos.
-     */
+
     public function destroy($id)
     {
         $orden = Orden::findOrFail($id);
         $orden->delete();
         return response()->json(['message' => 'Orden eliminada correctamente']);
     }
-     //INSERTAR Tabla intermedia de orden y aplicador que es muchos a muchos M/M
 
      public function insertarTablaIntermedia(){
         $orden=Orden::find(1);
@@ -110,7 +151,6 @@ class OrdenController extends Controller
 
     public function actualizarDatosdeApi(Request $request)
     {
-        dd($request->all());
 
         $request->validate([
             'estado' => 'required|string|max:50',
@@ -125,7 +165,7 @@ class OrdenController extends Controller
             'id_maquina' => 'nullable|exists:maquinas,id',
         ]);
 
-        $orden = Orden::create($request->all());
+        $orden = update($request->all());
         return response()->json($orden, 201);
     }
     public function ordenesPendientes()
@@ -152,7 +192,6 @@ public function ordenesCurso()
     }
 
 
-//pasado
 public function ordenesPausa()
     {
      $ordenesPausa = Orden::where('estado', 'pausada')->with('parcela')->get();
@@ -173,9 +212,8 @@ public function ordenesPausa()
 
 
 
-    //terminada
 
-public function ordenesTerminadas()
+    public function ordenesTerminadas()
     {
      $ordenesTerminada = Orden::where('estado', 'completada')->with('parcela')->get();
     return response()->json($ordenesTerminada)
@@ -184,34 +222,113 @@ public function ordenesTerminadas()
     ->header("Access-Control-Allow-Headers", "Content-Type, Authorization");
     }
 
-    //cancelada
+
+
+    public function mostrarOrdenesPorExplotacion($id)
+    {
+        $ordenes = Orden::where('explotacion_id', $id)->with('parcela')->with('explotacion')->with('maquina')->with('aplicadores')->with('tratamiento')->get();
+        return response()->json($ordenes)
+        ->header("Access-Control-Allow-Origin", "*")
+        ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+        ->header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    }
 
 
 
+    public function ordenesPorAplicador($id)
+    {
+        $ordenes = Orden::where('aplicador_id1', $id)->with('parcela')->with('explotacion')->with('maquina')->with('aplicadores')->with('tratamiento')->get();
+
+        return response()->json($ordenes);
+    }
 
 
+    public function iniciarOrden(Request $request, $id)
+    {
+        $orden = Orden::findOrFail($id);
+        $orden->estado = 'En curso';
+        $orden->fecha_inicio = now();
+        $orden->save();
 
+        return response()->json($orden, 200);
+    }
+
+    public function completarOrden(Request $request, $id)
+    {
+        $orden = Orden::findOrFail($id);
+        $orden->estado = 'Completada';
+        $orden->fecha_fin = now();
+        $orden->save();
+
+        return response()->json($orden, 200);
+    }
+
+    public function pausarOrden(Request $request)
+    {
+    try {
+        $info = $request->validate([
+            'orden_id'    => 'required|exists:ordenes,id',
+            'tipo'        => 'required|string',
+            'descripcion' => 'required|string',
+            'explotacion_id' => 'required|exists:explotaciones,id',
+        ]);
+        $incidencia = Incidencia::create([
+            'tipo'        => $info['tipo'],
+            'descripcion' => $info['descripcion'],
+            'explotacion_id' => $info['explotacion_id'],
+            'orden_id'   => $info['orden_id'],
+            'fecha'  => now(),
+            'estado' => 'Pendiente',
+        ]);
+        $orden = Orden::findOrFail($info['orden_id']);
+        $orden->estado = 'Pausada';
+        $orden->save();
+
+
+        return response()->json($incidencia, 201)
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+            ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    } catch (\Throwable $e) {
+        return response()->json([
+            'error'   => $e->getMessage(),
+            'trace'   => $e->getTraceAsString(),
+        ], 500);
+    }
+    }
 
 
 
 
     public function generarPdf(Request $request)
     {
-        // Captura las fechas de inicio y fin desde el formulario
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
+        // 1. Validar las fechas y el ID de explotación
+        $request->validate([
+            'fecha_inicio'    => 'required|date',
+            'fecha_fin'       => 'required|date|after_or_equal:fecha_inicio',
+            'explotacion_id'  => 'required|exists:explotaciones,id',
+        ]);
 
-        $ordenes = Orden::where('fecha_inicio', [$fechaInicio, $fechaFin])
-            ->orWhereBetween('fecha_fin', [$fechaInicio, $fechaFin])
+        $fechaInicio     = $request->input('fecha_inicio');
+        $fechaFin        = $request->input('fecha_fin');
+        $explotacionId   = $request->input('explotacion_id');
+
+        $ordenes = Orden::where('explotacion_id', $explotacionId)
+            ->whereBetween('fecha_inicio', [$fechaInicio, $fechaFin])
+            ->where('estado', 'Completada')
+            ->whereNotNull('id_tratamiento')
+            ->with('tratamiento') // se cargará correctamente
+            ->orderBy('fecha_inicio', 'asc')
             ->get();
 
-        // Si necesitas filtrar también por algún tratamiento específico
 
+        // 3
+        $explotacion = Explotacion::find($explotacionId);
 
-        $pdf = PDF::loadView('pdf.ordenes', compact('ordenes', 'fechaInicio', 'fechaFin'));
+        $pdf = PDF::loadView('pdf.ordenes', compact('ordenes', 'fechaInicio', 'fechaFin', 'explotacion'));
 
-        // Genera el PDF y lo descarga
-        return $pdf->download('informe.pdf');
+        // 5. Descargar el PDF (o devolver inline, según prefieras)
+        return $pdf->download('informe_ordenes_'.$explotacion->nombre.'_'.$fechaInicio.'_a_'.$fechaFin.'.pdf');
     }
 
 }

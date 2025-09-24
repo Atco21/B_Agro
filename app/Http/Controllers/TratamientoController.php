@@ -1,19 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Tratamiento;//hay que poner la ruta del modelo
+use App\Models\Tratamiento;
 
 use Illuminate\Http\Request;
 
 class TratamientoController extends Controller{
- // Obtener todos los tratamientos
  public function mostrarTratamientos()
  {
      return response()->json(Tratamiento::all());
  }
 
 
- // Obtener un tratamiento por ID
  public function show($id)
  {
      $Tratamiento = Tratamiento::find($id_tratamiento);
@@ -23,7 +21,6 @@ class TratamientoController extends Controller{
      return response()->json($Tratamiento, 200);
  }
 
- // Crear un nuevo Tratamiento
  public function store(Request $request)
  {
      $validatedData = $request->validate([
@@ -40,7 +37,6 @@ class TratamientoController extends Controller{
      return response()->json($tratamiento, 201);
  }
 
- // Actualizar un tratamiento
  public function update(Request $request, $id)
  {
      $tratamiento = Tratamiento::find($id);
@@ -59,7 +55,6 @@ class TratamientoController extends Controller{
      return response()->json($tratamiento, 200);
  }
 
- // Eliminar un tratamiento
  public function destroy($id)
  {
      $tratamiento = Tratamiento::find($id);

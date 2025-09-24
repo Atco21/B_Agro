@@ -21,7 +21,6 @@ return new class extends Migration
 
             $table->date('fecha_nacimiento')->nullable();
 
-            //datos de usuario
             $table->string('usuario', 255);
             $table->string('password', 255);
             $table->enum('rol',['jefe de campo', 'aplicador', 'admin'])->nullable();

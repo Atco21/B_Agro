@@ -21,30 +21,23 @@ class AuthController extends Controller
 
     public function login(Request $request)
 {
-    // Validar los datos
     $request->validate([
         'usuario' => 'required',
         'password' => 'required'
     ]);
 
-    // Intentar autenticar al usuario
     if (Auth::attempt(['usuario' => $request->usuario, 'password' => $request->password])) {
-        // Obtener el usuario autenticado
         $user = Auth::user();
 
 
-        // Generar el token con Passport
         $token = $user->createToken('agrocontrol')->accessToken;
 
 
-       // $explotacion = Explotacion::all();
 
-       return redirect()->to('/explotaciones');
-        // Devolver el token al frontend
-      //  return view('explotacion', compact('explotacion'));
+       return redirect()->to('/explotaciones/general');
+
     }
 
-    // Si falla la autenticación, devolver error
     return response()->json(['error' => 'Credenciales incorrectas'], 401);
 }
 
@@ -55,20 +48,32 @@ class AuthController extends Controller
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')->accessToken;
             $success['rol'] = $user->rol;
+            $success['explotacionId'] = $user->explotacion_id;
             return response()->json(['success' => $success], $this->successStatus);
         } else {
             return response()->json(['error' => 'Unauthorised'], 401);
         }
     }
 
+     public function me(Request $request)
+    {
+
+
+        $user = $request->user();
+
+        return response()->json([
+            'id'      => $user->id,
+            'usuario' => $user->usuario,
+            'email'   => $user->email,
+            'rol'     => $user->rol,
+
+        ], 200);
+    }
 
 
 
-    /**
-     * details api
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function details()
     {
         $user = Auth::user();
@@ -77,10 +82,6 @@ class AuthController extends Controller
 
 
 
-        /**
-     * logout api
-     *
-     */
     public function logout(Request $request)
     {
 

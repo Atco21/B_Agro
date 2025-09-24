@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Parcela;
 use App\Models\Explotacion;
+use \App\Models\Cultivo;
 
 class ParcelasController extends Controller
 {
@@ -61,8 +62,8 @@ class ParcelasController extends Controller
     public function listarParcelasPorExplotacion()
     {
         $explotacion = Explotacion::all();
-
-        return view('explotaciones.parcelas', ['explotacion'=>$explotacion]);
+        $cultivos = Cultivo::all();
+        return view('explotaciones.parcelas', compact('explotacion', 'cultivos'));
 
 
     }
